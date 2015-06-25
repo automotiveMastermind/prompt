@@ -5,7 +5,10 @@ if ! test -f ~/.ssh; then
     mkdir -p ~/.ssh
 fi
 
-cp ~/.bash_profile backup/bash_profile
+if test -f ~/.bashprofile; then
+    cp ~/.bash_profile backup/bash_profile
+fi
+
 cp -R ~/.ssh/* backup/ssh
 
 cp -Rf src/* ~/.ssh
