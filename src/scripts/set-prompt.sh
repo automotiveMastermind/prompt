@@ -29,10 +29,4 @@ function set-prompt() {
     # export PS1="\n\u@\h : \w\n  $(__git_ps1 '(%s)')\[${CLR_PROMPT}\] ==> \[${CLR_CLEAR}\]"
 }
 
-GIT_PS1_SHOWDIRTYSTATE=true
-GIT_PS1_SHOWSTASHSTATE=true
-GIT_PS1_SHOWCOLORHINTS=true
-GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWUPSTREAM="verbose"
-
 set-prompt
