@@ -1,0 +1,12 @@
+rm -rRf backup
+mkdir -p backup/ssh
+
+if ! test -f ~/.ssh; then
+    mkdir -p ~/.ssh
+fi
+
+cp ~/.bash_profile backup/bash_profile
+cp -R ~/.ssh/* backup/ssh
+
+cp -Rf src/* ~/.ssh
+cat template > ~/.bash_profile

@@ -1,0 +1,3 @@
+if [ -f ~/.ssh/bashrc ]; then
+    . ~/.ssh/bashrc
+fi
