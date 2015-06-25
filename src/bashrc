@@ -63,24 +63,9 @@ alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd .. ; ..'
 
-# -- listing shortcuts
-alias ls='ls -G'
-
 # -- sudo alias (allow other alias extensions to work when sudo-ing)
 alias sudo='sudo '
-
-# -- special effects
-alias colors="set | egrep 'CLR_w*'"
-alias myprofile="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
-
-alias flushdns='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 # shell options
 shopt -s checkwinsize     # check window size on script exit
 shopt -s cdable_vars      #  enable change directory to a variable value
-
-# aliases
-PATH=$PATH:~/.ssh/aliases
-
-# play login sound
-tlogi 1>&- 2>&-
