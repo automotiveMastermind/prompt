@@ -19,15 +19,18 @@ export CLR_BRIGHT_MAGENTA='\033[1;35m'  # BRIGHT MAGENTA (PURPLE)
 export CLR_BRIGHT_CYAN='\033[1;36m'     # BRIGHT CYAN
 export CLR_BRIGHT_WHITE='\033[1;37m'    # BRIGHT WHITE
 
-export CLR_ROOT_PROMPT=$CLR_RED         # COLOR OF THE PROMPT FOR ROOT
-export CLR_STAFF_PROMPT=$CLR_BRIGHT_RED # COLOR OF THE PROMPT FOR STAFF
-export CLR_USER_PROMPT=$CLR_BRIGHT_BLUE # COLOR OF THE PROMPT FOR USERS
+export CLR_ROOT_PROMPT=$CLR_BRIGHT_RED    # COLOR OF THE PROMPT FOR ROOT
+export CLR_STAFF_PROMPT=$CLR_BRIGHT_GREEN # COLOR OF THE PROMPT FOR STAFF
+export CLR_USER_PROMPT=$CLR_BRIGHT_BLUE   # COLOR OF THE PROMPT FOR USERS
 
 # enable colors for various commands
 export TERM=xterm-256color
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 export CLICOLOR=1
+
+# change ls colors to be more like original unix/linux
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 
 # other system settings
 export EDITOR='nano'
