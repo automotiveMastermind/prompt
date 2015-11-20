@@ -7,9 +7,14 @@ fi
 
 if test -f ~/.bashprofile; then
     cp ~/.bash_profile backup/bash_profile
+
+    if grep -q "~/.ssh/bashrc" ~/.bash_profile; then
+        cat template > ~/.bash_profile
+    fi
+else
+    cat template > ~/.bash_profile
 fi
 
 cp -R ~/.ssh/* backup/ssh
 
 cp -Rf src/* ~/.ssh
-cat template > ~/.bash_profile
