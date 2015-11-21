@@ -1,4 +1,4 @@
 function themes()
 {
-    open -a "Terminal" --args ~/.ssh/themes/terminal/Monokai.terminal
+    open ~/.ssh/themes/terminal/Monokai.terminal
 }
