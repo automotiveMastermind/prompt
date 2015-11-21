@@ -19,20 +19,23 @@ function install-dnvm() {
     fi
 }
 
+function update-dnvm() {    
+    (dnvm update-self &) 1>/dev/null 2>&1
+}
+
 # determine if dnvm is avialable
 if ! type dnvm >/dev/null 2>&1; then
     # install dnvm
     install-dnvm 1>/dev/null 2>&1
 
     # determine if dnvm now exists in the expected place
-    if [[ -f ~/.dnx/dnvm/dnvm.sh ]]; then
+    if test -f ~/.dnx/dnvm/dnvm.sh; then
         # add the dnvm folder to path
         PATH=$PATH:~/.dnx/dnvm
 
         # source dnvm
-        source dnvm.sh
+        source ~/.dnx/dnvm/dnvm.sh
     fi
 fi
 
-# update dnvm on a background thead
-screen -d -m -S "dnvm update" dnvm update-self
+update-dnvm

@@ -2234,7 +2234,8 @@ _git_config ()
 		user.name
 		user.signingkey
 		web.browser
-		branch. remote.
+		branch.
+		remote.
 	"
 }
 

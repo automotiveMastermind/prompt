@@ -30,7 +30,7 @@ Note: All "extensions" are implemented as sourced function calls, so it should n
 
 ### Using Uber
 
-Installing Uber is a 2 step process:
+Installing Uber is a 3 step process:
 
 1) Clone the repository:
 
@@ -43,6 +43,12 @@ git clone https://github.com/pulsebridge/uber.git
 ``` bash
 cd uber
 ./install
+```
+
+3) Open a new terminal window, or source the initialization script in the existing terminal:
+
+``` bash
+source ~/.ssh/bashrc
 ```
 
 3) (Optional) Open the included Monokai theme (currently only supported on OS X):

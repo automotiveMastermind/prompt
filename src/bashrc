@@ -36,12 +36,13 @@ export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 # other system settings
 export EDITOR='nano'
 export HISTCONTROL=ignoredubs
-export SVN_EDITOR='${EDITOR}'
 
-# system binds for bash completion
-bind "set completion-ignore-case on"     # ignore strict case sensitivity
-bind "set bell-style none"               # turn off audible alerts
-bind "set show-all-if-ambiguous on"      # show completion with double tap
+# system binds for bash completion (for interactive terminals)
+if [ -t 1 ]; then
+    bind "set completion-ignore-case on"     # ignore strict case sensitivity
+    bind "set bell-style none"               # turn off audible alerts
+    bind "set show-all-if-ambiguous on"      # show completion with double tap
+fi
 
 # turn on advanced completion
 if [ -f /etc/bash_completion ]; then

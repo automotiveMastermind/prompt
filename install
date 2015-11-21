@@ -1,9 +1,12 @@
 rm -rRf backup
 mkdir -p backup/ssh
 
-if ! test -f ~/.ssh; then
-    mkdir -p ~/.ssh
+if test -d ~/.ssh; then
+    cp -R ~/.ssh/* backup/ssh
+    rm -rRf ~/.ssh
 fi
+
+mkdir -p ~/.ssh
 
 if test -f ~/.bashprofile; then
     cp ~/.bash_profile backup/bash_profile
@@ -15,8 +18,4 @@ else
     cat template > ~/.bash_profile
 fi
 
-cp -R ~/.ssh/* backup/ssh
-
 cp -Rf src/* ~/.ssh
-
-. ~/.ssh/bashrc
