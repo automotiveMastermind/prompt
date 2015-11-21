@@ -1,5 +1,7 @@
 # uber
 
+[![Join the chat at https://gitter.im/pulsebridge/uber](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pulsebridge/uber?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > A spectacular (BaSH) prompt for *nix distributions. (Only tested on OS X currently)
 
 ## Vitals
