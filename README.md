@@ -62,5 +62,5 @@ itself, so you can re-run the installer to upgrade at any time. the ~/.bash_prof
 [license-image]: https://img.shields.io/badge/license-APACHE%202.0-blue.svg
 [license]: LICENSE
 
-[gitter-url]: //gitter.im/pulsebridge/condo
+[gitter-url]: //gitter.im/pulsebridge/uber
 [gitter-image]:https://img.shields.io/badge/⊪%20gitter-join%20chat%20→-1dce73.svg
