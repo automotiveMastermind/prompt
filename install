@@ -18,3 +18,5 @@ fi
 cp -R ~/.ssh/* backup/ssh
 
 cp -Rf src/* ~/.ssh
+
+. ~/.ssh/bashrc
