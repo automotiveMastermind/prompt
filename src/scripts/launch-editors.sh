@@ -1,15 +1,15 @@
 function launch-code() {
-	if [ "$(uname)" != "Darwin" ]; then
-		return
-	fi
+    if [ "$(uname)" != "Darwin" ]; then
+        return
+    fi
     
     VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*
 }
 
 function launch-sublime() {
-	if [ "$(uname)" != "Darwin" ]; then
-		return
-	fi
+    if [ "$(uname)" != "Darwin" ]; then
+        return
+    fi
 
     if [[ $# = 0 ]]; then
         echo "Opening Sublime Text"
@@ -21,9 +21,9 @@ function launch-sublime() {
 }
 
 function code() {
-	launch-code $@
+    launch-code $@
 }
 
 function sublime() {
-	launch-sublime $@
+    launch-sublime $@
 }
