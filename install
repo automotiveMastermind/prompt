@@ -60,6 +60,8 @@ if [ "$(uname)" == "Darwin" ]; then
     done
     
     LOCAL_PREFIX=$(brew --prefix)
+    
+    git config --system credential.helper osxkeychain
 fi
 
 gitpromptname=git-prompt.sh
