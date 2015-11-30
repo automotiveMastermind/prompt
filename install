@@ -34,18 +34,25 @@ fi
 LOCAL_PREFIX=/usr/local
 
 if [ "$(uname)" == "Darwin" ]; then
-    if ! type brew >/dev/null; then
+    if ! type brew 1>/dev/null 2>&1; then
         echo "Installing Homebrew..."
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 1>/dev/null 2>&1
     fi
     
     echo "Updating Homebrew..."
-    brew update
+    brew update 1>/dev/null 2>&1
+    
+    for pkg in git-flow; do
+        if brew list -1 | grep -q "^${pkg}\$"; then
+            echo "Uninstalling $pkg..."
+            brew uninstall ${pkg}
+        fi
+    done
     
     for pkg in ffmpeg gettext gifsicle git git-flow-avh gnu-getopt lame libvo-aacenc mono node x264 xvid; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             echo "Upgrading $pkg..."
-            brew upgrade ${pkg}
+            brew upgrade ${pkg} 1>/dev/null 2>&1
         else
             echo "Installing $pkg..."
             brew install $pkg
