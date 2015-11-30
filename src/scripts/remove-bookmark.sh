@@ -6,9 +6,9 @@ remove-bookmark() {
     # using expanded if statement since the compact form seems to declare local variables of its own, even if the variable is declared
     # in a wider scope (local to the main function or even global)
     if [ ! -z $b ]; then
-        r=`command grep -s -m 1 ^$b ~/.ssh/scripts/bookmarks.sh`
+        r=$(command grep -s -m 1 ^$b ~/.ssh/scripts/bookmarks.sh)
     elif [ -z $2 ]; then
-        r=`command grep -s -m 1 \"$PWD\"$ ~/.ssh/scripts/bookmarks.sh`
+        r=$(command grep -s -m 1 \"$PWD\"$ ~/.ssh/scripts/bookmarks.sh)
     fi
 
     # using (! -z) instead of (-n) due to a bug (or a lack of understanding)  where (-n) tests when a variable contains nothing

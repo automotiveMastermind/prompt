@@ -37,6 +37,12 @@ export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export EDITOR='nano'
 export HISTCONTROL=ignoredubs
 
+if type brew 1>/dev/null 2>&1; then
+    export LOCAL_PREFIX=$(brew --prefix)
+else
+    export LOCAL_PREFIX=/usr/local
+fi
+
 # system binds for bash completion (for interactive terminals)
 if [ -t 1 ]; then
     bind "set completion-ignore-case on"     # ignore strict case sensitivity

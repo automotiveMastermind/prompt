@@ -1,21 +1,70 @@
-rm -rRf backup
-mkdir -p backup/ssh
+echo "Removing old backup..."
+rm -rRf backup 1>/dev/null 2>&1
 
 if test -d ~/.ssh; then
-    cp -R ~/.ssh/* backup/ssh
-    rm -rRf ~/.ssh
+    echo "Creating backup path..."
+    mkdir -p backup/ssh 1>/dev/null 2>&1
+
+    echo "Backing up ~/.ssh..."
+    cp -R ~/.ssh/* backup/ssh 1>/dev/null 2>&1
+    
+    echo "Removing ~/.ssh..."
+    rm -rRf ~/.ssh 1>/dev/null 2>&1
 fi
 
-mkdir -p ~/.ssh
+echo "Creating ~/.ssh..."
+mkdir -p ~/.ssh 1>/dev/null 2>&1
+
+echo "Installing uber to ~/.ssh..."
+cp -Rf src/* ~/.ssh 1>/dev/null 2>&1
 
 if test -f ~/.bashprofile; then
+    echo "Backing up bash profile..."
     cp ~/.bash_profile backup/bash_profile
 
     if grep -q "~/.ssh/bashrc" ~/.bash_profile; then
+        echo "Sourcing uber in bash profile..."
         cat template > ~/.bash_profile
     fi
 else
+    echo "Sourcing uber in bash profile..."
     cat template > ~/.bash_profile
 fi
 
-cp -Rf src/* ~/.ssh
+LOCAL_PREFIX=/usr/local
+
+if [ "$(uname)" == "Darwin" ]; then
+    if ! type brew >/dev/null; then
+        echo "Installing Homebrew..."
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    
+    echo "Updating Homebrew..."
+    brew update
+    
+    for pkg in ffmpeg gettext gifsicle git git-flow-avh gnu-getopt lame libvo-aacenc mono node x264 xvid; do
+        if brew list -1 | grep -q "^${pkg}\$"; then
+            echo "Upgrading $pkg..."
+            brew upgrade ${pkg}
+        else
+            echo "Installing $pkg..."
+            brew install $pkg
+        fi
+    done
+    
+    LOCAL_PREFIX=$(brew --prefix)
+fi
+
+gitpromptname=git-prompt.sh
+gitprompt=$LOCAL_PREFIX/etc/bash_completion.d/$gitpromptname
+gitprompturi=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$gitpromptname
+
+if test -f "$gitprompt"; then
+    echo "Removing crappy git-prompt..."
+    rm -rRf "gitprompt" 1>/dev/null 2>&1
+fi
+
+echo "Downloading better git-prompt..."
+result=$(curl -L -D - "$gitprompturi" -o "$gitpromptname" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+
+[[ $result == "200" ]] && cp $gitpromptname "$gitprompt" && rm -rRf $gitpromptname

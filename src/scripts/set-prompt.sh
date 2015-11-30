@@ -1,13 +1,10 @@
-# make sure that git prompt is sourced first
-source ~/.ssh/scripts/git-prompt.sh
-
 function emit-prompt-arrow()
 {
     # set the default color
     local CLR_PROMPT=$CLR_USER_PROMPT
 
     # set color for staff user (administrator)
-    if [ ! -z '`command id -Gn | grep -s -o admin`' ]; then
+    if [ ! -z "$(command id -Gn | grep -s -o admin)" ]; then
         CLR_PROMPT=$CLR_STAFF_PROMPT
     fi
 
@@ -28,12 +25,20 @@ function emit-prompt-arrow()
     fi
 }
 
+for f in $LOCAL_PREFIX/etc/bash_completion.d/*; do
+    source $f
+done
+
 function set-prompt() {
     # set the window title
     echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
 
-    # use the git prompt with the prompt arrow
-    export PROMPT_COMMAND='__git_ps1 "\n\u@\h : \w\n" "`emit-prompt-arrow`"'
+    if ! type git 1>/dev/null 2>&1; then
+        export PROMPT_COMMAND='"\n\u@\h : \w\n" "$(emit-prompt-arrow)"'
+    else
+        # use the git prompt with the prompt arrow
+        export PROMPT_COMMAND='__posh_git_ps1 "\n\u@\h : \w\n" "$(emit-prompt-arrow)"'
+    fi
 }
 
 set-prompt

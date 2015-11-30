@@ -6,7 +6,7 @@ function add-bookmark() {
 	else
 		# make sure we remove any existing bookmark before defining another one.
         remove-bookmark $1 silent
-        local b="$1"=\"`pwd`\"
+        local b="$1"=\"$(pwd)\"
 	
 		echo Adding bookmark: $b
 		echo $b >> ~/.ssh/scripts/bookmarks.sh

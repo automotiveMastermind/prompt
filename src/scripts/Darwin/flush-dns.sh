@@ -1,8 +1,4 @@
 function flush-dns() {
-	if [ "$(uname)" != "Darwin" ]; then
-		return
-	fi
-	
 	dscacheutil -flushcache
 	sudo killall -HUP mDNSResponder
 }
