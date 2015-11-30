@@ -14,6 +14,10 @@ function add-bookmark() {
 	fi
 }
 
-function mk-bm() {
+function mbm() {
+	add-bookmark $@
+}
+
+function mb() {
 	add-bookmark $@
 }

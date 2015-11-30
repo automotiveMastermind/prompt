@@ -18,6 +18,11 @@ mkdir -p ~/.ssh 1>/dev/null 2>&1
 echo "Installing uber to ~/.ssh..."
 cp -Rf src/* ~/.ssh 1>/dev/null 2>&1
 
+if test -f backup/ssh/scripts/bookmarks.sh; then
+    echo "Restoring bookmarks..."
+    cp -R backup/ssh/scripts/bookmarks.sh ~/.ssh/scripts 1>/dev/null 2>&1
+fi
+
 if test -f ~/.bashprofile; then
     echo "Backing up bash profile..."
     cp ~/.bash_profile backup/bash_profile

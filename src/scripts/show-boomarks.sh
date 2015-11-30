@@ -2,7 +2,7 @@ function show-bookmarks() {
 	cat ~/.ssh/scripts/bookmarks.sh
 }
 
-function show() {
+function lbm() {
 	show-bookmarks
 }
 
