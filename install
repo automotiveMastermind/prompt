@@ -55,13 +55,25 @@ if [ "$(uname)" == "Darwin" ]; then
             brew upgrade ${pkg} 1>/dev/null 2>&1
         else
             echo "Installing $pkg..."
-            brew install $pkg
+            brew install ${pkg}
         fi
     done
     
     LOCAL_PREFIX=$(brew --prefix)
     
     git config --system credential.helper osxkeychain
+    
+    for app in atom visual-studio-code sublime-text textmate; do
+        if brew cask list -1 | grep -q "^${app}\$"; then
+            echo "Upgrading $app..."
+            brew cask update ${app}
+        else
+            echo "Installing $app..."
+            brew cask install ${app}
+        fi
+    done
+    
+    git config --system core.editor "atom --wait"
 fi
 
 git config --system color.ui true

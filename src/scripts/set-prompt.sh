@@ -29,8 +29,16 @@ for f in $LOCAL_PREFIX/etc/bash_completion.d/*; do
     source $f
 done
 
-if type gulp; then
+if type gulp 1>/dev/null 2>&1; then
     eval "$(gulp --completion=bash)"
+fi
+
+if type grunt 1>/dev/null 2>&1; then
+    eval "$(grunt --completion=bash)"
+fi
+
+if type npm 1>/dev/null 2>&1; then
+    eval "$(npm completion)"
 fi
 
 function set-prompt() {
