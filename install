@@ -64,6 +64,8 @@ if [ "$(uname)" == "Darwin" ]; then
     git config --system credential.helper osxkeychain
 fi
 
+git config --system color.ui true
+
 gitpromptname=git-prompt.sh
 gitprompt=$LOCAL_PREFIX/etc/bash_completion.d/$gitpromptname
 gitprompturi=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$gitpromptname

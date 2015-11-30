@@ -29,6 +29,10 @@ for f in $LOCAL_PREFIX/etc/bash_completion.d/*; do
     source $f
 done
 
+if type gulp; then
+    eval "$(gulp --completion=bash)"
+fi
+
 function set-prompt() {
     # set the window title
     echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
