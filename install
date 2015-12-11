@@ -44,6 +44,8 @@ if [ "$(uname)" == "Darwin" ]; then
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 1>/dev/null 2>&1
     fi
     
+    LOCAL_PREFIX=$(brew --prefix)
+
     echo "Updating Homebrew..."
     brew update 1>/dev/null 2>&1
     
@@ -54,6 +56,8 @@ if [ "$(uname)" == "Darwin" ]; then
         fi
     done
     
+    rm -rRf "$LOCAL_PREFIX/etc/bash_completion.d/git-prompt.sh" 1>/dev/null 2>&1
+    
     for pkg in ffmpeg gettext gifsicle git git-flow-avh gnu-getopt lame libvo-aacenc mono node x264 xvid; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             echo "Upgrading $pkg..."
@@ -63,8 +67,6 @@ if [ "$(uname)" == "Darwin" ]; then
             brew install ${pkg}
         fi
     done
-    
-    LOCAL_PREFIX=$(brew --prefix)
     
     git config --system credential.helper osxkeychain
     
@@ -80,15 +82,21 @@ if [ "$(uname)" == "Darwin" ]; then
             brew cask install ${app}
         fi
     done
+elif [ "$(uname)" == "MINGW64_NT-10.0" ]; then
+    LOCAL_PREFIX=$LOCALAPPDATA/git
+    
+    mkdir -p "$LOCAL_PREFIX" 1>/dev/null 2>&1
 fi
 
 gitpromptname=git-prompt.sh
-gitprompt=$LOCAL_PREFIX/etc/bash_completion.d/$gitpromptname
+gitprompt=$LOCAL_PREFIX/etc/bash_completion.d
 gitprompturi=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$gitpromptname
 
-if test -f "$gitprompt"; then
+if test -f "$gitprompt/$gitpromptname"; then
     echo "Removing crappy git-prompt..."
     rm -rRf "gitprompt" 1>/dev/null 2>&1
+else
+    mkdir -p "$gitprompt" 1>/dev/null 2>&1
 fi
 
 echo "Downloading better git-prompt..."

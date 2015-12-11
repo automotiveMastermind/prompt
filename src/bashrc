@@ -26,9 +26,9 @@ export CLR_SSH_PROMPT=$CLR_BRIGHT_MAGENTA # COLOR OF THE PROMPT FOR SSH
 
 # enable colors for various commands
 export TERM=xterm-256color
-export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 export CLICOLOR=1
+alias grep="$(which grep) --color=auto"
 
 # change ls colors to be more like original unix/linux
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
@@ -39,6 +39,8 @@ export HISTCONTROL=ignoredubs
 
 if type brew 1>/dev/null 2>&1; then
     export LOCAL_PREFIX=$(brew --prefix)
+elif test -d $LOCALAPPDATA/git; then
+    export LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
 else
     export LOCAL_PREFIX=/usr/local
 fi

@@ -4,7 +4,7 @@ function emit-prompt-arrow()
     local CLR_PROMPT=$CLR_USER_PROMPT
 
     # set color for staff user (administrator)
-    if [ ! -z "$(command id -Gn | grep -s -o admin)" ]; then
+    if [ ! -z "$(command id -Gn 2>/dev/null | grep -s -o admin)" ]; then
         CLR_PROMPT=$CLR_STAFF_PROMPT
     fi
 
@@ -25,23 +25,27 @@ function emit-prompt-arrow()
     fi
 }
 
-for f in $LOCAL_PREFIX/etc/bash_completion.d/*; do
-    source $f
-done
-
-if type gulp 1>/dev/null 2>&1; then
-    eval "$(gulp --completion=bash)"
-fi
-
-if type grunt 1>/dev/null 2>&1; then
-    eval "$(grunt --completion=bash)"
-fi
-
-if type npm 1>/dev/null 2>&1; then
-    eval "$(npm completion)"
-fi
-
 function set-prompt() {
+    local bash_completion=$LOCAL_PREFIX/etc/bash_completion.d
+    
+    if test -d "$bash_completion"; then
+        for f in $bash_completion/*; do
+            source $f
+        done
+    fi
+    
+    if type gulp 1>/dev/null 2>&1; then
+        eval "$(gulp --completion=bash)"
+    fi
+    
+    if type grunt 1>/dev/null 2>&1; then
+        eval "$(grunt --completion=bash)"
+    fi
+    
+    if type npm 1>/dev/null 2>&1; then
+        eval "$(npm completion)"
+    fi
+
     # set the window title
     echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
 
