@@ -23,7 +23,7 @@ if test -f backup/ssh/scripts/bookmarks.sh; then
     cp -R backup/ssh/scripts/bookmarks.sh ~/.ssh/scripts 1>/dev/null 2>&1
 fi
 
-if test -f ~/.bashprofile; then
+if test -f ~/.bash_profile; then
     echo "Backing up bash profile..."
     cp ~/.bash_profile backup/bash_profile
 
