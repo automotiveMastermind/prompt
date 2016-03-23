@@ -1,3 +1,7 @@
+if [ -n "${UBER_DEBUG+1}" ]; then
+        echo 'list-directory'
+fi
+
 function la() {
 	ls -la $@
 }

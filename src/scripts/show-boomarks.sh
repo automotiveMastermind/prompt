@@ -1,3 +1,7 @@
+if [ -n "${UBER_DEBUG+1}" ]; then
+        echo 'show-bookmarks'
+fi
+
 function show-bookmarks() {
 	cat ~/.ssh/scripts/bookmarks.sh
 }

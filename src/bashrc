@@ -34,7 +34,7 @@ alias grep="$(which grep) --color=auto"
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 
 # other system settings
-export EDITOR='atom --wait'
+export EDITOR='nano'
 export HISTCONTROL=ignoredubs
 
 if type brew 1>/dev/null 2>&1; then

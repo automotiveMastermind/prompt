@@ -1,8 +1,7 @@
-function themes()
-{
-    if [ "$(uname)" != "Darwin" ]; then
-		return
-	fi
-    
+if [ -n "${UBER_DEBUG+1}" ]; then
+    echo 'themes'
+fi
+
+function themes() {
     open ~/.ssh/themes/terminal/Monokai.terminal
 }

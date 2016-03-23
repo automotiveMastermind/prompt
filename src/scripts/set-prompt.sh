@@ -1,5 +1,8 @@
-function emit-prompt-arrow()
-{
+if [ -n "${UBER_DEBUG+1}" ]; then
+        echo 'set-prompt'
+fi
+
+function emit-prompt-arrow() {
     # set the default color
     local CLR_PROMPT=$CLR_USER_PROMPT
 
@@ -12,11 +15,11 @@ function emit-prompt-arrow()
     if [ $(id -u) -eq 0 ]; then
         CLR_PROMPT=$CLR_ROOT_PROMPT
     fi
-    
+
     # set the color for an ssh session
     if [ "$SSH_CONNECTION" ]; then
         CLR_PROMPT=$CLR_SSH_PROMPT
-        
+
         # emit the prompt using the correct color
         echo "\[${CLR_PROMPT}\] (ssh) ==> \[${CLR_CLEAR}\]"
     else
@@ -27,23 +30,23 @@ function emit-prompt-arrow()
 
 function set-prompt() {
     local bash_completion=$LOCAL_PREFIX/etc/bash_completion.d
-    
+
     if test -d "$bash_completion"; then
         for f in $bash_completion/*; do
             source $f
         done
     fi
-    
+
     if type gulp 1>/dev/null 2>&1; then
-        eval "$(gulp --completion=bash)"
+        eval "$(gulp --completion=bash)" 1>/dev/null 2>&1;
     fi
-    
+
     if type grunt 1>/dev/null 2>&1; then
-        eval "$(grunt --completion=bash)"
+        eval "$(grunt --completion=bash)" 1>/dev/null 2>&1;
     fi
-    
+
     if type npm 1>/dev/null 2>&1; then
-        eval "$(npm completion)"
+        eval "$(npm completion)" 1>/dev/null 2>&1;
     fi
 
     # set the window title

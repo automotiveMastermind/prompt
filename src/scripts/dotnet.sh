@@ -1,3 +1,7 @@
+if [ -n "${UBER_DEBUG+1}" ]; then
+        echo 'dotnet'
+fi
+
 function install-dnvm() {
     local dnvmpath=~/.dnx/dnvm
     local dnvmuri="https://raw.githubusercontent.com/aspnet/Home/dev/dnvm.sh"
@@ -13,13 +17,13 @@ function install-dnvm() {
     if test ! -f "$dnvmsh"; then
         # attempt to download it from curl
         local result=$(curl -L -D - "$dnvmuri" -o "$dnvmsh" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
-       
+
         # source it if it was successfully retrieved
         [[ $result == "200" ]] && chmod ugo+x "$dnvmsh"
     fi
 }
 
-function update-dnvm() {    
+function update-dnvm() {
     (dnvm update-self &) 1>/dev/null 2>&1
 }
 

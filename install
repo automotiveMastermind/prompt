@@ -41,7 +41,7 @@ LOCAL_PREFIX=/usr/local
 if [ "$(uname)" == "Darwin" ]; then
     if ! type brew 1>/dev/null 2>&1; then
         echo "Installing Homebrew..."
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 1>/dev/null 2>&1
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
     
     LOCAL_PREFIX=$(brew --prefix)
@@ -58,7 +58,7 @@ if [ "$(uname)" == "Darwin" ]; then
     
     rm -rRf "$LOCAL_PREFIX/etc/bash_completion.d/git-prompt.sh" 1>/dev/null 2>&1
     
-    for pkg in ffmpeg gettext gifsicle git git-flow-avh gnu-getopt lame libvo-aacenc mono node x264 xvid; do
+    for pkg in ffmpeg gettext gifsicle git git-extras git-flow-avh gnu-getopt lame libvo-aacenc mono node x264 xvid; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             echo "Upgrading $pkg..."
             brew upgrade ${pkg} 1>/dev/null 2>&1
@@ -73,15 +73,6 @@ if [ "$(uname)" == "Darwin" ]; then
     echo "Tapping extended versions for caskroom..."
     brew tap caskroom/versions 1>/dev/null 2>&1
     
-    for app in atom visual-studio-code sublime-text3 textmate; do
-        if brew cask list -1 | grep -q "^${app}\$"; then
-            echo "Upgrading $app..."
-            brew cask update ${app}
-        else
-            echo "Installing $app..."
-            brew cask install ${app}
-        fi
-    done
 elif [ "$(uname)" == "MINGW64_NT-10.0" ]; then
     LOCAL_PREFIX=$LOCALAPPDATA/git
     
@@ -89,17 +80,27 @@ elif [ "$(uname)" == "MINGW64_NT-10.0" ]; then
 fi
 
 gitpromptname=git-prompt.sh
+gitcompletename=git-flow-completion.bash
 gitprompt=$LOCAL_PREFIX/etc/bash_completion.d
 gitprompturi=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$gitpromptname
+gitcompleteuri=https://raw.githubusercontent.com/petervanderdoes/git-flow-completion/develop/$gitcompletename
+
+if test -f "$gitprompt/$gitcompletename"; then
+    echo "Removing git flow bash completion..."
+    rm -rRf "$gitprompt/$gitcompletename" 1>/dev/null 2>&1
+fi
 
 if test -f "$gitprompt/$gitpromptname"; then
     echo "Removing crappy git-prompt..."
-    rm -rRf "gitprompt" 1>/dev/null 2>&1
+    rm -rRf "$gitprompt/$gitpromptname" 1>/dev/null 2>&1
 else
     mkdir -p "$gitprompt" 1>/dev/null 2>&1
 fi
 
 echo "Downloading better git-prompt..."
 result=$(curl -L -D - "$gitprompturi" -o "$gitpromptname" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
-
 [[ $result == "200" ]] && cp $gitpromptname "$gitprompt" && rm -rRf $gitpromptname
+
+echo "Downloading git-flow completion..."
+result=$(curl -L -D - "$gitcompleteuri" -o "$gitcompletename" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+[[ $result == "200" ]] && cp $gitcompletename "$gitprompt" && rm -rRf $gitcompletename

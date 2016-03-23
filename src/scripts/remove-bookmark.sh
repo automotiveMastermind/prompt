@@ -1,3 +1,7 @@
+if [ -n "${UBER_DEBUG+1}" ]; then
+        echo 'remove-bookmark'
+fi
+
 remove-bookmark() {
     local b=$1
     local r=
