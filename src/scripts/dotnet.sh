@@ -2,44 +2,34 @@ if [ -n "${UBER_DEBUG+1}" ]; then
         echo 'dotnet'
 fi
 
-function install-dnvm() {
-    local dnvmpath=~/.dnx/dnvm
-    local dnvmuri="https://raw.githubusercontent.com/aspnet/Home/dev/dnvm.sh"
-    local dnvmsh=$dnvmpath/dnvm.sh
+function install-dotnet() {
+    local dotnetpath=$HOME/.dotnet
+    local dotneturi="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh"
+    local dotnetsh=$dotnetpath/dotnet-install.sh
 
-    # determine if the dnvm folder exists
-    if test ! -d "$dnvmpath"; then
-        # create the dnvm folder
-        mkdir -p "$dnvmpath"
+    # determine if the dotnet folder exists
+    if test ! -d "$dotnetpath"; then
+        # create the dotnet folder
+        mkdir -p "$dotnetpath"
     fi
 
-    # determine if the dnvm script file does not exist
-    if test ! -f "$dnvmsh"; then
+    # determine if the dotnet script file does not exist
+    if test ! -f "$dotnetsh"; then
         # attempt to download it from curl
-        local result=$(curl -L -D - "$dnvmuri" -o "$dnvmsh" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+        local result=$(curl -L -D - "$dotneturi" -o "$dotnetsh" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 
         # source it if it was successfully retrieved
-        [[ $result == "200" ]] && chmod ugo+x "$dnvmsh"
+        [[ $result == "200" ]] && chmod ugo+x "$dotnetsh"
+    fi
+
+    # determine if dotnet now exists in the expected place
+    if test -f "$dotnetsh"; then
+        # add the dotnet folder to path
+        PATH=$PATH:$dotnetpath
+
+        # source dotnet
+        source $dotnetsh
     fi
 }
 
-function update-dnvm() {
-    (dnvm update-self &) 1>/dev/null 2>&1
-}
-
-# determine if dnvm is avialable
-if ! type dnvm >/dev/null 2>&1; then
-    # install dnvm
-    install-dnvm 1>/dev/null 2>&1
-
-    # determine if dnvm now exists in the expected place
-    if test -f ~/.dnx/dnvm/dnvm.sh; then
-        # add the dnvm folder to path
-        PATH=$PATH:~/.dnx/dnvm
-
-        # source dnvm
-        source ~/.dnx/dnvm/dnvm.sh
-    fi
-fi
-
-update-dnvm
+install-dotnet

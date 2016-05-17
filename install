@@ -58,7 +58,7 @@ if [ "$(uname)" == "Darwin" ]; then
     
     rm -rRf "$LOCAL_PREFIX/etc/bash_completion.d/git-prompt.sh" 1>/dev/null 2>&1
     
-    for pkg in ffmpeg gettext gifsicle git git-extras git-flow-avh gnu-getopt lame libvo-aacenc mono node x264 xvid; do
+    for pkg in ffmpeg gettext gifsicle git git-extras git-flow-avh gnu-getopt lame libvo-aacenc mono node x264 xvid openssl; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             echo "Upgrading $pkg..."
             brew upgrade ${pkg} 1>/dev/null 2>&1
@@ -104,3 +104,7 @@ result=$(curl -L -D - "$gitprompturi" -o "$gitpromptname" -# | grep "^HTTP/1.1" 
 echo "Downloading git-flow completion..."
 result=$(curl -L -D - "$gitcompleteuri" -o "$gitcompletename" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 [[ $result == "200" ]] && cp $gitcompletename "$gitprompt" && rm -rRf $gitcompletename
+
+source ~/.bash_profile
+
+install-dotnet
