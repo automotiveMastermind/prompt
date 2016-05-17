@@ -19,7 +19,7 @@ Uber is a prompt for BaSH on *nix distributions that includes a ton of useful fu
 * Git prompt support (emit information about the current branch and status when in a git path)
 * Editor launch support, including Visual Studio Code and Sublime Text
 * BaSH completion for git and git-flow
-* Install DNVM (.NET Version Manager) if you try to use it and don't already have it
+* Install dotnet-cli
 * Bookmarking support (cdable variables)
 * Flush DNS
 * Enable and disable hidden files in Finder (OS X)

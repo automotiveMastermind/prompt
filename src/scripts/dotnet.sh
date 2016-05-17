@@ -6,7 +6,12 @@ function install-dotnet() {
     local dotnetpath=$HOME/.dotnet
     local dotneturi="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh"
     local dotnetsh=$dotnetpath/dotnet-install.sh
-
+    
+    # determine if dotnet is already on the path
+    if test dotnet; then
+        return
+    fi
+    
     # determine if the dotnet folder exists
     if test ! -d "$dotnetpath"; then
         # create the dotnet folder
@@ -31,5 +36,3 @@ function install-dotnet() {
         source $dotnetsh
     fi
 }
-
-install-dotnet
