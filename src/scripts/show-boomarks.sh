@@ -1,4 +1,4 @@
-if [ -n "${UBER_DEBUG+1}" ]; then
+if test -n "${UBER_DEBUG+1}"; then
         echo 'show-bookmarks'
 fi
 

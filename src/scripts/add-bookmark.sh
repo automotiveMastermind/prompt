@@ -1,12 +1,12 @@
-if [ -n "${UBER_DEBUG+1}" ]; then
+if test -n "${UBER_DEBUG+1}"; then
         echo 'add-bookmark'
 fi
 
 function add-bookmark() {
 	# make sure that a bookmark was specified.
-	if [ -z $1 ]; then
+	if test -z "${1+1}"; then
 		echo USAGE: add-bookmark NAME
-		echo '       NAME : a title for your bookmark'
+		echo '      NAME : a title for your bookmark'
 	else
 		# make sure we remove any existing bookmark before defining another one.
         remove-bookmark $1 silent

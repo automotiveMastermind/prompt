@@ -1,4 +1,4 @@
-if [ -n "${UBER_DEBUG+1}" ]; then
+if test -n "${UBER_DEBUG+1}"; then
         echo 'git-extensions'
 fi
 
@@ -11,12 +11,12 @@ git-clone() {
 	local url=$1
 	local name=$2
 
-	if [ "$url" == "" ]; then
+	if test -z "$url"; then
 		echo "You must specify a url, which is the first parameter."
 		return
 	fi
 
-	if [ "$name" == "" ]; then
+	if test -z "$name"; then
 		echo "You must specify a directory name, which is the second parameter."
 		return
 	fi

@@ -37,7 +37,7 @@ export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export EDITOR='nano'
 export HISTCONTROL=ignoredubs
 
-if type brew 1>/dev/null 2>&1; then
+if type brew 2>/dev/null; then
     export LOCAL_PREFIX=$(brew --prefix)
 elif test -d $LOCALAPPDATA/git; then
     export LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
@@ -46,14 +46,14 @@ else
 fi
 
 # system binds for bash completion (for interactive terminals)
-if [ -t 1 ]; then
+if test -t 1; then
     bind "set completion-ignore-case on"     # ignore strict case sensitivity
     bind "set bell-style none"               # turn off audible alerts
     bind "set show-all-if-ambiguous on"      # show completion with double tap
 fi
 
 # turn on advanced completion
-if [ -f /etc/bash_completion ]; then
+if test -f /etc/bash_completion; then
     ./etc/bash_completion
 fi
 

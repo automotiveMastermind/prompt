@@ -1,4 +1,4 @@
-if [ -n "${UBER_DEBUG+1}" ]; then
+if test -n "${UBER_DEBUG+1}"; then
         echo 'set-prompt'
 fi
 
@@ -7,17 +7,17 @@ function emit-prompt-arrow() {
     local CLR_PROMPT=$CLR_USER_PROMPT
 
     # set color for staff user (administrator)
-    if [ ! -z "$(command id -Gn 2>/dev/null | grep -s -o admin)" ]; then
+    if ! test -z "$(command id -Gn 2>/dev/null | grep -s -o admin)"; then
         CLR_PROMPT=$CLR_STAFF_PROMPT
     fi
 
     # set color for root user
-    if [ $(id -u) -eq 0 ]; then
+    if test $(id -u) -eq 0; then
         CLR_PROMPT=$CLR_ROOT_PROMPT
     fi
 
     # set the color for an ssh session
-    if [ "$SSH_CONNECTION" ]; then
+    if test -n "${SSH_CONNECTION+1}"; then
         CLR_PROMPT=$CLR_SSH_PROMPT
 
         # emit the prompt using the correct color
@@ -37,22 +37,22 @@ function set-prompt() {
         done
     fi
 
-    if type gulp 1>/dev/null 2>&1; then
+    if type gulp 2>/dev/null; then
         eval "$(gulp --completion=bash)" 1>/dev/null 2>&1;
     fi
 
-    if type grunt 1>/dev/null 2>&1; then
+    if type grunt 2>/dev/null; then
         eval "$(grunt --completion=bash)" 1>/dev/null 2>&1;
     fi
 
-    if type npm 1>/dev/null 2>&1; then
+    if type npm 2>/dev/null; then
         eval "$(npm completion)" 1>/dev/null 2>&1;
     fi
 
     # set the window title
     echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
 
-    if ! type git 1>/dev/null 2>&1; then
+    if ! type git 2>/dev/null; then
         export PROMPT_COMMAND='"\n\u@\h : \w\n" "$(emit-prompt-arrow)"'
     else
         # use the git prompt with the prompt arrow

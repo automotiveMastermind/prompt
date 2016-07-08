@@ -1,4 +1,4 @@
-if [ -n "${UBER_DEBUG+1}" ]; then
+if test -n "${UBER_DEBUG+1}"; then
         echo 'dotnet'
 fi
 
@@ -24,7 +24,7 @@ function install-dotnet() {
         local result=$(curl -L -D - "$dotneturi" -o "$dotnetsh" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 
         # source it if it was successfully retrieved
-        [[ $result == "200" ]] && chmod ugo+x "$dotnetsh"
+        test "$result" = "200" && chmod ugo+x "$dotnetsh"
     fi
 
     # determine if dotnet now exists in the expected place
