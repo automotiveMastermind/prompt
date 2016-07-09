@@ -37,22 +37,22 @@ function set-prompt() {
         done
     fi
 
-    if type gulp 2>/dev/null; then
+    if type gulp 1>/dev/null 2>&1; then
         eval "$(gulp --completion=bash)" 1>/dev/null 2>&1;
     fi
 
-    if type grunt 2>/dev/null; then
+    if type grunt 1>/dev/null 2>&1; then
         eval "$(grunt --completion=bash)" 1>/dev/null 2>&1;
     fi
 
-    if type npm 2>/dev/null; then
+    if type npm 1>/dev/null 2>&1; then
         eval "$(npm completion)" 1>/dev/null 2>&1;
     fi
 
     # set the window title
     echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
 
-    if ! type git 2>/dev/null; then
+    if ! type git 1>/dev/null 2>&1; then
         export PROMPT_COMMAND='"\n\u@\h : \w\n" "$(emit-prompt-arrow)"'
     else
         # use the git prompt with the prompt arrow

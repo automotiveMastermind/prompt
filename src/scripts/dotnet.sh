@@ -8,7 +8,7 @@ function install-dotnet() {
     local dotnetsh=$dotnetpath/dotnet-install.sh
     
     # determine if dotnet is already on the path
-    if test type dotnet 2>/dev/null; then
+    if test type dotnet 1>/dev/null 2>&1; then
         return
     fi
     

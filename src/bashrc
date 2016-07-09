@@ -37,7 +37,7 @@ export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export EDITOR='nano'
 export HISTCONTROL=ignoredubs
 
-if type brew 2>/dev/null; then
+if type brew 1>/dev/null 2>&1; then
     export LOCAL_PREFIX=$(brew --prefix)
 elif test -d $LOCALAPPDATA/git; then
     export LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
