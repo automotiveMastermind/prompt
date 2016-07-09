@@ -8,6 +8,7 @@ Info          | Badges
 --------------|--------------
 License       | [![License][license-image]][license]
 Chat          | [![Join Chat][gitter-image]][gitter-url]
+Discord       | [![Join Voice][discord-image]][discord-url]
 
 ## Getting Started
 
@@ -70,3 +71,6 @@ itself, so you can re-run the installer to upgrade at any time. the ~/.bash_prof
 
 [gitter-url]: //gitter.im/pulsebridge/uber
 [gitter-image]:https://img.shields.io/badge/⊪%20gitter-join%20chat%20→-1dce73.svg
+
+[discord-image]:https://img.shields.io/badge/discord-online-blue.svg
+[discord-url]:https://discord.gg/PrQmKTa
