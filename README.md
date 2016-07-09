@@ -42,7 +42,7 @@ git clone https://github.com/pulsebridge/uber.git
 
 ``` bash
 cd uber
-./install
+./install.sh
 ```
 
 3) Open a new terminal window, or source the initialization script in the existing terminal:
