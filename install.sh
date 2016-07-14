@@ -82,7 +82,7 @@ fi
 gitpromptname=git-prompt.sh
 gitcompletename=git-flow-completion.bash
 gitprompt=$LOCAL_PREFIX/etc/bash_completion.d
-gitprompturi=https://raw.githubusercontent.com/lyze/posh-git-sh/3526027049ea07f6c21ab020d1cf6c0cea9895e0/$gitpromptname
+gitprompturi=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$gitpromptname
 gitcompleteuri=https://raw.githubusercontent.com/petervanderdoes/git-flow-completion/develop/$gitcompletename
 
 if test -f "$gitprompt/$gitcompletename"; then
