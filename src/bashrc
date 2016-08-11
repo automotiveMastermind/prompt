@@ -19,6 +19,10 @@ export CLR_BRIGHT_MAGENTA='\033[1;35m'  # BRIGHT MAGENTA (PURPLE)
 export CLR_BRIGHT_CYAN='\033[1;36m'     # BRIGHT CYAN
 export CLR_BRIGHT_WHITE='\033[1;37m'    # BRIGHT WHITE
 
+export CLR_SUCCESS=$CLR_BRIGHT_GREEN    # COLOR FOR SUCCESS MESSAGES
+export CLR_FAIL=$CLR_RED                # COLOR FOR ERROR MESSAGES
+export CLR_RESET=$CLR_CLEAR             # ALIAS FOR CLEAR COLOR
+
 export CLR_ROOT_PROMPT=$CLR_BRIGHT_RED    # COLOR OF THE PROMPT FOR ROOT
 export CLR_STAFF_PROMPT=$CLR_BRIGHT_GREEN # COLOR OF THE PROMPT FOR STAFF
 export CLR_USER_PROMPT=$CLR_BRIGHT_BLUE   # COLOR OF THE PROMPT FOR USERS
@@ -58,7 +62,7 @@ if test -f /etc/bash_completion; then
 fi
 
 # source scripts
-for script in ~/.ssh/scripts/*.sh; do
+for script in ~/.uber/scripts/*.sh; do
     source $script
 done
 
