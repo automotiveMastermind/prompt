@@ -1,14 +1,14 @@
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
+function success() {
+    echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
+}
+
 now=$(date +"%Y%m%d_%H%M%S")
 
 success "Creating backup path : $pwd/backup/$now..."
 mkdir -p "backup/$now" 1>/dev/null
-
-function success() {
-    echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
-}
 
 if test -d ~/.uber; then
     success "Backing up ~/.uber..."
