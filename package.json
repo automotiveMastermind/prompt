@@ -10,7 +10,8 @@
   "scripts": {
     "test": "./install.sh",
     "prerelease": "standard-version",
-    "postrelease": "tar -cvzf uber.tar.gz install.sh src/*"
+    "release": "tar -cvzf uber.tar.gz install.sh src/*",
+    "postrelease": "git push --follow-tags origin master"
   },
   "keywords": [
     "bash",
