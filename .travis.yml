@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - 'node'
+before_script:
+  - git config --global user.name 'release'
+  - git config --global user.email 'open@pulsebridge.com'
+after_success:
+  - npm run release
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: XnwGUrfAkJ8axm9VGTA3doDGK2VYx7xkvGNyxlonaYG2MWkFeClVsdhriklIaoB91dw0ewxAEdtpE11/6B1uNSh2xB+6jv9KdkuMdX8kpf8WY+K+HoWP/JW0jWr5v7MHfvdt6px4cPlq6yfPHI9WRHYlOqFIT3B3nyIbkmIXrawOGZD85GoVP2JAeGebelbfIxHJFbrjhHdFRYJkZ6uFddMr+LNA56QLJvY2Jx0+qUi7b5mhoMU3xuqf1DG1jpTUN1cQsqiq9GzVZze/WOUFPRJ+uhULSxOcui6bvosX08qlzKK685BitdlvyfgJZW9KJTVad2tFD+KEtaOhRtGD/BD4pedExKrBanIBUR/JVSQbWsa8qKvFK+WKVH8KMOw4chdwbPV1h0z2VqZdADVqhE+kKORsBJptsP3vCqaclKCmej+Xsl3y/6bowXmnh4ymGqgMEG9AEMl8hLxc4IFfmMCnB0fYoCDvUl25XL5/TWI6L9pGa7XUAonaA/l+HwDOjUsTJUZ/NmNjxCErvzmi8YpK6rny3HXjb9Dv5lOszk450PKkcPMpHdXW9jgAKJs+b6GVuW7kRUryMHSV8rNgFzSYfkzcrDPvN0dYHj54QPH5jlnd2BeYrZjcp2XiEA5H2oSUV6NrdB2eH/SHLIpXvEj23k24/abxyQ9nfze9F9o=
+  file:
+    - uber.tar.gz
+  on:
+    repo: pulsebridge/uber
+    branch: master
