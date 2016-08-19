@@ -64,10 +64,11 @@ if test "$(uname)" = "Darwin"; then
     
     rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-prompt.sh" 1>/dev/null
     
-    for pkg in git git-extras git-flow-avh gnu-getopt mono homebrew/versions/node5 openssl; do
+    for pkg in git git-extras git-flow-avh gnu-getopt homebrew/versions/node5 openssl; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Upgrading $pkg..."
             brew upgrade ${pkg} 1>/dev/null
+            brew link --overwrite ${pkg}
         else
             success "Installing $pkg..."
             brew install ${pkg}
