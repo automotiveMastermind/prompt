@@ -27,7 +27,8 @@ Uber is a prompt for BaSH on *nix distributions that includes a ton of useful fu
 * Show available colors (already set as variables for use elsewhere)
 * ... and much more.
 
-Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing customization (aside from the prompt).
+Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing 
+customization (aside from the prompt).
 
 ### Using Uber
 
@@ -58,15 +59,16 @@ source ~/.ssh/bashrc
 themes
 ```
 
-**NOTE**: The installer simply creates a new folder (.ssh) under the root folder, and copies all of the files there. It will backup this 
-folder to ./backup first. It wires up the "extensions" by adding a source command for ~/.ssh/bashrc to ~/.bash_profile. It will not duplicate 
-itself, so you can re-run the installer to upgrade at any time. the ~/.bash_profile is also backed up to ./backup/.bash_profile.
+**NOTE**: The installer simply creates a new folder (.ssh) under the root folder, and copies all of the files there. 
+It will backup this folder to ./backup first. It wires up the "extensions" by adding a source command for ~/.ssh/bashrc 
+to ~/.bash_profile. It will not duplicate itself, so you can re-run the installer to upgrade at any time. the 
+~/.bash_profile is also backed up to ./backup/.bash_profile.
 
 ## Copright and License
 
-&copy; PulseBridge, Inc. and contributors. Distributed under the APACHE 2.0 license. See [LICENSE][] for details.
+&copy; PulseBridge, Inc. and contributors. Distributed under the MIT license. See [LICENSE][] for details.
 
-[license-image]: https://img.shields.io/badge/license-APACHE%202.0-blue.svg
+[license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: LICENSE
 
 [gitter-url]: //gitter.im/pulsebridge/uber
