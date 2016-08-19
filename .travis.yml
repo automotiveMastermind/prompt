@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - 'node'
+os:
+  - osx
 before_script:
   - git config --global user.name 'release'
   - git config --global user.email 'open@pulsebridge.com'
