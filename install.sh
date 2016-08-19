@@ -45,7 +45,7 @@ fi
 LOCAL_PREFIX=/usr/local
 
 if test "$(uname)" = "Darwin"; then
-    if ! type brew 2>/dev/null; then
+    if ! type brew 1>/dev/null 2>&1; then
         success "Installing Homebrew..."
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
@@ -63,23 +63,22 @@ if test "$(uname)" = "Darwin"; then
     done
     
     rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-prompt.sh" 1>/dev/null
+    rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-flow-completion.bash" 1>/dev/null
     
-    for pkg in git git-extras git-flow-avh gnu-getopt homebrew/versions/node5 openssl; do
+    for pkg in openssl git git-extras git-flow-avh node; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Upgrading $pkg..."
-            brew upgrade ${pkg} 1>/dev/null
-            brew link --overwrite ${pkg}
+            brew upgrade ${pkg} 1>/dev/null 2>&1
+            brwe link --overwrite ${pkg} 1>/dev/null 2>&1
         else
             success "Installing $pkg..."
             brew install ${pkg}
         fi
     done
     
-    git config --system credential.helper osxkeychain
-    
-    success "Tapping extended versions for caskroom..."
-    brew tap caskroom/versions 1>/dev/null
-    
+    success "Setting git credential helper to use the macOS keychain..."
+    git config --system credential.helper osxkeychain 1>/dev/null
+
 elif test "$(uname)" = "MINGW64_NT-10.0"; then
     LOCAL_PREFIX=$LOCALAPPDATA/git
     

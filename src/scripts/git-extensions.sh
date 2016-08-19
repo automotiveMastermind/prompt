@@ -3,7 +3,7 @@ if test -n "${UBER_DEBUG+1}"; then
 fi
 
 git-clone() {
-	if ! test -f $(which git); then
+	if ! type git 1>/dev/null 2>&1; then
 		echo "Git is not available on the current path. Exiting."
 		return
 	fi
@@ -21,8 +21,8 @@ git-clone() {
 		return
 	fi
 
-	git clone $url $name && \
-	cd $name && \
+	git clone "$url" "$name" && \
+	cd "$name" && \
 	git branch -a | sed -n "/\/HEAD /d; /\/master$/d; /\/develop$/d; /remotes/p;" | xargs -L1 git checkout -t 2>/dev/null
 
 	echo Checking out master and develop branches...
@@ -36,4 +36,39 @@ git-clone() {
 
 clone() {
 	git-clone $@
+}
+
+git-init() {
+	if ! type git 1>/dev/null 2>&1; then
+		echo "Git is not available on the current path. Exiting."
+		return
+	fi
+
+	local name=$1
+
+	if test -z "$name"; then
+		name="."
+	fi
+
+	# initialize a new repo
+	git init "$name"
+
+	# change directory into the new repo
+	cd "$name"
+
+	# create an initial empty commit
+	git commit --allow-empty -m "initial commit" 1>/dev/null
+
+	# initialize git flow
+	git flow init -d 1>/dev/null
+
+	# copy the default gitignore and gitattributes
+	cp ~/.uber/git/gitignore .gitignore 1>/dev/null
+	cp ~/.uber/git/gitattributes .gitattributes 1>/dev/null
+
+	# add the newly created gitignore and gitattributes
+	git add . 1>/dev/null
+
+	# create the initial commit
+	git commit -m "chore: add git ignore and attributes" 1>/dev/null
 }
