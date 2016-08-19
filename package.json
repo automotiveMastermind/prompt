@@ -1,6 +1,6 @@
 {
   "name": "uber",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An amazing bash prompt for macOS and *nix",
   "main": "install.sh",
   "repository": {
@@ -9,9 +9,7 @@
   },
   "scripts": {
     "test": ". ./install.sh",
-    "prerelease": "standard-version",
-    "release": "tar -cvzf uber.tar.gz install.sh src/*",
-    "postrelease": "git push --follow-tags origin master"
+    "release": "standard-version"
   },
   "keywords": [
     "bash",
