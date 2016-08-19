@@ -8,7 +8,7 @@
     "url": "git+https://github.com/pulsebridge/uber.git"
   },
   "scripts": {
-    "test": "./install.sh",
+    "test": ". ./install.sh",
     "prerelease": "standard-version",
     "release": "tar -cvzf uber.tar.gz install.sh src/*",
     "postrelease": "git push --follow-tags origin master"

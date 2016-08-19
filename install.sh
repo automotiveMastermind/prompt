@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
@@ -13,7 +15,7 @@ mkdir -p "backup/$now" 1>/dev/null
 if test -d ~/.uber; then
     success "Backing up ~/.uber..."
     cp -R ~/.uber/* "backup/$now" 1>/dev/null
-    
+
     success "Removing ~/.uber..."
     rm -rf ~/.uber 1>/dev/null
 fi
@@ -49,22 +51,22 @@ if test "$(uname)" = "Darwin"; then
         success "Installing Homebrew..."
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
-    
+
     LOCAL_PREFIX=$(brew --prefix)
 
     success "Updating Homebrew..."
     brew update 1>/dev/null
-    
+
     for pkg in git-flow; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Uninstalling $pkg..."
             brew uninstall ${pkg}
         fi
     done
-    
+
     rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-prompt.sh" 1>/dev/null
     rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-flow-completion.bash" 1>/dev/null
-    
+
     for pkg in openssl git git-extras git-flow-avh node; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Upgrading $pkg..."
@@ -75,13 +77,13 @@ if test "$(uname)" = "Darwin"; then
             brew install ${pkg}
         fi
     done
-    
+
     success "Setting git credential helper to use the macOS keychain..."
     git config --system credential.helper osxkeychain 1>/dev/null
 
 elif test "$(uname)" = "MINGW64_NT-10.0"; then
     LOCAL_PREFIX=$LOCALAPPDATA/git
-    
+
     mkdir -p "$LOCAL_PREFIX" 1>/dev/null
 fi
 
