@@ -1,0 +1,29 @@
+{
+  "name": "uber",
+  "version": "1.0.0",
+  "description": "An amazing bash prompt for macOS and *nix",
+  "main": "install.sh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pulsebridge/uber.git"
+  },
+  "scripts": {
+    "release": "standard-version"
+  },
+  "keywords": [
+    "bash",
+    "prompt",
+    "unix",
+    "linux",
+    "macos"
+  ],
+  "author": "PulseBridge, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pulsebridge/uber/issues"
+  },
+  "homepage": "https://github.com/pulsebridge/uber#readme",
+  "devDependencies": {
+    "standard-version": "^2.4.0"
+  }
+}
