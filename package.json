@@ -1,11 +1,11 @@
 {
   "name": "uber",
-  "version": "1.0.1",
-  "description": "An amazing bash prompt for macOS and *nix",
+  "version": "1.0.2",
+  "description": "A spectacular (BaSH) prompt for *nix distributions",
   "main": "install.sh",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pulsebridge/uber.git"
+    "url": "https://github.com/pulsebridge/uber.git"
   },
   "scripts": {
     "test": ". ./install.sh",

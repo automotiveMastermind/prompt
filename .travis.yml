@@ -3,18 +3,15 @@ node_js:
   - 'node'
 os:
   - osx
+branches:
+  except: /^v*/
 before_script:
   - git config --global user.name 'release'
   - git config --global user.email 'open@pulsebridge.com'
 after_success:
   - npm run release
+  - git push https://$GITHUB_TOKEN@github.com/pulsebridge/uber.git --quiet --tags > /dev/null 2>&1
   - tar -cvzf uber.tar.gz install.sh src/*
-  - eval "$(ssh-agent -s)"
-  - chmod 600 .travis/deploy_key.pem
-  - ssh-add .travis/deploy_key.pem
-  - git remote -v
-  - git remote add deploy https://github.com/pulsebridge/uber.git
-  - git push --follow-tags deploy
 deploy:
   provider: releases
   skip_cleanup: true
