@@ -20,7 +20,7 @@ deploy:
     - git config --global user.name 'release'
     - git config --global user.email 'open@pulsebridge.com'
     - npm run release
-    - git push https://$GITHUB_TOKEN@github.com/pulsebridge/uber.git --quiet --tags > /dev/null 2>&1
+    - git push https://$GITHUB_TOKEN@github.com/pulsebridge/uber.git --follow-tags > /dev/null 2>&1
   on:
     tags: false
     branch: master

@@ -1,6 +1,6 @@
 {
   "name": "uber",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A spectacular (BaSH) prompt for *nix distributions",
   "main": "install.sh",
   "repository": {
