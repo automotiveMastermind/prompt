@@ -3,14 +3,7 @@ node_js:
   - 'node'
 os:
   - osx
-branches:
-  except: /^v*/
-before_script:
-  - git config --global user.name 'release'
-  - git config --global user.email 'open@pulsebridge.com'
 after_success:
-  - npm run release
-  - git push https://$GITHUB_TOKEN@github.com/pulsebridge/uber.git --quiet --tags > /dev/null 2>&1
   - tar -cvzf uber.tar.gz install.sh src/*
 deploy:
   provider: releases
@@ -20,5 +13,14 @@ deploy:
   file:
     - uber.tar.gz
   on:
-    repo: pulsebridge/uber
+    tags: true
+deploy:
+  provider: script
+  script:
+    - git config --global user.name 'release'
+    - git config --global user.email 'open@pulsebridge.com'
+    - npm run release
+    - git push https://$GITHUB_TOKEN@github.com/pulsebridge/uber.git --quiet --tags > /dev/null 2>&1
+  on:
+    tags: false
     branch: master
