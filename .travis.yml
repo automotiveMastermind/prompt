@@ -5,6 +5,9 @@ os:
   - osx
 after_success:
   - tar -cvzf uber.tar.gz install.sh src/*
+  - git config --global user.name 'release'
+  - git config --global user.email 'open@pulsebridge.com'
+  - npm run release
 deploy:
   provider: releases
   skip_cleanup: true
@@ -16,11 +19,6 @@ deploy:
     tags: true
 deploy:
   provider: script
-  script:
-    - git config --global user.name 'release'
-    - git config --global user.email 'open@pulsebridge.com'
-    - npm run release
-    - git push https://$GITHUB_TOKEN@github.com/pulsebridge/uber.git --follow-tags > /dev/null 2>&1
+  script: git push https://$GITHUB_TOKEN@github.com/pulsebridge/uber.git --follow-tags > /dev/null 2>&1
   on:
-    tags: false
     branch: master

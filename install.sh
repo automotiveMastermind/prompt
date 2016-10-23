@@ -67,11 +67,11 @@ if test "$(uname)" = "Darwin"; then
     rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-prompt.sh" 1>/dev/null
     rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-flow-completion.bash" 1>/dev/null
 
-    for pkg in openssl git git-extras git-flow-avh node; do
+    for pkg in openssl git git-extras git-flow-avh nvm; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Upgrading $pkg..."
             brew upgrade ${pkg} 1>/dev/null 2>&1
-            brwe link --overwrite ${pkg} 1>/dev/null 2>&1
+            brew link --overwrite ${pkg} 1>/dev/null 2>&1
         else
             success "Installing $pkg..."
             brew install ${pkg}
