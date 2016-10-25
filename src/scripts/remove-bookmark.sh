@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
 if test -n "${UBER_DEBUG+1}"; then
-        echo 'remove-bookmark'
+    echo 'remove-bookmark'
 fi
 
 remove-bookmark() {

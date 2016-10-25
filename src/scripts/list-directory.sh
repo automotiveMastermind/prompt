@@ -1,19 +1,21 @@
+#!/usr/bin/env bash
+
 if test -n "${UBER_DEBUG+1}"; then
-        echo 'list-directory'
+    echo 'list-directory'
 fi
 
 function la() {
-	ls -la $@
+    ls -la $@
 }
 
 function ll() {
-	ls -lh $@
+    ls -lh $@
 }
 
 function lla() {
-	ls -lha $@
+    ls -lha $@
 }
 
 function lp() {
-	ls -p $@
+    ls -p $@
 }

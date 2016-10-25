@@ -31,22 +31,23 @@ if test -f backup/uber/scripts/bookmarks.sh; then
     cp -R backup/uber/scripts/bookmarks.sh ~/.uber/scripts 1>/dev/null
 fi
 
-if test -f ~/.bash_profile; then
-    success "Backing up bash profile..."
-    cp ~/.bash_profile backup/bash_profile
+for template in template/*; do
+    name=$(basename "$template")
+    path=~/.${name}
 
-    if ! $(grep -q "~/.uber/bashrc" ~/.bash_profile); then
-        success "Sourcing uber in bash profile..."
-        cat template >> ~/.bash_profile
+    if test -f $path; then
+        success "Backing up ${name}..."
+        cp $path backup/$name
     fi
-else
-    success "Sourcing uber in bash profile..."
-    cat template > ~/.bash_profile
-fi
+
+    cat $template > $path
+done
 
 LOCAL_PREFIX=/usr/local
+BASH_COMPLETION=$LOCAL_PREFIX/etc/bash_completion.d
+UNAME=$(uname)
 
-if test "$(uname)" = "Darwin"; then
+if test "$UNAME" = "Darwin"; then
     if ! type brew 1>/dev/null 2>&1; then
         success "Installing Homebrew..."
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -60,18 +61,15 @@ if test "$(uname)" = "Darwin"; then
     for pkg in git-flow; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Uninstalling $pkg..."
-            brew uninstall ${pkg}
+            brew uninstall ${pkg} 1>/dev/null
         fi
     done
-
-    rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-prompt.sh" 1>/dev/null
-    rm -rf "$LOCAL_PREFIX/etc/bash_completion.d/git-flow-completion.bash" 1>/dev/null
 
     for pkg in openssl git git-extras git-flow-avh nvm; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Upgrading $pkg..."
-            brew upgrade ${pkg} 1>/dev/null 2>&1
-            brew link --overwrite ${pkg} 1>/dev/null 2>&1
+            brew upgrade ${pkg} 1>/dev/null
+            brew link --overwrite ${pkg} 1>/dev/null
         else
             success "Installing $pkg..."
             brew install ${pkg}
@@ -80,47 +78,71 @@ if test "$(uname)" = "Darwin"; then
 
     success "Setting git credential helper to use the macOS keychain..."
     git config --system credential.helper osxkeychain 1>/dev/null
+fi
 
-elif test "$(uname)" = "MINGW64_NT-10.0"; then
+if test "$UNAME" = "Linux"; then
+    LOCAL_PREFIX=/usr/share
+    BASH_COMPLETION="${LOCAL_PREFIX}/bash-completion/completions"
+
+    sudo add-apt-repository ppa:pdoes/gitflow-avh -y 1>/dev/null 2>&1
+    sudo add-apt-repository ppa:git-core/ppa -y 1>/dev/null 2>&1
+    sudo apt-get update 1>/dev/null
+
+    for pkg in git-flow; do
+        if apt list $pkg | grep -q "&${pkg}(.*)\[installed\]$" 2>/dev/null; then
+            sudo apt-get remove -y $pkg 1>/dev/null
+        fi
+    done
+
+    for pkg in openssl git git-extras git-flow build-essential libssl-dev; do
+        success "Installing $pkg..."
+        sudo apt-get install -y ${pkg}
+    done
+
+    sudo apt-get autoremove -y 1>/dev/null
+
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+fi
+
+if test "$UNAME" = "MINGW64_NT-10.0"; then
     LOCAL_PREFIX=$LOCALAPPDATA/git
+    BASH_COMPLETION=$LOCAL_PREFIX/etc/bash_completion.d
 
-    mkdir -p "$LOCAL_PREFIX" 1>/dev/null
+    mkdir -p "$BASH_COMPLETION" 1>/dev/null
 fi
 
-gitpromptname=git-prompt.sh
-gitcompletename=git-flow-completion.bash
-gitprompt=$LOCAL_PREFIX/etc/bash_completion.d
-gitprompturi=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$gitpromptname
-gitcompleteuri=https://raw.githubusercontent.com/petervanderdoes/git-flow-completion/develop/$gitcompletename
+GIT_PROMPT_NAME=git-prompt.sh
+GIT_COMPLETE_NAME=git-flow-completion.bash
+GIT_PROMPT_URI=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$GIT_PROMPT_NAME
+GIT_COMPLETE_URI=https://raw.githubusercontent.com/petervanderdoes/git-flow-completion/develop/$GIT_COMPLETE_NAME
+UBER_COMPLETION=~/.uber/completions
 
-if test -f "$gitprompt/$gitcompletename"; then
+if test -f "$BASH_COMPLETION/$GIT_COMPLETE_NAME"; then
     success "Removing git flow bash completion..."
-    rm -rf "$gitprompt/$gitcompletename" 1>/dev/null
+    sudo rm -rf "$BASH_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null
 fi
 
-if test -f "$gitprompt/$gitpromptname"; then
+if test -f "$BASH_COMPLETION/$GIT_PROMPT_NAME"; then
     success "Removing crappy git-prompt..."
-    rm -rf "$gitprompt/$gitpromptname" 1>/dev/null
-else
-    mkdir -p "$gitprompt" 1>/dev/null
+    sudo rm -rf "$BASH_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/nullcd ~
+fi
+
+if ! test -d "$UBER_COMPLETION"; then
+    mkdir -p "$UBER_COMPLETION" 1>/dev/null
 fi
 
 success "Downloading better git-prompt..."
-result=$(curl -s -L -D - "$gitprompturi" -o "$gitpromptname" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+result=$(curl -s -L -D - "$GIT_PROMPT_URI" -o "$UBER_COMPLETION/$GIT_PROMPT_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 
 if test "$result" = "200"; then
-    success "Installing successfully downloaded git-prompt..."
-    cp $gitpromptname "$gitprompt" 1>/dev/null
-    rm -rf $gitpromptname 1>/dev/null
+    success "Successfully installed git-prompt..."
 fi
 
 success "Downloading git-flow completion..."
-result=$(curl -s -L -D - "$gitcompleteuri" -o "$gitcompletename" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+result=$(curl -s -L -D - "$GIT_COMPLETE_URI" -o "$UBER_COMPLETION/$GIT_COMPLETE_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 
 if test "$result" = "200"; then
-    success "Installing successfully downloaded git-flow completion..."
-    cp $gitcompletename "$gitprompt" 1>/dev/null
-    rm -rf $gitcompletename 1>/dev/null
+    success "Successfully installed git-flow completion..."
 fi
 
 echo -e "${CLR_SUCCESS}"

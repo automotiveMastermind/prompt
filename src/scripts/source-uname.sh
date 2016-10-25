@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 function source-uname() {
 	local unamepath=~/.ssh/scripts/$(uname)
 	

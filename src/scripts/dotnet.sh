@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
 if test -n "${UBER_DEBUG+1}"; then
-        echo 'dotnet'
+    echo 'dotnet'
 fi
 
 function install-dotnet() {
@@ -31,5 +33,3 @@ function install-dotnet() {
         PATH=$PATH:$dotnetpath
     fi
 }
-
-install-dotnet

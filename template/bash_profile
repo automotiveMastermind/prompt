@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if test -f ~/.uber/bashrc; then
+    source ~/.uber/bashrc
+fi

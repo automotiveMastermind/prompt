@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # set globals for colors
 export CLR_CLEAR='\033[0m'              # DEFAULT COLOR
 
@@ -58,8 +60,17 @@ fi
 
 # turn on advanced completion
 if test -f /etc/bash_completion; then
-    ./etc/bash_completion
+    . /etc/bash_completion
 fi
+
+if test -f /usr/share/bash-completion/bash_completion; then
+    . /usr/share/bash-completion/bash_completion
+fi
+
+# source completions
+for completion in ~/.uber/completions/*; do
+    source $completion
+done
 
 # source scripts
 for script in ~/.uber/scripts/*.sh; do

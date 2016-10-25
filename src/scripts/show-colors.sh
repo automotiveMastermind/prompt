@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
 if test -n "${UBER_DEBUG+1}"; then
-        echo 'show-colors'
+    echo 'show-colors'
 fi
 
 function show-colors() {

@@ -1,4 +1,0 @@
-
-if test -f ~/.uber/bashrc; then
-    . ~/.uber/bashrc
-fi

@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
 if test -n "${UBER_DEBUG+1}"; then
-        echo 'set-prompt'
+    echo 'set-prompt'
 fi
 
 function emit-prompt-arrow() {
