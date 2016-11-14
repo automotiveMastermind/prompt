@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/pulsebridge/uber/compare/v1.0.2...v1.1.0) (2016-11-14)
+
+
+### Bug Fixes
+
+* **brew:** correct brew link ([34528d7](https://github.com/pulsebridge/uber/commit/34528d7))
+
+
+### Features
+
+* **nvm:** add support for nvm in place of direct node install ([5064c06](https://github.com/pulsebridge/uber/commit/5064c06))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/pulsebridge/uber/compare/v1.0.2...v1.0.3) (2016-08-23)
 
