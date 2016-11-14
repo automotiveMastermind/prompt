@@ -7,20 +7,21 @@ fi
 remove-bookmark() {
     local b=$1
     local r=
+    local scripts_path=$HOME/.uber/scripts
 
     if ! test -z "$b"; then
-        r=$(command grep -s -m 1 ^$b ~/.ssh/scripts/bookmarks.sh)
+        r=$(command grep -s -m 1 ^$b $scripts_path/bookmarks.sh)
     elif test -z "$2"; then
-        r=$(command grep -s -m 1 \"$PWD\"$ ~/.ssh/scripts/bookmarks.sh)
+        r=$(command grep -s -m 1 \"$PWD\"$ $scripts_path/bookmarks.sh)
     fi
 
     if ! test -z "$r"; then
         test -z "$2" && ( echo Removing bookmark: $r )
 
-        command grep -s -v $r ~/.ssh/scripts/bookmarks.sh >> ~/.ssh/scripts/bookmarks1.sh
-        mv -f ~/.ssh/scripts/bookmarks1.sh ~/.ssh/scripts/bookmarks.sh
+        command grep -s -v $r $scripts_path/bookmarks.sh >> $scripts_path/bookmarks1.sh
+        mv -f $scripts_path/bookmarks1.sh $scripts_path/bookmarks.sh
 
-        source ~/.ssh/scripts/bookmarks.sh
+        source $scripts_path/bookmarks.sh
     else
         test -z "$2" && ( echo No bookmark was declared for the specified title or address. )
     fi

@@ -8,6 +8,7 @@ function success() {
 }
 
 now=$(date +"%Y%m%d_%H%M%S")
+backup_path="backup/$now"
 
 success "Creating backup path : $pwd/backup/$now..."
 mkdir -p "backup/$now" 1>/dev/null
@@ -26,18 +27,18 @@ mkdir -p ~/.uber 1>/dev/null
 success "Installing uber to ~/.uber..."
 cp -Rf src/* ~/.uber 1>/dev/null
 
-if test -f backup/uber/scripts/bookmarks.sh; then
+if test -f $backup_path/scripts/bookmarks.sh; then
     success "Restoring bookmarks..."
-    cp -R backup/uber/scripts/bookmarks.sh ~/.uber/scripts 1>/dev/null
+    cp -R $backup_path/uber/scripts/bookmarks.sh ~/.uber/scripts 1>/dev/null
 fi
 
 for template in template/*; do
     name=$(basename "$template")
-    path=~/.${name}
+    path=$HOME/.${name}
 
     if test -f $path; then
         success "Backing up ${name}..."
-        cp $path backup/$name
+        cp $path $backup_path/$name
     fi
 
     cat $template > $path
@@ -61,20 +62,34 @@ if test "$UNAME" = "Darwin"; then
     for pkg in git-flow; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Uninstalling $pkg..."
-            brew uninstall ${pkg} 1>/dev/null
+            brew uninstall ${pkg} 1>/dev/null 2>&1
         fi
     done
 
     for pkg in openssl git git-extras git-flow-avh nvm; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             success "Upgrading $pkg..."
-            brew upgrade ${pkg} 1>/dev/null
-            brew link --overwrite ${pkg} 1>/dev/null
+            brew upgrade ${pkg} 1>/dev/null 2>&1
+            brew link --overwrite ${pkg} 1>/dev/null 2>&1
         else
             success "Installing $pkg..."
-            brew install ${pkg}
+            brew install ${pkg} 1>/dev/null 2>&1
         fi
     done
+
+    nvm_path=$(brew --prefix nvm)
+
+    if test -d $nvm_path; then
+        if ! test -d $HOME/.nvm; then
+            mkdir -p $HOME/.nvm
+        fi
+
+        export NVM_DIR=~/.nvm
+
+        . $nvm_path/nvm.sh
+
+        nvm use --lts 1>/dev/null
+    fi
 
     success "Setting git credential helper to use the macOS keychain..."
     git config --system credential.helper osxkeychain 1>/dev/null
@@ -124,7 +139,7 @@ fi
 
 if test -f "$BASH_COMPLETION/$GIT_PROMPT_NAME"; then
     success "Removing crappy git-prompt..."
-    sudo rm -rf "$BASH_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/nullcd ~
+    sudo rm -rf "$BASH_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null
 fi
 
 if ! test -d "$UBER_COMPLETION"; then

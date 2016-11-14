@@ -65,8 +65,8 @@ git-init() {
     git flow init -d 1>/dev/null
 
     # copy the default gitignore and gitattributes
-    cp ~/.uber/git/gitignore .gitignore 1>/dev/null
-    cp ~/.uber/git/gitattributes .gitattributes 1>/dev/null
+    cp $HOME/.uber/git/gitignore .gitignore 1>/dev/null
+    cp $HOME/.uber/git/gitattributes .gitattributes 1>/dev/null
 
     # add the newly created gitignore and gitattributes
     git add . 1>/dev/null

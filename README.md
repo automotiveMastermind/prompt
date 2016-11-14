@@ -27,7 +27,7 @@ Uber is a prompt for BaSH on *nix distributions that includes a ton of useful fu
 * Show available colors (already set as variables for use elsewhere)
 * ... and much more.
 
-Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing 
+Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing
 customization (aside from the prompt).
 
 ### Using Uber
@@ -50,7 +50,7 @@ cd uber
 3) Open a new terminal window, or source the initialization script in the existing terminal:
 
 ``` bash
-source ~/.ssh/bashrc
+source $HOME/.uber/bashrc
 ```
 
 3) (Optional) Open the included Monokai theme (currently only supported on OS X):
@@ -59,10 +59,10 @@ source ~/.ssh/bashrc
 themes
 ```
 
-**NOTE**: The installer simply creates a new folder (.ssh) under the root folder, and copies all of the files there. 
-It will backup this folder to ./backup first. It wires up the "extensions" by adding a source command for ~/.ssh/bashrc 
-to ~/.bash_profile. It will not duplicate itself, so you can re-run the installer to upgrade at any time. the 
-~/.bash_profile is also backed up to ./backup/.bash_profile.
+**NOTE**: The installer simply creates a new folder (.uber) under the root folder, and copies all of the files there.
+It will backup this folder to ./backup first. It wires up the "extensions" by adding a source command for $HOME/.uber/bashrc
+to $HOME/.bash_profile. It will not duplicate itself, so you can re-run the installer to upgrade at any time. the
+$HOME/.bash_profile is also backed up to ./backup/[date].bash_profile.
 
 ## Copright and License
 

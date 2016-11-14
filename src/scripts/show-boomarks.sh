@@ -5,7 +5,7 @@ if test -n "${UBER_DEBUG+1}"; then
 fi
 
 function show-bookmarks() {
-    cat ~/.ssh/scripts/bookmarks.sh
+    cat $HOME/.uber/scripts/bookmarks.sh
 }
 
 function lbm() {

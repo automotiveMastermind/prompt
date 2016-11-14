@@ -15,8 +15,8 @@ function add-bookmark() {
         local b="$1"=\"$(pwd)\"
 
         echo Adding bookmark: $b
-        echo $b >> ~/.ssh/scripts/bookmarks.sh
-        source ~/.ssh/scripts/bookmarks.sh
+        echo $b >> $HOME/.uber/scripts/bookmarks.sh
+        source $HOME/.uber/scripts/bookmarks.sh
     fi
 }
 

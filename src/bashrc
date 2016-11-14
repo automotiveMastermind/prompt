@@ -60,22 +60,26 @@ fi
 
 # turn on advanced completion
 if test -f /etc/bash_completion; then
-    . /etc/bash_completion
+    source /etc/bash_completion
 fi
 
+# determine if bash completion exists elsewhere
 if test -f /usr/share/bash-completion/bash_completion; then
-    . /usr/share/bash-completion/bash_completion
+    source /usr/share/bash-completion/bash_completion
 fi
 
 # source completions
-for completion in ~/.uber/completions/*; do
+for completion in $HOME/.uber/completions/*; do
     source $completion
 done
 
 # source scripts
-for script in ~/.uber/scripts/*.sh; do
+for script in $HOME/.uber/scripts/*.sh; do
     source $script
 done
+
+# set the prompt
+set-prompt
 
 # aliases
 # -- prompt for overwrites
