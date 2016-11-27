@@ -47,83 +47,10 @@ done
 LOCAL_PREFIX=/usr/local
 BASH_COMPLETION=$LOCAL_PREFIX/etc/bash_completion.d
 UNAME=$(uname)
+UNAME_INSTALL="./install/install-$UNAME.sh"
 
-if test "$UNAME" = "Darwin"; then
-    if ! type brew 1>/dev/null 2>&1; then
-        success "Installing Homebrew..."
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-
-    LOCAL_PREFIX=$(brew --prefix)
-
-    success "Updating Homebrew..."
-    brew update 1>/dev/null
-
-    for pkg in git-flow; do
-        if brew list -1 | grep -q "^${pkg}\$"; then
-            success "Uninstalling $pkg..."
-            brew uninstall ${pkg} 1>/dev/null 2>&1
-        fi
-    done
-
-    for pkg in openssl git git-extras git-flow-avh nvm; do
-        if brew list -1 | grep -q "^${pkg}\$"; then
-            success "Upgrading $pkg..."
-            brew upgrade ${pkg} 1>/dev/null 2>&1
-            brew link --overwrite ${pkg} 1>/dev/null 2>&1
-        else
-            success "Installing $pkg..."
-            brew install ${pkg} 1>/dev/null 2>&1
-        fi
-    done
-
-    nvm_path=$(brew --prefix nvm)
-
-    if test -d $nvm_path; then
-        if ! test -d $HOME/.nvm; then
-            mkdir -p $HOME/.nvm
-        fi
-
-        export NVM_DIR=~/.nvm
-
-        . $nvm_path/nvm.sh
-
-        nvm use --lts 1>/dev/null
-    fi
-
-    success "Setting git credential helper to use the macOS keychain..."
-    git config --system credential.helper osxkeychain 1>/dev/null
-fi
-
-if test "$UNAME" = "Linux"; then
-    LOCAL_PREFIX=/usr/share
-    BASH_COMPLETION="${LOCAL_PREFIX}/bash-completion/completions"
-
-    sudo add-apt-repository ppa:pdoes/gitflow-avh -y 1>/dev/null 2>&1
-    sudo add-apt-repository ppa:git-core/ppa -y 1>/dev/null 2>&1
-    sudo apt-get update 1>/dev/null
-
-    for pkg in git-flow; do
-        if apt list $pkg | grep -q "&${pkg}(.*)\[installed\]$" 2>/dev/null; then
-            sudo apt-get remove -y $pkg 1>/dev/null
-        fi
-    done
-
-    for pkg in openssl git git-extras git-flow build-essential libssl-dev; do
-        success "Installing $pkg..."
-        sudo apt-get install -y ${pkg}
-    done
-
-    sudo apt-get autoremove -y 1>/dev/null
-
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
-fi
-
-if test "$UNAME" = "MINGW64_NT-10.0"; then
-    LOCAL_PREFIX=$LOCALAPPDATA/git
-    BASH_COMPLETION=$LOCAL_PREFIX/etc/bash_completion.d
-
-    mkdir -p "$BASH_COMPLETION" 1>/dev/null
+if test -f $UNAME_INSTALL; then
+    source $UNAME_INSTALL
 fi
 
 GIT_PROMPT_NAME=git-prompt.sh
