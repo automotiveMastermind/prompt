@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/pulsebridge/prompt/compare/v2.0.0...v3.0.0) (2016-11-29)
+
+
+### Code Refactoring
+
+* **docker-gc:** replace docker-gc with bash functions ([a71c209](https://github.com/pulsebridge/prompt/commit/a71c209))
+
+
+### BREAKING CHANGES
+
+* docker-gc: dotnet-install has been removed and is no longer available
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/pulsebridge/prompt/compare/v1.1.0...v2.0.0) (2016-11-29)
 
