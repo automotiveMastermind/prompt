@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/pulsebridge/prompt/compare/v1.1.0...v2.0.0) (2016-11-29)
+
+
+### Features
+
+* **docker-gc:** add support for docker-gc as a container ([a73def0](https://github.com/pulsebridge/prompt/commit/a73def0))
+
+
+### BREAKING CHANGES
+
+* docker-gc: The project has been renamed to PulseBridge Prompt and the path in which it is saved
+now exists at ~/.pulsebridge/prompt. Backward compatibility for restoring bookmarks
+is not available. Please restore the bookmarks yourself by copying the bookmarks.sh
+file from the ./backup/<DATE>/scripts/bookmarks.sh path to the
+$PULSEBRIDGE_PROMPT/scripts/bookmarks.sh path.
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/pulsebridge/prompt/compare/v1.0.2...v1.1.0) (2016-11-14)
 
