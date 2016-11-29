@@ -78,11 +78,6 @@ if ! test -d "$PROMPT_COMPLETION"; then
     mkdir -p "$PROMPT_COMPLETION" 1>/dev/null
 fi
 
-if type docker 1>/dev/null 2>&1; then
-    success "Discovered docker; downloading $DOCKER_GC_NAME..."
-    docker pull spotify/docker-gc
-fi
-
 success "Downloading better git-prompt..."
 result=$(curl -s -L -D - "$GIT_PROMPT_URI" -o "$PROMPT_COMPLETION/$GIT_PROMPT_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 

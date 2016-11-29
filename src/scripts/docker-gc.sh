@@ -5,7 +5,14 @@ if test -n "${PROMPT_DEBUG+1}"; then
 fi
 
 function docker-gc() {
-    if type docker 1>/dev/null 2>&1; then
-        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc
-    fi
+    docker-rm
+    docker-rmi
+}
+
+function docker-rm() {
+    docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+}
+
+function docker-rmi() {
+    docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
 }
