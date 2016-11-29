@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-if test -f $HOME/.uber/bashrc; then
-    source $HOME/.uber/bashrc
+if test -f $HOME/.pulsebridge/prompt/bashrc; then
+    source $HOME/.pulsebridge/prompt/bashrc
 fi

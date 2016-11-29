@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if test -n "${UBER_DEBUG+1}"; then
+if test -n "${PROMPT_DEBUG+1}"; then
     echo 'add-bookmark'
 fi
 
@@ -15,8 +15,8 @@ function add-bookmark() {
         local b="$1"=\"$(pwd)\"
 
         echo Adding bookmark: $b
-        echo $b >> $HOME/.uber/scripts/bookmarks.sh
-        source $HOME/.uber/scripts/bookmarks.sh
+        echo $b >> $HOME/.pulsebridge/prompt/scripts/bookmarks.sh
+        source $HOME/.pulsebridge/prompt/scripts/bookmarks.sh
     fi
 }
 

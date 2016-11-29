@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if test -n "${UBER_DEBUG+1}"; then
+if test -n "${PROMPT_DEBUG+1}"; then
     echo 'git-extensions'
 fi
 
@@ -65,8 +65,8 @@ git-init() {
     git flow init -d 1>/dev/null
 
     # copy the default gitignore and gitattributes
-    cp $HOME/.uber/git/gitignore .gitignore 1>/dev/null
-    cp $HOME/.uber/git/gitattributes .gitattributes 1>/dev/null
+    cp $HOME/.pulsebridge/prompt/git/gitignore .gitignore 1>/dev/null
+    cp $HOME/.pulsebridge/prompt/git/gitattributes .gitattributes 1>/dev/null
 
     # add the newly created gitignore and gitattributes
     git add . 1>/dev/null

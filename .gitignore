@@ -121,5 +121,5 @@ vnd/
 # condo files
 Condo.AssemblyInfo.cs
 
-# uber backups
+# prompt backups
 backup/

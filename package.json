@@ -1,11 +1,11 @@
 {
-  "name": "uber",
+  "name": "prompt",
   "version": "1.1.0",
   "description": "A spectacular (BaSH) prompt for *nix distributions",
   "main": "install.sh",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pulsebridge/uber.git"
+    "url": "https://github.com/pulsebridge/prompt.git"
   },
   "scripts": {
     "test": ". ./install.sh",
@@ -21,9 +21,9 @@
   "author": "PulseBridge, Inc.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pulsebridge/uber/issues"
+    "url": "https://github.com/pulsebridge/prompt/issues"
   },
-  "homepage": "https://github.com/pulsebridge/uber#readme",
+  "homepage": "https://github.com/pulsebridge/prompt#readme",
   "devDependencies": {
     "standard-version": "^2.4.0"
   }

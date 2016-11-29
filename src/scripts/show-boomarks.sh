@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-if test -n "${UBER_DEBUG+1}"; then
+if test -n "${PROMPT_DEBUG+1}"; then
     echo 'show-bookmarks'
 fi
 
 function show-bookmarks() {
-    cat $HOME/.uber/scripts/bookmarks.sh
+    cat $HOME/.pulsebridge/prompt/scripts/bookmarks.sh
 }
 
 function lbm() {

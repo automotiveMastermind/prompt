@@ -1,6 +1,6 @@
-# uber
+# PulseBridge Prompt
 
-> A spectacular (BaSH) prompt for *nix distributions. (Only tested on OS X currently)
+> A spectacular (BaSH) prompt for *nix distributions. (Only tested on macOS currently)
 
 ## Vitals
 
@@ -12,9 +12,9 @@ Discord       | [![Join Voice][discord-image]][discord-url]
 
 ## Getting Started
 
-### What is Uber?
+### What is PulseBridge Prompt?
 
-Uber is a prompt for BaSH on *nix distributions that includes a ton of useful functionality, including:
+PulseBridge Prompt is a prompt for BaSH on *nix distributions that includes a ton of useful functionality, including:
 
 * Two-line prompt that includes username, hostname, and current path
 * Git prompt support (emit information about the current branch and status when in a git path)
@@ -30,27 +30,27 @@ Uber is a prompt for BaSH on *nix distributions that includes a ton of useful fu
 Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing
 customization (aside from the prompt).
 
-### Using Uber
+### Using PulseBridge Prompt
 
-Installing Uber is a 3 step process:
+Installing PulseBridge Prompt is a 3 step process:
 
 1) Clone the repository:
 
 ``` bash
-git clone https://github.com/pulsebridge/uber.git
+git clone https://github.com/pulsebridge/prompt.git
 ```
 
 2) Run the installer:
 
 ``` bash
-cd uber
+cd prompt
 ./install.sh
 ```
 
 3) Open a new terminal window, or source the initialization script in the existing terminal:
 
 ``` bash
-source $HOME/.uber/bashrc
+source $HOME/.bash_profile
 ```
 
 3) (Optional) Open the included Monokai theme (currently only supported on OS X):
@@ -59,10 +59,10 @@ source $HOME/.uber/bashrc
 themes
 ```
 
-**NOTE**: The installer simply creates a new folder (.uber) under the root folder, and copies all of the files there.
-It will backup this folder to ./backup first. It wires up the "extensions" by adding a source command for $HOME/.uber/bashrc
-to $HOME/.bash_profile. It will not duplicate itself, so you can re-run the installer to upgrade at any time. the
-$HOME/.bash_profile is also backed up to ./backup/[date].bash_profile.
+**NOTE**: The installer simply creates a new folder (.pulsebridge) under the home folder, and copies all of the files
+there. It will backup this folder to ./backup first. It wires up the "extensions" by adding a source command for
+$HOME/.pulsebridge/prompt/bashrc to $HOME/.bash_profile. It will not duplicate itself, so you can re-run the installer
+to upgrade at any time. The $HOME/.bash_profile is also backed up to ./backup/[date]/.bash_profile.
 
 ## Copright and License
 
@@ -71,7 +71,7 @@ $HOME/.bash_profile is also backed up to ./backup/[date].bash_profile.
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: LICENSE
 
-[gitter-url]: //gitter.im/pulsebridge/uber
+[gitter-url]: //gitter.im/pulsebridge/prompt
 [gitter-image]:https://img.shields.io/badge/⊪%20gitter-join%20chat%20→-1dce73.svg
 
 [discord-image]:https://img.shields.io/badge/discord-online-blue.svg

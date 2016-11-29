@@ -34,7 +34,7 @@ export CLR_SSH_PROMPT=$CLR_BRIGHT_MAGENTA # COLOR OF THE PROMPT FOR SSH
 export TERM=xterm-256color
 export GREP_COLOR='1;32'
 export CLICOLOR=1
-alias grep="$(which grep) --color=auto"
+alias grep="grep --color=auto"
 
 # change ls colors to be more like original unix/linux
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
@@ -68,15 +68,23 @@ if test -f /usr/share/bash-completion/bash_completion; then
     source /usr/share/bash-completion/bash_completion
 fi
 
+PULSEBRIDGE_PROMPT=$HOME/.pulsebridge/prompt
+
 # source completions
-for completion in $HOME/.uber/completions/*; do
+for completion in $PULSEBRIDGE_PROMPT/completions/*; do
     source $completion
 done
 
 # source scripts
-for script in $HOME/.uber/scripts/*.sh; do
+for script in $PULSEBRIDGE_PROMPT/scripts/*.sh; do
     source $script
 done
+
+# test for prompt bin
+if test -d $PULSEBRIDGE_PROMPT/bin; then
+    # append prompt to path
+    export PATH=$PATH:$PULSEBRIDGE_PROMPT/bin
+fi
 
 # set the prompt
 set-prompt

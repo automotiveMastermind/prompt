@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-if test -n "${UBER_DEBUG+1}"; then
+if test -n "${PROMPT_DEBUG+1}"; then
     echo 'remove-bookmark'
 fi
 
 remove-bookmark() {
     local b=$1
     local r=
-    local scripts_path=$HOME/.uber/scripts
+    local scripts_path=$HOME/.pulsebridge/prompt/scripts
 
     if ! test -z "$b"; then
         r=$(command grep -s -m 1 ^$b $scripts_path/bookmarks.sh)

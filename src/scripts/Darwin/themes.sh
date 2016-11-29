@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if test -n "${UBER_DEBUG+1}"; then
+if test -n "${PROMPT_DEBUG+1}"; then
     echo 'themes'
 fi
 
 function themes() {
-    open $HOME/.uber/themes/terminal/Monokai.terminal
+    open $HOME/.pulsebridge/prompt/themes/terminal/Monokai.terminal
 }

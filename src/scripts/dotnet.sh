@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if test -n "${UBER_DEBUG+1}"; then
+if test -n "${PROMPT_DEBUG+1}"; then
     echo 'dotnet'
 fi
 
@@ -8,7 +8,7 @@ function install-dotnet() {
     local dotnetpath=$HOME/.dotnet
     local dotneturi="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh"
     local dotnetsh=$dotnetpath/dotnet-install.sh
-    
+
     # determine if dotnet is already on the path
     if ! type dotnet 1>/dev/null 2>&1; then
         # determine if the dotnet folder exists
@@ -26,7 +26,7 @@ function install-dotnet() {
             test "$result" = "200" && chmod ugo+x "$dotnetsh"
         fi
     fi
-    
+
     # determine if dotnet now exists in the expected place
     if test -f "$dotnetsh"; then
         # add the dotnet folder to path
