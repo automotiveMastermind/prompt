@@ -39,8 +39,12 @@ alias grep="grep --color=auto"
 # change ls colors to be more like original unix/linux
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 
-# other system settings
-export EDITOR='nano'
+if type code 1>/dev/null 2>&1; then
+    export EDITOR='code --wait'
+else
+    export EDITOR='nano'
+fi
+
 export HISTCONTROL=ignoredubs
 
 if type brew 1>/dev/null 2>&1; then
