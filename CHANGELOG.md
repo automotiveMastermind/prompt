@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/pulsebridge/prompt/compare/v3.1.0...v3.2.0) (2016-12-12)
+
+
+### Features
+
+* **bootstrap:** add support for one-line bootstrap ([34e1404](https://github.com/pulsebridge/prompt/commit/34e1404))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/pulsebridge/prompt/compare/v3.0.1...v3.1.0) (2016-12-01)
 
