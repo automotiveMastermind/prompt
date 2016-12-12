@@ -32,28 +32,13 @@ customization (aside from the prompt).
 
 ### Using PulseBridge Prompt
 
-Installing PulseBridge Prompt is a 3 step process:
-
-1) Clone the repository:
+Installing PulseBridge Prompt is a 1 step process:
 
 ``` bash
-git clone https://github.com/pulsebridge/prompt.git
+curl -L https://raw.github.com/pulsebridge/prompt/master/bootstrap.sh | /usr/bin/env bash
 ```
 
-2) Run the installer:
-
-``` bash
-cd prompt
-./install.sh
-```
-
-3) Open a new terminal window, or source the initialization script in the existing terminal:
-
-``` bash
-source $HOME/.bash_profile
-```
-
-3) (Optional) Open the included Monokai theme (currently only supported on OS X):
+(Optional) Open the included Monokai theme (currently only supported on OS X):
 
 ``` bash
 themes
