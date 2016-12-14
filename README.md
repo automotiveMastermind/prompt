@@ -8,7 +8,6 @@ Info          | Badges
 --------------|--------------
 License       | [![License][license-image]][license]
 Chat          | [![Join Chat][gitter-image]][gitter-url]
-Discord       | [![Join Voice][discord-image]][discord-url]
 
 ## Getting Started
 
@@ -18,12 +17,12 @@ PulseBridge Prompt is a prompt for BaSH on *nix distributions that includes a to
 
 * Two-line prompt that includes username, hostname, and current path
 * Git prompt support (emit information about the current branch and status when in a git path)
-* Editor launch support, including Visual Studio Code and Sublime Text
-* BaSH completion for git and git-flow
+* Better BaSH completion for git and git-flow
 * Install dotnet-cli
 * Bookmarking support (cdable variables)
-* Flush DNS
-* Enable and disable hidden files in Finder (OS X)
+* Variables support (add vars without modifying profile)
+* Flush DNS (on macOS)
+* Enable and disable hidden files in Finder (on macOS)
 * Show available colors (already set as variables for use elsewhere)
 * ... and much more.
 
@@ -35,10 +34,10 @@ customization (aside from the prompt).
 Installing PulseBridge Prompt is a 1 step process:
 
 ``` bash
-curl -fsSL https://raw.githubusercontent.com/pulsebridge/prompt/master/bootstrap.sh | /usr/bin/env bash
+curl -fsSL https://git.io/pb-prompt-bs | /usr/bin/env bash
 ```
 
-(Optional) Open the included Monokai theme (currently only supported on OS X):
+(Optional) Open the included Monokai theme (currently only supported on macOS):
 
 ``` bash
 themes
@@ -47,7 +46,7 @@ themes
 **NOTE**: The installer simply creates a new folder (.pulsebridge) under the home folder, and copies all of the files
 there. It will backup this folder to ./backup first. It wires up the "extensions" by adding a source command for
 $HOME/.pulsebridge/prompt/bashrc to $HOME/.bash_profile. It will not duplicate itself, so you can re-run the installer
-to upgrade at any time. The $HOME/.bash_profile is also backed up to ./backup/[date]/.bash_profile.
+to upgrade at any time. The $HOME/.bash_profile is also backed up to $HOME/.pulsebridge/prompt/backup/[date]/.bash_profile.
 
 ## Copright and License
 
@@ -58,6 +57,3 @@ to upgrade at any time. The $HOME/.bash_profile is also backed up to ./backup/[d
 
 [gitter-url]: //gitter.im/pulsebridge/prompt
 [gitter-image]:https://img.shields.io/badge/⊪%20gitter-join%20chat%20→-1dce73.svg
-
-[discord-image]:https://img.shields.io/badge/discord-online-blue.svg
-[discord-url]:https://discord.gg/PrQmKTa
