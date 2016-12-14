@@ -12,8 +12,6 @@ if ! type brew 1>/dev/null 2>&1; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-LOCAL_PREFIX=$(brew --prefix)
-
 success "Updating Homebrew..."
 brew update 1>/dev/null
 
@@ -33,20 +31,25 @@ for pkg in openssl git git-extras git-flow-avh nvm; do
         success "Installing $pkg..."
         brew install ${pkg} 1>/dev/null 2>&1
     fi
+
+    mkdir -p /usr/local/lib 1>/dev/null 2>&1
+    ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/ 1>/dev/null 2>&1
+    ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/ 1>/dev/null 2>&1
 done
 
 nvm_path=$(brew --prefix nvm)
 
-if test -d $nvm_path; then
-    if ! test -d $HOME/.nvm; then
-        mkdir -p $HOME/.nvm
-    fi
+if [ -d $nvm_path ]; then
+    export NVM_DIR=$HOME/.nvm
 
-    export NVM_DIR=~/.nvm
+    if [ ! -d $NVM_DIR ]; then
+        mkdir -p $NVM_DIR
+    fi
 
     . $nvm_path/nvm.sh
 
-    nvm use --lts 1>/dev/null
+    nvm install --lts 1>/dev/null 2>&1
+    nvm use --lts 1>/dev/null 2>&1
 fi
 
 success "Setting git credential helper to use the macOS keychain..."

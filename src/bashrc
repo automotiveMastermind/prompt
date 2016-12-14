@@ -49,43 +49,43 @@ export HISTCONTROL=ignoredubs
 
 if type brew 1>/dev/null 2>&1; then
     export LOCAL_PREFIX=$(brew --prefix)
-elif test -d $LOCALAPPDATA/git; then
+elif [ -d $LOCALAPPDATA/git ]; then
     export LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
 else
     export LOCAL_PREFIX=/usr/local
 fi
 
 # system binds for bash completion (for interactive terminals)
-if test -t 1; then
+if [ -t 1 ]; then
     bind "set completion-ignore-case on"     # ignore strict case sensitivity
     bind "set bell-style none"               # turn off audible alerts
     bind "set show-all-if-ambiguous on"      # show completion with double tap
 fi
 
 # turn on advanced completion
-if test -f /etc/bash_completion; then
-    source /etc/bash_completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
 fi
 
 # determine if bash completion exists elsewhere
-if test -f /usr/share/bash-completion/bash_completion; then
-    source /usr/share/bash-completion/bash_completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
 fi
 
 PULSEBRIDGE_PROMPT=$HOME/.pulsebridge/prompt
 
 # source completions
 for completion in $PULSEBRIDGE_PROMPT/completions/*; do
-    source $completion
+    . $completion
 done
 
 # source scripts
 for script in $PULSEBRIDGE_PROMPT/scripts/*.sh; do
-    source $script
+    . $script
 done
 
 # test for prompt bin
-if test -d $PULSEBRIDGE_PROMPT/bin; then
+if [ -d $PULSEBRIDGE_PROMPT/bin ]; then
     # append prompt to path
     export PATH=$PATH:$PULSEBRIDGE_PROMPT/bin
 fi

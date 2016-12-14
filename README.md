@@ -35,7 +35,7 @@ customization (aside from the prompt).
 Installing PulseBridge Prompt is a 1 step process:
 
 ``` bash
-curl -L https://raw.github.com/pulsebridge/prompt/master/bootstrap.sh | /usr/bin/env bash
+curl -fsSL https://raw.githubusercontent.com/pulsebridge/prompt/master/bootstrap.sh | /usr/bin/env bash
 ```
 
 (Optional) Open the included Monokai theme (currently only supported on OS X):

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if test -n "${PROMPT_DEBUG+1}"; then
+if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'set-prompt'
 fi
 
@@ -9,17 +9,17 @@ function emit-prompt-arrow() {
     local CLR_PROMPT=$CLR_USER_PROMPT
 
     # set color for staff user (administrator)
-    if ! test -z "$(command id -Gn 2>/dev/null | grep -s -o admin)"; then
+    if [ ! -z "$(command id -Gn 2>/dev/null | grep -s -o admin)" ]; then
         CLR_PROMPT=$CLR_STAFF_PROMPT
     fi
 
     # set color for root user
-    if test $(id -u) -eq 0; then
+    if [ $(id -u) = 0 ]; then
         CLR_PROMPT=$CLR_ROOT_PROMPT
     fi
 
     # set the color for an ssh session
-    if test -n "${SSH_CONNECTION+1}"; then
+    if [ ! -z "${SSH_CONNECTION:-}" ]; then
         CLR_PROMPT=$CLR_SSH_PROMPT
 
         # emit the prompt using the correct color
@@ -33,7 +33,7 @@ function emit-prompt-arrow() {
 function set-prompt() {
     local bash_completion=$LOCAL_PREFIX/etc/bash_completion.d
 
-    if test -d "$bash_completion"; then
+    if [ -d "$bash_completion" ]; then
         for f in $bash_completion/*; do
             source $f
         done

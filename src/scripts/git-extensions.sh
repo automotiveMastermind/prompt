@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if test -n "${PROMPT_DEBUG+1}"; then
+if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'git-extensions'
 fi
 
@@ -13,12 +13,12 @@ git-clone() {
     local url=$1
     local name=$2
 
-    if test -z "$url"; then
+    if [ -z "${url:-}" ]; then
         echo "You must specify a url, which is the first parameter."
         return
     fi
 
-    if test -z "$name"; then
+    if [ -z "${name:-}" ]; then
         echo "You must specify a directory name, which is the second parameter."
         return
     fi
@@ -48,7 +48,7 @@ git-init() {
 
     local name=$1
 
-    if test -z "$name"; then
+    if [ -z "${name:-}" ]; then
         name="."
     fi
 

@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-if test -n "${PROMPT_DEBUG+1}"; then
+if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'add-ssh-keys'
 fi
+
 function add-ssh-keys() {
 	ssh-add -A 2>/dev/null
 }

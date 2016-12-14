@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if test -f $HOME/.pulsebridge/prompt/bashrc; then
+if [ -e $HOME/.pulsebridge/prompt/bashrc ]; then
     source $HOME/.pulsebridge/prompt/bashrc
 fi
 
-if test -f $HOME/.dotnet/dotnet; then
+if [ -e $HOME/.dotnet/dotnet ]; then
     export PATH=$HOME/.dotnet:$PATH
 fi

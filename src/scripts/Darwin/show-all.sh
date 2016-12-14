@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if test -n "${PROMPT_DEBUG+1}"; then
+if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'show-all'
 fi
 function show-all() {

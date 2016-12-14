@@ -1,4 +1,0 @@
-LOCAL_PREFIX=$LOCALAPPDATA/git
-BASH_COMPLETION=$LOCAL_PREFIX/etc/bash_completion.d
-
-mkdir -p "$BASH_COMPLETION" 1>/dev/null

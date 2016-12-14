@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-if test -n "${PROMPT_DEBUG+1}"; then
+if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'add-bookmark'
 fi
 
 function add-bookmark() {
     # make sure that a bookmark was specified.
-    if test -z "${1+1}"; then
+    if [ -z "${1:-}" ]; then
         echo USAGE: add-bookmark NAME
         echo '      NAME : a title for your bookmark'
     else
