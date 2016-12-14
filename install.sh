@@ -103,10 +103,16 @@ if [ "$result" = "200" ]; then
     chmod +x "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null 2>&1
 fi
 
-SHA=$(git rev-parse HEAD)
-SHA_PATH=$PULSEBRIDGE_PROMPT/$SHA
+CURL_OPT='-s'
+if [ ! -z "${GH_TOKEN:-}" ]; then
+    CURL_OPT='$CURL_OPT -H "Authorization: token $GH_TOKEN"'
+fi
 
-touch $SHA_PATH 1>/dev/null 2>&1
+SHA_URI="https://api.github.com/repos/pulsebridge/prompt/commits/master"
+PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
+PROMPT_SHA_PATH=$HOME/.pulsebridge/prompt/$PROMPT_SHA
+
+touch $PROMPT_SHA_PATH
 
 echo -e "${CLR_SUCCESS}"
 echo "#######################################"
