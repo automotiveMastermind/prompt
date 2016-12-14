@@ -1,31 +1,31 @@
 {
-    "name": "prompt",
-    "version": "3.4.1",
-    "description": "A spectacular (BaSH) prompt for *nix distributions",
-    "main": "install.sh",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/pulsebridge/prompt.git"
-    },
-    "scripts": {
-        "test": ". ./install.sh",
-        "push": "git push --follow-tags origin master",
-        "release": "standard-version && npm run push"
-    },
-    "keywords": [
-        "bash",
-        "prompt",
-        "unix",
-        "linux",
-        "macos"
-    ],
-    "author": "PulseBridge, Inc.",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/pulsebridge/prompt/issues"
-    },
-    "homepage": "https://github.com/pulsebridge/prompt#readme",
-    "devDependencies": {
-        "standard-version": "^2.4.0"
-    }
+  "name": "prompt",
+  "version": "3.4.2",
+  "description": "A spectacular (BaSH) prompt for *nix distributions",
+  "main": "install.sh",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pulsebridge/prompt.git"
+  },
+  "scripts": {
+    "test": ". ./install.sh",
+    "push": "git push --follow-tags origin master",
+    "release": "standard-version && npm run push"
+  },
+  "keywords": [
+    "bash",
+    "prompt",
+    "unix",
+    "linux",
+    "macos"
+  ],
+  "author": "PulseBridge, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pulsebridge/prompt/issues"
+  },
+  "homepage": "https://github.com/pulsebridge/prompt#readme",
+  "devDependencies": {
+    "standard-version": "^2.4.0"
+  }
 }
