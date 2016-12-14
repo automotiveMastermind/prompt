@@ -21,6 +21,7 @@ function update-prompt() {
     pushd prompt-master 1>/dev/null
     ./install.sh
     popd 1>/dev/null
+    popd 1>/dev/null
 
     rm -rf $UPDATE_TEMP 1>/dev/null
 }
