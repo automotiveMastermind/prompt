@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.1"></a>
+## [3.3.1](https://github.com/pulsebridge/prompt/compare/v3.3.0...v3.3.1) (2016-12-14)
+
+
+### Bug Fixes
+
+* **dotnet-install:** remove reset in dotnet-install ([ad1e15e](https://github.com/pulsebridge/prompt/commit/ad1e15e))
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/pulsebridge/prompt/compare/v3.2.1...v3.3.0) (2016-12-14)
 
