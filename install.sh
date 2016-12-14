@@ -35,6 +35,11 @@ if [ -f $backup_path/scripts/bookmarks.sh ]; then
     cp -R $backup_path/scripts/bookmarks.sh $PULSEBRIDGE_PROMPT/scripts 1>/dev/null
 fi
 
+if [ -f $backup_path/scripts/variables.sh ]; then
+    success "Restoring variables..."
+    cp -R $backup_path/scripts/variables.sh $PULSEBRIDGE_PROMPT/scripts 1>/dev/null
+fi
+
 for template in template/*; do
     name=$(basename "$template")
     path=$HOME/.${name}
@@ -97,6 +102,11 @@ if [ "$result" = "200" ]; then
     success "Successfully installed git-flow completion..."
     chmod +x "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null 2>&1
 fi
+
+SHA=$(git rev-parse HEAD)
+SHA_PATH=$PULSEBRIDGE_PROMPT/$SHA
+
+touch $SHA_PATH 1>/dev/null 2>&1
 
 echo -e "${CLR_SUCCESS}"
 echo "#######################################"
