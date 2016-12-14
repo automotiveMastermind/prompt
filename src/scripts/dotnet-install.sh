@@ -45,6 +45,4 @@ function dotnet-install() {
 
     mkdir -p /usr/local/share 1>/dev/null 2>&1
     ln -s $DOTNET_INSTALL_DIR /usr/local/share 1>/dev/null 2>&1
-
-    reset
 }
