@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.5.5"></a>
+## [3.5.5](https://github.com/pulsebridge/prompt/compare/v3.5.4...v3.5.5) (2016-12-18)
+
+
+
 <a name="3.5.4"></a>
 ## [3.5.4](https://github.com/pulsebridge/prompt/compare/v3.5.3...v3.5.4) (2016-12-18)
 
