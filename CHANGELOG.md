@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.5.2"></a>
+## [3.5.2](https://github.com/pulsebridge/prompt/compare/v3.5.1...v3.5.2) (2016-12-18)
+
+
+### Bug Fixes
+
+* **bashrc:** fix an issue with the scripts path in bashrc ([de37ef1](https://github.com/pulsebridge/prompt/commit/de37ef1))
+
+
+
 <a name="3.5.1"></a>
 ## [3.5.1](https://github.com/pulsebridge/prompt/compare/v3.5.0...v3.5.1) (2016-12-18)
 
