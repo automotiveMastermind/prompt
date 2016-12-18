@@ -80,7 +80,7 @@ for completion in $PULSEBRIDGE_PROMPT/completions/*; do
 done
 
 # source scripts
-for script in $PULSEBRIDGE_PROMPT/scripts/*; do
+for script in $PULSEBRIDGE_PROMPT/scripts/*.sh; do
     . $script
 done
 
