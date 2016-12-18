@@ -17,6 +17,16 @@ safe-exec() {
     fi
 }
 
+function set-dotnet-path() {
+    if [ -e /usr/local/share/dotnet ]; then
+        export PATH=/usr/local/share/dotnet:$PATH
+    fi
+
+    if [ -e $HOME/.dotnet/dotnet ]; then
+        export PATH=$HOME/.dotnet:$PATH
+    fi
+}
+
 function dotnet-install() {
     if type dotnet 1>/dev/null 2>&1; then
         return
@@ -45,4 +55,7 @@ function dotnet-install() {
 
     mkdir -p /usr/local/share 1>/dev/null 2>&1
     ln -s $DOTNET_INSTALL_DIR /usr/local/share 1>/dev/null 2>&1
+    set-dotnet-path
 }
+
+set-dotnet-path

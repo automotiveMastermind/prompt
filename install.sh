@@ -64,7 +64,7 @@ if [ -e /etc/os-release ]; then
 fi
 
 if [ -f $UNAME_INSTALL ]; then
-    source $UNAME_INSTALL
+    . $UNAME_INSTALL
 fi
 
 GIT_PROMPT_NAME=git-prompt.sh

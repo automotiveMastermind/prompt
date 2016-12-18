@@ -35,7 +35,7 @@ function set-prompt() {
 
     if [ -d "$bash_completion" ]; then
         for f in $bash_completion/*; do
-            source $f
+            . $f
         done
     fi
 
