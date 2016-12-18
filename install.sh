@@ -75,12 +75,12 @@ PROMPT_COMPLETION=$PULSEBRIDGE_PROMPT/completions
 
 if [ -f "$BASH_COMPLETION/$GIT_COMPLETE_NAME" ]; then
     success "Removing git flow bash completion..."
-    sudo rm -rf "$BASH_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null
+    rm -rf "$BASH_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null
 fi
 
 if [ -f "$BASH_COMPLETION/$GIT_PROMPT_NAME" ]; then
     success "Removing crappy git-prompt..."
-    sudo rm -rf "$BASH_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null
+    rm -rf "$BASH_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null
 fi
 
 if [ ! -d "$PROMPT_COMPLETION" ]; then
@@ -121,3 +121,5 @@ echo "   PLEASE OPEN A NEW TERMINAL WINDOW"
 echo "#######################################"
 echo "#######################################"
 echo -e "${CLR_CLEAR}"
+
+/usr/bin/env bash -l

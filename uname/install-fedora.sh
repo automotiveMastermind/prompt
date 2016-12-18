@@ -5,9 +5,9 @@ function success() {
     echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
 }
 
-for pkg in openssl git install libunwind libicu; do
+for pkg in openssl git libunwind libicu; do
     success "Installing $pkg..."
-    sudo dnf ${pkg}
+    sudo dnf install ${pkg}
 done
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
