@@ -121,5 +121,3 @@ echo "   PLEASE OPEN A NEW TERMINAL WINDOW"
 echo "#######################################"
 echo "#######################################"
 echo -e "${CLR_CLEAR}"
-
-. ~/.bash_profile
