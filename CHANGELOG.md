@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.5.6"></a>
+## [3.5.6](https://github.com/pulsebridge/prompt/compare/v3.5.5...v3.5.6) (2016-12-20)
+
+
+### Bug Fixes
+
+* **install:** fix git flow completion curl could fail ([718b975](https://github.com/pulsebridge/prompt/commit/718b975))
+
+
+
 <a name="3.5.5"></a>
 ## [3.5.5](https://github.com/pulsebridge/prompt/compare/v3.5.4...v3.5.5) (2016-12-18)
 
