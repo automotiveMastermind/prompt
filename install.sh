@@ -105,7 +105,7 @@ fi
 
 CURL_OPT='-s'
 if [ ! -z "${GH_TOKEN:-}" ]; then
-    CURL_OPT='$CURL_OPT -H "Authorization: token $GH_TOKEN"'
+    CURL_OPT="$CURL_OPT -H 'Authorization: token $GH_TOKEN'"
 fi
 
 SHA_URI="https://api.github.com/repos/pulsebridge/prompt/commits/master"
