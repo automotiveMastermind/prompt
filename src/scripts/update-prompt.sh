@@ -13,6 +13,7 @@ function update-prompt() {
         return 1
     fi
 
+    local CHANGELOG_URI="https://github.com/pulsebridge/prompt/blob/master/CHANGELOG.md"
     local UPDATE_URI="https://github.com/pulsebridge/prompt/archive/master.tar.gz"
     local UPDATE_TEMP=$(mktemp -d -t pb_prompt)
 
@@ -24,4 +25,6 @@ function update-prompt() {
     popd 1>/dev/null
 
     rm -rf $UPDATE_TEMP 1>/dev/null
+
+    open-url $CHANGELOG_URI 1>/dev/null
 }
