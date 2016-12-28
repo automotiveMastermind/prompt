@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.6.0"></a>
+# [3.6.0](https://github.com/pulsebridge/prompt/compare/v3.5.7...v3.6.0) (2016-12-28)
+
+
+### Features
+
+* **open-url:** add support for opening a url across platforms ([8509caa](https://github.com/pulsebridge/prompt/commit/8509caa))
+
+
+
 <a name="3.5.7"></a>
 ## [3.5.7](https://github.com/pulsebridge/prompt/compare/v3.5.6...v3.5.7) (2016-12-28)
 
