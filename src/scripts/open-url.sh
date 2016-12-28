@@ -1,3 +1,9 @@
+#!/usr/bin/env bash
+
+if [ ! -z "${PROMPT_DEBUG:-}" ]; then
+    echo 'open-url'
+fi
+
 open-url() {
     local url="$1"
 
