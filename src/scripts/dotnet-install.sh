@@ -40,12 +40,19 @@ function dotnet-install() {
         export DOTNET_INSTALL_DIR=$HOME/.dotnet
     fi
 
-    local DOTNET_URI=https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2.1/scripts/obtain/dotnet-install.sh
+    local DOTNET_PROJECTJSON_URI=https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2.1/scripts/obtain/dotnet-install.sh
+    local DOTNET_URI=https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh
     local DOTNET_INSTALL_SH=$DOTNET_INSTALL_DIR/dotnet-install.sh
 
     if [ ! -d $DOTNET_INSTALL_DIR ]; then
         mkdir -p $DOTNET_INSTALL_DIR
     fi
+
+    curl -fSsL $DOTNET_PROJECTJSON_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
+
+    safe-exec chmod +x $DOTNET_INSTALL_SH
+    safe-exec $DOTNET_INSTALL_SH
+    safe-exec rm -rf $DOTNET_INSTALL_SH
 
     curl -fSsL $DOTNET_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
 
