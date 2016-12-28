@@ -43,10 +43,23 @@ curl -fsSL https://git.io/pb-prompt-bs | /usr/bin/env bash
 themes
 ```
 
+Updating PulseBridge Prompt:
+
+``` bash
+update-prompt
+```
+
+If you already have the latest version of prompt installed, the ```update-prompt``` command will not re-install the
+current version.
+
 **NOTE**: The installer simply creates a new folder (.pulsebridge) under the home folder, and copies all of the files
-there. It will backup this folder to ./backup first. It wires up the "extensions" by adding a source command for
-$HOME/.pulsebridge/prompt/bashrc to $HOME/.bash_profile. It will not duplicate itself, so you can re-run the installer
-to upgrade at any time. The $HOME/.bash_profile is also backed up to $HOME/.pulsebridge/prompt/backup/[date]/.bash_profile.
+there. It will backup this folder first. It wires up the "extensions" by adding a source command for
+```$HOME/.pulsebridge/prompt/bashrc``` to ```$HOME/.bash_profile```. It will not duplicate itself, so you can re-run the
+installer or use the ```upgrade-prompt``` command to upgrade at any time.
+
+The backup folder is located at: ```$HOME/.pulsebridge/prompt/backup/[date]```
+
+The ```$HOME/.bash_profile``` is also backed up to ```$HOME/.pulsebridge/prompt/backup/[date]/.bash_profile```.
 
 ## Copright and License
 
