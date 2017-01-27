@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ! -z "${PROMPT_DEBUG:-}" ]; then
-    echo 'dotnet-install'
+    echo "dotnet-install"
 fi
 
 safe-exec() {
@@ -13,7 +13,7 @@ safe-exec() {
     local EXIT_CODE=$?
 
     if [ $EXIT_CODE -ne 0 ]; then
-        exit $EXIT_CODE
+        return $EXIT_CODE
     fi
 }
 
@@ -28,10 +28,6 @@ function set-dotnet-path() {
 }
 
 function dotnet-install() {
-    if type dotnet 1>/dev/null 2>&1; then
-        return
-    fi
-
     if [ ! -z "${1:-}" ]; then
         export DOTNET_INSTALL_DIR=$1
     fi
@@ -40,25 +36,25 @@ function dotnet-install() {
         export DOTNET_INSTALL_DIR=$HOME/.dotnet
     fi
 
-    local DOTNET_PROJECTJSON_URI=https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2.1/scripts/obtain/dotnet-install.sh
-    local DOTNET_URI=https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh
-    local DOTNET_INSTALL_SH=$DOTNET_INSTALL_DIR/dotnet-install.sh
-
     if [ ! -d $DOTNET_INSTALL_DIR ]; then
         mkdir -p $DOTNET_INSTALL_DIR
     fi
 
+    local DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
+    local DOTNET_PROJECTJSON_URI="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2.1/scripts/obtain/dotnet-install.sh"
+    local DOTNET_MSBUILD_URI="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh"
+    local DOTNET_MSBUILD_CHANNELS=("rel-1.0.0-preview3" "rel-1.0.0-preview4" "rel-1.0.0-rc3" "rel-1.0.0")
+
     curl -fSsL $DOTNET_PROJECTJSON_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
-
     safe-exec chmod +x $DOTNET_INSTALL_SH
     safe-exec $DOTNET_INSTALL_SH
-    safe-exec rm -rf $DOTNET_INSTALL_SH
 
-    curl -fSsL $DOTNET_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
-
+    curl -fSsL $DOTNET_MSBUILD_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
     safe-exec chmod +x $DOTNET_INSTALL_SH
-    safe-exec $DOTNET_INSTALL_SH
-    safe-exec rm -rf $DOTNET_INSTALL_SH
+
+    for DOTNET_MSBUILD_CHANNEL in ${DOTNET_MSBUILD_CHANNELS[@]}; do
+        safe-exec $DOTNET_INSTALL_SH --channel $DOTNET_MSBUILD_CHANNEL
+    done
 
     mkdir -p /usr/local/share 1>/dev/null 2>&1
     ln -s $DOTNET_INSTALL_DIR /usr/local/share 1>/dev/null 2>&1
