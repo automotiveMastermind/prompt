@@ -5,5 +5,5 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
 fi
 
 remove-backup() {
-    rm -rf $HOME/.pulsebridge/prompt/backup 2>/dev/null
+    rm -rf $HOME/.am/prompt/backup 2>/dev/null
 }

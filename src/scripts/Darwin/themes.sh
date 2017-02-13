@@ -5,5 +5,5 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
 fi
 
 function themes() {
-    open $HOME/.pulsebridge/prompt/themes/terminal/Monokai.terminal
+    open $HOME/.am/prompt/themes/terminal/Monokai.terminal
 }

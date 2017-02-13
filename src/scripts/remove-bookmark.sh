@@ -7,7 +7,7 @@ fi
 remove-bookmark() {
     local b=$1
     local r=
-    local scripts_path=$HOME/.pulsebridge/prompt/scripts
+    local scripts_path=$HOME/.am/prompt/scripts
 
     if [ ! -z "${b:-}" ]; then
         r=$(grep -s -m 1 ^$b $scripts_path/bookmarks.sh)

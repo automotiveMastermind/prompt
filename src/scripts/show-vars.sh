@@ -5,5 +5,5 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
 fi
 
 function show-vars() {
-    cat $HOME/.pulsebridge/prompt/scripts/variables.sh 2>/dev/null
+    cat $HOME/.am/prompt/scripts/variables.sh 2>/dev/null
 }

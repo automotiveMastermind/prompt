@@ -5,7 +5,7 @@
   "main": "install.sh",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pulsebridge/prompt.git"
+    "url": "https://github.com/automotivemastermind/prompt.git"
   },
   "scripts": {
     "test": ". ./install.sh",
@@ -19,12 +19,12 @@
     "linux",
     "macos"
   ],
-  "author": "PulseBridge, Inc.",
+  "author": "automotiveMastermind",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pulsebridge/prompt/issues"
+    "url": "https://github.com/automotivemastermind/prompt/issues"
   },
-  "homepage": "https://github.com/pulsebridge/prompt#readme",
+  "homepage": "https://github.com/automotivemastermind/prompt#readme",
   "devDependencies": {
     "standard-version": "^2.4.0"
   }

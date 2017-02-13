@@ -3,41 +3,53 @@
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
-PULSEBRIDGE_PATH="$HOME/.pulsebridge"
-PULSEBRIDGE_PROMPT="$HOME/.pulsebridge/prompt"
+AM_PATH="$HOME/.am"
+AM_PROMPT="$AM_PATH/prompt"
+
+PB_PATH="$HOME/.pulsebridge"
+PB_PROMPT="$PB_PATH/prompt"
 
 function success() {
     echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
 }
 
+if [ -d $PB_PROMPT ]; then
+    if [ -d $AM_PROMPT ]; then
+        cp -R $PB_PROMPT/* $AM_PROMPT/ 1>/dev/null
+    else
+        mkdir -p $AM_PROMPT 1>/dev/null
+        mv $PB_PROMPT $AM_PROMPT 1>/dev/null
+    fi
+fi
+
 now=$(date +"%Y%m%d_%H%M%S")
-backup_path="$PULSEBRIDGE_PATH/backup/prompt/$now"
+backup_path="$AM_PATH/backup/prompt/$now"
 
 success "Creating backup path : $backup_path..."
 mkdir -p "$backup_path" 1>/dev/null
 
-if [ -d $PULSEBRIDGE_PROMPT ]; then
-    success "Backing up $PULSEBRIDGE_PROMPT..."
-    cp -R $PULSEBRIDGE_PROMPT/* "$backup_path" 1>/dev/null
+if [ -d $AM_PROMPT ]; then
+    success "Backing up $AM_PROMPT..."
+    cp -R $AM_PROMPT/* "$backup_path" 1>/dev/null
 
-    success "Removing $PULSEBRIDGE_PROMPT..."
-    rm -rf $PULSEBRIDGE_PROMPT 1>/dev/null
+    success "Removing $AM_PROMPT..."
+    rm -rf $AM_PROMPT 1>/dev/null
 fi
 
-success "Creating $PULSEBRIDGE_PROMPT..."
-mkdir -p $PULSEBRIDGE_PROMPT/bin 1>/dev/null
+success "Creating $AM_PROMPT..."
+mkdir -p $AM_PROMPT/bin 1>/dev/null
 
-success "Installing PulseBridge Prompt to $PULSEBRIDGE_PROMPT..."
-cp -Rf src/* $PULSEBRIDGE_PROMPT 1>/dev/null
+success "Installing promptMastermind to $AM_PROMPT..."
+cp -Rf src/* $AM_PROMPT 1>/dev/null
 
 if [ -f $backup_path/scripts/bookmarks.sh ]; then
     success "Restoring bookmarks..."
-    cp -R $backup_path/scripts/bookmarks.sh $PULSEBRIDGE_PROMPT/scripts 1>/dev/null
+    cp -R $backup_path/scripts/bookmarks.sh $AM_PROMPT/scripts 1>/dev/null
 fi
 
 if [ -f $backup_path/scripts/variables.sh ]; then
     success "Restoring variables..."
-    cp -R $backup_path/scripts/variables.sh $PULSEBRIDGE_PROMPT/scripts 1>/dev/null
+    cp -R $backup_path/scripts/variables.sh $AM_PROMPT/scripts 1>/dev/null
 fi
 
 for template in template/*; do
@@ -71,7 +83,7 @@ GIT_PROMPT_NAME=git-prompt.sh
 GIT_COMPLETE_NAME=git-flow-completion.bash
 GIT_PROMPT_URI=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$GIT_PROMPT_NAME
 GIT_COMPLETE_URI=https://raw.githubusercontent.com/petervanderdoes/git-flow-completion/develop/$GIT_COMPLETE_NAME
-PROMPT_COMPLETION=$PULSEBRIDGE_PROMPT/completions
+PROMPT_COMPLETION=$AM_PROMPT/completions
 
 if [ -f "$BASH_COMPLETION/$GIT_COMPLETE_NAME" ]; then
     success "Removing git flow bash completion..."
@@ -108,9 +120,9 @@ if [ ! -z "${GH_TOKEN:-}" ]; then
     CURL_OPT="$CURL_OPT -H 'Authorization: token $GH_TOKEN'"
 fi
 
-SHA_URI="https://api.github.com/repos/pulsebridge/prompt/commits/master"
+SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"
 PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
-PROMPT_SHA_PATH=$HOME/.pulsebridge/prompt/$PROMPT_SHA
+PROMPT_SHA_PATH=$HOME/.am/prompt/$PROMPT_SHA
 
 touch $PROMPT_SHA_PATH
 

@@ -1,4 +1,4 @@
-# PulseBridge Prompt
+# promptMastermind
 
 > A spectacular (BaSH) prompt for *nix distributions. (Only tested on macOS currently)
 
@@ -11,9 +11,9 @@ Chat          | [![Join Chat][gitter-image]][gitter-url]
 
 ## Getting Started
 
-### What is PulseBridge Prompt?
+### What is promptMastermind?
 
-PulseBridge Prompt is a prompt for BaSH on *nix distributions that includes a ton of useful functionality, including:
+promptMastermind is a prompt for BaSH on *nix distributions that includes a ton of useful functionality, including:
 
 * Two-line prompt that includes username, hostname, and current path
 * Git prompt support (emit information about the current branch and status when in a git path)
@@ -29,9 +29,9 @@ PulseBridge Prompt is a prompt for BaSH on *nix distributions that includes a to
 Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing
 customization (aside from the prompt).
 
-### Using PulseBridge Prompt
+### Using promptMastermind
 
-Installing PulseBridge Prompt is a 1 step process:
+Installing promptMastermind is a 1 step process:
 
 ``` bash
 curl -fsSL https://git.io/pb-prompt-bs | /usr/bin/env bash
@@ -43,7 +43,7 @@ curl -fsSL https://git.io/pb-prompt-bs | /usr/bin/env bash
 themes
 ```
 
-Updating PulseBridge Prompt:
+Updating promptMastermind:
 
 ``` bash
 update-prompt
@@ -52,21 +52,21 @@ update-prompt
 If you already have the latest version of prompt installed, the ```update-prompt``` command will not re-install the
 current version.
 
-**NOTE**: The installer simply creates a new folder (.pulsebridge) under the home folder, and copies all of the files
+**NOTE**: The installer simply creates a new folder (.am) under the home folder, and copies all of the files
 there. It will backup this folder first. It wires up the "extensions" by adding a source command for
-```$HOME/.pulsebridge/prompt/bashrc``` to ```$HOME/.bash_profile```. It will not duplicate itself, so you can re-run the
+```$HOME/.am/prompt/bashrc``` to ```$HOME/.bash_profile```. It will not duplicate itself, so you can re-run the
 installer or use the ```upgrade-prompt``` command to upgrade at any time.
 
-The backup folder is located at: ```$HOME/.pulsebridge/prompt/backup/[date]```
+The backup folder is located at: ```$HOME/.am/prompt/backup/[date]```
 
-The ```$HOME/.bash_profile``` is also backed up to ```$HOME/.pulsebridge/prompt/backup/[date]/.bash_profile```.
+The ```$HOME/.bash_profile``` is also backed up to ```$HOME/.am/prompt/backup/[date]/.bash_profile```.
 
 ## Copright and License
 
-&copy; PulseBridge, Inc. and contributors. Distributed under the MIT license. See [LICENSE][] for details.
+&copy; automotiveMastermind and contributors. Distributed under the MIT license. See [LICENSE][] for details.
 
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: LICENSE
 
-[gitter-url]: //gitter.im/pulsebridge/prompt
+[gitter-url]: //gitter.im/automotivemastermind/prompt
 [gitter-image]:https://img.shields.io/badge/⊪%20gitter-join%20chat%20→-1dce73.svg

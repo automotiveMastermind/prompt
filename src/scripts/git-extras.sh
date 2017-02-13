@@ -18,7 +18,7 @@ function git-sha() {
     local BRANCH_NAME=$3
 
     if [ -z "${ORG_NAME:-}" ]; then
-        local ORG_NAME="pulsebridge"
+        local ORG_NAME="automotiveMastermind"
     fi
 
     if [ -z "${REPO_NAME:-}" ]; then

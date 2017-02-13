@@ -7,7 +7,7 @@ fi
 remove-var() {
     local v=$1
     local r=
-    local scripts_path=$HOME/.pulsebridge/prompt/scripts
+    local scripts_path=$HOME/.am/prompt/scripts
 
     if [ -z "${v:-}" ]; then
         r=$(grep -s -m 1 ^$v $scripts_path/variables.sh)

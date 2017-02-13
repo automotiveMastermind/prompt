@@ -72,22 +72,22 @@ if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
 fi
 
-PULSEBRIDGE_PROMPT=$HOME/.pulsebridge/prompt
+AM_PROMPT=$HOME/.am/prompt
 
 # source completions
-for completion in $PULSEBRIDGE_PROMPT/completions/*; do
+for completion in $AM_PROMPT/completions/*; do
     . $completion
 done
 
 # source scripts
-for script in $PULSEBRIDGE_PROMPT/scripts/*.sh; do
+for script in $AM_PROMPT/scripts/*.sh; do
     . $script
 done
 
 # test for prompt bin
-if [ -d $PULSEBRIDGE_PROMPT/bin ]; then
+if [ -d $AM_PROMPT/bin ]; then
     # append prompt to path
-    export PATH=$PATH:$PULSEBRIDGE_PROMPT/bin
+    export PATH=$PATH:$AM_PROMPT/bin
 fi
 
 # set the prompt

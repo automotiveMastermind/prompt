@@ -15,8 +15,8 @@ function add-bookmark() {
         local b="$1"=\"$(pwd)\"
 
         echo Adding bookmark: $b
-        echo $b >> $HOME/.pulsebridge/prompt/scripts/bookmarks.sh
-        source $HOME/.pulsebridge/prompt/scripts/bookmarks.sh
+        echo $b >> $HOME/.am/prompt/scripts/bookmarks.sh
+        source $HOME/.am/prompt/scripts/bookmarks.sh
     fi
 }
 

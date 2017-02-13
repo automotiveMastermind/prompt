@@ -6,15 +6,15 @@ fi
 
 function update-prompt() {
     local SHA=$(git-sha)
-    local SHA_PATH=$HOME/.pulsebridge/prompt/$SHA
+    local SHA_PATH=$HOME/.am/prompt/$SHA
 
     if [ -f $SHA_PATH ]; then
         echo "prompt: latest version already installed: $SHA"
         return 1
     fi
 
-    local CHANGELOG_URI="https://github.com/pulsebridge/prompt/blob/master/CHANGELOG.md"
-    local UPDATE_URI="https://github.com/pulsebridge/prompt/archive/master.tar.gz"
+    local CHANGELOG_URI="https://github.com/automotivemastermind/prompt/blob/master/CHANGELOG.md"
+    local UPDATE_URI="https://github.com/automotivemastermind/prompt/archive/master.tar.gz"
     local UPDATE_TEMP=$(mktemp -d -t pb_prompt)
 
     pushd $UPDATE_TEMP 1>/dev/null

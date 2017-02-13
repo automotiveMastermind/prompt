@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-if [ -e $HOME/.pulsebridge/prompt/bashrc ]; then
-    . $HOME/.pulsebridge/prompt/bashrc
+if [ -e $HOME/.am/prompt/bashrc ]; then
+    . $HOME/.am/prompt/bashrc
 fi

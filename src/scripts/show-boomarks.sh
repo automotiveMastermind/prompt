@@ -5,7 +5,7 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
 fi
 
 function show-bookmarks() {
-    cat $HOME/.pulsebridge/prompt/scripts/bookmarks.sh 2>/dev/null
+    cat $HOME/.am/prompt/scripts/bookmarks.sh 2>/dev/null
 }
 
 function lbm() {

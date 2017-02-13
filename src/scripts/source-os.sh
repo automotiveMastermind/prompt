@@ -6,12 +6,12 @@ fi
 
 function source-os() {
     local uname=$(uname)
-	local unamepath=$HOME/.pulsebridge/prompt/scripts/$uname
+	local unamepath=$HOME/.am/prompt/scripts/$uname
 
     if [ -e /etc/os-release ]; then
         . /etc/os-release
 
-        local unamepath=$HOME/.pulsebridge/prompt/scripts/$ID
+        local unamepath=$HOME/.am/prompt/scripts/$ID
     fi
 
 	if [ -d $unamepath ]; then

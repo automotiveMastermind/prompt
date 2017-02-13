@@ -29,6 +29,6 @@ function add-var() {
     local v="$1"=\"$2\"
 
     echo Adding varable: $v
-    echo $v >> $HOME/.pulsebridge/prompt/scripts/variables.sh
-    . $HOME/.pulsebridge/prompt/scripts/variables.sh
+    echo $v >> $HOME/.am/prompt/scripts/variables.sh
+    . $HOME/.am/prompt/scripts/variables.sh
 }
