@@ -16,6 +16,7 @@ function success() {
 if [ -d $PB_PROMPT ]; then
     if [ -d $AM_PROMPT ]; then
         cp -R $PB_PROMPT/* $AM_PROMPT/ 1>/dev/null
+        rm -rf $PB_PROMPT
     else
         mkdir -p $AM_PROMPT 1>/dev/null
         mv $PB_PROMPT $AM_PROMPT 1>/dev/null
