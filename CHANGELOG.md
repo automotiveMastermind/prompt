@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.8.1"></a>
+## [3.8.1](https://github.com/automotivemastermind/prompt/compare/v3.8.0...v3.8.1) (2017-02-13)
+
+
+### Bug Fixes
+
+* **install:** remove old pulsebridge path on install ([4f5525c](https://github.com/automotivemastermind/prompt/commit/4f5525c))
+
+
+
 <a name="3.8.0"></a>
 # [3.8.0](https://github.com/automotivemastermind/prompt/compare/v3.7.0...v3.8.0) (2017-02-13)
 
