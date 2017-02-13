@@ -34,7 +34,7 @@ customization (aside from the prompt).
 Installing promptMastermind is a 1 step process:
 
 ``` bash
-curl -fsSL https://git.io/pb-prompt-bs | /usr/bin/env bash
+curl -fsSL https://git.io/am-prompt | /usr/bin/env bash
 ```
 
 (Optional) Open the included Monokai theme (currently only supported on macOS):
