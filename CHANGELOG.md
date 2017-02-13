@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.8.0"></a>
+# [3.8.0](https://github.com/automotivemastermind/prompt/compare/v3.7.0...v3.8.0) (2017-02-13)
+
+
+### Features
+
+* **am:** migrate branding to aM ([8389ee7](https://github.com/automotivemastermind/prompt/commit/8389ee7))
+
+
+
 <a name="3.7.0"></a>
 # [3.7.0](https://github.com/automotivemastermind/prompt/compare/v3.6.2...v3.7.0) (2017-01-27)
 
