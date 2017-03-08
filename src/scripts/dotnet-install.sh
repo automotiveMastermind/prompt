@@ -28,12 +28,32 @@ function set-dotnet-path() {
 }
 
 function dotnet-install() {
-    if [ ! -z "${1:-}" ]; then
-        export DOTNET_INSTALL_DIR=$1
-    fi
+    local DOTNET_RESET=0
+
+    # continue testing for arguments
+    while [[ $# > 0 ]]; do
+        case $1 in
+            --reset|--clean)
+                DOTNET_RESET=1
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                export DOTNET_INSTALL_DIR=$1
+                break
+                ;;
+        esac
+        shift
+    done
 
     if [ -z "${DOTNET_INSTALL_DIR:-}" ]; then
         export DOTNET_INSTALL_DIR=$HOME/.dotnet
+    fi
+
+    if [[ "$DOTNET_RESET" == "1" ]]; then
+        rm -rf $DOTNET_INSTALL_DIR
     fi
 
     if [ ! -d $DOTNET_INSTALL_DIR ]; then
@@ -43,7 +63,8 @@ function dotnet-install() {
     local DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
     local DOTNET_PROJECTJSON_URI="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2.1/scripts/obtain/dotnet-install.sh"
     local DOTNET_MSBUILD_URI="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh"
-    local DOTNET_MSBUILD_CHANNELS=("rel-1.0.0-preview3" "rel-1.0.0-preview4" "rel-1.0.0-rc3" "rel-1.0.0")
+    local DOTNET_MSBUILD_CHANNELS=("rel-1.0.1")
+    local DOTNET_MSBUILD_VERSIONS=("1.0.1")
 
     curl -fSsL $DOTNET_PROJECTJSON_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
     safe-exec chmod +x $DOTNET_INSTALL_SH
@@ -54,6 +75,10 @@ function dotnet-install() {
 
     for DOTNET_MSBUILD_CHANNEL in ${DOTNET_MSBUILD_CHANNELS[@]}; do
         safe-exec $DOTNET_INSTALL_SH --channel $DOTNET_MSBUILD_CHANNEL
+    done
+
+    for DOTNET_MSBUILD_VERSION in ${DOTNET_MSBUILD_VERSIONS[@]}; do
+        safe-exec $DOTNET_INSTALL_SH --version $DOTNET_MSBUILD_VERSION
     done
 
     mkdir -p /usr/local/share 1>/dev/null 2>&1
