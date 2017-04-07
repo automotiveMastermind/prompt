@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.10.0"></a>
+# [3.10.0](https://github.com/automotivemastermind/prompt/compare/v3.9.1...v3.10.0) (2017-04-07)
+
+
+### Features
+
+* **dotnet:** update sln with new projs ([64b2260](https://github.com/automotivemastermind/prompt/commit/64b2260))
+
+
+
 <a name="3.9.1"></a>
 ## [3.9.1](https://github.com/automotivemastermind/prompt/compare/v3.9.0...v3.9.1) (2017-03-10)
 
