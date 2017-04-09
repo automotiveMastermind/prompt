@@ -1,7 +1,7 @@
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
-function success() {
+success() {
     echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
 }
 

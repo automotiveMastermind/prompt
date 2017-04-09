@@ -19,7 +19,7 @@ remove-var() {
         grep -s -v $r $scripts_path/variables.sh >> $scripts_path/variables1.sh
         mv -f $scripts_path/variables1.sh $scripts_path/variables.sh
 
-        . $scripts_path/variables.sh
+        source $scripts_path/variables.sh
     elif [ -z "${2:-}" ]; then
         echo No variable was declared for the specified name.
     fi

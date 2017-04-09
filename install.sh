@@ -9,7 +9,7 @@ AM_PROMPT="$AM_PATH/prompt"
 PB_PATH="$HOME/.pulsebridge"
 PB_PROMPT="$PB_PATH/prompt"
 
-function success() {
+success() {
     echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
 }
 
@@ -71,13 +71,13 @@ UNAME=$(uname)
 UNAME_INSTALL="./uname/install-$UNAME.sh"
 
 if [ -e /etc/os-release ]; then
-    . /etc/os-release
+    source /etc/os-release
 
     UNAME_INSTALL="./uname/install-$ID.sh"
 fi
 
 if [ -f $UNAME_INSTALL ]; then
-    . $UNAME_INSTALL
+    source $UNAME_INSTALL
 fi
 
 GIT_PROMPT_NAME=git-prompt.sh
@@ -134,3 +134,5 @@ echo "   PLEASE OPEN A NEW TERMINAL WINDOW"
 echo "#######################################"
 echo "#######################################"
 echo -e "${CLR_CLEAR}"
+
+source $HOME/.am/prompt/bashrc

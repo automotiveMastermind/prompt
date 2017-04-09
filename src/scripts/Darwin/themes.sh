@@ -4,6 +4,10 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'themes'
 fi
 
-function themes() {
+themes() {
     open $HOME/.am/prompt/themes/terminal/Monokai.terminal
+}
+
+theme() {
+    themes
 }

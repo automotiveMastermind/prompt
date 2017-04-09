@@ -4,18 +4,18 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'list-directory'
 fi
 
-function la() {
+la() {
     ls -la $@
 }
 
-function ll() {
+ll() {
     ls -lh $@
 }
 
-function lla() {
+lla() {
     ls -lha $@
 }
 
-function lp() {
+lp() {
     ls -p $@
 }

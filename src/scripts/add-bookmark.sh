@@ -4,7 +4,7 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'add-bookmark'
 fi
 
-function add-bookmark() {
+add-bookmark() {
     # make sure that a bookmark was specified.
     if [ -z "${1:-}" ]; then
         echo USAGE: add-bookmark NAME
@@ -20,10 +20,10 @@ function add-bookmark() {
     fi
 }
 
-function mbm() {
+mbm() {
     add-bookmark $@
 }
 
-function mb() {
+mb() {
     add-bookmark $@
 }

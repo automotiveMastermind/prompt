@@ -3,7 +3,7 @@
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
-function success() {
+success() {
     echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
 }
 
@@ -22,7 +22,7 @@ for pkg in git-flow; do
     fi
 done
 
-for pkg in openssl git git-extras git-flow-avh nvm; do
+for pkg in openssl git git-extras git-flow-avh nvm bash-completion; do
     if brew list -1 | grep -q "^${pkg}\$"; then
         success "Upgrading $pkg..."
         brew upgrade ${pkg} 1>/dev/null 2>&1
@@ -46,7 +46,7 @@ if [ -d $nvm_path ]; then
         mkdir -p $NVM_DIR
     fi
 
-    . $nvm_path/nvm.sh
+    source $nvm_path/nvm.sh
 
     nvm install --lts 1>/dev/null 2>&1
     nvm use --lts 1>/dev/null 2>&1

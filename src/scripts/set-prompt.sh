@@ -4,7 +4,7 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'set-prompt'
 fi
 
-function emit-prompt-arrow() {
+__prompt-emit-prompt-arrow() {
     # set the default color
     local CLR_PROMPT=$CLR_USER_PROMPT
 
@@ -30,15 +30,7 @@ function emit-prompt-arrow() {
     fi
 }
 
-function set-prompt() {
-    local bash_completion=$LOCAL_PREFIX/etc/bash_completion.d
-
-    if [ -d "$bash_completion" ]; then
-        for f in $bash_completion/*; do
-            . $f
-        done
-    fi
-
+__prompt-set-prompt() {
     if type gulp 1>/dev/null 2>&1; then
         eval "$(gulp --completion=bash)" 1>/dev/null 2>&1;
     fi
@@ -51,13 +43,30 @@ function set-prompt() {
         eval "$(npm completion)" 1>/dev/null 2>&1;
     fi
 
+    if type kubectl 1>/dev/null 2>&1; then
+        eval "$(kubectl completion bash)" 1>/dev/null 2>&1;
+    fi
+
+    if [ -f $LOCAL_PREFIX/etc/bash_completion ]; then
+        source $LOCAL_PREFIX/etc/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        source /etc/bash_completion
+    elif [ -f /usr/share/bash-completion/bash_completion ]; then
+        source /usr/share/bash-completion/bash_completion
+    fi
+
+    # source completions
+    for completion in $AM_PROMPT/completions/*; do
+        source $completion
+    done
+
     # set the window title
     echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
 
     if ! type git 1>/dev/null 2>&1; then
-        export PROMPT_COMMAND='"\n\u@\h : \w\n" "$(emit-prompt-arrow)"'
+        export PROMPT_COMMAND='"\n\u@\h : \w\n" "$(__prompt-emit-prompt-arrow)"'
     else
         # use the git prompt with the prompt arrow
-        export PROMPT_COMMAND='__posh_git_ps1 "\n\u@\h : \w\n" "$(emit-prompt-arrow)"'
+        export PROMPT_COMMAND='__posh_git_ps1 "\n\u@\h : \w\n" "$(__prompt-emit-prompt-arrow)"'
     fi
 }

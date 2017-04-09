@@ -4,11 +4,11 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'flush-dns'
 fi
 
-function flush-dns() {
+flush-dns() {
 	dscacheutil -flushcache
 	sudo killall -HUP mDNSResponder
 }
 
-function flushdns() {
+flushdns() {
 	flush-dns
 }

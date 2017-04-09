@@ -58,9 +58,6 @@ git-init() {
     # change directory into the new repo
     cd "$name"
 
-    # create an initial empty commit
-    git commit --allow-empty -m "initial commit" 1>/dev/null
-
     # initialize git flow
     git flow init -d 1>/dev/null
 
@@ -69,7 +66,7 @@ git-init() {
     cp $HOME/.am/prompt/git/gitattributes .gitattributes 1>/dev/null
 
     # add the newly created gitignore and gitattributes
-    git add . 1>/dev/null
+    git add source 1>/dev/null
 
     # create the initial commit
     git commit -m "chore: add git ignore and attributes" 1>/dev/null

@@ -17,7 +17,7 @@ safe-exec() {
     fi
 }
 
-function set-dotnet-path() {
+__prompt-set-dotnet-path() {
     if [ -e /usr/local/share/dotnet ]; then
         export PATH=/usr/local/share/dotnet:$PATH
     fi
@@ -27,7 +27,7 @@ function set-dotnet-path() {
     fi
 }
 
-function dotnet-install() {
+dotnet-install() {
     local DOTNET_RESET=0
 
     # continue testing for arguments
@@ -86,4 +86,4 @@ function dotnet-install() {
     set-dotnet-path
 }
 
-set-dotnet-path
+__prompt-set-dotnet-path

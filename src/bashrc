@@ -62,26 +62,11 @@ if [ -t 1 ]; then
     bind "set show-all-if-ambiguous on"      # show completion with double tap
 fi
 
-# turn on advanced completion
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
-
-# determine if bash completion exists elsewhere
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-fi
-
 AM_PROMPT=$HOME/.am/prompt
-
-# source completions
-for completion in $AM_PROMPT/completions/*; do
-    . $completion
-done
 
 # source scripts
 for script in $AM_PROMPT/scripts/*.sh; do
-    . $script
+    source $script
 done
 
 # test for prompt bin
@@ -91,7 +76,7 @@ if [ -d $AM_PROMPT/bin ]; then
 fi
 
 # set the prompt
-set-prompt
+__prompt-set-prompt
 
 # aliases
 # -- prompt for overwrites

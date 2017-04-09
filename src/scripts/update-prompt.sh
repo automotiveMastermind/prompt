@@ -4,7 +4,7 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'update-prompt'
 fi
 
-function update-prompt() {
+update-prompt() {
     local SHA=$(git-sha)
     local SHA_PATH=$HOME/.am/prompt/$SHA
 

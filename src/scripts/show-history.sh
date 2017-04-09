@@ -4,10 +4,10 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'show-history'
 fi
 
-function show-history() {
+show-history() {
 	history $@
 }
 
-function lh() {
+lh() {
 	history $@
 }

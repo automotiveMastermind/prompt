@@ -21,16 +21,16 @@ remove-bookmark() {
         grep -s -v $r $scripts_path/bookmarks.sh >> $scripts_path/bookmarks1.sh
         mv -f $scripts_path/bookmarks1.sh $scripts_path/bookmarks.sh
 
-        . $scripts_path/bookmarks.sh
+        source $scripts_path/bookmarks.sh
     elif [ -z "${2:-}" ]; then
         echo "No bookmark was declared for the specified title or address."
     fi
 }
 
-function rbm() {
+rbm() {
     remove-bookmark $@
 }
 
-function rb() {
+rb() {
     remove-bookmark $@
 }

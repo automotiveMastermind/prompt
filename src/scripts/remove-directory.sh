@@ -4,6 +4,6 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'remove-directory'
 fi
 
-function rd() {
+rd() {
     rm -dRr $@
 }

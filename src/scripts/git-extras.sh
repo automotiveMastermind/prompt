@@ -4,15 +4,15 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'git-extras'
 fi
 
-function git-lines() {
+git-lines() {
     git summary --line
 }
 
-function git-commits() {
+git-commits() {
     git summary
 }
 
-function git-sha() {
+git-sha() {
     local ORG_NAME=$1
     local REPO_NAME=$2
     local BRANCH_NAME=$3
@@ -41,7 +41,7 @@ function git-sha() {
     echo "$SHA"
 }
 
-function git-token() {
+git-token() {
     local GH_TOKEN=$1
 
     if [ -z "${GH_TOKEN:-}" ]; then

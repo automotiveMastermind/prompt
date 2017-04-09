@@ -4,7 +4,7 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'show-colors'
 fi
 
-function show-colors() {
+show-colors() {
     echo
 
     for color in $(env | awk '/^CLR_BRIGHT/' | cut -d= -f1 | sort); do
@@ -24,10 +24,10 @@ function show-colors() {
     done
 }
 
-function colors() {
+colors() {
     show-colors
 }
 
-function lc() {
+lc() {
     show-colors
 }

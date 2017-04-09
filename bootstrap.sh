@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function __prompt-bootstrap()
+__prompt-bootstrap()
 {
     local CURL_OPT='-s'
     if [ ! -z "${GH_TOKEN:-}" ]; then

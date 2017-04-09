@@ -4,7 +4,7 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
     echo 'set-nvm'
 fi
 
-function set-nvm()
+__prompt-set-nvm()
 {
     if type brew 1>/dev/null 2>&1; then
         local nvm_path=$(brew --prefix nvm)
@@ -19,10 +19,10 @@ function set-nvm()
 
         export NVM_DIR=$HOME/.nvm
 
-        . $nvm_path/nvm.sh
+        source $nvm_path/nvm.sh
     fi
 
     nvm use --lts
 }
 
-set-nvm
+__prompt-set-nvm

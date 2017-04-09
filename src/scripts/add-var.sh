@@ -10,7 +10,7 @@ add-var-usage() {
     echo '    value : a value for your variable'
 }
 
-function add-var() {
+add-var() {
     # make sure that a bookmark was specified.
     if [ -z "${1:-}" ]; then
         echo 'add-var: missing <name>'
@@ -30,5 +30,5 @@ function add-var() {
 
     echo Adding varable: $v
     echo $v >> $HOME/.am/prompt/scripts/variables.sh
-    . $HOME/.am/prompt/scripts/variables.sh
+    source $HOME/.am/prompt/scripts/variables.sh
 }
