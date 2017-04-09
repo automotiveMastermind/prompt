@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.11.0"></a>
+# [3.11.0](https://github.com/automotivemastermind/prompt/compare/v3.10.1...v3.11.0) (2017-04-09)
+
+
+### Features
+
+* **macos:** add kubernetes install support ([5892645](https://github.com/automotivemastermind/prompt/commit/5892645))
+
+
+
 <a name="3.10.1"></a>
 ## [3.10.1](https://github.com/automotivemastermind/prompt/compare/v3.10.0...v3.10.1) (2017-04-09)
 
