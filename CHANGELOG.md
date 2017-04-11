@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.12.0"></a>
+# [3.12.0](https://github.com/automotivemastermind/prompt/compare/v3.11.0...v3.12.0) (2017-04-11)
+
+
+### Bug Fixes
+
+* **k8s:** fix install of kubernetes ([a3c0e21](https://github.com/automotivemastermind/prompt/commit/a3c0e21))
+
+
+### Features
+
+* **prompt:** enable user-defined marker ([2c63a54](https://github.com/automotivemastermind/prompt/commit/2c63a54))
+
+
+
 <a name="3.11.0"></a>
 # [3.11.0](https://github.com/automotivemastermind/prompt/compare/v3.10.1...v3.11.0) (2017-04-09)
 
