@@ -5,5 +5,5 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
 fi
 
 rd() {
-    rm -dRr $@
+    rm -r $@
 }

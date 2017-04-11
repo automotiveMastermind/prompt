@@ -3,136 +3,141 @@
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
-AM_PATH="$HOME/.am"
-AM_PROMPT="$AM_PATH/prompt"
-
-PB_PATH="$HOME/.pulsebridge"
-PB_PROMPT="$PB_PATH/prompt"
-
-success() {
-    echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
+__prompt-success() {
+    echo -e "${CLR_SUCCESS}prompt-install: $1${CLR_CLEAR}"
 }
 
-if [ -d $PB_PROMPT ]; then
+__prompt-install() {
+    local AM_HOME="$HOME/.am"
+    local AM_PROMPT="$AM_HOME/prompt"
+
+    local NOW=$(date +"%Y%m%d_%H%M%S")
+    local BACKUP_PATH="$AM_HOME/backup/prompt/$NOW"
+
+    __prompt-success "creating backup path: $BACKUP_PATH"
+    mkdir -p "$BACKUP_PATH" 1>/dev/null
+
+    for template in template/*; do
+        local name=$(basename "$template")
+        local path="$HOME/.${name}"
+
+        if [ -f "$path" ]; then
+            __prompt-success "backing up ${name}"
+            cp "$path" "$BACKUP_PATH/$name"
+        fi
+
+        cat "$template" > "$path"
+    done
+
     if [ -d $AM_PROMPT ]; then
-        cp -R $PB_PROMPT/* $AM_PROMPT/ 1>/dev/null
-        rm -rf $PB_PROMPT
+        __prompt-success "backing up $AM_PROMPT"
+        cp -R $AM_PROMPT/* "$BACKUP_PATH" 1>/dev/null
+
+        __prompt-success "removing $AM_PROMPT"
+        rm -rf "$AM_PROMPT/git" 1>/dev/null 2>&1
+        rm -rf "$AM_PROMPT/scripts" 1>/dev/null 2>&1
+        rm -rf "$AM_PROMPT/themes" 1>/dev/null 2>&1
+        rm -f "$AM_PROMPT/bashrc" 1>/dev/null 2>&1
+    fi
+
+    __prompt-success "creating $AM_PROMPT"
+    mkdir -p "$AM_PROMPT/user" 1>/dev/null 2>&1
+
+    __prompt-success "installing promptMastermind to $AM_PROMPT"
+    cp -Rf src/git "$AM_PROMPT" 1>/dev/null
+    cp -Rf src/scripts "$AM_PROMPT" 1>/dev/null
+    cp -Rf src/themes "$AM_PROMPT" 1>/dev/null
+    cp -f src/bashrc "$AM_PROMPT" 1>/dev/null
+
+    for useritem in src/user/*; do
+        local name=$(basename "$useritem")
+        local path="$AM_PROMPT/user/$name"
+
+        if [ ! -f "$path" ]; then
+            __prompt-success "initializing user profile: $name at $path"
+            cp "$useritem" "$path"
+        fi
+    done
+
+    if type brew 1>/dev/null 2>&1; then
+        local LOCAL_PREFIX=$(brew --prefix)
+    elif [ -d $LOCALAPPDATA/git ]; then
+        local LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
     else
-        mkdir -p $AM_PROMPT 1>/dev/null
-        mv $PB_PROMPT $AM_PROMPT 1>/dev/null
-    fi
-fi
-
-now=$(date +"%Y%m%d_%H%M%S")
-backup_path="$AM_PATH/backup/prompt/$now"
-
-success "Creating backup path : $backup_path..."
-mkdir -p "$backup_path" 1>/dev/null
-
-if [ -d $AM_PROMPT ]; then
-    success "Backing up $AM_PROMPT..."
-    cp -R $AM_PROMPT/* "$backup_path" 1>/dev/null
-
-    success "Removing $AM_PROMPT..."
-    rm -rf $AM_PROMPT 1>/dev/null
-fi
-
-success "Creating $AM_PROMPT..."
-mkdir -p $AM_PROMPT/bin 1>/dev/null
-
-success "Installing promptMastermind to $AM_PROMPT..."
-cp -Rf src/* $AM_PROMPT 1>/dev/null
-
-if [ -f $backup_path/scripts/bookmarks.sh ]; then
-    success "Restoring bookmarks..."
-    cp -R $backup_path/scripts/bookmarks.sh $AM_PROMPT/scripts 1>/dev/null
-fi
-
-if [ -f $backup_path/scripts/variables.sh ]; then
-    success "Restoring variables..."
-    cp -R $backup_path/scripts/variables.sh $AM_PROMPT/scripts 1>/dev/null
-fi
-
-for template in template/*; do
-    name=$(basename "$template")
-    path=$HOME/.${name}
-
-    if [ -f $path ]; then
-        success "Backing up ${name}..."
-        cp $path $backup_path/$name
+        local LOCAL_PREFIX=/usr/local
     fi
 
-    cat $template > $path
-done
+    local BASH_COMPLETION="$LOCAL_PREFIX/etc/bash_completion.d"
+    local UNAME=$(uname)
+    local UNAME_INSTALL="./uname/install-$UNAME.sh"
 
-LOCAL_PREFIX=/usr/local
-BASH_COMPLETION=$LOCAL_PREFIX/etc/bash_completion.d
-UNAME=$(uname)
-UNAME_INSTALL="./uname/install-$UNAME.sh"
+    if [ -e /etc/os-release ]; then
+        source /etc/os-release
 
-if [ -e /etc/os-release ]; then
-    source /etc/os-release
+        local UNAME_INSTALL="./uname/install-$ID.sh"
+    fi
 
-    UNAME_INSTALL="./uname/install-$ID.sh"
-fi
+    if [ -f "$UNAME_INSTALL" ]; then
+        source "$UNAME_INSTALL"
+    fi
 
-if [ -f $UNAME_INSTALL ]; then
-    source $UNAME_INSTALL
-fi
+    local GIT_PROMPT_NAME=git-prompt.sh
+    local GIT_COMPLETE_NAME=git-flow-completion.bash
+    local GIT_PROMPT_URI=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$GIT_PROMPT_NAME
+    local GIT_COMPLETE_URI=https://raw.githubusercontent.com/petervanderdoes/git-flow-completion/develop/$GIT_COMPLETE_NAME
+    local PROMPT_COMPLETION="$AM_PROMPT/completions"
 
-GIT_PROMPT_NAME=git-prompt.sh
-GIT_COMPLETE_NAME=git-flow-completion.bash
-GIT_PROMPT_URI=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$GIT_PROMPT_NAME
-GIT_COMPLETE_URI=https://raw.githubusercontent.com/petervanderdoes/git-flow-completion/develop/$GIT_COMPLETE_NAME
-PROMPT_COMPLETION=$AM_PROMPT/completions
+    if [ -f "$BASH_COMPLETION/$GIT_COMPLETE_NAME" ]; then
+        __prompt-success 'removing git flow bash completion'
+        rm -rf "$BASH_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null
+    fi
 
-if [ -f "$BASH_COMPLETION/$GIT_COMPLETE_NAME" ]; then
-    success "Removing git flow bash completion..."
-    rm -rf "$BASH_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null
-fi
+    if [ -f "$BASH_COMPLETION/$GIT_PROMPT_NAME" ]; then
+        __prompt-success 'removing crappy git-prompt'
+        rm -rf "$BASH_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null
+    fi
 
-if [ -f "$BASH_COMPLETION/$GIT_PROMPT_NAME" ]; then
-    success "Removing crappy git-prompt..."
-    rm -rf "$BASH_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null
-fi
+    if [ ! -d "$PROMPT_COMPLETION" ]; then
+        mkdir -p "$PROMPT_COMPLETION" 1>/dev/null
+    fi
 
-if [ ! -d "$PROMPT_COMPLETION" ]; then
-    mkdir -p "$PROMPT_COMPLETION" 1>/dev/null
-fi
+    __prompt-success 'downloading better git-prompt'
+    local result=$(curl -sLD- "$GIT_PROMPT_URI" -o "$PROMPT_COMPLETION/$GIT_PROMPT_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 
-success "Downloading better git-prompt..."
-result=$(curl -sLD- "$GIT_PROMPT_URI" -o "$PROMPT_COMPLETION/$GIT_PROMPT_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+    if [ "$result" = "200" ]; then
+        __prompt-success 'successfully installed git-prompt'
+        chmod +x "PROMPT_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null 2>&1
+    fi
 
-if [ "$result" = "200" ]; then
-    success "Successfully installed git-prompt..."
-    chmod +x "PROMPT_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null 2>&1
-fi
+    __prompt-success 'downloading git-flow completion'
+    local result=$(curl -sLD- "$GIT_COMPLETE_URI" -o "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 
-success "Downloading git-flow completion..."
-result=$(curl -sLD- "$GIT_COMPLETE_URI" -o "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+    if [ "$result" = "200" ]; then
+        __prompt-success 'successfully installed git-flow completion'
+        chmod +x "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null 2>&1
+    fi
 
-if [ "$result" = "200" ]; then
-    success "Successfully installed git-flow completion..."
-    chmod +x "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null 2>&1
-fi
+    local CURL_OPT='-s'
 
-CURL_OPT='-s'
-if [ ! -z "${GH_TOKEN:-}" ]; then
-    CURL_OPT="$CURL_OPT -H 'Authorization: token $GH_TOKEN'"
-fi
+    if [ ! -z "${GH_TOKEN:-}" ]; then
+        local CURL_OPT="$CURL_OPT -H 'Authorization: token $GH_TOKEN'"
+    fi
 
-SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"
-PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
-PROMPT_SHA_PATH=$HOME/.am/prompt/$PROMPT_SHA
+    local SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"
+    local PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
+    local PROMPT_SHA_PATH=$HOME/.am/prompt/$PROMPT_SHA
 
-touch $PROMPT_SHA_PATH
+    touch "$PROMPT_SHA_PATH"
 
-echo -e "${CLR_SUCCESS}"
-echo "#######################################"
-echo "#######################################"
-echo "   PLEASE OPEN A NEW TERMINAL WINDOW"
-echo "#######################################"
-echo "#######################################"
-echo -e "${CLR_CLEAR}"
+    echo -e "${CLR_SUCCESS}"
+    echo "#######################################"
+    echo "#######################################"
+    echo "   PLEASE OPEN A NEW TERMINAL WINDOW"
+    echo "#######################################"
+    echo "#######################################"
+    echo -e "${CLR_CLEAR}"
 
-source $HOME/.am/prompt/bashrc
+    source "$AM_PROMPT/bashrc"
+}
+
+__prompt-install

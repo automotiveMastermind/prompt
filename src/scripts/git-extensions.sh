@@ -6,7 +6,7 @@ fi
 
 git-clone() {
     if ! type git 1>/dev/null 2>&1; then
-        echo "Git is not available on the current path. Exiting."
+        echo 'git-clone: git is not available on the current path.'
         return
     fi
 
@@ -14,12 +14,12 @@ git-clone() {
     local name=$2
 
     if [ -z "${url:-}" ]; then
-        echo "You must specify a url, which is the first parameter."
+        echo 'git-clone: you must specify a url, which is the first parameter.'
         return
     fi
 
     if [ -z "${name:-}" ]; then
-        echo "You must specify a directory name, which is the second parameter."
+        echo 'git-clone: you must specify a directory name, which is the second parameter.'
         return
     fi
 
@@ -42,14 +42,14 @@ clone() {
 
 git-init() {
     if ! type git 1>/dev/null 2>&1; then
-        echo "Git is not available on the current path. Exiting."
+        echo 'git-init: git is not available on the current path.'
         return
     fi
 
     local name=$1
 
     if [ -z "${name:-}" ]; then
-        name="."
+        name='.'
     fi
 
     # initialize a new repo
@@ -64,9 +64,11 @@ git-init() {
     # create the initial feature
     git flow feature start initial
 
+    local gitpath="$AM_PROMPT/git"
+
     # copy the default gitignore and gitattributes
-    cp $HOME/.am/prompt/git/gitignore .gitignore 1>/dev/null
-    cp $HOME/.am/prompt/git/gitattributes .gitattributes 1>/dev/null
+    cp "$gitpath/gitignore" .gitignore 1>/dev/null
+    cp "$gitpath/gitattributes" .gitattributes 1>/dev/null
 
     # add the newly created gitignore and gitattributes
     git add source 1>/dev/null

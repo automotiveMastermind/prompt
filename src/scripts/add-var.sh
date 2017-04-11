@@ -5,9 +5,9 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
 fi
 
 add-var-usage() {
-    echo "add-var <name> <value>"
-    echo '     name : a name for your variable'
-    echo '    value : a value for your variable'
+    echo '[add-var|set-var] <name> <value>'
+    echo '     name  : a name for your variable'
+    echo '     value : a value for your variable'
 }
 
 add-var() {
@@ -27,8 +27,13 @@ add-var() {
     # make sure we remove any existing variable before defining another one
     remove-var $1 silent
     local v="$1"=\"$2\"
+    local varpath="$AM_PROMPT/user/variables.sh"
 
     echo Adding varable: $v
-    echo $v >> $HOME/.am/prompt/scripts/variables.sh
-    source $HOME/.am/prompt/scripts/variables.sh
+    echo $v >> "$varpath"
+    source "$varpath"
+}
+
+set-var() {
+    add-var $@
 }

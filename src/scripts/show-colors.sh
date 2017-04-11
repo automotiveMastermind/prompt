@@ -27,7 +27,3 @@ show-colors() {
 colors() {
     show-colors
 }
-
-lc() {
-    show-colors
-}

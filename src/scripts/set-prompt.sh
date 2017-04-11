@@ -23,10 +23,10 @@ __prompt-emit-prompt-arrow() {
         CLR_PROMPT=$CLR_SSH_PROMPT
 
         # emit the prompt using the correct color
-        echo "\[${CLR_PROMPT}\] (ssh) ==> \[${CLR_CLEAR}\]"
+        echo "\[${CLR_PROMPT}\] (ssh) ${AM_PROMPT_MARKER:-==>} \[${CLR_CLEAR}\]"
     else
         # emit the prompt using the correct color
-        echo "\[${CLR_PROMPT}\] ==> \[${CLR_CLEAR}\]"
+        echo "\[${CLR_PROMPT}\] ${AM_PROMPT_MARKER:-==>} \[${CLR_CLEAR}\]"
     fi
 }
 

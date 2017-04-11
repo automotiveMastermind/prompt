@@ -8,8 +8,8 @@ remove-backup() {
     local backup=$1
 
     if [ -z "${backup:-}" ]; then
-        backup="prompt"
+        backup='prompt'
     fi
 
-    rm -rf "$HOME/.am/backup/$backup" 2>/dev/null
+    rm -rf "$AM_HOME/backup/$backup" 2>/dev/null
 }

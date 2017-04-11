@@ -5,5 +5,17 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
 fi
 
 show-vars() {
-    cat $HOME/.am/prompt/scripts/variables.sh 2>/dev/null
+    local varpath="$HOME/.am/prompt/user/variables.sh"
+
+    if [ ! -f $varpath ]; then
+        echo 'show-vars: no variables are currently specified'
+        add-var-usage
+        return
+    fi
+
+    cat $varpath
+}
+
+vars() {
+    show-vars
 }

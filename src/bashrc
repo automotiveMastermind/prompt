@@ -62,17 +62,28 @@ if [ -t 1 ]; then
     bind "set show-all-if-ambiguous on"      # show completion with double tap
 fi
 
-AM_PROMPT=$HOME/.am/prompt
+export AM_HOME="$HOME/.am"
+export AM_PROMPT="$AM_HOME/prompt"
+
+# determine if a user variables exist
+if [ -f "$AM_PROMPT/user/bashrc" ]; then
+    source "$AM_PROMPT/user/variables.sh"
+fi
 
 # source scripts
 for script in $AM_PROMPT/scripts/*.sh; do
-    source $script
+    source "$script"
 done
 
 # test for prompt bin
-if [ -d $AM_PROMPT/bin ]; then
+if [ -d "$AM_PROMPT/user/bin" ]; then
     # append prompt to path
-    export PATH=$PATH:$AM_PROMPT/bin
+    export PATH=$PATH:"$AM_PROMPT/user/bin"
+fi
+
+# determine if a user bashrc exists
+if [ -f "$AM_PROMPT/user/bashrc" ]; then
+    source "$AM_PROMPT/user/bashrc"
 fi
 
 # set the prompt

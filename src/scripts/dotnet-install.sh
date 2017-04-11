@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 if [ ! -z "${PROMPT_DEBUG:-}" ]; then
-    echo "dotnet-install"
+    echo 'dotnet-install'
 fi
 
-safe-exec() {
+__prompt-safe-exec() {
     local CMD=$1
     shift
 
@@ -61,24 +61,24 @@ dotnet-install() {
     fi
 
     local DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
-    local DOTNET_PROJECTJSON_URI="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2.1/scripts/obtain/dotnet-install.sh"
-    local DOTNET_MSBUILD_URI="https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh"
-    local DOTNET_MSBUILD_CHANNELS=("rel-1.0.1")
-    local DOTNET_MSBUILD_VERSIONS=("1.0.1")
+    local DOTNET_PROJECTJSON_URI='https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2.1/scripts/obtain/dotnet-install.sh'
+    local DOTNET_MSBUILD_URI='https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh'
+    local DOTNET_MSBUILD_CHANNELS=('rel-1.0.1')
+    local DOTNET_MSBUILD_VERSIONS=('1.0.1')
 
     curl -fSsL $DOTNET_PROJECTJSON_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
-    safe-exec chmod +x $DOTNET_INSTALL_SH
-    safe-exec $DOTNET_INSTALL_SH
+    __prompt-safe-exec chmod +x $DOTNET_INSTALL_SH
+    __prompt-safe-exec $DOTNET_INSTALL_SH
 
     curl -fSsL $DOTNET_MSBUILD_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
-    safe-exec chmod +x $DOTNET_INSTALL_SH
+    __prompt-safe-exec chmod +x $DOTNET_INSTALL_SH
 
     for DOTNET_MSBUILD_CHANNEL in ${DOTNET_MSBUILD_CHANNELS[@]}; do
-        safe-exec $DOTNET_INSTALL_SH --channel $DOTNET_MSBUILD_CHANNEL
+        __prompt-safe-exec $DOTNET_INSTALL_SH --channel $DOTNET_MSBUILD_CHANNEL
     done
 
     for DOTNET_MSBUILD_VERSION in ${DOTNET_MSBUILD_VERSIONS[@]}; do
-        safe-exec $DOTNET_INSTALL_SH --version $DOTNET_MSBUILD_VERSION
+        __prompt-safe-exec $DOTNET_INSTALL_SH --version $DOTNET_MSBUILD_VERSION
     done
 
     mkdir -p /usr/local/share 1>/dev/null 2>&1

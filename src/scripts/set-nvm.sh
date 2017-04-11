@@ -13,13 +13,13 @@ __prompt-set-nvm()
     fi
 
     if [ -d $nvm_path ]; then
-        if [ ! -d $HOME/.nvm ]; then
-            mkdir -p $HOME/.nvm
+        if [ ! -d "$HOME/.nvm" ]; then
+            mkdir -p "$HOME/.nvm"
         fi
 
-        export NVM_DIR=$HOME/.nvm
+        export NVM_DIR="$HOME/.nvm"
 
-        source $nvm_path/nvm.sh
+        source "$nvm_path/nvm.sh"
     fi
 
     nvm use --lts

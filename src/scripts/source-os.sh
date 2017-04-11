@@ -11,6 +11,7 @@ __prompt-source-os() {
     if [ -e /etc/os-release ]; then
         source /etc/os-release
 
+        local uname=$ID
         local unamepath=$HOME/.am/prompt/scripts/$ID
     fi
 
@@ -19,6 +20,8 @@ __prompt-source-os() {
 			source $f
 		done
 	fi
+
+    export AM_PROMPT_OS=$uname
 }
 
 __prompt-source-os

@@ -5,13 +5,17 @@ if [ ! -z "${PROMPT_DEBUG:-}" ]; then
 fi
 
 show-bookmarks() {
-    cat $HOME/.am/prompt/scripts/bookmarks.sh 2>/dev/null
+    local bookmarkpath="$HOME/.am/prompt/user/bookmarks.sh"
+
+    if [ ! -f $bookmarkpath ]; then
+        echo 'show-bookmarks: no bookmarks are currently specified'
+        add-bookmark-usage
+        return
+    fi
+
+    cat $bookmarkpath
 }
 
-lbm() {
-    show-bookmarks
-}
-
-lb() {
-    show-bookmarks
+bookmarks() {
+    show-booksmarks
 }

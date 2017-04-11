@@ -7,7 +7,3 @@ fi
 show-history() {
 	history $@
 }
-
-lh() {
-	history $@
-}
