@@ -10,14 +10,14 @@ minikube-install() {
     brew install docker-machine-driver-xhyve
 
     echo "Setting ownership of docker-machine-driver-xhyve: you will be prompted for your password..."
-    chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+    sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
     sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 
     echo "Installing minikube..."
     brew install Caskroom/cask/minikube
 
     echo "Configuring minikube to use xhyve..."
-    minikube config set vm-driver xhvye
+    minikube config set vm-driver xhyve
 
     if [ ! -f /usr/local/bin/kubectl ]; then
         echo "Downloading kubectl..."

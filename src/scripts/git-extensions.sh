@@ -61,6 +61,9 @@ git-init() {
     # initialize git flow
     git flow init -d 1>/dev/null
 
+    # create the initial feature
+    git flow feature start initial
+
     # copy the default gitignore and gitattributes
     cp $HOME/.am/prompt/git/gitignore .gitignore 1>/dev/null
     cp $HOME/.am/prompt/git/gitattributes .gitattributes 1>/dev/null
