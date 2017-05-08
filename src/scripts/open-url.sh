@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ ! -z "${PROMPT_DEBUG:-}" ]; then
+if [ ! -z "${AM_PROMPT_DEBUG:-}" ]; then
     echo 'open-url'
 fi
 

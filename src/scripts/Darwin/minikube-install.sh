@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 
-if [ ! -z "${PROMPT_DEBUG:-}" ]; then
+if [ ! -z "${AM_PROMPT_DEBUG:-}" ]; then
     echo 'minikube-install'
 fi
 
 minikube-install() {
-    echo "Installing docker-machine-driver-xhyve..."
+    echo "Installing minikube..."
     brew update
-    brew install docker-machine-driver-xhyve
+    brew install docker-machine-driver-xhyve kubernetes-cli Caskroom/cask/minikube
 
     echo "Setting ownership of docker-machine-driver-xhyve: you will be prompted for your password..."
     sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
     sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
 
-    echo "Installing minikube..."
-    brew install Caskroom/cask/minikube
-
     echo "Configuring minikube to use xhyve..."
     minikube config set vm-driver xhyve
 
-    if [ ! -f /usr/local/bin/kubectl ]; then
-        echo "Downloading kubectl..."
-        curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.5.3/bin/darwin/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin/
-    fi
+    echo "Starting minikube..."
+    minikube start --insecure-registry localhost:5000
+
+    echo "Using docker environment from minikube..."
+    eval $(minikube docker-env)
+
+    echo "Install the docker registry into kubernetes..."
+    kubectl apply -f local/kube-registry.yml
 }

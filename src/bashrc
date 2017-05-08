@@ -86,9 +86,6 @@ if [ -f "$AM_PROMPT/user/bashrc" ]; then
     source "$AM_PROMPT/user/bashrc"
 fi
 
-# set the prompt
-__prompt-set-prompt
-
 # aliases
 # -- prompt for overwrites
 alias cp='cp -i'
