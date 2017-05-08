@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.13.0"></a>
+# [3.13.0](https://github.com/automotivemastermind/prompt/compare/v3.12.0...v3.13.0) (2017-05-08)
+
+
+### Features
+
+* **kube:** add docker registry to minikube ([d64da08](https://github.com/automotivemastermind/prompt/commit/d64da08))
+
+
+
 <a name="3.12.0"></a>
 # [3.12.0](https://github.com/automotivemastermind/prompt/compare/v3.11.0...v3.12.0) (2017-04-11)
 
