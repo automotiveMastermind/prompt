@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.14.0"></a>
+# [3.14.0](https://github.com/automotivemastermind/prompt/compare/v3.13.0...v3.14.0) (2017-05-15)
+
+
+### Features
+
+* **dotnet-install:** add dotnet core 2.0 support ([cb21e1b](https://github.com/automotivemastermind/prompt/commit/cb21e1b))
+
+
+
 <a name="3.13.0"></a>
 # [3.13.0](https://github.com/automotivemastermind/prompt/compare/v3.12.0...v3.13.0) (2017-05-08)
 
