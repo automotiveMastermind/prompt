@@ -29,12 +29,22 @@ __prompt-set-dotnet-path() {
 
 dotnet-install() {
     local DOTNET_RESET=0
+    local DOTNET_CHANNELS=()
+    local DOTNET_VERSIONS=()
 
     # continue testing for arguments
     while [[ $# > 0 ]]; do
         case $1 in
             --reset|--clean)
                 DOTNET_RESET=1
+                ;;
+            --channel)
+                DOTNET_CHANNELS+=($2)
+                shift
+                ;;
+            --version)
+                DOTNET_VERSIONS+=($2)
+                shift
                 ;;
             --)
                 shift
@@ -52,6 +62,14 @@ dotnet-install() {
         export DOTNET_INSTALL_DIR=$HOME/.dotnet
     fi
 
+    if [ ${#DOTNET_CHANNELS[@]} -eq 0 ]; then
+        DOTNET_CHANNELS=('release/2.0.0')
+    fi
+
+    if [ ${#DOTNET_VERSIONS[@]} -eq 0 ]; then
+        DOTNET_VERSIONS=('1.0.0' '1.0.1')
+    fi
+
     if [[ "$DOTNET_RESET" == "1" ]]; then
         rm -rf $DOTNET_INSTALL_DIR
     fi
@@ -61,29 +79,22 @@ dotnet-install() {
     fi
 
     local DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
-    local DOTNET_PROJECTJSON_URI='https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2.1/scripts/obtain/dotnet-install.sh'
-    local DOTNET_MSBUILD_URI='https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/dotnet-install.sh'
-    local DOTNET_MSBUILD_CHANNELS=('rel-1.0.1')
-    local DOTNET_MSBUILD_VERSIONS=('1.0.1')
+    local DOTNET_URI='https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh'
 
-    curl -fSsL $DOTNET_PROJECTJSON_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
-    __prompt-safe-exec chmod +x $DOTNET_INSTALL_SH
-    __prompt-safe-exec $DOTNET_INSTALL_SH
-
-    curl -fSsL $DOTNET_MSBUILD_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
+    curl -fSsL $DOTNET_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
     __prompt-safe-exec chmod +x $DOTNET_INSTALL_SH
 
-    for DOTNET_MSBUILD_CHANNEL in ${DOTNET_MSBUILD_CHANNELS[@]}; do
-        __prompt-safe-exec $DOTNET_INSTALL_SH --channel $DOTNET_MSBUILD_CHANNEL
+    for DOTNET_VERSION in ${DOTNET_VERSIONS[@]}; do
+        __prompt-safe-exec $DOTNET_INSTALL_SH --version $DOTNET_VERSION
     done
 
-    for DOTNET_MSBUILD_VERSION in ${DOTNET_MSBUILD_VERSIONS[@]}; do
-        __prompt-safe-exec $DOTNET_INSTALL_SH --version $DOTNET_MSBUILD_VERSION
+    for DOTNET_CHANNEL in ${DOTNET_CHANNELS[@]}; do
+        __prompt-safe-exec $DOTNET_INSTALL_SH --channel $DOTNET_CHANNEL
     done
 
     mkdir -p /usr/local/share 1>/dev/null 2>&1
     ln -s $DOTNET_INSTALL_DIR /usr/local/share 1>/dev/null 2>&1
-    set-dotnet-path
+    __prompt-set-dotnet-path
 }
 
 __prompt-set-dotnet-path

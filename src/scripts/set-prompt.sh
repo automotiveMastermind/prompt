@@ -70,3 +70,7 @@ __prompt-set-prompt() {
         export PROMPT_COMMAND='__posh_git_ps1 "\n\u@\h : \w\n" "$(__prompt-emit-prompt-arrow)"'
     fi
 }
+
+set-prompt() {
+    __prompt-set-prompt
+}
