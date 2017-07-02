@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.15.0"></a>
+# [3.15.0](https://github.com/automotivemastermind/prompt/compare/v3.14.0...v3.15.0) (2017-07-02)
+
+
+### Features
+
+* **bash:** enable exglob for bash ([b778112](https://github.com/automotivemastermind/prompt/commit/b778112))
+
+
+
 <a name="3.14.0"></a>
 # [3.14.0](https://github.com/automotivemastermind/prompt/compare/v3.13.0...v3.14.0) (2017-05-15)
 
