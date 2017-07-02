@@ -30,6 +30,11 @@ export CLR_STAFF_PROMPT=$CLR_BRIGHT_GREEN # COLOR OF THE PROMPT FOR STAFF
 export CLR_USER_PROMPT=$CLR_BRIGHT_BLUE   # COLOR OF THE PROMPT FOR USERS
 export CLR_SSH_PROMPT=$CLR_BRIGHT_MAGENTA # COLOR OF THE PROMPT FOR SSH
 
+# shell options
+shopt -s checkwinsize     # check window size on script exit
+shopt -s cdable_vars      # enable change directory to a variable value
+shopt -s extglob          # enable extended glob patterns
+
 # enable colors for various commands
 export TERM=xterm-256color
 export GREP_COLOR='1;32'
@@ -102,7 +107,3 @@ alias ...='cd .. ; ..'
 
 # -- sudo alias (allow other alias extensions to work when sudo-ing)
 alias sudo='sudo '
-
-# shell options
-shopt -s checkwinsize     # check window size on script exit
-shopt -s cdable_vars      #  enable change directory to a variable value

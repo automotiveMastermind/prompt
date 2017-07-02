@@ -63,11 +63,7 @@ dotnet-install() {
     fi
 
     if [ ${#DOTNET_CHANNELS[@]} -eq 0 ]; then
-        DOTNET_CHANNELS=('release/2.0.0')
-    fi
-
-    if [ ${#DOTNET_VERSIONS[@]} -eq 0 ]; then
-        DOTNET_VERSIONS=('1.0.0' '1.0.1')
+        DOTNET_CHANNELS=('release/1.0.0' 'release/2.0.0')
     fi
 
     if [[ "$DOTNET_RESET" == "1" ]]; then
