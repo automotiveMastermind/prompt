@@ -132,7 +132,7 @@ __prompt-install() {
     echo -e "${CLR_SUCCESS}"
     echo "#######################################"
     echo "#######################################"
-    echo "   PLEASE OPEN A NEW TERMINAL WINDOW"
+    echo "   PLEASE RUN: exec -l \$SHELL"
     echo "#######################################"
     echo "#######################################"
     echo -e "${CLR_CLEAR}"

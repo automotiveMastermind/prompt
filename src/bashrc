@@ -91,8 +91,10 @@ if [ -f "$AM_PROMPT/user/bashrc" ]; then
     source "$AM_PROMPT/user/bashrc"
 fi
 
-# set the prompt
-set-prompt
+# source post scripts
+for script in $AM_PROMPT/scripts/post/*.sh; do
+    source "$script"
+done
 
 # aliases
 # -- prompt for overwrites
