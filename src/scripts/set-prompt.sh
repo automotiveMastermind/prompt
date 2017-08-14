@@ -47,6 +47,10 @@ __prompt-set-prompt() {
         eval "$(kubectl completion bash)" 1>/dev/null 2>&1;
     fi
 
+    if type helm 1>/dev/null 2>&1; then
+        eval "$(helm completion bash)" 1>/dev/null 2>&1;
+    fi
+
     if [ -f $LOCAL_PREFIX/etc/bash_completion ]; then
         source $LOCAL_PREFIX/etc/bash_completion
     elif [ -f /etc/bash_completion ]; then

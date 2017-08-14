@@ -7,7 +7,17 @@ fi
 minikube-install() {
     echo "Installing minikube..."
     brew update
-    brew install docker-machine-driver-xhyve kubernetes-cli Caskroom/cask/minikube
+
+    for pkg in docker-machine-driver-xhyve kubernetes-cli Caskroom/cask/minikube kubernetes-helm; do
+        if brew list -1 | grep -q "^${pkg}\$"; then
+            echo "upgrading: $pkg"
+            brew upgrade $pkg 1>/dev/null 2>&1
+            brew link --overwrite $pkg 1>/dev/null 2>&1
+        else
+            echo "installing: $pkg"
+            brew install $pkg 1>/dev/null 2>&1
+        fi
+    done
 
     echo "Setting ownership of docker-machine-driver-xhyve: you will be prompted for your password..."
     sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
@@ -18,6 +28,9 @@ minikube-install() {
 
     echo "Starting minikube..."
     minikube start --insecure-registry localhost:5000
+
+    echo "Installing helm and tiller..."
+    helm init
 
     echo "Using docker environment from minikube..."
     eval $(minikube docker-env)
