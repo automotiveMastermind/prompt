@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.16.0"></a>
+# [3.16.0](https://github.com/automotivemastermind/prompt/compare/v3.15.2...v3.16.0) (2017-08-14)
+
+
+### Features
+
+* **helm:** add helm install and completion ([bbf2462](https://github.com/automotivemastermind/prompt/commit/bbf2462))
+
+
+
 <a name="3.15.2"></a>
 ## [3.15.2](https://github.com/automotivemastermind/prompt/compare/v3.15.1...v3.15.2) (2017-07-12)
 
