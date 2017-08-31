@@ -51,6 +51,12 @@ __prompt-set-prompt() {
         eval "$(helm completion bash)" 1>/dev/null 2>&1;
     fi
 
+    local GCLOUD_COMPLETION_INC=$HOME/.gcloud/completion.bash.inc
+
+    if [ -e $GCLOUD_COMPLETION_INC ]; then
+        source $GCLOUD_COMPLETION_INC
+    fi
+
     if [ -f $LOCAL_PREFIX/etc/bash_completion ]; then
         source $LOCAL_PREFIX/etc/bash_completion
     elif [ -f /etc/bash_completion ]; then

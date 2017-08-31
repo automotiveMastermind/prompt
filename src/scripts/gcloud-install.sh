@@ -5,8 +5,9 @@ if [ ! -z "${AM_PROMPT_DEBUG:-}" ]; then
 fi
 
 __prompt-set-gcloud-path() {
-    if [ -e $HOME/.gcloud/bin/gcloud ]; then
-        export PATH=$PATH:~/.gcloud/bin
+    local GCLOUD_PATH_INC=$HOME/.gcloud/path.bash.inc
+    if [ -e $GCLOUD_PATH_INC ]; then
+        source $GCLOUD_PATH_INC
     fi
 }
 
