@@ -125,9 +125,11 @@ __prompt-install() {
 
     local SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"
     local PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
-    local PROMPT_SHA_PATH=$HOME/.am/prompt/$PROMPT_SHA
+    local PROMPT_SHA_PATH=$HOME/.am/prompt/.sha
 
-    touch "$PROMPT_SHA_PATH"
+    echo $PROMPT_SHA > $PROMPT_SHA_PATH
+
+    source "$AM_PROMPT/bashrc"
 
     echo -e "${CLR_SUCCESS}"
     echo "#######################################"
@@ -136,8 +138,6 @@ __prompt-install() {
     echo "#######################################"
     echo "#######################################"
     echo -e "${CLR_CLEAR}"
-
-    source "$AM_PROMPT/bashrc"
 }
 
 __prompt-install

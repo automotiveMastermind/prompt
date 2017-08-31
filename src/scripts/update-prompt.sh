@@ -6,11 +6,15 @@ fi
 
 update-prompt() {
     local SHA=$(git-sha)
-    local SHA_PATH=$HOME/.am/prompt/$SHA
+    local SHA_PATH=$HOME/.am/prompt/.sha
 
     if [ -f $SHA_PATH ]; then
-        echo "prompt: latest version already installed: $SHA"
-        return 1
+        CURRENT_SHA=$(cat $SHA_PATH)
+
+        if [ $SHA = $CURRENT_SHA ]; then
+            echo "prompt: latest version already installed: $SHA"
+            return 1
+        fi
     fi
 
     local CHANGELOG_URI="https://github.com/automotivemastermind/prompt/blob/master/CHANGELOG.md"

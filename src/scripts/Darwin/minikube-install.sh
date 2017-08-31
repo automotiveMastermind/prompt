@@ -8,7 +8,7 @@ minikube-install() {
     echo "Installing minikube..."
     brew update
 
-    for pkg in docker-machine-driver-xhyve kubernetes-cli Caskroom/cask/minikube kubernetes-helm; do
+    for pkg in docker-machine-driver-xhyve Caskroom/cask/minikube kubernetes-helm; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             echo "upgrading: $pkg"
             brew upgrade $pkg 1>/dev/null 2>&1
@@ -28,6 +28,9 @@ minikube-install() {
 
     echo "Starting minikube..."
     minikube start --insecure-registry localhost:5000
+
+    echo "Installing gcloud..."
+    gcloud-install
 
     echo "Installing helm and tiller..."
     helm init
