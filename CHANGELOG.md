@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.19.0"></a>
+# [3.19.0](https://github.com/automotivemastermind/prompt/compare/v3.18.0...v3.19.0) (2017-08-31)
+
+
+### Features
+
+* **docker:** add update for all images ([5167da4](https://github.com/automotivemastermind/prompt/commit/5167da4))
+
+
+
 <a name="3.18.0"></a>
 # [3.18.0](https://github.com/automotivemastermind/prompt/compare/v3.17.0...v3.18.0) (2017-08-31)
 
