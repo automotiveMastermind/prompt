@@ -63,7 +63,7 @@ dotnet-install() {
     fi
 
     if [ ${#DOTNET_CHANNELS[@]} -eq 0 ]; then
-        DOTNET_CHANNELS=('release/1.0.0' 'release/2.0.0')
+        DOTNET_CHANNELS=('release/2.0.0')
     fi
 
     if [[ "$DOTNET_RESET" == "1" ]]; then
@@ -75,6 +75,8 @@ dotnet-install() {
     fi
 
     local DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
+    local DOTNET_CACHE_DIR="$DOTNET_INSTALL_DIR/.cache"
+
     local DOTNET_URI='https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh'
 
     curl -fSsL $DOTNET_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
@@ -90,6 +92,15 @@ dotnet-install() {
 
     mkdir -p /usr/local/share 1>/dev/null 2>&1
     ln -s $DOTNET_INSTALL_DIR /usr/local/share 1>/dev/null 2>&1
+
+    echo "building dotnet cache... (this may take a few minutes)"
+    mkdir -p $DOTNET_CACHE_DIR 1>/dev/null 2>&1
+    pushd $DOTNET_CACHE_DIR 1>/dev/null
+    dotnet new console 1>/dev/null
+    dotnet restore 1>/dev/null 2>/dev/null
+    popd 1>/dev/null
+    rm -rf $DOTNET_CACHE_DIR 1>/dev/null
+
     __prompt-set-dotnet-path
 }
 

@@ -129,8 +129,6 @@ __prompt-install() {
 
     echo $PROMPT_SHA > $PROMPT_SHA_PATH
 
-    source "$AM_PROMPT/bashrc"
-
     echo -e "${CLR_SUCCESS}"
     echo "#######################################"
     echo "#######################################"

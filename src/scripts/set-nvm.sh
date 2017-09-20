@@ -24,5 +24,3 @@ __prompt-set-nvm()
 
     nvm use --lts
 }
-
-__prompt-set-nvm
