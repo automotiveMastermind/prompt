@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/automotivemastermind/prompt/compare/v3.19.0...v4.0.0) (2017-09-20)
+
+
+### Features
+
+* **bash:** install latest bash on Darwin ([e16e99b](https://github.com/automotivemastermind/prompt/commit/e16e99b))
+
+
+### BREAKING CHANGES
+
+* **bash:** This version of prompt will install and configure a new version of bash as the default shell for the user. It does NOT
+symlink over /bin/bash. Scripts that do not use /usr/bin/env in the shebang will continue to use the old version of
+bash to execute the script, which should maintain backward compatibility on the platform. Please let us know if you have
+any issues by creating an aptly named issue on github!
+
+
+
 <a name="3.19.0"></a>
 # [3.19.0](https://github.com/automotivemastermind/prompt/compare/v3.18.0...v3.19.0) (2017-08-31)
 
