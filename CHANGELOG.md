@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/automotivemastermind/prompt/compare/v4.0.0...v4.0.1) (2017-10-11)
+
+
+### Bug Fixes
+
+* **npm:** fix npm completion order issue ([d928464](https://github.com/automotivemastermind/prompt/commit/d928464))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/automotivemastermind/prompt/compare/v3.19.0...v4.0.0) (2017-09-20)
 
