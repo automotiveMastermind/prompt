@@ -39,10 +39,6 @@ __prompt-set-prompt() {
         eval "$(grunt --completion=bash)" 1>/dev/null 2>&1;
     fi
 
-    if type npm 1>/dev/null 2>&1; then
-        eval "$(npm completion)" 1>/dev/null 2>&1;
-    fi
-
     if type kubectl 1>/dev/null 2>&1; then
         eval "$(kubectl completion bash)" 1>/dev/null 2>&1;
     fi

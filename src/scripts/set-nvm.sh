@@ -18,9 +18,9 @@ __prompt-set-nvm()
         fi
 
         export NVM_DIR="$HOME/.nvm"
-
         source "$nvm_path/nvm.sh"
     fi
 
     nvm use --lts
+    eval "$(npm completion)"
 }
