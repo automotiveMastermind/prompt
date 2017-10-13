@@ -1,6 +1,6 @@
 {
   "name": "prompt",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "A spectacular (BaSH) prompt for *nix distributions",
   "main": "install.sh",
   "repository": {
