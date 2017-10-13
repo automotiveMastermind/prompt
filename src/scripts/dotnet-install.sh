@@ -63,7 +63,7 @@ dotnet-install() {
     fi
 
     if [ ${#DOTNET_CHANNELS[@]} -eq 0 ]; then
-        DOTNET_CHANNELS=('release/2.0.0')
+        DOTNET_CHANNELS=('1.1' '2.0')
     fi
 
     if [[ "$DOTNET_RESET" == "1" ]]; then
@@ -77,7 +77,7 @@ dotnet-install() {
     local DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
     local DOTNET_CACHE_DIR="$DOTNET_INSTALL_DIR/.cache"
 
-    local DOTNET_URI='https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh'
+    local DOTNET_URI='https://dot.net/v1/dotnet-install.sh'
 
     curl -fSsL $DOTNET_URI -o $DOTNET_INSTALL_SH 1>/dev/null 2>&1
     __prompt-safe-exec chmod +x $DOTNET_INSTALL_SH
