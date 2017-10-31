@@ -30,7 +30,7 @@ add-var() {
     local varpath="$AM_PROMPT/user/variables.sh"
 
     echo Adding varable: $v
-    echo $v >> "$varpath"
+    echo "\n$v" >> "$varpath"
     source "$varpath"
 }
 

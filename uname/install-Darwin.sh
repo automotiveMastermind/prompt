@@ -56,7 +56,7 @@ __prompt-install-darwin() {
         source "$nvm_path/nvm.sh"
 
         nvm install --lts 1>/dev/null 2>&1
-        nvm use --lts 1>/dev/null 2>&1
+        nvm use --lts --delete-prefix 1>/dev/null 2>&1
     fi
 
     __prompt-success 'setting git credential helper to use the macOS keychain'

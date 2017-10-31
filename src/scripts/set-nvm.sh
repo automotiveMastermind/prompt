@@ -21,6 +21,6 @@ __prompt-set-nvm()
         source "$nvm_path/nvm.sh"
     fi
 
-    nvm use --lts
+    nvm use --lts --delete-prefix
     eval "$(npm completion)"
 }

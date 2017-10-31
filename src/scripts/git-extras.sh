@@ -38,7 +38,19 @@ git-sha() {
     local SHA_URI=https://api.github.com/repos/$ORG_NAME/$REPO_NAME/commits/$BRANCH_NAME
     local SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
 
-    echo $SHA
+    if [ ! -z "${AM_PROMPT_DEBUG:-}" ]; then
+        echo "curl $CURL_OPT $SHA_URI"
+    fi
+
+    if [ ! -z "${SHA:-}" ]; then
+        echo $SHA
+        return 0
+    fi
+
+    echo "ERROR RETRIEVING GIT SHA FOR $SHA_URI"
+    echo "$(curl $CURL_OPT $SHA_URI)"
+
+    return 1
 }
 
 git-token() {
