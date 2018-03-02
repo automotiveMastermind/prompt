@@ -4,18 +4,26 @@ if [ ! -z "${AM_PROMPT_DEBUG:-}" ]; then
     echo 'list-directory'
 fi
 
-la() {
-    ls -la $@
-}
+if [ ! type "la" 1>/dev/null 2>&1 ]; then
+    la() {
+        ls -la $@
+    }
+fi
 
-ll() {
-    ls -lh $@
-}
+if [ ! type "ll" 1>/dev/null 2>&1 ]; then
+    ll() {
+        ls -lh $@
+    }
+fi
 
-lla() {
-    ls -lha $@
-}
+if [ ! type "lla" 1>/dev/null 2>&1 ]; then
+    lla() {
+        ls -lha $@
+    }
+fi
 
-lp() {
-    ls -p $@
-}
+if [ ! type "lp" 1>/dev/null 2>&1 ]; then
+    lp() {
+        ls -p $@
+    }
+fi
