@@ -12,13 +12,14 @@ __prompt-set-nvm()
         local nvm_path=$(which nvm)
     fi
 
-    if [ -d $nvm_path ]; then
+    if [ ! -d $nvm_path ]; then
         if [ ! -d "$HOME/.nvm" ]; then
             mkdir -p "$HOME/.nvm"
         fi
 
-        export NVM_DIR="$HOME/.nvm"
-        source "$nvm_path/nvm.sh"
+        nvm_path="$HOME/.nvm"
+        export NVM_DIR=$nvm_path
+        source "$NVM_DIR/nvm.sh"
     fi
 
     nvm use --lts --delete-prefix
