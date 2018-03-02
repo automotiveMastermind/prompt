@@ -17,7 +17,7 @@ __prompt-bootstrap()
     fi
 
     local INSTALL_URI="https://github.com/automotivemastermind/prompt/archive/master.tar.gz"
-    local INTALL_TEMP=$(mktemp -d -t pb_prompt)
+    local INTALL_TEMP=$(mktemp -d)
     local EXTRACT_TEMP="$INTALL_TEMP/extract"
 
     pushd $INTALL_TEMP 1>/dev/null

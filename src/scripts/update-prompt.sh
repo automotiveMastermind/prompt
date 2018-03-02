@@ -30,7 +30,7 @@ update-prompt() {
 
     local CHANGELOG_URI="https://github.com/automotivemastermind/prompt/blob/master/CHANGELOG.md"
     local UPDATE_URI="https://github.com/automotivemastermind/prompt/archive/master.tar.gz"
-    local UPDATE_TEMP=$(mktemp -d -t pb_prompt)
+    local UPDATE_TEMP=$(mktemp -d)
 
     pushd $UPDATE_TEMP 1>/dev/null
     curl -skL $UPDATE_URI | tar zx
