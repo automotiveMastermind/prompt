@@ -12,7 +12,7 @@ __prompt-set-nvm()
         local nvm_path=$(which nvm)
     fi
 
-    if [ ! -d $nvm_path ]; then
+    if [ ! -d ${nvm_path:-/__no__exist} ]; then
         if [ ! -d "$HOME/.nvm" ]; then
             mkdir -p "$HOME/.nvm"
         fi
