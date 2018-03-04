@@ -17,15 +17,15 @@ git-sha() {
     local REPO_NAME=$2
     local BRANCH_NAME=$3
 
-    if [ -z "${ORG_NAME:-}" ]; then
+    if [ -z ${ORG_NAME+x} ]; then
         local ORG_NAME='automotiveMastermind'
     fi
 
-    if [ -z "${REPO_NAME:-}" ]; then
+    if [ -z ${REPO_NAME+x} ]; then
         local REPO_NAME='prompt'
     fi
 
-    if [ -z "${BRANCH_NAME:-}" ]; then
+    if [ -z ${BRANCH_NAME+x} ]; then
         local BRANCH_NAME='master'
     fi
 
@@ -56,7 +56,7 @@ git-sha() {
 git-token() {
     local GH_TOKEN=$1
 
-    if [ -z "${GH_TOKEN:-}" ]; then
+    if [ -z ${GH_TOKEN+x} ]; then
         echo 'usage: git-token [token]'
     else
         add-var GH_TOKEN $GH_TOKEN

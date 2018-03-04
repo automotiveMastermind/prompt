@@ -44,17 +44,12 @@ __prompt-install-darwin() {
     ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/ 1>/dev/null 2>&1
     ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/ 1>/dev/null 2>&1
 
-    nvm_path=$(brew --prefix nvm)
+    local NVM_PATH=$(brew --prefix nvm)
 
-    if [ -d $nvm_path ]; then
-        export NVM_DIR="$HOME/.nvm"
+    if [ -d $NVM_PATH ]; then
+        __prompt-success 'setting up nvm...'
 
-        if [ ! -d $NVM_DIR ]; then
-            mkdir -p "$NVM_DIR"
-        fi
-
-        source "$nvm_path/nvm.sh"
-
+        source "$NVM_PATH/nvm.sh"
         nvm install --lts 1>/dev/null 2>&1
         nvm use --lts --delete-prefix 1>/dev/null 2>&1
     fi

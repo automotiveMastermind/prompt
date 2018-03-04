@@ -11,7 +11,7 @@ add-bookmark-usage() {
 
 add-bookmark() {
     # make sure that a bookmark was specified.
-    if [ -z "${1:-}" ]; then
+    if [ -z ${1+x} ]; then
         echo 'add-bookmark: missing <name>'
         add-bookmark-usage
         return
@@ -19,9 +19,9 @@ add-bookmark() {
 
     # make sure we remove any existing bookmark before defining another one.
     remove-bookmark $1 silent
-    local b="$1"=\"$(pwd)\"
+    local BOOKMARK="$1"=\"$(pwd)\"
 
-    echo "add-bookmark: adding bookmark $b"
-    echo $b >> $HOME/.am/prompt/scripts/bookmarks.sh
+    echo "add-bookmark: adding bookmark $BOOKMARK"
+    echo $BOOKMARK >> $HOME/.am/prompt/scripts/bookmarks.sh
     source $HOME/.am/prompt/scripts/bookmarks.sh
 }

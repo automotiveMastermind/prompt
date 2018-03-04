@@ -10,29 +10,29 @@ remove-var-usage() {
 }
 
 remove-var() {
-    local variable=$1
-    local r=
-    local userpath="$AM_PROMPT/user"
-    local varpath="$userpath/variables.sh"
+    local VARIABLE=$1
+    local REMOVE=
+    local USER_PATH="$AM_PROMPT/user"
+    local VAR_PATH="$USER_PATH/variables.sh"
 
-    if [ -z "${variable:-}" ]; then
+    if [ -z "${VARIABLE:-}" ]; then
         remove-var-usage
         return 1
     fi
 
-    r=$(grep -s -m 1 ^$variable $varpath)
-    unset "$variable" 1>/dev/null 2>&1
+    REMOVE=$(grep -s -m 1 ^$VARIABLE $VAR_PATH)
+    unset $VARIABLE 1>/dev/null 2>&1
 
-    if [ -z "${r:-}" ]; then
+    if [ -z ${REMOVE+x} ]; then
         echo 'remove-var: no variable was declared for the specified name'
 
         return 1
     fi
 
-    echo "remove-var: removing variable $row"
+    echo "remove-var: removing variable $REMOVE"
 
-    grep -s -v ^$variable "$varpath" >> "$userpath/variables1.sh"
-    mv -f "$userpath/variables1.sh" "$userpath/variables.sh"
+    grep -s -v ^$VARIABLE "$VAR_PATH" >> "$USER_PATH/variables1.sh"
+    mv -f "$USER_PATH/variables1.sh" "$USER_PATH/variables.sh"
 
-    source "$userpath/variables.sh"
+    source "$USER_PATH/variables.sh"
 }

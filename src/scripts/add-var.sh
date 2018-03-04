@@ -12,13 +12,13 @@ add-var-usage() {
 
 add-var() {
     # make sure that a bookmark was specified.
-    if [ -z "${1:-}" ]; then
+    if [ -z ${1+x} ]; then
         echo 'add-var: missing <name>'
         add-var-usage
         return
     fi
 
-    if [ -z "${2:-}" ]; then
+    if [ -z ${2+x} ]; then
         echo 'add-var: missing <value>'
         add-var-usage
         return
@@ -26,13 +26,13 @@ add-var() {
 
     # make sure we remove any existing variable before defining another one
     remove-var $1 silent
-    local v="$1"=\"$2\"
-    local varpath="$AM_PROMPT/user/variables.sh"
+    local VARIABLE="$1"=\"$2\"
+    local VAR_PATH="$AM_PROMPT/user/variables.sh"
 
-    echo Adding varable: $v
-    echo >> "$varpath"
-    echo "$v" >> "$varpath"
-    source "$varpath"
+    echo 'Adding varable: $VARIABLE'
+    echo >> "$VAR_PATH"
+    echo "$VARIABLE" >> "$VAR_PATH"
+    source "$VAR_PATH"
 }
 
 set-var() {
