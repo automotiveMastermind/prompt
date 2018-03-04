@@ -7,7 +7,7 @@ fi
 open-url() {
     local url="$1"
 
-    if [ -z "${1:-}" ]; then
+    if [ -z ${1+x} ]; then
         echo 'open-url: url must be supplied'
         return 1
     fi

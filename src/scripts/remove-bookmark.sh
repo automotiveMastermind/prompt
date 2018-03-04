@@ -10,36 +10,37 @@ remove-bookmark-usage() {
 }
 
 remove-bookmark() {
-    local bookmark=$1
-    local userpath="$AM_HOME/user"
+    local BOOKMARK=$1
+    local USER_PATH="$AM_HOME/user"
+    local ROW=
 
-    if [ -z "${bookmark:-}" ]; then
+    if [ -z "${BOOKMARK:-}" ]; then
         remove-var-usage
         return 1
     fi
 
-    local row=$(grep -s -m 1 ^$bookmark "$userpath/bookmarks.sh")
+    ROW=$(grep -s -m 1 ^$BOOKMARK "$USER_PATH/bookmarks.sh")
 
     if [ -z "${row:-}" ]; then
-        local row=$(grep -s -m 1 $bookmark$ "$userpath/bookmarks.sh")
+        ROW=$(grep -s -m 1 $BOOKMARK$ "$USER_PATH/bookmarks.sh")
     fi
 
     if [ -z "${row:-}" ]; then
-        local row=$(grep -s -m 1 $path$ "$userpath/bookmarks.sh")
+        ROW=$(grep -s -m 1 $path$ "$USER_PATH/bookmarks.sh")
     else
-        local row=$(grep -s -m 1 \"$PWD\"$ "$userpath/bookmarks.sh")
+        ROW=$(grep -s -m 1 \"$PWD\"$ "$USER_PATH/bookmarks.sh")
     fi
 
-    if [ -z "${row:-}" ]; then
+    if [ -z ${ROW+x} ]; then
         echo 'remove-bookmark: no bookmark was found for the specified title or path.'
 
         return 1
     fi
 
-    "remove-bookmark: removing bookmark $row"
+    "remove-bookmark: removing bookmark $ROW"
 
-    grep -s -v $r "$userpath/bookmarks.sh" >> "$userpath/bookmarks1.sh"
-    mv -f "$userpath/bookmarks1.sh" "$userpath/bookmarks.sh"
+    grep -s -v $r "$USER_PATH/bookmarks.sh" >> "$USER_PATH/bookmarks1.sh"
+    mv -f "$USER_PATH/bookmarks1.sh" "$USER_PATH/bookmarks.sh"
 
-    source $userpath/bookmarks.sh
+    source $USER_PATH/bookmarks.sh
 }

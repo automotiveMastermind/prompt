@@ -6,22 +6,26 @@ fi
 
 __prompt-set-nvm()
 {
-    if type brew 1>/dev/null 2>&1; then
-        local nvm_path=$(brew --prefix nvm)
-    else
-        local nvm_path=$(which nvm)
+    local NVM_PATH=$(which nvm)
+
+    if [ -z ${NVM_PATH+x} ]; then
+        nvm use --lts --delete-prefix
+        eval "$(npm completion)"
+        return
     fi
 
-    if [ ! -d ${nvm_path:-/__no__exist} ]; then
-        if [ ! -d "$HOME/.nvm" ]; then
-            mkdir -p "$HOME/.nvm"
-        fi
+    NVM_PATH=$(brew --prefix nvm 2>/dev/null)
 
-        nvm_path="$HOME/.nvm"
-        export NVM_DIR=$nvm_path
-        source "$NVM_DIR/nvm.sh"
+    if [ -z ${NVM_PATH+x} ]; then
+        NVM_PATH=$HOME/.nvm
     fi
 
+    if [ ! -d ${NVM_PATH} ]; then
+        echo "not found"
+        return
+    fi
+
+    source "$NVM_PATH/nvm.sh"
     nvm use --lts --delete-prefix
     eval "$(npm completion)"
 }

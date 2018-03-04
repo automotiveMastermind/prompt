@@ -5,11 +5,11 @@ if [ ! -z "${AM_PROMPT_DEBUG:-}" ]; then
 fi
 
 remove-backup() {
-    local backup=$1
+    local BACKUP=$1
 
-    if [ -z "${backup:-}" ]; then
-        backup='prompt'
+    if [ -z ${BACKUP+x} ]; then
+        BACKUP='prompt'
     fi
 
-    rm -rf "$AM_HOME/backup/$backup" 2>/dev/null
+    rm -rf "$AM_HOME/backup/$BACKUP" 2>/dev/null
 }

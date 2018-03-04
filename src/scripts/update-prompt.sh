@@ -8,21 +8,21 @@ update-prompt() {
     local SHA=$(git-sha)
     local SHA_PATH=$HOME/.am/prompt/.sha
 
-    if [ "${1:-}" = "--force" ]; then
+    if [ "${1+x}" = "--force" ]; then
         rm -rf $SHA_PATH 1>/dev/null 2>&1
     fi
 
     remove-backup
 
-    if [ -f "${SHA_PATH:-}" ]; then
+    if [ -f ${SHA_PATH+x} ]; then
         CURRENT_SHA=$(cat $SHA_PATH)
 
-        if [ -z "${SHA:-}" ]; then
+        if [ -z ${SHA+x} ]; then
             echo "prompt: SHA cannot be retrieved, which could be related to rate limiting."
             return 1
         fi
 
-        if [ "${SHA:-}" = "${CURRENT_SHA:-}" ]; then
+        if [ "${SHA+x}" = "${CURRENT_SHA+x}" ]; then
             echo "prompt: latest version already installed: $SHA"
             return 0
         fi
