@@ -15,23 +15,23 @@ Chat          | [![Join Chat][gitter-image]][gitter-url]
 
 promptMastermind is a prompt for BaSH on *nix distributions that includes a ton of useful functionality, including:
 
-* Two-line prompt that includes username, hostname, and current path
-* Git prompt support (emit information about the current branch and status when in a git path)
+* A two-line prompt that displays username, hostname, and current path
+* Git prompt support (that emits information about the current branch and status when in a git path)
 * Better BaSH completion for git and git-flow
-* Install dotnet-cli
+* Installation of dotnet-cli
 * Bookmarking support (cdable variables)
 * Variables support (add vars without modifying profile)
 * Flush DNS (on macOS)
-* Enable and disable hidden files in Finder (on macOS)
-* Show available colors (already set as variables for use elsewhere)
-* ... and much more.
+* Ability to enable and disable hidden files in Finder (on macOS)
+* Display of available colors (already set as variables for use elsewhere)
+* ... and much more!
 
 Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing
 customization (aside from the prompt).
 
 ### Using promptMastermind
 
-Installing promptMastermind is a 1 step process:
+Install promptMastermind in one step:
 
 ``` bash
 curl -fsSL https://git.io/am-prompt | /usr/bin/env bash
@@ -52,12 +52,12 @@ update-prompt
 If you already have the latest version of prompt installed, the ```update-prompt``` command will not re-install the
 current version.
 
-**NOTE**: The installer simply creates a new folder (.am) under the home folder, and copies all of the files
+**NOTE**: The installer simply creates a new folder (.am) under the home folder and copies all of the files
 there. It will backup this folder first. It wires up the "extensions" by adding a source command for
 ```$HOME/.am/prompt/bashrc``` to ```$HOME/.bash_profile```. It will not duplicate itself, so you can re-run the
 installer or use the ```upgrade-prompt``` command to upgrade at any time.
 
-The backup folder is located at: ```$HOME/.am/prompt/backup/[date]```
+The backup folder is located at: ```$HOME/.am/prompt/backup/[date]```.
 
 The ```$HOME/.bash_profile``` is also backed up to ```$HOME/.am/prompt/backup/[date]/.bash_profile```.
 
