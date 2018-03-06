@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.5"></a>
+## [4.0.5](https://github.com/automotivemastermind/prompt/compare/v4.0.4...v4.0.5) (2018-03-06)
+
+
+### Bug Fixes
+
+* prompt updates on sierra ([#12](https://github.com/automotivemastermind/prompt/issues/12)) ([6147b37](https://github.com/automotivemastermind/prompt/commit/6147b37))
+
+
+
 <a name="4.0.4"></a>
 ## [4.0.4](https://github.com/automotivemastermind/prompt/compare/v4.0.3...v4.0.4) (2017-10-31)
 
