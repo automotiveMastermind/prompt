@@ -13,12 +13,12 @@ git-flow-clone() {
     local URL=$1
     local NAME=$2
 
-    if [ -z ${URL+x} ]; then
+    if [ -z ${URL:-} ]; then
         echo 'git-clone: you must specify a url, which is the first parameter.'
         return
     fi
 
-    if [ -z ${NAME+x} ]; then
+    if [ -z ${NAME:-} ]; then
         echo 'git-clone: you must specify a directory name, which is the second parameter.'
         return
     fi
@@ -48,7 +48,7 @@ git-flow-init() {
 
     local NAME=$1
 
-    if [ -z ${NAME+x} ]; then
+    if [ -z ${NAME:-} ]; then
         NAME='.'
     fi
 

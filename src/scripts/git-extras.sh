@@ -17,22 +17,22 @@ git-sha() {
     local REPO_NAME=$2
     local BRANCH_NAME=$3
 
-    if [ -z ${ORG_NAME+x} ]; then
-        local ORG_NAME='automotiveMastermind'
+    if [ -z ${ORG_NAME:-} ]; then
+        ORG_NAME='automotiveMastermind'
     fi
 
-    if [ -z ${REPO_NAME+x} ]; then
-        local REPO_NAME='prompt'
+    if [ -z ${REPO_NAME:-} ]; then
+        REPO_NAME='prompt'
     fi
 
-    if [ -z ${BRANCH_NAME+x} ]; then
-        local BRANCH_NAME='master'
+    if [ -z ${BRANCH_NAME:-} ]; then
+        BRANCH_NAME='master'
     fi
 
     local CURL_OPT='-s'
 
     if [ ! -z "${GH_TOKEN:-}" ]; then
-        local CURL_OPT="$CURL_OPT -H 'Authorization: $GH_TOKEN'"
+        CURL_OPT="$CURL_OPT -H 'Authorization: $GH_TOKEN'"
     fi
 
     local SHA_URI=https://api.github.com/repos/$ORG_NAME/$REPO_NAME/commits/$BRANCH_NAME
@@ -56,7 +56,7 @@ git-sha() {
 git-token() {
     local GH_TOKEN=$1
 
-    if [ -z ${GH_TOKEN+x} ]; then
+    if [ -z ${GH_TOKEN:-} ]; then
         echo 'usage: git-token [token]'
     else
         add-var GH_TOKEN $GH_TOKEN

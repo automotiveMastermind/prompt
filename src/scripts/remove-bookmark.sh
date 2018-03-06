@@ -31,7 +31,7 @@ remove-bookmark() {
         ROW=$(grep -s -m 1 \"$PWD\"$ "$USER_PATH/bookmarks.sh")
     fi
 
-    if [ -z ${ROW+x} ]; then
+    if [ -z ${ROW:-} ]; then
         echo 'remove-bookmark: no bookmark was found for the specified title or path.'
 
         return 1

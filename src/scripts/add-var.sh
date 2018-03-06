@@ -12,13 +12,13 @@ add-var-usage() {
 
 add-var() {
     # make sure that a bookmark was specified.
-    if [ -z ${1+x} ]; then
+    if [ -z ${1:-} ]; then
         echo 'add-var: missing <name>'
         add-var-usage
         return
     fi
 
-    if [ -z ${2+x} ]; then
+    if [ -z ${2:-} ]; then
         echo 'add-var: missing <value>'
         add-var-usage
         return

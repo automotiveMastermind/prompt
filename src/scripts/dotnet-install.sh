@@ -58,7 +58,7 @@ dotnet-install() {
         shift
     done
 
-    if [ -z ${DOTNET_INSTALL_DIR+x} ]; then
+    if [ -z ${DOTNET_INSTALL_DIR:-} ]; then
         export DOTNET_INSTALL_DIR=$HOME/.dotnet
     fi
 

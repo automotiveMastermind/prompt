@@ -46,12 +46,12 @@ __prompt-install-darwin() {
 
     local NVM_PATH=$(brew --prefix nvm)
 
-    if [ -d $NVM_PATH ]; then
+    if [ -f "$NVM_PATH/nvm.sh" ]; then
         __prompt-success 'setting up nvm...'
-
+        export NVM_DIR="${HOME}/.nvm"
         source "$NVM_PATH/nvm.sh"
         nvm install --lts 1>/dev/null 2>&1
-        nvm use --lts --delete-prefix 1>/dev/null 2>&1
+        nvm use --lts --delete-prefix --silent 1>/dev/null 2>&1
     fi
 
     __prompt-success 'setting git credential helper to use the macOS keychain'
