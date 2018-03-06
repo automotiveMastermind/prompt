@@ -23,7 +23,7 @@ remove-var() {
     REMOVE=$(grep -s -m 1 ^$VARIABLE $VAR_PATH)
     unset $VARIABLE 1>/dev/null 2>&1
 
-    if [ -z ${REMOVE+x} ]; then
+    if [ -z ${REMOVE:-} ]; then
         echo 'remove-var: no variable was declared for the specified name'
 
         return 1

@@ -11,7 +11,7 @@ add-bookmark-usage() {
 
 add-bookmark() {
     # make sure that a bookmark was specified.
-    if [ -z ${1+x} ]; then
+    if [ -z ${1:-} ]; then
         echo 'add-bookmark: missing <name>'
         add-bookmark-usage
         return

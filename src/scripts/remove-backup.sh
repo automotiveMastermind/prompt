@@ -7,7 +7,7 @@ fi
 remove-backup() {
     local BACKUP=$1
 
-    if [ -z ${BACKUP+x} ]; then
+    if [ -z ${BACKUP:-} ]; then
         BACKUP='prompt'
     fi
 
