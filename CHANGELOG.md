@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.6"></a>
+## [4.0.6](https://github.com/automotivemastermind/prompt/compare/v4.0.5...v4.0.6) (2018-04-22)
+
+
+### Bug Fixes
+
+* **list-directory:** fix aliases for la, ll, lla, and lsp ([#14](https://github.com/automotivemastermind/prompt/issues/14)) ([8b8a173](https://github.com/automotivemastermind/prompt/commit/8b8a173))
+
+
+
 <a name="4.0.5"></a>
 ## [4.0.5](https://github.com/automotivemastermind/prompt/compare/v4.0.4...v4.0.5) (2018-03-06)
 
