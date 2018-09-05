@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+__am-prompt-remove-backup() {
+    local BACKUP=$1
+
+    if [ -z ${BACKUP:-} ]; then
+        BACKUP='prompt'
+    fi
+
+    rm -rf "$AM_HOME/backup/$BACKUP" 2>/dev/null
+}
+
+__am-prompt-remove-backup $@

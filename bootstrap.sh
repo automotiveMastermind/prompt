@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__prompt-bootstrap()
+__am-prompt-bootstrap()
 {
     local CURL_OPT='-s'
     if [ ! -z "${GH_TOKEN:-}" ]; then
@@ -30,4 +30,4 @@ __prompt-bootstrap()
     rm -rf $INTALL_TEMP 1>/dev/null
 }
 
-__prompt-bootstrap
+__am-prompt-bootstrap

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+__am-prompt-show-vars() {
+    local VAR_PATH="$HOME/.am/prompt/user/variables.sh"
+
+    if [ ! -f $VAR_PATH ]; then
+        echo 'show-vars: no variables are currently specified'
+        add-var-usage
+        return
+    fi
+
+    cat $VAR_PATH
+}
+
+__am-prompt-show-vars

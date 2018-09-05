@@ -22,7 +22,8 @@ export CLR_BRIGHT_CYAN='\033[1;36m'     # BRIGHT CYAN
 export CLR_BRIGHT_WHITE='\033[1;37m'    # BRIGHT WHITE
 
 export CLR_SUCCESS=$CLR_BRIGHT_GREEN    # COLOR FOR SUCCESS MESSAGES
-export CLR_FAIL=$CLR_RED                # COLOR FOR ERROR MESSAGES
+export CLR_FAIL=$CLR_BRIGHT_RED         # COLOR FOR ERROR MESSAGES
+export CLR_WARN=$CLR_BRIGHT_YELLOW      # COLOR FOR WARNING MESSAGES
 export CLR_RESET=$CLR_CLEAR             # ALIAS FOR CLEAR COLOR
 
 export CLR_ROOT_PROMPT=$CLR_BRIGHT_RED    # COLOR OF THE PROMPT FOR ROOT
@@ -70,30 +71,23 @@ fi
 export AM_HOME="$HOME/.am"
 export AM_PROMPT="$AM_HOME/prompt"
 
-# determine if a user variables exist
-if [ -f "$AM_PROMPT/user/bashrc" ]; then
-    source "$AM_PROMPT/user/variables.sh"
-fi
+# add scripts to path
+export PATH="$AM_PROMPT/scripts:$PATH"
 
-# source scripts
-for script in $AM_PROMPT/scripts/*.sh; do
-    source "$script"
+# source user files
+for USER_SCRIPT in $AM_PROMPT/user/*; do
+    source "$USER_SCRIPT"
 done
 
 # test for prompt bin
 if [ -d "$AM_PROMPT/user/bin" ]; then
     # append prompt to path
-    export PATH=$PATH:"$AM_PROMPT/user/bin"
+    export PATH="$PATH:$AM_PROMPT/user/bin"
 fi
 
-# determine if a user bashrc exists
-if [ -f "$AM_PROMPT/user/bashrc" ]; then
-    source "$AM_PROMPT/user/bashrc"
-fi
-
-# source post scripts
-for script in $AM_PROMPT/scripts/post/*.sh; do
-    source "$script"
+# evaluate eval scripts
+for EVAL_SCRIPT in $AM_PROMPT/scripts/eval/*; do
+    source "$EVAL_SCRIPT"
 done
 
 # aliases

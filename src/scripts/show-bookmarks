@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+__am-prompt-show-bookmarks() {
+    local BOOKMARK_PATH="$HOME/.am/prompt/user/bookmarks"
+
+    if [ ! -f $BOOKMARK_PATH ]; then
+        echo 'show-bookmarks: no bookmarks are currently specified'
+        add-bookmark --help
+        return
+    fi
+
+    cat $BOOKMARK_PATH
+}
+
+__am-prompt-show-bookmarks

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ssh-add -A 2>/dev/null

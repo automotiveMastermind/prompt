@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+__am-prompt-do-repeat() {
+    local COUNT=$1
+    local CMD="${*:2}"
+
+    for (( CURRENT=1; CURRENT<=$COUNT; CURRENT++ )); do $CMD; done
+}
+
+__am-prompt-do-repeat $@

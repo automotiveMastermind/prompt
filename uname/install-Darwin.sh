@@ -3,40 +3,40 @@
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
-__prompt-install-darwin() {
+__am-prompt-install-darwin() {
     if ! type brew 1>/dev/null 2>&1; then
-        __prompt-success 'installing homebrew'
+        __am-prompt-success 'installing homebrew'
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    __prompt-success 'updating homebrew'
+    __am-prompt-success 'updating homebrew'
     brew update 1>/dev/null
 
     for pkg in git-flow; do
         if brew list -1 | grep -q "^${pkg}\$"; then
-            __prompt-success "uninstalling: $pkg"
+            __am-prompt-success "uninstalling: $pkg"
             brew uninstall $pkg 1>/dev/null 2>&1
         fi
     done
 
     for pkg in bash openssl git git-extras git-flow-avh nvm bash-completion; do
         if brew list -1 | grep -q "^${pkg}\$"; then
-            __prompt-success "upgrading: $pkg"
+            __am-prompt-success "upgrading: $pkg"
             brew upgrade $pkg 1>/dev/null 2>&1
             brew link --overwrite $pkg 1>/dev/null 2>&1
         else
-            __prompt-success "installing: $pkg"
+            __am-prompt-success "installing: $pkg"
             brew install $pkg 1>/dev/null 2>&1
         fi
     done
 
     if ! grep "/usr/local/bin/bash" /etc/shells 1>/dev/null 2>&1; then
-        __prompt-success 'adding updated bash to shells...'
+        __am-prompt-success 'adding updated bash to shells...'
         sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
     fi
 
     if [[ "$SHELL" != "/usr/local/bin/bash" ]]; then
-        __prompt-success 'setting updated bash to default shell for user...'
+        __am-prompt-success 'setting updated bash to default shell for user...'
         chsh -s /usr/local/bin/bash
     fi
 
@@ -47,15 +47,15 @@ __prompt-install-darwin() {
     local NVM_PATH=$(brew --prefix nvm)
 
     if [ -f "$NVM_PATH/nvm.sh" ]; then
-        __prompt-success 'setting up nvm...'
+        __am-prompt-success 'setting up nvm...'
         export NVM_DIR="${HOME}/.nvm"
         source "$NVM_PATH/nvm.sh"
         nvm install --lts 1>/dev/null 2>&1
         nvm use --lts --delete-prefix --silent 1>/dev/null 2>&1
     fi
 
-    __prompt-success 'setting git credential helper to use the macOS keychain'
+    __am-prompt-success 'setting git credential helper to use the macOS keychain'
     git config --system credential.helper osxkeychain 1>/dev/null
 }
 
-__prompt-install-darwin
+__am-prompt-install-darwin

@@ -3,59 +3,58 @@
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
-__prompt-success() {
+__am-prompt-success() {
     echo -e "${CLR_SUCCESS}prompt-install: $1${CLR_CLEAR}"
 }
 
-__prompt-install() {
+__am-prompt-install() {
     local AM_HOME="$HOME/.am"
     local AM_PROMPT="$AM_HOME/prompt"
 
     local NOW=$(date +"%Y%m%d_%H%M%S")
     local BACKUP_PATH="$AM_HOME/backup/prompt/$NOW"
 
-    __prompt-success "creating backup path: $BACKUP_PATH"
+    __am-prompt-success "creating backup path: $BACKUP_PATH"
     mkdir -p "$BACKUP_PATH" 1>/dev/null
 
-    for template in template/*; do
-        local name=$(basename "$template")
-        local path="$HOME/.${name}"
+    for TEMPLATE in template/*; do
+        local TEMPLATE_NAME=$(basename "$TEMPLATE")
+        local TEMPLATE_PATH="$HOME/.${TEMPLATE_NAME}"
 
-        if [ -f "$path" ]; then
-            __prompt-success "backing up ${name}"
-            cp "$path" "$BACKUP_PATH/$name"
+        if [ -f "$TEMPLATE_PATH" ]; then
+            __am-prompt-success "backing up ${TEMPLATE_NAME}"
+            cp "$TEMPLATE_PATH" "$BACKUP_PATH/$TEMPLATE_NAME"
         fi
 
-        cat "$template" > "$path"
+        cat "$TEMPLATE" > "$TEMPLATE_PATH"
     done
 
     if [ -d $AM_PROMPT ]; then
-        __prompt-success "backing up $AM_PROMPT"
+        __am-prompt-success "backing up $AM_PROMPT"
         cp -R $AM_PROMPT/* "$BACKUP_PATH" 1>/dev/null
 
-        __prompt-success "removing $AM_PROMPT"
+        __am-prompt-success "removing $AM_PROMPT"
         rm -rf "$AM_PROMPT/git" 1>/dev/null 2>&1
         rm -rf "$AM_PROMPT/scripts" 1>/dev/null 2>&1
         rm -rf "$AM_PROMPT/themes" 1>/dev/null 2>&1
         rm -f "$AM_PROMPT/bashrc" 1>/dev/null 2>&1
     fi
 
-    __prompt-success "creating $AM_PROMPT"
+    __am-prompt-success "creating $AM_PROMPT"
     mkdir -p "$AM_PROMPT/user" 1>/dev/null 2>&1
 
-    __prompt-success "installing promptMastermind to $AM_PROMPT"
-    cp -Rf src/git "$AM_PROMPT" 1>/dev/null
+    __am-prompt-success "installing promptMastermind to $AM_PROMPT"
     cp -Rf src/scripts "$AM_PROMPT" 1>/dev/null
     cp -Rf src/themes "$AM_PROMPT" 1>/dev/null
     cp -f src/bashrc "$AM_PROMPT" 1>/dev/null
 
-    for useritem in src/user/*; do
-        local name=$(basename "$useritem")
-        local path="$AM_PROMPT/user/$name"
+    for USER_ITEM in src/user/*; do
+        local USER_ITEM_NAME=$(basename "$USER_ITEM")
+        local USER_ITEM_PATH="$AM_PROMPT/user/$USER_ITEM_NAME"
 
-        if [ ! -f "$path" ]; then
-            __prompt-success "initializing user profile: $name at $path"
-            cp "$useritem" "$path"
+        if [ ! -f "$USER_ITEM_PATH" ]; then
+            __am-prompt-success "initializing user profile: $USER_ITEM_NAME at $USER_ITEM_PATH"
+            cp "$USER_ITEM" "$USER_ITEM_PATH"
         fi
     done
 
@@ -88,12 +87,12 @@ __prompt-install() {
     local PROMPT_COMPLETION="$AM_PROMPT/completions"
 
     if [ -f "$BASH_COMPLETION/$GIT_COMPLETE_NAME" ]; then
-        __prompt-success 'removing git flow bash completion'
+        __am-prompt-success 'removing git flow bash completion'
         rm -rf "$BASH_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null
     fi
 
     if [ -f "$BASH_COMPLETION/$GIT_PROMPT_NAME" ]; then
-        __prompt-success 'removing crappy git-prompt'
+        __am-prompt-success 'removing crappy git-prompt'
         rm -rf "$BASH_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null
     fi
 
@@ -101,19 +100,19 @@ __prompt-install() {
         mkdir -p "$PROMPT_COMPLETION" 1>/dev/null
     fi
 
-    __prompt-success 'downloading better git-prompt'
-    local result=$(curl -sLD- "$GIT_PROMPT_URI" -o "$PROMPT_COMPLETION/$GIT_PROMPT_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+    __am-prompt-success 'downloading better git-prompt'
+    local CURL_RESULT=$(curl -sLD- "$GIT_PROMPT_URI" -o "$PROMPT_COMPLETION/$GIT_PROMPT_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 
-    if [ "$result" = "200" ]; then
-        __prompt-success 'successfully installed git-prompt'
+    if [ "$CURL_RESULT" = "200" ]; then
+        __am-prompt-success 'successfully installed git-prompt'
         chmod +x "PROMPT_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null 2>&1
     fi
 
-    __prompt-success 'downloading git-flow completion'
-    local result=$(curl -sLD- "$GIT_COMPLETE_URI" -o "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
+    __am-prompt-success 'downloading git-flow completion'
+    local CURL_RESULT=$(curl -sLD- "$GIT_COMPLETE_URI" -o "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
 
-    if [ "$result" = "200" ]; then
-        __prompt-success 'successfully installed git-flow completion'
+    if [ "$CURL_RESULT" = "200" ]; then
+        __am-prompt-success 'successfully installed git-flow completion'
         chmod +x "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null 2>&1
     fi
 
@@ -138,4 +137,4 @@ __prompt-install() {
     echo -e "${CLR_CLEAR}"
 }
 
-__prompt-install
+__am-prompt-install

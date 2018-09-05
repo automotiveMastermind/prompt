@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo "Minikube is now included with the installation of Docker for all platforms..."
+echo
+echo "Download docker from: https://www.docker.com/products/docker-desktop"

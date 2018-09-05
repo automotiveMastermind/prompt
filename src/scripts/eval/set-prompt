@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+__am-prompt-emit-prompt-arrow() {
+    # set the default color
+    local CLR_PROMPT=$CLR_USER_PROMPT
+
+    # set color for staff user (administrator)
+    if [ ! -z "$(command id -Gn 2>/dev/null | grep -s -o admin)" ]; then
+        CLR_PROMPT=$CLR_STAFF_PROMPT
+    fi
+
+    # set color for root user
+    if [ $(id -u) = 0 ]; then
+        CLR_PROMPT=$CLR_ROOT_PROMPT
+    fi
+
+    # set the color for an ssh session
+    if [ ! -z "${SSH_CONNECTION:-}" ]; then
+        CLR_PROMPT=$CLR_SSH_PROMPT
+
+        # emit the prompt using the correct color
+        echo "\[${CLR_PROMPT}\] (ssh) ${AM_PROMPT_MARKER:-==>} \[${CLR_CLEAR}\]"
+    else
+        # emit the prompt using the correct color
+        echo "\[${CLR_PROMPT}\] ${AM_PROMPT_MARKER:-==>} \[${CLR_CLEAR}\]"
+    fi
+}
+
+__am-prompt-set-prompt() {
+    if type gulp 1>/dev/null 2>&1; then
+        eval "$(gulp --completion=bash)" 1>/dev/null 2>&1;
+    fi
+
+    if type grunt 1>/dev/null 2>&1; then
+        eval "$(grunt --completion=bash)" 1>/dev/null 2>&1;
+    fi
+
+    if type kubectl 1>/dev/null 2>&1; then
+        eval "$(kubectl completion bash)" 1>/dev/null 2>&1;
+    fi
+
+    if type helm 1>/dev/null 2>&1; then
+        eval "$(helm completion bash)" 1>/dev/null 2>&1;
+    fi
+
+    if [ -f "$LOCAL_PREFIX/etc/bash_completion" ]; then
+        source "$LOCAL_PREFIX/etc/bash_completion"
+    elif [ -f /etc/bash_completion ]; then
+        source /etc/bash_completion
+    elif [ -f /usr/share/bash-completion/bash_completion ]; then
+        source /usr/share/bash-completion/bash_completion
+    fi
+
+    # source completions
+    for AM_COMPLETION in $AM_PROMPT/completions/*; do
+        source "$AM_COMPLETION"
+    done
+
+    # set the window title
+    echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
+
+    if ! type git 1>/dev/null 2>&1; then
+        export PROMPT_COMMAND='"\n\u@\h : \w\n" "$(__am-prompt-emit-prompt-arrow)"'
+    else
+        # use the git prompt with the prompt arrow
+        export PROMPT_COMMAND='__posh_git_ps1 "\n\u@\h : \w\n" "$(__am-prompt-emit-prompt-arrow)"'
+    fi
+}
+
+__am-prompt-dotnet_bash_complete() {
+  local WORD=${COMP_WORDS[COMP_CWORD]}
+  local DOTNET_PATH=${COMP_WORDS[1]}
+
+  local COMPLETIONS=("$(dotnet complete --position ${COMP_POINT} "${COMP_LINE}")")
+
+  COMPREPLY=( $(compgen -W "$COMPLETIONS" -- "$WORD") )
+}
+
+__am-prompt-set-nvm() {
+    NVM_PATH=$(brew --prefix nvm 2>/dev/null)
+
+    if [ -z ${NVM_PATH+x} ]; then
+        NVM_PATH=$HOME/.nvm
+    fi
+
+    if [ ! -d ${NVM_PATH} ]; then
+        echo "not found"
+        return
+    fi
+
+    if [ -f "$NVM_PATH/nvm.sh" ]; then
+        export NVM_DIR="${HOME}/.nvm"
+        source "$NVM_PATH/nvm.sh"
+        eval "$(npm completion)"
+    fi
+}
+
+__am-prompt-set-prompt
+__am-prompt-set-nvm
+
+complete -f -F __am-prompt-dotnet_bash_complete dotnet

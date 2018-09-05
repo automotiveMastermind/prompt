@@ -8,7 +8,7 @@
     "url": "https://github.com/automotivemastermind/prompt.git"
   },
   "scripts": {
-    "test": "source ./install.sh",
+    "test": "bash install.sh",
     "push": "git push --follow-tags origin master",
     "release": "standard-version && npm run push"
   },
@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/automotivemastermind/prompt#readme",
   "devDependencies": {
-    "standard-version": "^2.4.0"
+    "standard-version": "^4.4.0"
   }
 }

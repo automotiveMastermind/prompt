@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ -e "/usr/local/share/dotnet" ]; then
+    export PATH="/usr/local/share/dotnet:$PATH"
+fi
+
+if [ -e "$HOME/.dotnet/dotnet" ]; then
+    export PATH="$HOME/.dotnet:$PATH"
+fi

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+__am-prompt-git-sha() {
+    local ORG_NAME=$1
+    local REPO_NAME=$2
+    local BRANCH_NAME=$3
+
+    if [ -z ${ORG_NAME:-} ]; then
+        ORG_NAME='automotivemastermind'
+    fi
+
+    if [ -z ${REPO_NAME:-} ]; then
+        REPO_NAME='prompt'
+    fi
+
+    if [ -z ${BRANCH_NAME:-} ]; then
+        BRANCH_NAME='master'
+    fi
+
+    local CURL_OPT='-s'
+
+    if [ ! -z "${GH_TOKEN:-}" ]; then
+        CURL_OPT="$CURL_OPT -H 'Authorization: $GH_TOKEN'"
+    fi
+
+    local SHA_URI=https://api.github.com/repos/$ORG_NAME/$REPO_NAME/commits/$BRANCH_NAME
+    local SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
+
+    if [ ! -z "${SHA:-}" ]; then
+        echo $SHA
+        return 0
+    fi
+
+    return 1
+}
+
+__am-prompt-git-sha $@
