@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/automotivemastermind/prompt/compare/v4.0.6...v5.0.0) (2018-09-05)
+
+
+### Features
+
+* use scripts instead of sourced functions ([7cdde0a](https://github.com/automotivemastermind/prompt/commit/7cdde0a))
+
+
+### BREAKING CHANGES
+
+* `minikube-install` is no longer available as minikube is now included in
+Docker Desktop for both Mac and Windows.
+
+Git extensions based on git-flow have been removed. These were rarely
+utilized.
+
+
+
 <a name="4.0.6"></a>
 ## [4.0.6](https://github.com/automotivemastermind/prompt/compare/v4.0.5...v4.0.6) (2018-04-22)
 
