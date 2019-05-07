@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [5.1.0](https://github.com/automotivemastermind/prompt/compare/v5.0.0...v5.1.0) (2019-05-07)
+
+
+### Build System
+
+* update standard-version package ([2d255cd](https://github.com/automotivemastermind/prompt/commit/2d255cd))
+
+
+### Features
+
+* make update-sln diff aware ([#15](https://github.com/automotivemastermind/prompt/issues/15)) ([4baa9f7](https://github.com/automotivemastermind/prompt/commit/4baa9f7))
+
+
 
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/automotivemastermind/prompt/compare/v4.0.6...v5.0.0) (2018-09-05)
