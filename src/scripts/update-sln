@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
-rm -rf *.sln 1>/dev/null
-dotnet new sln
-find . -name *.csproj | xargs dotnet sln add
+__contains() { for item in "${@:2}"; do [[ "$item" == "$1" ]] && return 0; done; return 1; }
+
+for SLN in *.sln; do
+    EXISTING=($(dotnet sln "$SLN" list))
+    EXISTING=("${EXISTING[@]:2}")
+    DISCOVERED=($(find * -name '*.csproj' ! -path '*/bin/*' ! -path '*/obj/*' ! -path '*/shared/*' ))
+
+    for existing in "${EXISTING[@]}"; do
+        __contains $existing "${DISCOVERED[@]}" || dotnet sln "$SLN" remove "$existing"
+    done
+
+    for discovered in "${DISCOVERED[@]}"; do
+        __contains $discovered "${EXISTING[@]}" || dotnet sln "$SLN" add "$discovered"
+    done
+done
