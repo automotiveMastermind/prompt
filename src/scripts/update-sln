@@ -2,16 +2,42 @@
 
 __contains() { for item in "${@:2}"; do [[ "$item" == "$1" ]] && return 0; done; return 1; }
 
-for SLN in *.sln; do
-    EXISTING=($(dotnet sln "$SLN" list))
+SOLUTIONS=($@)
+
+CURRENT_PATH=$(pwd)
+
+if [ ${#SOLUTIONS[@]} -eq 0 ]; then
+    SOLUTIONS=(*.sln)
+fi
+
+for solution in "${SOLUTIONS[@]}"; do
+    if [ ! -f "$solution" ]; then
+        echo "ERROR: $solution does not exist; skipping..."
+        echo
+
+        continue
+    fi
+
+    solution="./$solution"
+
+    basepath="${solution%/*}"
+    name="${solution##*/}"
+
+    echo "Checking solution: $name"
+
+    pushd "$basepath" 1>/dev/null
+
+    EXISTING=($(dotnet sln "$name" list))
     EXISTING=("${EXISTING[@]:2}")
     DISCOVERED=($(find * -name '*.csproj' ! -path '*/bin/*' ! -path '*/obj/*' ! -path '*/shared/*' ))
 
     for existing in "${EXISTING[@]}"; do
-        __contains $existing "${DISCOVERED[@]}" || dotnet sln "$SLN" remove "$existing"
+        __contains $existing "${DISCOVERED[@]}" || dotnet sln "$name" remove "$existing"
     done
 
     for discovered in "${DISCOVERED[@]}"; do
-        __contains $discovered "${EXISTING[@]}" || dotnet sln "$SLN" add "$discovered"
+        __contains $discovered "${EXISTING[@]}" || dotnet sln "$name" add "$discovered"
     done
+
+    popd 1>/dev/null
 done

@@ -35,6 +35,7 @@ export CLR_SSH_PROMPT=$CLR_BRIGHT_MAGENTA # COLOR OF THE PROMPT FOR SSH
 shopt -s checkwinsize     # check window size on script exit
 shopt -s cdable_vars      # enable change directory to a variable value
 shopt -s extglob          # enable extended glob patterns
+shopt -s globstar         # enable glob ** expansion
 
 # enable colors for various commands
 export TERM=xterm-256color
