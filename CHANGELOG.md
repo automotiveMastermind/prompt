@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/automotivemastermind/prompt/compare/v5.1.0...v5.2.0) (2019-05-09)
+
+
+### Features
+
+* **update-sln:** add support for glob patterns ([#16](https://github.com/automotivemastermind/prompt/issues/16)) ([b4c4b7e](https://github.com/automotivemastermind/prompt/commit/b4c4b7e))
+
+
+
 ## [5.1.0](https://github.com/automotivemastermind/prompt/compare/v5.0.0...v5.1.0) (2019-05-07)
 
 
