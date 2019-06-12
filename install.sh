@@ -81,15 +81,8 @@ __am-prompt-install() {
     fi
 
     local GIT_PROMPT_NAME=git-prompt.sh
-    local GIT_COMPLETE_NAME=git-flow-completion.bash
     local GIT_PROMPT_URI=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$GIT_PROMPT_NAME
-    local GIT_COMPLETE_URI=https://raw.githubusercontent.com/petervanderdoes/git-flow-completion/develop/$GIT_COMPLETE_NAME
     local PROMPT_COMPLETION="$AM_PROMPT/completions"
-
-    if [ -f "$BASH_COMPLETION/$GIT_COMPLETE_NAME" ]; then
-        __am-prompt-success 'removing git flow bash completion'
-        rm -rf "$BASH_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null
-    fi
 
     if [ -f "$BASH_COMPLETION/$GIT_PROMPT_NAME" ]; then
         __am-prompt-success 'removing crappy git-prompt'
@@ -106,14 +99,6 @@ __am-prompt-install() {
     if [ "$CURL_RESULT" = "200" ]; then
         __am-prompt-success 'successfully installed git-prompt'
         chmod +x "PROMPT_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null 2>&1
-    fi
-
-    __am-prompt-success 'downloading git-flow completion'
-    local CURL_RESULT=$(curl -sLD- "$GIT_COMPLETE_URI" -o "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
-
-    if [ "$CURL_RESULT" = "200" ]; then
-        __am-prompt-success 'successfully installed git-flow completion'
-        chmod +x "$PROMPT_COMPLETION/$GIT_COMPLETE_NAME" 1>/dev/null 2>&1
     fi
 
     local CURL_OPT='-s'
