@@ -19,7 +19,7 @@ __am-prompt-install-darwin() {
         fi
     done
 
-    for pkg in bash openssl git git-extras git-flow-avh nvm bash-completion; do
+    for pkg in bash openssl git go nvm bash-completion; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             __am-prompt-success "upgrading: $pkg"
             brew upgrade $pkg 1>/dev/null 2>&1

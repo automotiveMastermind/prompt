@@ -17,5 +17,3 @@ source "$NVM_DIR/nvm.sh"
 
 nvm install --lts 1>/dev/null
 nvm use --lts --delete-prefix 1>/dev/null
-
-wget --no-check-certificate -q  https://raw.github.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh && sudo bash gitflow-installer.sh install stable; rm gitflow-installer.sh

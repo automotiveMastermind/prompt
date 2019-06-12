@@ -5,7 +5,6 @@ success() {
     echo -e "${CLR_SUCCESS}$1${CLR_CLEAR}"
 }
 
-sudo add-apt-repository ppa:pdoes/gitflow-avh -y 1>/dev/null 2>&1
 sudo add-apt-repository ppa:git-core/ppa -y 1>/dev/null 2>&1
 sudo apt-get update 1>/dev/null
 
@@ -15,7 +14,7 @@ for pkg in git-flow; do
     fi
 done
 
-for pkg in openssl git git-extras git-flow build-essential libssl-dev curl libunwind8 gettext; do
+for pkg in openssl git build-essential libssl-dev curl libunwind8 gettext; do
     success "Installing $pkg..."
     sudo apt-get install -y ${pkg}
 done
