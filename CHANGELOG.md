@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/automotivemastermind/prompt/compare/v5.2.0...v6.0.0) (2019-06-12)
+
+
+### Features
+
+* add golang to darwin and set go paths ([6128192](https://github.com/automotivemastermind/prompt/commit/6128192))
+
+
+### BREAKING CHANGES
+
+* The `git-flow-avh`, `git-extras`, and `git-flow-completion` tools are no
+installed by default. While git-flow is still a fairly popular workflow
+for private repositories, this prompt is designed to favor OSS
+development where forks are the norm.
+
+You can review the diff of this commit to see how they were installed on
+each platform if you would like to continue using these tools.
+
+
+
 ## [5.2.0](https://github.com/automotivemastermind/prompt/compare/v5.1.0...v5.2.0) (2019-05-09)
 
 
