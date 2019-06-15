@@ -75,10 +75,10 @@ export AM_PROMPT="$AM_HOME/prompt"
 # add scripts to path
 export PATH="$AM_PROMPT/scripts:$PATH"
 
-# source user files
-for USER_SCRIPT in $AM_PROMPT/user/*; do
-    source "$USER_SCRIPT"
-done
+# test for user variables
+if [ -f $AM_PROMPT/user/variables ]; then
+    source "$AM_PROMPT/user/variables"
+fi
 
 # test for prompt bin
 if [ -d "$AM_PROMPT/user/bin" ]; then
@@ -90,6 +90,11 @@ fi
 for EVAL_SCRIPT in $AM_PROMPT/scripts/eval/*; do
     source "$EVAL_SCRIPT"
 done
+
+# test for user bashrc
+if [ -f $AM_PROMPT/user/bashrc ]; then
+    source "$AM_PROMPT/user/bashrc"
+fi
 
 # aliases
 # -- prompt for overwrites
