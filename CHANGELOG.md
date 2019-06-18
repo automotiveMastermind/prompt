@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.1](https://github.com/automotivemastermind/prompt/compare/v6.0.0...v6.0.1) (2019-06-18)
+
+
+### Bug Fixes
+
+* **user:** source user bashrc after platform ([#18](https://github.com/automotivemastermind/prompt/issues/18)) ([aa8ac25](https://github.com/automotivemastermind/prompt/commit/aa8ac25))
+
+
+
 ## [6.0.0](https://github.com/automotivemastermind/prompt/compare/v5.2.0...v6.0.0) (2019-06-12)
 
 
