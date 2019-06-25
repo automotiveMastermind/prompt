@@ -1,13 +1,22 @@
 # promptMastermind
 
-> A spectacular (BaSH) prompt for *nix distributions. (Only tested on macOS currently)
+> A spectacular (BaSH) prompt for macOS and *nix distributions
 
 ## Vitals
 
 Info          | Badges
---------------|--------------
+--------------|-------------------------------------
 License       | [![License][license-image]][license]
-Chat          | [![Join Chat][gitter-image]][gitter-url]
+
+### Supported Operating Systems
+
+Name   | Version          
+-------|------------------
+macOS  | Siera or greater 
+ubuntu | 16.04 or greater 
+fedora | 29 or greater    
+debian |                  
+centOS |                  
 
 ## Getting Started
 

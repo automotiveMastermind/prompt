@@ -1,32 +1,24 @@
 #!/usr/bin/env bash
 
-CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
-CLR_CLEAR="\033[0m"         # DEFAULT COLOR
-
 __am-prompt-install-darwin() {
+    local BREWS=(bash openssl git go nvm bash-completion python@3)
+
     if ! type brew 1>/dev/null 2>&1; then
-        __am-prompt-success 'installing homebrew'
+        __am-prompt-success 'installing homebrew...'
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    __am-prompt-success 'updating homebrew'
-    brew update 1>/dev/null
+    __am-prompt-success 'updating homebrew...'
+    brew update
 
-    for pkg in git-flow; do
+    for pkg in "${BREWS[@]}"; do
         if brew list -1 | grep -q "^${pkg}\$"; then
-            __am-prompt-success "uninstalling: $pkg"
-            brew uninstall $pkg 1>/dev/null 2>&1
-        fi
-    done
-
-    for pkg in bash openssl git go nvm bash-completion; do
-        if brew list -1 | grep -q "^${pkg}\$"; then
-            __am-prompt-success "upgrading: $pkg"
-            brew upgrade $pkg 1>/dev/null 2>&1
-            brew link --overwrite $pkg 1>/dev/null 2>&1
+            __am-prompt-success "upgrading: $pkg..."
+            brew upgrade $pkg 2>/dev/null
+            brew link --overwrite $pkg 2>/dev/null
         else
-            __am-prompt-success "installing: $pkg"
-            brew install $pkg 1>/dev/null 2>&1
+            __am-prompt-success "installing: $pkg..."
+            brew install $pkg
         fi
     done
 
@@ -50,12 +42,12 @@ __am-prompt-install-darwin() {
         __am-prompt-success 'setting up nvm...'
         export NVM_DIR="${HOME}/.nvm"
         source "$NVM_PATH/nvm.sh"
-        nvm install --lts 1>/dev/null 2>&1
-        nvm use --lts --delete-prefix --silent 1>/dev/null 2>&1
+        nvm install --lts 2>/dev/null
+        nvm use --lts --delete-prefix --silent 2>/dev/null
     fi
 
     __am-prompt-success 'setting git credential helper to use the macOS keychain'
-    git config --system credential.helper osxkeychain 1>/dev/null
+    git config --system credential.helper osxkeychain
 }
 
 __am-prompt-install-darwin

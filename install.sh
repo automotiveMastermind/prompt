@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
@@ -68,12 +70,12 @@ __am-prompt-install() {
 
     local BASH_COMPLETION="$LOCAL_PREFIX/etc/bash_completion.d"
     local UNAME=$(uname)
-    local UNAME_INSTALL="./uname/install-$UNAME.sh"
+    local UNAME_INSTALL="$SCRIPT_DIR/uname/install-$UNAME.sh"
 
     if [ -e /etc/os-release ]; then
         source /etc/os-release
 
-        local UNAME_INSTALL="./uname/install-$ID.sh"
+        local UNAME_INSTALL="$SCRIPT_DIR/uname/install-$ID.sh"
     fi
 
     if [ -f "$UNAME_INSTALL" ]; then
