@@ -2,5 +2,6 @@
 
 CODEOWNERS @sjk07 @dmccaffery
 
+/.circleci/ @sjk07 @dmccaffery
 install.sh @sjk07 @dmccaffery
 /uname/ @sjk07 @dmccaffery

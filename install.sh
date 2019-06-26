@@ -7,6 +7,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
+# when not outputing to a tty, add spacing instead of colors
+if [ ! -t 1 ]; then
+    CLR_SUCCESS="\n------------------------------------------------------------------------------------------------------------------------
+\n"
+    CLR_CLEAR=$CLR_SUCCESS
+fi
+
 __am-prompt-success() {
     echo -e "${CLR_SUCCESS}prompt-install: $1${CLR_CLEAR}"
 }

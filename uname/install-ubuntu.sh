@@ -3,6 +3,12 @@
 __am-prompt-install-ubuntu() {
     local PACKAGES=(build-essential curl file git)
 
+    __am-prompt-success "updating software repositories..."
+    sudo apt-get update
+
+    __am-prompt-success "install add-apt-repository..."
+    sudo apt-get install -y software-properties-common
+
     __am-prompt-success "setting up git-core repository..."
     sudo add-apt-repository ppa:git-core/ppa -y
 

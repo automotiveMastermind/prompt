@@ -123,3 +123,6 @@ Condo.AssemblyInfo.cs
 
 # prompt backups
 backup/
+
+# circle-ci
+!**/.circleci

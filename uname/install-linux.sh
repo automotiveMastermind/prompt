@@ -5,7 +5,7 @@ __am-prompt-install-linux() {
 
     if ! type brew 1>/dev/null 2>&1; then
         __am-prompt-success 'installing homebrew...'
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+        sh -c "yes | $(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh) && brew config"
 
         source "$SCRIPT_DIR/src/scripts/eval/set-brew-path"
     fi
@@ -37,7 +37,7 @@ __am-prompt-install-linux() {
 
     if [[ "$SHELL" != "/usr/local/bin/bash" ]]; then
         __am-prompt-success 'setting updated bash to default shell for user...'
-        chsh -s $BASH_SHELL
+        sudo chsh -s $BASH_SHELL $USER
     fi
 
     curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
