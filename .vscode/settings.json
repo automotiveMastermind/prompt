@@ -1,11 +1,15 @@
 {
     "search.exclude": {
-        "**/backup": true
+        "**/backup": true,
+        "**/node_modules/**": true
     },
     "files.exclude": {
         "**/.git": true,
         "**/.DS_Store": true,
-        "**/backup": true
+        "**/backup": true,
+        "**/node_modules/**": true
     },
-    "vsicons.presets.angular": false
+    "editor.trimAutoWhitespace": true,
+    "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": true
 }

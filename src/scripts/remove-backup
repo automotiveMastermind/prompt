@@ -7,6 +7,9 @@ __am-prompt-remove-backup() {
         BACKUP='prompt'
     fi
 
+    local REMOVE_PATH="$AM_HOME/backup/$BACKUP"
+
+    echo "removing path: $REMOVE_PATH..."
     rm -rf "$AM_HOME/backup/$BACKUP" 2>/dev/null
 }
 
