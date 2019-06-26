@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/automotivemastermind/prompt/compare/v6.0.2...v6.1.0) (2019-06-26)
+
+
+### Bug Fixes
+
+* remove invalid scripts ([#21](https://github.com/automotivemastermind/prompt/issues/21)) ([d3a9c60](https://github.com/automotivemastermind/prompt/commit/d3a9c60))
+
+
+### Features
+
+* **aws-install:** add install for aws toolchain ([4989391](https://github.com/automotivemastermind/prompt/commit/4989391))
+
+
+
 ### [6.0.2](https://github.com/automotivemastermind/prompt/compare/v6.0.1...v6.0.2) (2019-06-26)
 
 
