@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 __am-prompt-install-darwin() {
-    local BREWS=(bash openssl git go nvm bash-completion python@3)
+    local BREWS=(bash openssl git go nvm bash-completion python)
 
     if ! type brew 1>/dev/null 2>&1; then
         __am-prompt-success 'installing homebrew...'
@@ -10,6 +10,8 @@ __am-prompt-install-darwin() {
 
     __am-prompt-success 'updating homebrew...'
     brew update
+
+    set +e
 
     for pkg in "${BREWS[@]}"; do
         if brew list -1 | grep -q "^${pkg}\$"; then
@@ -22,6 +24,8 @@ __am-prompt-install-darwin() {
         fi
     done
 
+    set -e
+
     if ! grep "/usr/local/bin/bash" /etc/shells 1>/dev/null 2>&1; then
         __am-prompt-success 'adding updated bash to shells...'
         sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
@@ -33,8 +37,8 @@ __am-prompt-install-darwin() {
     fi
 
     mkdir -p /usr/local/lib 1>/dev/null 2>&1
-    ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/ 1>/dev/null 2>&1
-    ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/ 1>/dev/null 2>&1
+    ln -sf /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/ 1>/dev/null 2>&1
+    ln -sf /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/ 1>/dev/null 2>&1
 
     local NVM_PATH=$(brew --prefix nvm)
 

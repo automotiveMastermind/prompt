@@ -16,7 +16,8 @@ macOS  | Sierra or greater
 ubuntu | 16.04 or greater
 fedora | 29 or greater
 debian | 9 or greater
-centOS | 7 or newer
+centOS | 7 or greater
+mint   | 19 or greater
 
 ## Getting Started
 
