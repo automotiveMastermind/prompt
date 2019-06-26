@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.2.0](https://github.com/automotivemastermind/prompt/compare/v6.0.2...v6.2.0) (2019-06-26)
+
+
+### Bug Fixes
+
+* remove invalid scripts ([#21](https://github.com/automotivemastermind/prompt/issues/21)) ([d3a9c60](https://github.com/automotivemastermind/prompt/commit/d3a9c60))
+
+
+### Build System
+
+* fix deploy docker image ([0d6b18e](https://github.com/automotivemastermind/prompt/commit/0d6b18e))
+* move to circle ci ([#24](https://github.com/automotivemastermind/prompt/issues/24)) ([0b09959](https://github.com/automotivemastermind/prompt/commit/0b09959)), closes [#23](https://github.com/automotivemastermind/prompt/issues/23)
+* run deploy stage without rebuilding on master ([#25](https://github.com/automotivemastermind/prompt/issues/25)) ([c402a9f](https://github.com/automotivemastermind/prompt/commit/c402a9f))
+* set git email/name on deploy task ([95d2825](https://github.com/automotivemastermind/prompt/commit/95d2825))
+
+
+### Features
+
+* **aws-install:** add install for aws toolchain ([4989391](https://github.com/automotivemastermind/prompt/commit/4989391))
+
+
+
 ## [6.1.0](https://github.com/automotivemastermind/prompt/compare/v6.0.2...v6.1.0) (2019-06-26)
 
 
