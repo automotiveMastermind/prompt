@@ -12,7 +12,7 @@ License       | [![License][license-image]][license]
 
 Name   | Version
 -------|------------------
-macOS  | Siera or greater
+macOS  | Sierra or greater
 ubuntu | 16.04 or greater
 fedora | 29 or greater
 debian |
