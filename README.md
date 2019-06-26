@@ -10,17 +10,17 @@ License       | [![License][license-image]][license]
 
 ### Supported Operating Systems
 
-Name   | Version          
+Name   | Version
 -------|------------------
-macOS  | Siera or greater 
-ubuntu | 16.04 or greater 
-fedora | 29 or greater    
-debian |                  
-centOS |                  
+macOS  | Siera or greater
+ubuntu | 16.04 or greater
+fedora | 29 or greater
+debian |
+centOS | 7 or newer
 
 ## Getting Started
 
-### What is promptMastermind?
+### What is promptMastermind
 
 promptMastermind is a prompt for BaSH on *nix distributions that includes a ton of useful functionality, including:
 
@@ -49,7 +49,7 @@ curl -fsSL https://git.io/am-prompt | /usr/bin/env bash
 (Optional) Open the included Monokai theme (currently only supported on macOS):
 
 ``` bash
-themes
+theme
 ```
 
 Updating promptMastermind:
@@ -70,7 +70,7 @@ The backup folder is located at: ```$HOME/.am/prompt/backup/[date]```.
 
 The ```$HOME/.bash_profile``` is also backed up to ```$HOME/.am/prompt/backup/[date]/.bash_profile```.
 
-## Copright and License
+## Copyright and License
 
 &copy; automotiveMastermind and contributors. Distributed under the MIT license. See [LICENSE][] for details.
 
