@@ -10,7 +10,7 @@
   "scripts": {
     "test": "bash install.sh",
     "push": "git push --follow-tags origin master",
-    "version": "standard-version --message \"chore: release %s [no-ci]\"",
+    "version": "standard-version --message \"chore: release %s [skip ci]\"",
     "release": "npm run version && npm run push"
   },
   "keywords": [

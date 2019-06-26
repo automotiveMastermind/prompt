@@ -107,6 +107,11 @@ jobs:
             - "a0:dd:b4:96:be:95:30:89:5e:a4:67:57:98:ba:c2:da"
       - checkout
       - run:
+          name: configure
+          command: |
+            git config user.email $GIT_AUTHOR_EMAIL
+            git config user.name $GIT_AUTHOR_NAME
+      - run:
           name: install
           command: npm install
       - run:
