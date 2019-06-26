@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
 
-if [ -e "/usr/local/share/dotnet" ]; then
-    export PATH="/usr/local/share/dotnet:$PATH"
+if [ -d "/usr/local/share/dotnet" ]; then
+    export DOTNET_ROOT="/usr/local/share/dotnet"
+    export PATH="$DOTNET_ROOT:$PATH"
 fi
 
-if [ -e "$HOME/.dotnet/dotnet" ]; then
-    export PATH="$HOME/.dotnet:$PATH"
+if [ -d "/usr/local/share/dotnet/tools" ]; then
+    export PATH="/usr/local/share/dotnet/tools:$PATH"
+fi
+
+if [ -d "$HOME/.dotnet" ]; then
+    export DOTNET_ROOT="$HOME/.dotnet"
+    export PATH="$DOTNET_ROOT:$PATH"
+fi
+
+if [ -d "$HOME/.dotnet/tools" ]; then
+    export PATH="$HOME/.dotnet/tools:$PATH"
 fi
