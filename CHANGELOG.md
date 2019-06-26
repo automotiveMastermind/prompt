@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.0.2](https://github.com/automotivemastermind/prompt/compare/v6.0.1...v6.0.2) (2019-06-26)
+
+
+### Bug Fixes
+
+* **dotnet:** set paths for global tools ([#19](https://github.com/automotivemastermind/prompt/issues/19)) ([d16a5f2](https://github.com/automotivemastermind/prompt/commit/d16a5f2))
+
+
+
 ### [6.0.1](https://github.com/automotivemastermind/prompt/compare/v6.0.0...v6.0.1) (2019-06-18)
 
 
