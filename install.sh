@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 
@@ -60,7 +64,7 @@ __am-prompt-install() {
 
     if type brew 1>/dev/null 2>&1; then
         local LOCAL_PREFIX=$(brew --prefix)
-    elif [ -d $LOCALAPPDATA/git ]; then
+    elif [ -d ${LOCALAPPDATA:-}/git ]; then
         local LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
     else
         local LOCAL_PREFIX=/usr/local
@@ -68,12 +72,12 @@ __am-prompt-install() {
 
     local BASH_COMPLETION="$LOCAL_PREFIX/etc/bash_completion.d"
     local UNAME=$(uname)
-    local UNAME_INSTALL="./uname/install-$UNAME.sh"
+    local UNAME_INSTALL="$SCRIPT_DIR/uname/install-$UNAME.sh"
 
-    if [ -e /etc/os-release ]; then
+    if [ -f /etc/os-release ]; then
         source /etc/os-release
 
-        local UNAME_INSTALL="./uname/install-$ID.sh"
+        local UNAME_INSTALL="$SCRIPT_DIR/uname/install-$ID.sh"
     fi
 
     if [ -f "$UNAME_INSTALL" ]; then
@@ -98,7 +102,7 @@ __am-prompt-install() {
 
     if [ "$CURL_RESULT" = "200" ]; then
         __am-prompt-success 'successfully installed git-prompt'
-        chmod +x "PROMPT_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null 2>&1
+        chmod +x "$PROMPT_COMPLETION/$GIT_PROMPT_NAME" 1>/dev/null
     fi
 
     local CURL_OPT='-s'

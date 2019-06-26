@@ -32,7 +32,7 @@ __am-prompt-gcloud-install() {
 
         local GCLOUD_PATH_INC="$HOME/.gcloud/path.bash.inc"
 
-        if [ -e "$GCLOUD_PATH_INC" ]; then
+        if [ -f "$GCLOUD_PATH_INC" ]; then
             source "$GCLOUD_PATH_INC"
         fi
     fi

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__am-prompt-install-debian() {
+__am-prompt-install-mint() {
     local PACKAGES=(build-essential curl file git)
 
     __am-prompt-success "updating software repositories..."
@@ -17,4 +17,4 @@ __am-prompt-install-debian() {
     source "$SCRIPT_DIR/uname/install-linux.sh"
 }
 
-__am-prompt-install-debian
+__am-prompt-install-mint

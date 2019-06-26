@@ -1,17 +1,27 @@
 # promptMastermind
 
-> A spectacular (BaSH) prompt for *nix distributions. (Only tested on macOS currently)
+> A spectacular (BaSH) prompt for macOS and *nix distributions
 
 ## Vitals
 
 Info          | Badges
---------------|--------------
+--------------|-------------------------------------
 License       | [![License][license-image]][license]
-Chat          | [![Join Chat][gitter-image]][gitter-url]
+
+### Supported Operating Systems
+
+Name   | Version
+-------|------------------
+macOS  | Sierra or greater
+ubuntu | 16.04 or greater
+fedora | 29 or greater
+debian | 9 or greater
+centOS | 7 or greater
+mint   | 19 or greater
 
 ## Getting Started
 
-### What is promptMastermind?
+### What is promptMastermind
 
 promptMastermind is a prompt for BaSH on *nix distributions that includes a ton of useful functionality, including:
 
@@ -40,7 +50,7 @@ curl -fsSL https://git.io/am-prompt | /usr/bin/env bash
 (Optional) Open the included Monokai theme (currently only supported on macOS):
 
 ``` bash
-themes
+theme
 ```
 
 Updating promptMastermind:
@@ -61,12 +71,9 @@ The backup folder is located at: ```$HOME/.am/prompt/backup/[date]```.
 
 The ```$HOME/.bash_profile``` is also backed up to ```$HOME/.am/prompt/backup/[date]/.bash_profile```.
 
-## Copright and License
+## Copyright and License
 
 &copy; automotiveMastermind and contributors. Distributed under the MIT license. See [LICENSE][] for details.
 
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: LICENSE
-
-[gitter-url]: //gitter.im/automotivemastermind/prompt
-[gitter-image]:https://img.shields.io/badge/⊪%20gitter-join%20chat%20→-1dce73.svg
