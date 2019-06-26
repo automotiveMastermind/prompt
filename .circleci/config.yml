@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 jobs:
   macos:
     macos:
@@ -114,27 +114,38 @@ jobs:
           command: npm run release
 
 workflows:
+  version: 2
   install:
     jobs:
-      - macos
-      - ubuntu
-      - debian
-      - fedora-29
-      - fedora-30
-      - centos
-      - mint
-      - deploy:
-          requires:
-            - macos
-            - ubuntu
-            - debian
-            - fedora-29
-            - fedora-30
-            - centos
-            - mint
+      - macos:
           filters:
-            tags:
-              ignore:
-                - /.*/
+            branches:
+              ignore: master
+      - ubuntu:
+          filters:
+            branches:
+              ignore: master
+      - debian:
+          filters:
+            branches:
+              ignore: master
+      - fedora-29:
+          filters:
+            branches:
+              ignore: master
+      - fedora-30:
+          filters:
+            branches:
+              ignore: master
+      - centos:
+          filters:
+            branches:
+              ignore: master
+      - mint:
+          filters:
+            branches:
+              ignore: master
+      - deploy:
+          filters:
             branches:
               only: master
