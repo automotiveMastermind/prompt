@@ -10,7 +10,7 @@ jobs:
           command: ./install.sh | tee log.txt
       - run:
           name: ensure prompt
-          command: exec -l $SHELL git-sha
+          command: bash -l -c "git sha"
       - store_artifacts:
           path: log.txt
           destination: logs/$CIRCLE_STAGE.txt

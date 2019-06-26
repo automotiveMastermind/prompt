@@ -64,9 +64,9 @@ fi
 
 # system binds for bash completion (for interactive terminals)
 if [ -t 1 ]; then
-    bind "set completion-ignore-case on"     # ignore strict case sensitivity
-    bind "set bell-style none"               # turn off audible alerts
-    bind "set show-all-if-ambiguous on"      # show completion with double tap
+    bind "set completion-ignore-case on" 2>/dev/null     # ignore strict case sensitivity
+    bind "set bell-style none" 2>/dev/null               # turn off audible alerts
+    bind "set show-all-if-ambiguous on" 2>/dev/null      # show completion with double tap
 fi
 
 export AM_HOME="$HOME/.am"
