@@ -100,7 +100,7 @@ jobs:
 
   deploy:
     docker:
-      - image: docker:stable
+      - image: circleci/node:lts
     steps:
       - add_ssh_keys:
           fingerprints:
