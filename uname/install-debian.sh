@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 __am-prompt-install-debian() {
-    local PACKAGES=(build-essential curl file git)
+    local PACKAGES=(build-essential curl file git ruby)
 
     __am-prompt-success "updating software repositories..."
     sudo apt-get update

@@ -1,0 +1,140 @@
+version: 2.1
+jobs:
+  macos:
+    macos:
+      xcode: "10.2.1"
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: ./install.sh | tee log.txt
+      - run:
+          name: ensure prompt
+          command: exec -l $SHELL git-sha
+      - store_artifacts:
+          path: log.txt
+          destination: logs/$CIRCLE_STAGE.txt
+
+  ubuntu:
+    docker:
+      - image: docker:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: install and ensure prompt
+          command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
+      - store_artifacts:
+          path: log.txt
+          destination: logs/$CIRCLE_STAGE.txt
+
+  debian:
+    docker:
+      - image: docker:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: install and ensure prompt
+          command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
+      - store_artifacts:
+          path: log.txt
+          destination: logs/$CIRCLE_STAGE.txt
+
+  fedora-29:
+    docker:
+      - image: docker:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: install and ensure prompt
+          command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
+      - store_artifacts:
+          path: log.txt
+          destination: logs/$CIRCLE_STAGE.txt
+
+  fedora-30:
+    docker:
+      - image: docker:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: install and ensure prompt
+          command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
+      - store_artifacts:
+          path: log.txt
+          destination: logs/$CIRCLE_STAGE.txt
+
+  centos:
+    docker:
+      - image: docker:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: install and ensure prompt
+          command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
+      - store_artifacts:
+          path: log.txt
+          destination: logs/$CIRCLE_STAGE.txt
+
+  mint:
+    docker:
+      - image: docker:stable
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: install and ensure prompt
+          command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
+      - store_artifacts:
+          path: log.txt
+          destination: logs/$CIRCLE_STAGE.txt
+
+  deploy:
+    docker:
+      - image: docker:stable
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "a0:dd:b4:96:be:95:30:89:5e:a4:67:57:98:ba:c2:da"
+      - checkout
+      - run:
+          name: install
+          command: npm install
+      - run:
+          name: release
+          command: npm run release
+
+workflows:
+  install:
+    jobs:
+      - macos
+      - ubuntu
+      - debian
+      - fedora-29
+      - fedora-30
+      - centos
+      - mint
+      - deploy:
+          requires:
+            - macos
+            - ubuntu
+            - debian
+            - fedora-29
+            - fedora-30
+            - centos
+            - mint
+          filters:
+            tags:
+              ignore:
+                - /.*/
+            branches:
+              only: master

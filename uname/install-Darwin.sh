@@ -33,7 +33,7 @@ __am-prompt-install-darwin() {
 
     if [[ "$SHELL" != "/usr/local/bin/bash" ]]; then
         __am-prompt-success 'setting updated bash to default shell for user...'
-        chsh -s /usr/local/bin/bash
+        sudo chsh -s /usr/local/bin/bash $USER
     fi
 
     mkdir -p /usr/local/lib 1>/dev/null 2>&1

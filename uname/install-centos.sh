@@ -2,7 +2,7 @@
 
 __am-prompt-install-centos() {
     local YUM=$(command -v dnf 2>/dev/null || command -v yum)
-    local PACKAGES=(curl file git)
+    local PACKAGES=(curl file git which)
 
     __am-prompt-success "installing development tools..."
     sudo $YUM groupinstall -y "Development Tools"
