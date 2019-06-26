@@ -13,6 +13,8 @@ __am-prompt-install-linux() {
     __am-prompt-success 'updating homebrew...'
     brew update
 
+    set +e
+
     for pkg in "${BREWS[@]}"; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             __am-prompt-success "upgrading: $pkg..."
@@ -23,6 +25,8 @@ __am-prompt-install-linux() {
             brew install $pkg
         fi
     done
+
+    set -e
 
     curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 

@@ -78,11 +78,11 @@ __am-prompt-dotnet-install() {
     mkdir -p /usr/local/share 1>/dev/null 2>&1
     ln -s "$DOTNET_INSTALL_DIR" "/usr/local/share" 1>/dev/null 2>&1
 
-    if [ -e "/usr/local/share/dotnet" ]; then
+    if [ -f "/usr/local/share/dotnet/dotnet" ]; then
         export PATH="/usr/local/share/dotnet:$PATH"
     fi
 
-    if [ -e "$HOME/.dotnet/dotnet" ]; then
+    if [ -f "$HOME/.dotnet/dotnet" ]; then
         export PATH="$HOME/.dotnet:$PATH"
     fi
 

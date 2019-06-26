@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-if [ -e $HOME/.am/prompt/bashrc ]; then
+if [ -f $HOME/.am/prompt/bashrc ]; then
     source $HOME/.am/prompt/bashrc
 fi

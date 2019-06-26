@@ -4,7 +4,7 @@ __am-prompt-source-os() {
     local UNAME=$(uname)
 	local UNAME_PATH="$HOME/.am/prompt/scripts/$UNAME"
 
-    if [ -e /etc/os-release ]; then
+    if [ -f /etc/os-release ]; then
         source /etc/os-release
 
         local UNAME="$ID"
