@@ -15,7 +15,7 @@ Name   | Version
 macOS  | Sierra or greater
 ubuntu | 16.04 or greater
 fedora | 29 or greater
-debian |
+debian | 9 or greater
 centOS | 7 or newer
 
 ## Getting Started
