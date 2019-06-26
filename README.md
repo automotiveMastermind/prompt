@@ -76,6 +76,3 @@ The ```$HOME/.bash_profile``` is also backed up to ```$HOME/.am/prompt/backup/[d
 
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: LICENSE
-
-[gitter-url]: //gitter.im/automotivemastermind/prompt
-[gitter-image]:https://img.shields.io/badge/⊪%20gitter-join%20chat%20→-1dce73.svg
