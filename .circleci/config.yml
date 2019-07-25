@@ -6,10 +6,16 @@ jobs:
     steps:
       - checkout
       - run:
+          name: analyze
+          command: |
+            curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
+            fossa init
+            fossa analyze
+      - run:
           name: install
           command: ./install.sh | tee log.txt
       - run:
-          name: ensure prompt
+          name: verify
           command: bash -l -c "git sha"
       - store_artifacts:
           path: log.txt
@@ -23,7 +29,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -37,7 +43,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -51,7 +57,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -65,7 +71,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -79,7 +85,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -92,7 +98,7 @@ jobs:
       - setup_remote_docker
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt

@@ -1,7 +1,10 @@
 {
   "name": "prompt",
   "version": "6.2.0",
+  "author": "automotiveMastermind",
   "description": "A spectacular (BaSH) prompt for *nix distributions",
+  "license": "MIT",
+  "private": true,
   "main": "install.sh",
   "repository": {
     "type": "git",
@@ -20,16 +23,12 @@
     "linux",
     "macos"
   ],
-  "author": "automotiveMastermind",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/automotivemastermind/prompt/issues"
   },
   "homepage": "https://github.com/automotivemastermind/prompt#readme",
   "devDependencies": {
+    "lodash.template": "^4.5.0",
     "standard-version": "^6.0.1"
-  },
-  "dependencies": {
-    "lodash.template": "^4.5.0"
   }
 }
