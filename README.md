@@ -9,6 +9,7 @@
 Info          | Badges
 --------------|-------------------------------------
 License       | [![License][license-image]][license-uri]
+License Scan  | [![FOSSA Status][fossa-image]][fossa-uri]
 Build         | [![Build][build-image]][build-uri]
 
 ### Supported Operating Systems
@@ -101,3 +102,6 @@ In addition, [circleci][circleci-uri] is used to build all platforms, including 
 [circleci-uri]: https://circleci.com
 
 [preview-image]: https://user-images.githubusercontent.com/1803684/60201230-a8241300-97fc-11e9-8cb6-613cd31d914f.png
+
+[fossa-image]: https://app.fossa.com/api/projects/custom%2B12139%2Fgit%40github.com%3AautomotiveMastermind%2Fprompt.git.svg?type=shield
+[fossa-uri]: https://app.fossa.com/projects/custom%2B12139%2Fgit%40github.com%3AautomotiveMastermind%2Fprompt.git?ref=badge_shield

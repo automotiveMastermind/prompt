@@ -6,10 +6,16 @@ jobs:
     steps:
       - checkout
       - run:
+          name: analyze
+          command: |
+            curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
+            fossa init
+            fossa analyze
+      - run:
           name: install
           command: ./install.sh | tee log.txt
       - run:
-          name: ensure prompt
+          name: verify
           command: bash -l -c "git sha"
       - store_artifacts:
           path: log.txt
@@ -23,7 +29,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -37,7 +43,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -51,7 +57,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -65,7 +71,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -79,7 +85,7 @@ jobs:
           docker_layer_caching: true
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -92,7 +98,7 @@ jobs:
       - setup_remote_docker
       - checkout
       - run:
-          name: install and ensure prompt
+          name: install and verify
           command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
       - store_artifacts:
           path: log.txt
@@ -106,6 +112,10 @@ jobs:
           fingerprints:
             - "a0:dd:b4:96:be:95:30:89:5e:a4:67:57:98:ba:c2:da"
       - checkout
+      - restore_cache:
+          name: restore yarn package cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: configure
           command: |
@@ -113,11 +123,15 @@ jobs:
             git config user.name $GIT_AUTHOR_NAME
       - run:
           name: install
-          command: npm install
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: save yarn package cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
       - run:
           name: release
-          command: npm run release
-
+          command: yarn run release
 workflows:
   version: 2
   install:
