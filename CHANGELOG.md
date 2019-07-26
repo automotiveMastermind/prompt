@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.2.2](https://github.com/automotivemastermind/prompt/compare/v6.2.0...v6.2.2) (2019-07-26)
+
+
+### Build System
+
+* force update of lodash.template ([#27](https://github.com/automotivemastermind/prompt/issues/27)) ([2fe19e5](https://github.com/automotivemastermind/prompt/commit/2fe19e5))
+* resolve security issues in dependencies ([#26](https://github.com/automotivemastermind/prompt/issues/26)) ([74784cb](https://github.com/automotivemastermind/prompt/commit/74784cb))
+
+
+
 ## [6.2.0](https://github.com/automotivemastermind/prompt/compare/v6.0.2...v6.2.0) (2019-06-26)
 
 
