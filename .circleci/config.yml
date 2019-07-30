@@ -9,7 +9,6 @@ jobs:
           name: analyze
           command: |
             curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
-            fossa init
             fossa test
       - run:
           name: install
@@ -125,7 +124,6 @@ jobs:
           name: analyze
           command: |
             curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
-            fossa init
             fossa analyze
       - run:
           name: install
