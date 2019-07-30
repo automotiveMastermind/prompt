@@ -10,7 +10,7 @@ jobs:
           command: |
             curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
             fossa init
-            fossa analyze
+            fossa test
       - run:
           name: install
           command: ./install.sh | tee log.txt
@@ -121,6 +121,12 @@ jobs:
           command: |
             git config user.email $GIT_AUTHOR_EMAIL
             git config user.name $GIT_AUTHOR_NAME
+      - run:
+          name: analyze
+          command: |
+            curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
+            fossa init
+            fossa analyze
       - run:
           name: install
           command: yarn install --frozen-lockfile
