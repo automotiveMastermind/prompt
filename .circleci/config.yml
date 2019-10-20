@@ -25,8 +25,7 @@ jobs:
     docker:
       - image: docker:stable
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - checkout
       - run:
           name: install and verify
@@ -39,8 +38,7 @@ jobs:
     docker:
       - image: docker:stable
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - checkout
       - run:
           name: install and verify
@@ -53,8 +51,7 @@ jobs:
     docker:
       - image: docker:stable
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - checkout
       - run:
           name: install and verify
@@ -67,8 +64,7 @@ jobs:
     docker:
       - image: docker:stable
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - checkout
       - run:
           name: install and verify
@@ -81,8 +77,7 @@ jobs:
     docker:
       - image: docker:stable
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - checkout
       - run:
           name: install and verify
