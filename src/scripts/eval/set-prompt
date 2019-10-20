@@ -27,22 +27,6 @@ __am-prompt-emit-prompt-arrow() {
 }
 
 __am-prompt-set-prompt() {
-    if type gulp 1>/dev/null 2>&1; then
-        eval "$(gulp --completion=bash)" 1>/dev/null 2>&1;
-    fi
-
-    if type grunt 1>/dev/null 2>&1; then
-        eval "$(grunt --completion=bash)" 1>/dev/null 2>&1;
-    fi
-
-    if type kubectl 1>/dev/null 2>&1; then
-        eval "$(kubectl completion bash)" 1>/dev/null 2>&1;
-    fi
-
-    if type helm 1>/dev/null 2>&1; then
-        eval "$(helm completion bash)" 1>/dev/null 2>&1;
-    fi
-
     if [ -f "$LOCAL_PREFIX/etc/bash_completion" ]; then
         source "$LOCAL_PREFIX/etc/bash_completion"
     elif [ -f /etc/bash_completion ]; then
@@ -67,15 +51,6 @@ __am-prompt-set-prompt() {
     fi
 }
 
-__am-prompt-dotnet_bash_complete() {
-  local WORD=${COMP_WORDS[COMP_CWORD]}
-  local DOTNET_PATH=${COMP_WORDS[1]}
-
-  local COMPLETIONS=("$(dotnet complete --position ${COMP_POINT} "${COMP_LINE}")")
-
-  COMPREPLY=( $(compgen -W "$COMPLETIONS" -- "$WORD") )
-}
-
 __am-prompt-set-nvm() {
     NVM_PATH=$(brew --prefix nvm 2>/dev/null)
 
@@ -93,4 +68,3 @@ __am-prompt-set-nvm() {
 __am-prompt-set-prompt
 __am-prompt-set-nvm
 
-complete -f -F __am-prompt-dotnet_bash_complete dotnet
