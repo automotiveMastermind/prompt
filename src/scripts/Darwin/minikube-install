@@ -7,9 +7,13 @@ minikube config set vm-driver hyperkit
 minikube config set cpus 4
 minikube config set memory 4096
 minikube config set bootstrapper kubeadm
-minikube config set dashboard true
-minikube config set heapster true
-minikube config set ingress false
 
 # enable all the things
 minikube start --extra-config=apiserver.enable-admission-plugins="Initializers,NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,NodeRestriction,ResourceQuota,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,PodSecurityPolicy"
+
+# enable the dashboard and heapter
+minikube config set dashboard true
+minikube config set heapster true
+
+# make sure ingress is off
+minikube config set ingress false
