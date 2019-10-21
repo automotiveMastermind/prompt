@@ -4,7 +4,7 @@ brew cask install minikube 1>/dev/null 2>&1
 brew install hyperkit 1>/dev/null 2>&1
 
 minikube config set vm-driver hyperkit
-minikube config set cpu 4
+minikube config set cpus 4
 minikube config set memory 4096
 minikube config set bootstrapper kubeadm
 minikube config set dashboard true
