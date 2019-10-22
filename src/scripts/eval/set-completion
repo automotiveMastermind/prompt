@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+if type gulp 1>/dev/null 2>&1; then
+    eval "$(gulp --completion=bash)" 1>/dev/null 2>&1;
+fi
+
+if type grunt 1>/dev/null 2>&1; then
+    eval "$(grunt --completion=bash)" 1>/dev/null 2>&1;
+fi
+
+if type kubectl 1>/dev/null 2>&1; then
+    eval "$(kubectl completion bash)" 1>/dev/null 2>&1;
+fi
+
+if type helm 1>/dev/null 2>&1; then
+    eval "$(helm completion bash)" 1>/dev/null 2>&1;
+fi
+
+if type minikube 1>/dev/null 2>&1; then
+    eval "$(minikube completion bash)" 1>/dev/null 2>&1;
+fi
+
+__am-prompt-dotnet_bash_complete() {
+  local WORD=${COMP_WORDS[COMP_CWORD]}
+  local DOTNET_PATH=${COMP_WORDS[1]}
+
+  local COMPLETIONS=("$(dotnet complete --position ${COMP_POINT} "${COMP_LINE}")")
+
+  COMPREPLY=( $(compgen -W "$COMPLETIONS" -- "$WORD") )
+}
+
+complete -f -F __am-prompt-dotnet_bash_complete dotnet
