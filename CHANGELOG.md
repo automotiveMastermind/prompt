@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.3.0](https://github.com/automotivemastermind/prompt/compare/v6.2.2...v6.3.0) (2019-10-22)
+
+
+### Features
+
+* add minikube install for macos ([#30](https://github.com/automotivemastermind/prompt/issues/30)) ([ff39175](https://github.com/automotivemastermind/prompt/commit/ff39175))
+
+
+
 ### [6.2.2](https://github.com/automotivemastermind/prompt/compare/v6.2.0...v6.2.2) (2019-07-26)
 
 
