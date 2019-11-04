@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# install the hypervisor
+sudo apt-get install -y qemu-kvm libvirt-clients libvirt-daemon-system
+sudo adduser `id -un` libvirt
+
+# install minikube
+brew install minikube
+
+# set the vm-driver
+minikube config set vm-driver kvm2
+
+# setup minikube
+minikube-setup
