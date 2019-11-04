@@ -7,6 +7,14 @@ minikube config set vm-driver hyperkit
 minikube config set cpus 4
 minikube config set memory 4096
 minikube config set bootstrapper kubeadm
+minikube config set kubernetes-version 1.15.5
+
+# enable the dashboard and heapter
+minikube config set dashboard true
+minikube config set heapster true
+
+# make sure ingress is off
+minikube config set ingress false
 
 # detect missing psp
 if [ ! -f "$HOME/.minikube/addons/psp.yaml" ]; then
@@ -15,15 +23,5 @@ if [ ! -f "$HOME/.minikube/addons/psp.yaml" ]; then
     cat $HOME/.am/prompt/scripts/Darwin/psp.yaml > $HOME/.minikube/addons/psp.yaml
 fi
 
-# enable all the things
-minikube start \
-    --kubernetes-version=1.15.5 \
-    --extra-config=apiserver.authorization-mode=RBAC \
-    --extra-config=apiserver.enable-admission-plugins="PodSecurityPolicy"
-
-# enable the dashboard and heapter
-minikube config set dashboard true
-minikube config set heapster true
-
-# make sure ingress is off
-minikube config set ingress false
+# start minikube
+minikube-start
