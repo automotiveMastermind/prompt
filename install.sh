@@ -78,7 +78,7 @@ __am-prompt-install() {
     fi
 
     local BASH_COMPLETION="$LOCAL_PREFIX/etc/bash_completion.d"
-    local UNAME=$(uname)
+    local UNAME=$(uname | tr [:upper:] [:lower:])
     local UNAME_INSTALL="$SCRIPT_DIR/uname/install-$UNAME.sh"
 
     if [ -f /etc/os-release ]; then
