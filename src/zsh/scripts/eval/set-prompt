@@ -1,0 +1,42 @@
+#!/usr/bin/env zsh
+
+__am_prompt_emit_prompt_arrow() {
+
+    # set the default color
+    local CLR_PROMPT=$CLR_USER_PROMPT
+
+    # set color for staff user (administrator)
+    if [ ! -z "$(command id -Gn 2>/dev/null | grep -s -o admin)" ]; then
+        CLR_PROMPT=$CLR_STAFF_PROMPT
+    fi
+
+    # set color for root user
+    if [ $(id -u) = 0 ]; then
+        CLR_PROMPT=$CLR_ROOT_PROMPT
+    fi
+
+    # set the color for an ssh session
+    if [ ! -z "${SSH_CONNECTION:-}" ]; then
+        CLR_PROMPT=$CLR_SSH_PROMPT
+
+        # emit the prompt using the correct color
+        export AM_PROMPT_ARROW="${CLR_PROMPT} (ssh) ${AM_PROMPT_MARKER:-==>} ${CLR_CLEAR_PROMPT}"
+    else
+        # emit the prompt using the correct color
+        export AM_PROMPT_ARROW="${CLR_PROMPT} ${AM_PROMPT_MARKER:-==>} ${CLR_CLEAR_PROMPT}"
+    fi
+}
+
+__am_prompt_set_prompt() {
+    # set the window title
+    echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
+
+    local NEWLINE=$'\n'
+    __posh_git_ps1 "${NEWLINE}%n@%m : %~${NEWLINE}" " $AM_PROMPT_ARROW"
+}
+
+# set up the arrow
+__am_prompt_emit_prompt_arrow
+
+# set the prompt command
+precmd_functions=(__am_prompt_set_prompt)

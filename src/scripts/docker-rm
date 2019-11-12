@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null

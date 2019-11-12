@@ -11,5 +11,17 @@
     },
     "editor.trimAutoWhitespace": true,
     "editor.formatOnSave": true,
-    "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true,
+    "cSpell.words": [
+        "dnvm",
+        "gcloud",
+        "keychain",
+        "macos",
+        "minikube",
+        "repos",
+        "symlink",
+        "toolchain",
+        "xcode",
+        "xplat"
+    ]
 }

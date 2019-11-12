@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
-if [ -f $HOME/.am/prompt/bashrc ]; then
-    source $HOME/.am/prompt/bashrc
+# determine if bash exists
+if [ -f "$HOME/.bashrc" ]; then
+
+    # load bash
+    source "$HOME/.bashrc"
 fi

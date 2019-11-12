@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-# start minikube with rbac and psp
-minikube start \
-    --extra-config=apiserver.authorization-mode=RBAC \
-    --extra-config=apiserver.enable-admission-plugins="PodSecurityPolicy"

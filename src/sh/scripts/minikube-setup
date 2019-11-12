@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+minikube config set cpus 4
+minikube config set memory 4096
+minikube config set bootstrapper kubeadm
+minikube config set kubernetes-version 1.15.5
+
+# enable the dashboard and metrics server
+minikube config set dashboard true
+minikube config set metrics-server true
+minikube config set heapster false
+
+# make sure ingress is off
+minikube config set ingress false
+
+# detect missing psp
+if [ ! -f "$HOME/.minikube/addons/psp.yaml" ]; then
+
+    # get default pod security policy
+    curl -L https://github.com/kubernetes/minikube/files/3065532/psp.txt -o $HOME/.minikube/addons/psp.yaml
+fi
+
+# start minikube
+minikube-start

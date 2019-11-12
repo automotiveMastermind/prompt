@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+
+if [ -d /Applications/Docker.app/Contents/Resources/etc ]; then
+
+    local DOCKER_PATH=/Applications/Docker.app/Contents/Resources/etc
+
+elif [ -d "$HOME/Applications/Docker.app/Contents/Resources/etc" ]; then
+
+    local DOCKER_PATH="$HOME/Applications/Docker.app/Contents/Resources/etc"
+fi
+
+if [ ! -z "${DOCKER_PATH:-}" ]; then
+
+    # enable short option stacking for docker
+    zstyle ':completion:*:*:docker:*' option-stacking yes
+    zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+    # add completion for docker
+    if [ ! -f "${ZSH_COMPLETION_DIR}/_docker" ]; then
+        ln -s $DOCKER_PATH/docker.zsh-completion $ZSH_COMPLETION_DIR/_docker
+        . $ZSH_COMPLETION_DIR/_docker
+    fi
+
+    # add completion for docker-machine
+    if [ ! -f "${ZSH_COMPLETION_DIR}/_docker-machine" ]; then
+        ln -s $DOCKER_PATH/docker-machine.zsh-completion $ZSH_COMPLETION_DIR/_docker-machine
+        . $ZSH_COMPLETION_DIR/_docker-machine
+    fi
+
+    # add completion for docker-compose
+    if [ ! -f "${ZSH_COMPLETION_DIR}/_docker-compose" ]; then
+        ln -s $DOCKER_PATH/docker-compose.zsh-completion $ZSH_COMPLETION_DIR/_docker-compose
+        . $ZSH_COMPLETION_DIR/_docker-compose
+    fi
+fi

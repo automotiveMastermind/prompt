@@ -1,0 +1,57 @@
+#! /usr/bin/env sh
+
+__am_prompt_use_shell() {
+
+    local PROMPT_SHELL=$1
+    local ECHO=${ECHO:-"echo"}
+
+    if [ -z "${PROMPT_SHELL:-}" ]; then
+        echo "${CLR_FAIL}You must specify a shell to use, either bash or zsh.${CLR_CLEAR}"
+        exit 1
+    fi
+
+    if type brew 1>/dev/null 2>&1; then
+        local LOCAL_PREFIX=$(brew --prefix)
+    elif [ -d $LOCALAPPDATA/git ]; then
+        local LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
+    else
+        local LOCAL_PREFIX=/usr/local
+    fi
+
+    local PROMPT_SHELL_PATH="$LOCAL_PREFIX/bin/$PROMPT_SHELL"
+    local UNAME=$(uname | tr '[:upper:]' '[:lower:]')
+    local UNAME_INSTALL="$UNAME.sh"
+
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+
+        local UNAME_INSTALL="$ID.sh"
+    fi
+
+    if [ -f "$AM_PROMPT/$PROMPT_SHELL/install/$UNAME_INSTALL" ]; then
+        . "$AM_PROMPT/$PROMPT_SHELL/install/$UNAME_INSTALL"
+    fi
+
+    if ! grep "$PROMPT_SHELL_PATH" /etc/shells 1>/dev/null 2>&1; then
+        echo "${CLR_SUCCESS}adding updated $PROMPT_SHELL to shells...${CLR_CLEAR}"
+        sudo sh -c "echo $PROMPT_SHELL_PATH >> /etc/shells"
+    fi
+
+    if [ "$SHELL" != "$PROMPT_SHELL_PATH" ]; then
+        echo "${CLR_SUCCESS}setting updated $PROMPT_SHELL to default shell for user...${CLR_CLEAR}"
+        sudo chsh -s $PROMPT_SHELL_PATH $USER
+
+        # set the default shell for the current session
+        export SHELL="$PROMPT_SHELL_PATH"
+    fi
+
+    echo "${CLR_SUCCESS}"
+    echo "##############################################################################"
+    echo "##############################################################################"
+    echo "     PLEASE RUN: exec -l \$SHELL # ($SHELL)"
+    echo "##############################################################################"
+    echo "##############################################################################"
+    echo "${CLR_CLEAR}"
+}
+
+__am_prompt_use_shell $@

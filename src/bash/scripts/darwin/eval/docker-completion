@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+if [ -d /Applications/Docker.app/Contents/Resources/etc ]; then
+    local DOCKER_PATH=/Applications/Docker.app/Contents/Resources/etc
+elif [ -d "$HOME/Applications/Docker.app/Contents/Resources/etc" ]; then
+    local DOCKER_PATH="$HOME/Applications/Docker.app/Contents/Resources/etc"
+fi
+
+if [ ! -z "${DOCKER_PATH:-}" ]; then
+    . "$DOCKER_PATH/docker.bash-completion"
+    . "$DOCKER_PATH/docker-machine.bash-completion"
+    . "$DOCKER_PATH/docker-compose.bash-completion"
+fi

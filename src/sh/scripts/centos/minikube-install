@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# install the hypervisor
+sudo yum install -y qemu-kvm libvirt libvirt-python libguestfs-tools virt-install
+systemctl enable libvirtd
+systemctl start libvirtd
+
+# set the vm-driver
+minikube config set vm-driver kvm2
+
+# setup minikube
+minikube-setup

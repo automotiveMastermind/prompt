@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-open $HOME/.am/prompt/themes/terminal/Monokai.terminal

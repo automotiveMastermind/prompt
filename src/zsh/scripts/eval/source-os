@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+
+__am_prompt_source_os() {
+
+    local UNAME=$(uname | tr '[:upper:]' '[:lower:]')
+	local UNAME_PATH="$HOME/.am/prompt/zsh/scripts/$UNAME"
+
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+
+        local UNAME="$ID"
+        local UNAME_PATH="$HOME/.am/prompt/zsh/scripts/$UNAME"
+    fi
+
+	if [ -d "$UNAME_PATH" ]; then
+        export PATH="$UNAME_PATH:$PATH"
+	fi
+
+    if [ -d "$UNAME_PATH/eval" ]; then
+		for EVAL_SCRIPT in $UNAME_PATH/eval/*; do
+			. "$EVAL_SCRIPT"
+		done
+    fi
+
+    export AM_PROMPT_OS=$UNAME
+}
+
+__am_prompt_source_os

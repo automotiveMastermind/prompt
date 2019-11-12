@@ -1,0 +1,53 @@
+#!/usr/bin/env zsh
+
+# use case sensitive match followed by case-insensitive match
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+if type gulp 1>/dev/null 2>&1; then
+    . <(gulp --completion=zsh)
+fi
+
+if type grunt 1>/dev/null 2>&1; then
+    . <(grunt --completion=zsh)
+fi
+
+if type kubectl 1>/dev/null 2>&1; then
+    . <(kubectl completion zsh)
+fi
+
+if type helm 1>/dev/null 2>&1; then
+    . <(helm completion zsh)
+fi
+
+if type minikube 1>/dev/null 2>&1; then
+    . <(minikube completion zsh)
+fi
+
+if type nvm 1>/dev/null 2>&1; then
+    . <(npm completion)
+fi
+
+__am_prompt_dotnet_zsh_complete()
+{
+  local COMPLETIONS=("$(dotnet complete "$WORDS")")
+
+  reply=( "${(ps:\n:)COMPLETIONS}" )
+}
+
+if type dotnet 1>/dev/null 2>&1; then
+    compctl -K __am_prompt_dotnet_zsh_complete dotnet
+fi
+
+# determine if completions exist
+if [ ! -d "$AM_PROMPT/zsh/completions" ]; then
+
+    # move on immediately
+    return
+fi
+
+# iterate over each completion
+for AM_COMPLETION in $AM_PROMPT/zsh/completions/*; do
+
+    # source the completion
+    . "$AM_COMPLETION"
+done

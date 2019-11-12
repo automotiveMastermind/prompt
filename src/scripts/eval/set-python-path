@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
-
-if [ -f $PYTHON ]; then
-    USER_BASE_PATH=$($PYTHON -m site --user-base)
-    export PATH=$PATH:$USER_BASE_PATH/bin
-fi

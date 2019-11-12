@@ -1,0 +1,97 @@
+#!/usr/bin/env sh
+
+__am_prompt_safe_exec() {
+    local CMD=$1
+    shift
+
+    $CMD "$@" 2>&1
+
+    local EXIT_CODE=$?
+
+    if [ $EXIT_CODE -ne 0 ]; then
+        return $EXIT_CODE
+    fi
+}
+
+__am_prompt_dotnet_install() {
+
+    local DOTNET_RESET=0
+    local DOTNET_CHANNELS=''
+    local DOTNET_VERSIONS=''
+
+    # continue testing for arguments
+    while :; do
+        case $1 in
+            --reset|--clean)
+                DOTNET_RESET=1
+                ;;
+            --channel)
+                shift
+                DOTNET_CHANNELS="$DOTNET_CHANNELS $1"
+                ;;
+            --version)
+                shift
+                DOTNET_VERSIONS="$DOTNET_VERSIONS $1"
+                ;;
+            --)
+                shift
+                break
+                ;;
+            ?*)
+                export DOTNET_INSTALL_DIR=$1
+                break
+                ;;
+            *)
+                break
+                ;;
+        esac
+        shift
+    done
+
+    if [ -z ${DOTNET_INSTALL_DIR:-} ]; then
+        export DOTNET_INSTALL_DIR="$HOME/.dotnet"
+    fi
+
+    if [ -z "${DOTNET_CHANNELS:-}" ]; then
+        DOTNET_CHANNELS='Current'
+    fi
+
+    if [ "$DOTNET_RESET" = '1' ]; then
+        rm -rf "$DOTNET_INSTALL_DIR"
+    fi
+
+    if [ ! -d "$DOTNET_INSTALL_DIR" ]; then
+        mkdir -p "$DOTNET_INSTALL_DIR"
+    fi
+
+    local DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
+
+    local DOTNET_URI='https://dot.net/v1/dotnet-install.sh'
+
+    curl -fSsL $DOTNET_URI -o "$DOTNET_INSTALL_SH" 1>/dev/null 2>&1
+    __am_prompt_safe_exec chmod +x "$DOTNET_INSTALL_SH"
+
+    for DOTNET_VERSION in $DOTNET_VERSIONS; do
+        __am_prompt_safe_exec "$DOTNET_INSTALL_SH" __version $DOTNET_VERSION
+    done
+
+    for DOTNET_CHANNEL in $DOTNET_CHANNELS; do
+        __am_prompt_safe_exec "$DOTNET_INSTALL_SH" __channel $DOTNET_CHANNEL
+    done
+
+    mkdir -p /usr/local/share 1>/dev/null 2>&1
+    ln -s "$DOTNET_INSTALL_DIR" "/usr/local/share" 1>/dev/null 2>&1
+
+    if [ -f "/usr/local/share/dotnet/dotnet" ]; then
+        export PATH="/usr/local/share/dotnet:$PATH"
+    fi
+
+    if [ -f "$HOME/.dotnet/dotnet" ]; then
+        export PATH="$HOME/.dotnet:$PATH"
+    fi
+
+    echo 'building dotnet cache... (this may take a few minutes)'
+    dotnet help
+}
+
+__am_prompt_dotnet_install $@

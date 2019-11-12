@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-# setup the hypervisor
-brew install hyperkit
-minikube config set vm-driver hyperkit
-
-# setup minikube
-minikube-setup
