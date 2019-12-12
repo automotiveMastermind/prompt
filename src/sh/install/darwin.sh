@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 __am_prompt_install_darwin() {
-    local BREWS=(openssl git go nvm python)
+    local BREWS='openssl git go nvm python'
 
     if ! type brew 1>/dev/null 2>&1; then
         $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
@@ -13,7 +13,7 @@ __am_prompt_install_darwin() {
 
     set +e
 
-    for pkg in "${BREWS[@]}"; do
+    for pkg in $BREWS; do
         if brew list -1 | grep -q "^${pkg}\$"; then
             $ECHO "${CLR_SUCCESS}upgrading: $pkg...${CLR_CLEAR}"
             brew upgrade $pkg 2>/dev/null

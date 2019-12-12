@@ -117,7 +117,7 @@ __am_prompt_install() {
 
     # install fira code
     brew tap homebrew/cask-fonts 1>/dev/null 2>&1
-    brew install font-fira-code 1>/dev/null 2>&1
+    brew cask install font-fira-code 1>/dev/null 2>&1
 
     local SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"
     local PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
