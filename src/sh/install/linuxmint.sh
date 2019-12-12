@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
 __am_prompt_install_mint() {
-    local PACKAGES=(build-essential curl file git)
+    local PACKAGES='build-essential curl file git'
 
     $ECHO "${CLR_SUCCESS}updating software repositories...${CLR_CLEAR}"
     sudo apt-get update
 
-    for pkg in "${PACKAGES[@]}"; do
+    for pkg in $PACKAGES; do
         $ECHO "${CLR_SUCCESS}installing $pkg...${CLR_CLEAR}"
         sudo apt-get install -y ${pkg}
     done
