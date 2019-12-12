@@ -23,30 +23,30 @@ __am_prompt_set_gcloud_path() {
     local GCLOUD_COMPLETION_INC="$GCLOUD_DIR/completion.bash.inc"
 
     # detect the gcloud path
-    if [ ! -f "$ZSH_COMPLETION_DIR/_gcloud-path" ]; then
+    if [ ! -f "$BASH_COMPLETION_DIR/_gcloud-path" ]; then
 
         # detect gcloud path completion
         if [ -f "$GCLOUD_PATH_INC" ]; then
 
             # link the gcloud path to the completion dir
-            ln -s $GCLOUD_PATH_INC "$ZSH_COMPLETION_DIR/_gcloud-path"
+            ln -s $GCLOUD_PATH_INC "$BASH_COMPLETION_DIR/_gcloud-path"
 
             # source the path
-            . "$ZSH_COMPLETION_DIR/_gcloud-path"
+            . "$BASH_COMPLETION_DIR/_gcloud-path"
         fi
     fi
 
     # detect the gcloud completion path
-    if [ ! -f "$ZSH_COMPLETION_DIR/_gcloud-completion" ]; then
+    if [ ! -f "$BASH_COMPLETION_DIR/_gcloud-completion" ]; then
 
         # detect gcloud command completion
         if [ -f "$GCLOUD_COMPLETION_INC" ]; then
 
             # link the gcloud completion to the completion dir
-            ln -s $GCLOUD_COMPLETION_INC "$ZSH_COMPLETION_DIR/_gcloud-completion"
+            ln -s $GCLOUD_COMPLETION_INC "$BASH_COMPLETION_DIR/_gcloud-completion"
 
             # source the path
-            . "$ZSH_COMPLETION_DIR/_gcloud-completion"
+            . "$BASH_COMPLETION_DIR/_gcloud-completion"
         fi
     fi
 }
