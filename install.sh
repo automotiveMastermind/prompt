@@ -115,10 +115,6 @@ __am_prompt_install() {
         local CURL_OPT="$CURL_OPT -H 'Authorization: token $GH_TOKEN'"
     fi
 
-    # install fira code
-    brew tap homebrew/cask-fonts 1>/dev/null 2>&1
-    brew cask install font-fira-code 1>/dev/null 2>&1
-
     local SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"
     local PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
     local PROMPT_SHA_PATH=$HOME/.am/prompt/.sha
