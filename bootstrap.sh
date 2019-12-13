@@ -2,7 +2,7 @@
 
 set -e
 
-function __am_prompt_update()
+__am_prompt_update()
 {
     local CLR_FAIL=${CLR_FAIL:-"\033[1;31m"}        # BRIGHT RED
     local CLR_SUCCESS=${CLR_SUCCESS:-"\033[1;32m"}  # BRIGHT GREEN

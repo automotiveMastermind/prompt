@@ -39,7 +39,7 @@ including:
 * Display of available colors (already set as variables for use elsewhere)
 * ... and much more!
 
-Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing
+Note: All "extensions" are implemented as scripts added to the path, so it should not interfere with existing
 customization (aside from the prompt).
 
 ### Use It
