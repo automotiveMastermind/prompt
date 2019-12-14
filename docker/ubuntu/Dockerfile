@@ -24,6 +24,9 @@ COPY . ./
 RUN set -ex; \
     ./install.sh bash
 
+# force the docker shell to bash
+SHELL ["/home/linuxbrew/.linuxbrew/bin/bash", "-c"]
+
 # smoke test bash
 RUN echo "$SHELL" | grep "/home/linuxbrew/.linuxbrew/bin/bash";
 
