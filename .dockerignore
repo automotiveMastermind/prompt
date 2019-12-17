@@ -3,3 +3,10 @@
 
 artifacts/
 node_modules/
+docker/
+
+*.md
+*.lock
+*.json
+CODEOWNERS
+LICENSE

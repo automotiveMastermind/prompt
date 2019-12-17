@@ -1,6 +1,6 @@
 # promptMastermind
 
-> A spectacular (BaSH) prompt for macOS and *nix distributions
+> A spectacular shell prompt for macOS and *nix distributions
 
 ![Preview][preview-image]
 
@@ -25,12 +25,13 @@ mint   | 19 or greater
 
 ## Know It
 
-promptMastermind is a prompt for BaSH on *nix distributions that includes a ton of useful functionality, including:
+promptMastermind is a prompt for sh, bash, and zsh on *nix distributions that includes a ton of useful functionality,
+including:
 
 * A two-line prompt that displays username, hostname, and current path
 * Git prompt support (that emits information about the current branch and status when in a git path)
-* Better BaSH completion for git and git-flow
-* Installation of dotnet-cli
+* Better tab completion for git and git-flow
+* Installation of dotnet sdk, aws sdk, and gcloud sdk
 * Bookmarking support (cdable variables)
 * Variables support (add vars without modifying profile)
 * Flush DNS (on macOS)
@@ -38,44 +39,73 @@ promptMastermind is a prompt for BaSH on *nix distributions that includes a ton 
 * Display of available colors (already set as variables for use elsewhere)
 * ... and much more!
 
-Note: All "extensions" are implemented as sourced function calls, so it should not interfere with existing
+Note: All "extensions" are implemented as scripts added to the path, so it should not interfere with existing
 customization (aside from the prompt).
 
 ### Use It
 
-Install promptMastermind in one step:
+Install promptMastermind in one step (choose one of the following options):
 
-``` bash
-curl -fsSL https://git.io/am-prompt | /usr/bin/env bash
+``` sh
+# install and use bash
+curl -fsSL https://git.io/am-prompt | sh -s -- bash
+
+# install and use zsh
+curl -fsSL https://git.io/am-prompt | sh -s -- zsh
 ```
 
-(Optional) Open the included Monokai theme (currently only supported on macOS):
+> NOTE: if you do not specify a shell, bash will be used by default
 
-``` bash
-theme
+#### Specific Versions
+
+Although it is **NOT** recommended, you can install a specific version of prompt using one of the following:
+
+``` sh
+# install and use bash with prompt v6.0.0
+curl -fsSL https://git.io/am-prompt | sh -s -- --version v7.0.0 bash
+
+# install and use zsh with prompt v7.0.0
+curl -fsSL https://git.io/am-prompt | sh -s -- --version v7.0.0 zsh
+```
+
+All available versions of prompt are available here: https://github.com/automotiveMastermind/prompt/releases
+
+> NOTE: zsh is only available as of v7.0.0 -- older versions of prompt only support bash
+
+(Optional) Open an included theme (currently only supported on macOS):
+
+``` sh
+theme monokai # general high quality theme that has been around for many years
+```
+
+OR
+
+```sh
+theme dark-mode # our own custom theme that is nice and bright for dark mode on macOS
 ```
 
 Updating promptMastermind:
 
-``` bash
+``` sh
 update-prompt
 ```
 
-If you already have the latest version of prompt installed, the ```update-prompt``` command will not re-install the
+If you already have the latest version of prompt installed, the `update-prompt` command will not re-install the
 current version.
 
 **NOTE**: The installer simply creates a new folder (.am) under the home folder and copies all of the files
 there. It will backup this folder first. It wires up the "extensions" by adding a source command for
-```$HOME/.am/prompt/bashrc``` to ```$HOME/.bash_profile```. It will not duplicate itself, so you can re-run the
-installer or use the ```upgrade-prompt``` command to upgrade at any time.
+`$HOME/.am/prompt/bashrc` to `$HOME/.bash_profile`. It will not duplicate itself, so you can re-run the
+installer or use the `upgrade-prompt` command to upgrade at any time.
 
-The backup folder is located at: ```$HOME/.am/prompt/backup/[date]```.
+The backup folder is located at: `$HOME/.am/backup/prompt/[date]`.
 
-The ```$HOME/.bash_profile``` is also backed up to ```$HOME/.am/prompt/backup/[date]/.bash_profile```.
+All profile and rc scripts such as `$HOME/.bash_profile` are also backed up to `$HOME/.am/backup/prompt/[date]/`.
 
 ## Build It
 
-In order to test the installation routine for promptMastermind, we use a set of docker images for each of the supported *nix platforms. The build script in the `docker/` folder can be used to build all of the images, or specific ones:
+In order to test the installation routine for promptMastermind, we use a set of docker images for each of the supported
+*nix platforms. The build script in the `docker/` folder can be used to build all of the images, or specific ones:
 
 ```sh
 # build all of the platforms (this will take a while)
@@ -88,7 +118,8 @@ In order to test the installation routine for promptMastermind, we use a set of 
 ./docker/build.sh mint
 ```
 
-In addition, [circleci][circleci-uri] is used to build all platforms, including macOS as part of our pull request validation. Special thanks to [circleci][circleci-uri] for providing the build agents!
+In addition, [circleci][circleci-uri] is used to build all platforms, including macOS as part of our pull request
+validation. Special thanks to [circleci][circleci-uri] for providing the build agents!
 
 ## Copyright and License
 

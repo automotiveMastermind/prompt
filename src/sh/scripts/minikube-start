@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# start minikube with rbac, psp, and token request projection
+minikube start \
+    --extra-config=apiserver.authorization-mode=RBAC \
+    --extra-config=apiserver.enable-admission-plugins='PodSecurityPolicy' \
+    --extra-config=apiserver.service-account-issuer=api \
+    --extra-config=apiserver.service-account-signing-key-file=/var/lib/minikube/certs/sa.key \
+    --extra-config=apiserver.service-account-key-file=/var/lib/minikube/certs/sa.pub \
+    --extra-config=apiserver.service-account-api-audiences=api

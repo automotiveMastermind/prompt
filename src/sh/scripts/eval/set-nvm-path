@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+NVM_PATH=$(brew --prefix nvm 2>/dev/null)
+
+if [ ! -d ${NVM_PATH} ]; then
+    NVM_PATH=$HOME/.nvm
+fi
+
+if [ -f "$NVM_PATH/nvm.sh" ]; then
+    export NVM_DIR="${HOME}/.nvm"
+    . "$NVM_PATH/nvm.sh"
+fi

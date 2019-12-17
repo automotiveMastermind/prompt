@@ -1,0 +1,44 @@
+#!/usr/bin/env sh
+
+__am_prompt_remove_bookmark_usage() {
+    echo 'remove-bookmark <name>'
+    echo '     name  : the name or path of your bookmark'
+}
+
+__am_prompt_remove_bookmark() {
+    local BOOKMARK=$1
+    local USER_PATH="$AM_HOME/user"
+    local ROW=
+
+    if [ -z "${BOOKMARK:-}" ]; then
+        __am_prompt_remove_bookmark_usage
+        return 1
+    fi
+
+    ROW=$(grep -s -m 1 ^$BOOKMARK "$USER_PATH/bookmarks")
+
+    if [ -z "${row:-}" ]; then
+        ROW=$(grep -s -m 1 $BOOKMARK$ "$USER_PATH/bookmarks")
+    fi
+
+    if [ -z "${row:-}" ]; then
+        ROW=$(grep -s -m 1 $path$ "$USER_PATH/bookmarks")
+    else
+        ROW=$(grep -s -m 1 \"$PWD\"$ "$USER_PATH/bookmarks")
+    fi
+
+    if [ -z ${ROW:-} ]; then
+        echo 'remove-bookmark: no bookmark was found for the specified title or path.'
+
+        return 1
+    fi
+
+    "remove-bookmark: removing bookmark $ROW"
+
+    grep -s -v $r "$USER_PATH/bookmarks" >> "$USER_PATH/bookmarks1"
+    mv -f "$USER_PATH/bookmarks1" "$USER_PATH/bookmarks"
+
+    . "$USER_PATH/bookmarks"
+}
+
+__am_prompt_remove_bookmark $@

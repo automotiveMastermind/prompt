@@ -1,22 +1,17 @@
 version: 2
+
 jobs:
   macos:
     macos:
-      xcode: "10.2.1"
+      xcode: "11.2.1"
     steps:
       - checkout
       - run:
-          name: analyze
-          command: |
-            curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
-            fossa init
-            fossa analyze
+          name: install-bash
+          command: ./install.sh bash | tee log.txt && bash -lc "git sha"
       - run:
-          name: install
-          command: ./install.sh | tee log.txt
-      - run:
-          name: verify
-          command: bash -l -c "git sha"
+          name: install-zsh
+          command: ./install.sh zsh | tee -a log.txt && zsh -lc "git sha"
       - store_artifacts:
           path: log.txt
           destination: logs/$CIRCLE_STAGE.txt
@@ -73,6 +68,19 @@ jobs:
           path: log.txt
           destination: logs/$CIRCLE_STAGE.txt
 
+  fedora-31:
+    docker:
+      - image: docker:stable
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: install and verify
+          command: docker build --file docker/$CIRCLE_STAGE/Dockerfile . | tee log.txt
+      - store_artifacts:
+          path: log.txt
+          destination: logs/$CIRCLE_STAGE.txt
+
   centos:
     docker:
       - image: docker:stable
@@ -112,21 +120,14 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: configure
-          command: |
-            git config user.email $GIT_AUTHOR_EMAIL
-            git config user.name $GIT_AUTHOR_NAME
-      - run:
-          name: install
-          command: yarn install --frozen-lockfile
+          name: publish
+          command: ./publish.sh
       - save_cache:
           name: save yarn package cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-      - run:
-          name: release
-          command: yarn run release
+
 workflows:
   version: 2
   install:
@@ -148,6 +149,10 @@ workflows:
             branches:
               ignore: master
       - fedora-30:
+          filters:
+            branches:
+              ignore: master
+      - fedora-31:
           filters:
             branches:
               ignore: master

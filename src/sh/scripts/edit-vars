@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+__am_prompt_edit_vars() {
+    local VAR_PATH="$AM_PROMPT/user/variables"
+
+    if [ ! -f "$VAR_PATH" ]; then
+        echo "#!/usr/bin/env sh" > "$VAR_PATH"
+        echo >> "$VAR_PATH"
+    fi
+
+    ${EDITOR:-vi} "$VAR_PATH"
+}
+
+__am_prompt_edit_vars

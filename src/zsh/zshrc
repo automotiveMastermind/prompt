@@ -1,0 +1,46 @@
+#!/usr/bin/env zsh
+
+# determine if this is a tty
+if [ -t 1 ]; then
+
+    # update colors for prompt
+    export CLR_ROOT_PROMPT='%B%F{red}'        # COLOR OF THE PROMPT FOR ROOT
+    export CLR_STAFF_PROMPT='%B%F{green}'     # COLOR OF THE PROMPT FOR STAFF
+    export CLR_USER_PROMPT='%B%F{red}'        # COLOR OF THE PROMPT FOR USERS
+    export CLR_SSH_PROMPT='%B%F{magenta}'     # COLOR OF THE PROMPT FOR SSH
+    export CLR_CLEAR_PROMPT='%f%b'            # CLEAR THE COLOR FOR PROMPT
+fi
+
+# shell options
+setopt CDABLE_VARS
+
+# rebuild completion
+rm -rf $HOME/.zcompdump
+autoload -U compinit
+compinit
+
+# get zsh completion dir
+export ZSH_COMPLETION_DIR="$AM_PROMPT/user/zsh/completions"
+
+# determine if the completion dir does not exist
+if [ ! -d "${ZSH_COMPLETION_DIR}" ]; then
+
+    # create the completion dir
+    mkdir -p "$ZSH_COMPLETION_DIR" 1>/dev/null 2>&1
+fi
+
+# add completion dir to fpath
+fpath=($ZSH_COMPLETION_DIR $fpath)
+
+# add scripts to path
+export PATH="$AM_PROMPT/zsh/scripts:$PATH"
+
+# evaluate eval scripts
+for EVAL_SCRIPT in $AM_PROMPT/zsh/scripts/eval/*; do
+    . "$EVAL_SCRIPT"
+done
+
+# test for user zshrc
+if [ -f $AM_PROMPT/user/zshrc ]; then
+    . "$AM_PROMPT/user/zshrc"
+fi

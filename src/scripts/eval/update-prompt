@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-if [ "${AM_PROMPT_UPDATE}" = "1" ]; then
-    update-prompt --dry-run
-fi
-
-if [ "${AM_PROMPT_UPDATE}" = "true" ]; then
-    update-prompt --dry-run
-fi

@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+echo
+echo "prompt: using dash shell"
+
+if [ -f $HOME/.am/prompt/sh/profile ]; then
+    . $HOME/.am/prompt/sh/profile
+fi

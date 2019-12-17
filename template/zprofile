@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+# determine if zshrc exists
+if [ -f "$HOME/.zshrc" ]; then
+
+    # load zshrc
+    . "$HOME/.zshrc"
+fi

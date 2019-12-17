@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+__am_prompt_edit_zshrc() {
+
+    local ZSHRC_PATH="$AM_PROMPT/user/zshrc"
+
+    if [ ! -f "$ZSHRC_PATH" ]; then
+        echo "#!/usr/bin/env zsh" > "$ZSHRC_PATH"
+        echo >> "$ZSHRC_PATH"
+    fi
+
+    ${EDITOR:-vi} "$ZSHRC_PATH"
+}
+
+__am_prompt_edit_zshrc

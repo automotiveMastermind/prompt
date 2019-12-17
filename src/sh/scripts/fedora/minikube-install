@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+# install the hypervisor
+sudo dnf install @virtualization
+sudo systemctl start libvirtd
+sudo systemctl enable libvirtd
+
+# install minikube
+brew install minikube
+
+# set the vm-driver
+minikube config set vm-driver kvm2
+
+# setup minikube
+minikube-setup

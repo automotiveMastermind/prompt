@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+__am_kind_prompt_install() {
+
+    # get the kind command
+    KIND=$(command -v kind 2>/dev/null)
+
+    # determine if kind is already available
+    if ! test -z "${KIND:-}"; then
+
+        # move on immediately
+        return 0
+    fi
+
+    # get the uname for the platform and the latest version of kind
+    local UNAME=$(uname | tr '[:upper:]' '[:lower:]')
+    local KIND_VERSION=$(git-release kubernetes-sigs kind)
+    local KIND_URL=https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-${UNAME}-amd64
+
+    # download the assembly to the bin
+    curl -Lso $LOCAL_PREFIX/kind $KIND_URL
+
+    # make it executable
+    chmod +x $LOCAL_PREFIX/kind
+}
+
+__am_kind_prompt_install

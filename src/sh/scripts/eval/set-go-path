@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# detect if go is installed and gopath is not already set
+if type go 1>/dev/null 2>&1; then
+
+    # export the go path
+    export GOPATH=${GOPATH:-$HOME/.go}
+
+    # export the go bin
+    export GOBIN=${GOBIN:-$GOPATH/bin}
+fi
+
+# determine if go bin is specified
+if [ ! -z "${GOBIN}" ]; then
+
+    # add the go bin to the path
+    export PATH=$PATH:$GOBIN
+fi
+
