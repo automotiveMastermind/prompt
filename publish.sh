@@ -3,10 +3,12 @@
 set -eu
 
 # set the git author and email
-GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-"open@automotivemastermind.com"}
-GIT_COMMITTER_EMAIL=${GIT_COMMITTER_EMAIL:-$GIT_AUTHOR_EMAIL}
 GIT_AUTHOR_NAME=${GIT_AUTHOR_NAME:="aM Open Source"}
-GIT_COMMITTER_NAME=${GIT_COMMITTER_NAME:-$GIT_AUTHOR_NAME}
+GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-"open@automotivemastermind.com"}
+
+# set git user
+git config user.name $GIT_AUTHOR_NAME
+git config user.email $GIT_AUTHOR_EMAIL
 
 # install yarn assets
 yarn install --frozen-lockfile
@@ -39,10 +41,5 @@ yarn run release
 
 # determine if we are running in ci
 if ! test -z "${CI:-}"; then
-    GIT_AUTHOR_NAME=$GIT_AUTHOR_NAME \
-    GIT_AUTHOR_EMAIL=$GIT_AUTHOR_EMAIL \
-    EMAIL=$GIT_AUTHOR_EMAIL \
-    GIT_COMMITTER_NAME=$GIT_COMMITTER_EMAIL \
-    GIT_COMMITTER_EMAIL=$GIT_COMMITTER_EMAIL \
     git push --follow-tags origin master
 fi
