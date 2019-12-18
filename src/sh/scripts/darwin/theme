@@ -1,10 +1,11 @@
 #!/usr/bin/env sh
 
-PROMPT_THEME=${1:-"monokai"}
+PROMPT_THEME_NAME=${1:-"monokai"}
+PROMPT_THEME=$HOME/.am/prompt/themes/terminal/$PROMPT_THEME_NAME.terminal
 
 if [ ! -f "${PROMPT_THEME:-}" ]; then
-    echo "${CLR_FAIL}The theme $PROMPT_THEME is not supported.${CLR_CLEAR}"
+    echo "${CLR_FAIL}The theme $PROMPT_THEME_NAME is not supported.${CLR_CLEAR}"
     exit 1
 fi
 
-open $HOME/.am/prompt/themes/terminal/$PROMPT_THEME.terminal
+open $PROMPT_THEME
