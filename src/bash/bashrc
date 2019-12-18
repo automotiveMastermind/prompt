@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# set prompt shell
+export PROMPT_SHELL="bash"
+
 # shell options
 shopt -s checkwinsize     # check window size on script exit
 shopt -s cdable_vars      # enable change directory to a variable value

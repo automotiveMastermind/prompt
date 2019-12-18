@@ -121,7 +121,24 @@ __am_prompt_install() {
 
     echo $PROMPT_SHA > $PROMPT_SHA_PATH
 
-    local PROMPT_SHELL="${1:-"bash"}"
+    # get the requested shell
+    local PROMPT_SHELL="${1:-}"
+
+    # determine if the request shell was not set
+    if [ -z "${PROMPT_SHELL:-}" ]; then
+
+        # get the current shell
+        PROMPT_SHELL=$(echo $SHELL | rev | cut -d'/' -f1 | rev)
+
+        # test if the current shell is something other than zsh
+        if [ "$PROMPT_SHELL" != "zsh" ]; then
+
+            # default to bash
+            PROMPT_SHELL="bash"
+        fi
+    fi
+
+    # lowercase the prompt shell
     local PROMPT_SHELL=$(echo $PROMPT_SHELL | tr '[:upper:]' '[:lower:]')
 
     # use the correct shell

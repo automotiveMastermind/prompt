@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# set prompt shell
+export PROMPT_SHELL="zsh"
+
 # determine if this is a tty
 if [ -t 1 ]; then
 
