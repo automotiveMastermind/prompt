@@ -3,11 +3,12 @@
 set -eu
 
 # set the git author and email
-GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-"open@automotivemastermind.com"}
 GIT_AUTHOR_NAME=${GIT_AUTHOR_NAME:="aM Open Source"}
+GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-"open@automotivemastermind.com"}
 
-git config --set user.name $GIT_AUTHOR_NAME
-git config --set user.email $GIT_AUTHOR_NAME
+# set git user
+git config user.name $GIT_AUTHOR_NAME
+git config user.email $GIT_AUTHOR_EMAIL
 
 # install yarn assets
 yarn install --frozen-lockfile
@@ -37,3 +38,8 @@ fi
 
 # create the release
 yarn run release
+
+# determine if we are running in ci
+if ! test -z "${CI:-}"; then
+    git push --follow-tags origin master
+fi

@@ -1,6 +1,6 @@
 {
   "name": "prompt",
-  "version": "6.3.1",
+  "version": "7.0.0",
   "author": "automotiveMastermind",
   "description": "A spectacular (BaSH) prompt for *nix distributions",
   "license": "MIT",
@@ -8,10 +8,8 @@
   "main": "install.sh",
   "repository": "https://github.com/automotivemastermind/prompt.git",
   "scripts": {
-    "test": "bash install.sh",
-    "push": "git push --follow-tags origin master",
-    "version": "standard-version --message \"chore: release %s [skip ci]\"",
-    "release": "npm run version && npm run push"
+    "test": "sh install.sh",
+    "release": "standard-version --message \"chore: release %s [skip ci]\""
   },
   "keywords": [
     "bash",
