@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/automotivemastermind/prompt/compare/v6.3.1...v7.0.0) (2019-12-18)
+
+
+### Bug Fixes
+
+* theme launcher ([#37](https://github.com/automotivemastermind/prompt/issues/37)) ([e124ce4](https://github.com/automotivemastermind/prompt/commit/e124ce4))
+
+
+### Build System
+
+* fix git user/email in publish ([#40](https://github.com/automotivemastermind/prompt/issues/40)) ([1ce6870](https://github.com/automotivemastermind/prompt/commit/1ce6870))
+* fix publish for prompt ([#38](https://github.com/automotivemastermind/prompt/issues/38)) ([b7a33b0](https://github.com/automotivemastermind/prompt/commit/b7a33b0))
+
+
+### Features
+
+* add zsh and dash support to prompt ([#32](https://github.com/automotivemastermind/prompt/issues/32)) ([275f62c](https://github.com/automotivemastermind/prompt/commit/275f62c))
+
+
+### BREAKING CHANGES
+
+* While this is not an actual breaking change, quite a bit has changed with
+regard to how prompt actually works. We want to notify users that this may
+result is some level of bugs as test coverage of scripts like this one is
+incredibly difficult.
+
+
+
 ### [6.3.1](https://github.com/automotivemastermind/prompt/compare/v6.3.0...v6.3.1) (2019-11-05)
 
 
