@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.1](https://github.com/automotivemastermind/prompt/compare/v7.0.0...v7.0.1) (2019-12-18)
+
+
+### Bug Fixes
+
+* use current shell if bash/zsh ([#39](https://github.com/automotivemastermind/prompt/issues/39)) ([f3834ee](https://github.com/automotivemastermind/prompt/commit/f3834ee))
+
+
+
 ## [7.0.0](https://github.com/automotivemastermind/prompt/compare/v6.3.1...v7.0.0) (2019-12-18)
 
 
