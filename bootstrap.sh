@@ -81,8 +81,6 @@ __am_prompt_update()
         return 0
     fi
 
-    remove-backup
-
     local PROMPT_CHANGELOG_URI="https://github.com/automotivemastermind/prompt/blob/$PROMPT_COMMIT_REF/CHANGELOG.md"
     local PROMPT_INSTALL_URI="https://github.com/automotiveMastermind/prompt/archive/$PROMPT_COMMIT_REF.tar.gz"
     local PROMPT_INTALL_TEMP=$(mktemp -d)
