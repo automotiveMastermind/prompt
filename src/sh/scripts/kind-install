@@ -12,16 +12,8 @@ __am_kind_prompt_install() {
         return 0
     fi
 
-    # get the uname for the platform and the latest version of kind
-    local UNAME=$(uname | tr '[:upper:]' '[:lower:]')
-    local KIND_VERSION=$(git-release kubernetes-sigs kind)
-    local KIND_URL=https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-${UNAME}-amd64
-
-    # download the assembly to the bin
-    curl -Lso $LOCAL_PREFIX/kind $KIND_URL
-
-    # make it executable
-    chmod +x $LOCAL_PREFIX/kind
+    # install kind with homebrew now that its available there
+    brew install kind
 }
 
 __am_kind_prompt_install
