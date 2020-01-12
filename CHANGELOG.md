@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.2](https://github.com/automotivemastermind/prompt/compare/v7.0.1...v7.0.2) (2020-01-12)
+
+
+### Bug Fixes
+
+* do not remove backup in bootstrap ([#42](https://github.com/automotivemastermind/prompt/issues/42)) ([9b02c2f](https://github.com/automotivemastermind/prompt/commit/9b02c2f))
+
+
+
 ### [7.0.1](https://github.com/automotivemastermind/prompt/compare/v7.0.0...v7.0.1) (2019-12-18)
 
 
