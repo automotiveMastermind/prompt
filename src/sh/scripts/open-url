@@ -16,7 +16,9 @@ __am_prompt_open_url() {
         fi
     done
 
-    return 1
+    # no open or browser was available (headless)
+    echo "Open a browser: $url"
+    return 0
 }
 
 __am_prompt_open_url $@
