@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.3](https://github.com/automotivemastermind/prompt/compare/v7.0.2...v7.0.3) (2020-01-13)
+
+
+### Bug Fixes
+
+* resolve open changelog on install/update ([#44](https://github.com/automotivemastermind/prompt/issues/44)) ([f83efc4](https://github.com/automotivemastermind/prompt/commit/f83efc4)), closes [#34](https://github.com/automotivemastermind/prompt/issues/34) [#43](https://github.com/automotivemastermind/prompt/issues/43)
+
+
+
 ### [7.0.2](https://github.com/automotivemastermind/prompt/compare/v7.0.1...v7.0.2) (2020-01-12)
 
 
