@@ -95,8 +95,6 @@ __am_prompt_update()
     popd 1>/dev/null
 
     rm -rf $PROMPT_INTALL_TEMP 1>/dev/null
-
-    open-url $CHANGELOG_URI 1>/dev/null
 }
 
 __am_prompt_update $@

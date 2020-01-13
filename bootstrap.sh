@@ -81,7 +81,6 @@ __am_prompt_update()
         return 0
     fi
 
-    local PROMPT_CHANGELOG_URI="https://github.com/automotivemastermind/prompt/blob/$PROMPT_COMMIT_REF/CHANGELOG.md"
     local PROMPT_INSTALL_URI="https://github.com/automotiveMastermind/prompt/archive/$PROMPT_COMMIT_REF.tar.gz"
     local PROMPT_INTALL_TEMP=$(mktemp -d)
     local PROMPT_EXTRACT_TEMP="$PROMPT_INTALL_TEMP/extract"
@@ -94,8 +93,6 @@ __am_prompt_update()
     popd 1>/dev/null
 
     rm -rf $PROMPT_INTALL_TEMP 1>/dev/null
-
-    open-url $CHANGELOG_URI 1>/dev/null
 }
 
 __am_prompt_update $@
