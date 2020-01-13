@@ -118,6 +118,7 @@ __am_prompt_install() {
     local SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"
     local PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
     local PROMPT_SHA_PATH=$HOME/.am/prompt/.sha
+    local PROMPT_CHANGELOG_URI="https://github.com/automotivemastermind/prompt/blob/$PROMPT_SHA/CHANGELOG.md"
 
     echo $PROMPT_SHA > $PROMPT_SHA_PATH
 
@@ -143,6 +144,9 @@ __am_prompt_install() {
 
     # use the correct shell
     . $AM_PROMPT/sh/scripts/use-shell $PROMPT_SHELL
+
+    # open the changelog url
+    . $AM_PROMPT/sh/scripts/open-url $PROMPT_CHANGELOG_URI 1>/dev/null
 }
 
 __am_prompt_install $@
