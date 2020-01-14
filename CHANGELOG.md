@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.4](https://github.com/automotivemastermind/prompt/compare/v7.0.3...v7.0.4) (2020-01-14)
+
+
+### Bug Fixes
+
+* **sh:** use correct args for dotnet-install ([#46](https://github.com/automotivemastermind/prompt/issues/46)) ([8a2b5e3](https://github.com/automotivemastermind/prompt/commit/8a2b5e3)), closes [#45](https://github.com/automotivemastermind/prompt/issues/45)
+
+
+
 ### [7.0.3](https://github.com/automotivemastermind/prompt/compare/v7.0.2...v7.0.3) (2020-01-13)
 
 
