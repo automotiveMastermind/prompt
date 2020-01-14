@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: test
+          command: ./test.sh
+      - run:
           name: install-bash
           command: ./install.sh bash | tee log.txt && bash -lc "git sha"
       - run:
