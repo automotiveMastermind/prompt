@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-set -eux
+set -eu
 
 echo 'test default install'
 ./src/sh/scripts/dotnet-install

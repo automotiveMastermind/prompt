@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
-set -eux
+set -eu
 
-find ./test/sh/scripts -name '*.test.sh' -exec {} \;
+# run the tests with a dummy terminal
+TERM=dumb find ./test/sh/scripts -name '*.test.sh' -exec {} \;
