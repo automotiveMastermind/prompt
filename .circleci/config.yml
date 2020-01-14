@@ -10,6 +10,9 @@ jobs:
           name: install-bash
           command: ./install.sh bash | tee log.txt && bash -lc "git sha"
       - run:
+          name: test-sh
+          command: find ./test/sh -name '*.sh' -exec {} \;
+      - run:
           name: install-zsh
           command: ./install.sh zsh | tee -a log.txt && zsh -lc "git sha"
       - store_artifacts:
