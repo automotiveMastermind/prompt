@@ -15,6 +15,24 @@ __am_prompt_install_darwin() {
             brew install $pkg
         fi
     done
+
+    # test to see if the zsh completion dir is specified
+    if [ ! -z "${ZSH_COMPLETION_DIR:-}" ]; then
+
+        # iterate over each completion
+        for completion in $ZSH_COMPLETION_DIR/*; do
+
+            # test for invalid completion
+            if [ ! -e $completion ]; then
+
+                # let the user know we're removing the invalid completion
+                $ECHO "${CLR_WARN}removing: $completion as it no longer exists...${CLR_CLEAR}"
+
+                # remove the completion
+                rm -f $completion
+            fi
+        done
+    fi
 }
 
 __am_prompt_install_darwin

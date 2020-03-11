@@ -1,11 +1,8 @@
 #!/usr/bin/env sh
 
 if [ -d /Applications/Docker.app/Contents/Resources/etc ]; then
-
     local DOCKER_PATH=/Applications/Docker.app/Contents/Resources/etc
-
 elif [ -d "$HOME/Applications/Docker.app/Contents/Resources/etc" ]; then
-
     local DOCKER_PATH="$HOME/Applications/Docker.app/Contents/Resources/etc"
 fi
 
@@ -15,21 +12,14 @@ if [ ! -z "${DOCKER_PATH:-}" ]; then
     zstyle ':completion:*:*:docker:*' option-stacking yes
     zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
-    # add completion for docker
-    if [ ! -f "${ZSH_COMPLETION_DIR}/_docker" ]; then
-        ln -s $DOCKER_PATH/docker.zsh-completion $ZSH_COMPLETION_DIR/_docker
-        . $ZSH_COMPLETION_DIR/_docker
-    fi
+    # iterate over each completion
+    for completion in $DOCKER_PATH/*.zsh-completion; do
 
-    # add completion for docker-machine
-    if [ ! -f "${ZSH_COMPLETION_DIR}/_docker-machine" ]; then
-        ln -s $DOCKER_PATH/docker-machine.zsh-completion $ZSH_COMPLETION_DIR/_docker-machine
-        . $ZSH_COMPLETION_DIR/_docker-machine
-    fi
+        ZSH_COMPLETION=${completion##*/}
+        ZSH_COMPLETION=${ZSH_COMPLETION%.*}
+        ZSH_COMPLETION="$ZSH_COMPLETION_DIR/_$ZSH_COMPLETION"
 
-    # add completion for docker-compose
-    if [ ! -f "${ZSH_COMPLETION_DIR}/_docker-compose" ]; then
-        ln -s $DOCKER_PATH/docker-compose.zsh-completion $ZSH_COMPLETION_DIR/_docker-compose
-        . $ZSH_COMPLETION_DIR/_docker-compose
-    fi
+        ln -s $completion $ZSH_COMPLETION 2>/dev/null 1>&1
+        . $ZSH_COMPLETION
+    done
 fi
