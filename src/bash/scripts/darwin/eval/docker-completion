@@ -7,7 +7,7 @@ elif [ -d "$HOME/Applications/Docker.app/Contents/Resources/etc" ]; then
 fi
 
 if [ ! -z "${DOCKER_PATH:-}" ]; then
-    . "$DOCKER_PATH/docker.bash-completion"
-    . "$DOCKER_PATH/docker-machine.bash-completion"
-    . "$DOCKER_PATH/docker-compose.bash-completion"
+    for completion in $DOCKER_PATH/*.bash-completion; do
+        . $completion
+    done
 fi
