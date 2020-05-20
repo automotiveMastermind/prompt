@@ -87,12 +87,13 @@ __am_prompt_update()
     local PROMPT_INTALL_TEMP=$(mktemp -d)
     local PROMPT_EXTRACT_TEMP="$PROMPT_INTALL_TEMP/extract"
 
-    pushd $PROMPT_INTALL_TEMP 1>/dev/null
+    local CURRENT_DIR=${PWD}
+
+    cd $PROMPT_INTALL_TEMP 1>/dev/null
     curl -skL $PROMPT_INSTALL_URI | tar zx
-    pushd prompt-master 1>/dev/null
+    cd prompt-master 1>/dev/null
     ./install.sh $PROMPT_SHELL
-    popd 1>/dev/null
-    popd 1>/dev/null
+    cd $CURRENT_DIR
 
     rm -rf $PROMPT_INTALL_TEMP 1>/dev/null
 }
