@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.6](https://github.com/automotivemastermind/prompt/compare/v7.0.5...v7.0.6) (2020-05-21)
+
+
+### Bug Fixes
+
+* pushd is not posix compliant ([#51](https://github.com/automotivemastermind/prompt/issues/51)) ([6708af5](https://github.com/automotivemastermind/prompt/commit/6708af5))
+
+
+
 ### [7.0.5](https://github.com/automotivemastermind/prompt/compare/v7.0.4...v7.0.5) (2020-03-11)
 
 
