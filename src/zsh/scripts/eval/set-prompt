@@ -27,7 +27,7 @@ __am_prompt_emit_prompt_arrow() {
     fi
 }
 
-__am_prompt_set_direnv() {
+__am_prompt_show_virtualenv() {
     if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
         setopt PROMPT_SUBST
         export DIR_ENV=" ($(basename $VIRTUAL_ENV))"
