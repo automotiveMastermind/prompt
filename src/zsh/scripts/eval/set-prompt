@@ -45,7 +45,7 @@ __am_prompt_set_prompt() {
 }
 
 # set the direnv if exists
-__am_prompt_set_direnv
+__am_prompt_show_virtualenv
 
 # set up the arrow
 __am_prompt_emit_prompt_arrow
