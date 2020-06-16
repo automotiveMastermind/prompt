@@ -6,22 +6,22 @@
 
 ## Vitals
 
-Info          | Badges
---------------|-------------------------------------
-License       | [![License][license-image]][license-uri]
-License Scan  | [![FOSSA Status][fossa-image]][fossa-uri]
-Build         | [![Build][build-image]][build-uri]
+| Info         | Badges                                    |
+| ------------ | ----------------------------------------- |
+| License      | [![License][license-image]][license-uri]  |
+| License Scan | [![FOSSA Status][fossa-image]][fossa-uri] |
+| Build        | [![Build][build-image]][build-uri]        |
 
 ### Supported Operating Systems
 
-Name   | Version
--------|------------------
-macOS  | Sierra or greater
-ubuntu | 16.04 or greater
-fedora | 29 or greater
-debian | 9 or greater
-centOS | 7 or greater
-mint   | 19 or greater
+| Name   | Version           |
+| ------ | ----------------- |
+| macOS  | Sierra or greater |
+| ubuntu | 16.04 or greater  |
+| fedora | 29 or greater     |
+| debian | 9 or greater      |
+| centOS | 7 or greater      |
+| mint   | 19 or greater     |
 
 ## Know It
 
@@ -37,6 +37,7 @@ including:
 * Flush DNS (on macOS)
 * Ability to enable and disable hidden files in Finder (on macOS)
 * Display of available colors (already set as variables for use elsewhere)
+* Display currently active Python virtialenv when using [pyenv][pyenv-url] & [direnv][direnv-url] (bash & zsh)
 * ... and much more!
 
 Note: All "extensions" are implemented as scripts added to the path, so it should not interfere with existing
@@ -121,6 +122,93 @@ In order to test the installation routine for promptMastermind, we use a set of 
 In addition, [circleci][circleci-uri] is used to build all platforms, including macOS as part of our pull request
 validation. Special thanks to [circleci][circleci-uri] for providing the build agents!
 
+## Features
+
+### Two-Line Prompt
+
+The first-line displays username, hostname, and current path.
+
+The second-line emits information about the current branch and status when in a git path. If using [pyenv][pyenv-url] and [direnv][direnv-url] the second-line also displays the currently activated Python virtualenv.
+
+### SDK Installs
+
+[AWS SDK][aws-sdk-url]
+
+```sh
+aws-install
+```
+
+[Google Cloud SDK][gcloud-sdk-url]
+
+```sh
+gcloud-install
+```
+
+[.Net SDK][dotnet-sdk-url]
+
+```sh
+dotnet-install
+```
+
+### Colors
+
+Glocal colors defined by promotMastermind:
+
+| Name               | Color                   |
+| ------------------ | ----------------------- |
+| CLR_CLEAR          | DEFAULT COLOR           |
+| CLR_BLACK          | ANSI BLACK (GRAY)       |
+| CLR_RED            | ANSI RED                |
+| CLR_GREEN          | ANSI GREEN              |
+| CLR_YELLOW         | ANSI YELLOW             |
+| CLR_BLUE           | ANSI BLUE               |
+| CLR_MAGENTA        | ANSI MAGENTA (PURPLE)   |
+| CLR_CYAN           | ANSI CYAN               |
+| CLR_WHITE          | ANSI WHITE              |
+| CLR_BRIGHT_BLACK   | BRIGHT BLACK (GRAY)     |
+| CLR_BRIGHT_RED     | BRIGHT RED              |
+| CLR_BRIGHT_GREEN   | BRIGHT GREEN            |
+| CLR_BRIGHT_YELLOW  | BRIGHT YELLOW           |
+| CLR_BRIGHT_BLUE    | BRIGHT BLUE             |
+| CLR_BRIGHT_MAGENTA | BRIGHT MAGENTA (PURPLE) |
+| CLR_BRIGHT_CYAN    | BRIGHT CYAN             |
+| CLR_BRIGHT_WHITE   | BRIGHT WHITE            |
+
+### macOS Commands
+
+Show/Hide Files:
+
+```sh
+# show all hidden files
+show-all
+
+# hide all hidden files
+hide-all
+```
+
+Flush DNS:
+
+```she
+flush-dns
+```
+
+Install [minikube][minikube-url]:
+
+```sh
+minikube-install
+```
+
+Set Theme to Monokai:
+```sh
+theme monokai # general high quality theme that has been around for many years
+```
+
+Set Theme to Dark Mode
+```sh
+theme dark-mode # our own custom theme that is nice and bright for dark mode on macOS
+```
+---
+
 ## Copyright and License
 
 &copy; automotiveMastermind and contributors. Distributed under the MIT license. See [LICENSE][license-uri] for details.
@@ -136,3 +224,9 @@ validation. Special thanks to [circleci][circleci-uri] for providing the build a
 
 [fossa-image]: https://app.fossa.com/api/projects/custom%2B12139%2Fgit%40github.com%3AautomotiveMastermind%2Fprompt.git.svg?type=shield
 [fossa-uri]: https://app.fossa.com/projects/custom%2B12139%2Fgit%40github.com%3AautomotiveMastermind%2Fprompt.git?ref=badge_shield
+[pyenv-url]: https://github.com/pyenv/pyenv
+[direnv-url]: https://github.com/direnv/direnv/wiki/Python
+[minikube-url]: https://minikube.sigs.k8s.io/docs/
+[aws-sdk-url]: https://github.com/aws/aws-cli
+[gcloud-sdk-url]: https://cloud.google.com/sdk/install
+[dotnet-sdk-url]: https://github.com/dotnet/installer
