@@ -152,7 +152,7 @@ dotnet-install
 
 ### Colors
 
-Glocal colors defined by promotMastermind:
+Global colors defined by promotMastermind:
 
 | Name               | Color                   |
 | ------------------ | ----------------------- |
