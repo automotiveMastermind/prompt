@@ -27,25 +27,20 @@ __am_prompt_emit_prompt_arrow() {
     fi
 }
 
-__am_prompt_show_virtualenv() {
-    if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
-        setopt PROMPT_SUBST
-        export DIR_ENV=" ($(basename $VIRTUAL_ENV))"
-    else
-        export DIR_ENV=""
-    fi
-}
-
 __am_prompt_set_prompt() {
     # set the window title
     echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
 
+    if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+        setopt PROMPT_SUBST
+        local DIR_ENV="(${VIRTUAL_ENV##*/})"
+    else
+        local DIR_ENV=""
+    fi
+
     local NEWLINE=$'\n'
     __posh_git_ps1 "${NEWLINE}%n@%m : %~${NEWLINE}" "$DIR_ENV $AM_PROMPT_ARROW"
 }
-
-# set the direnv if exists
-__am_prompt_show_virtualenv
 
 # set up the arrow
 __am_prompt_emit_prompt_arrow

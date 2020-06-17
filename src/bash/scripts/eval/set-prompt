@@ -26,12 +26,6 @@ __am_prompt_emit_prompt_arrow() {
     fi
 }
 
-__am_prompt_show_virtual_env() {
-  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
-    echo "($(basename $VIRTUAL_ENV)) "
-  fi
-}
-
 __am_prompt_set_prompt() {
 
     # set the window title
@@ -41,7 +35,7 @@ __am_prompt_set_prompt() {
         export PROMPT_COMMAND='"\n\u@\h : \w\n" "$(__am_prompt_emit_prompt_arrow)"'
     else
         # use the git prompt with the prompt arrow
-        export PROMPT_COMMAND='__posh_git_ps1 "\n\u@\h : \w\n" "$(__am_prompt_show_virtual_env)$(__am_prompt_emit_prompt_arrow)"'
+        export PROMPT_COMMAND='__posh_git_ps1 "\n\u@\h : \w\n" "$(__am_prompt_show_virtual_env) $(__am_prompt_emit_prompt_arrow)"'
     fi
 }
 

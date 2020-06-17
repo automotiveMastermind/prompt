@@ -188,26 +188,30 @@ hide-all
 
 Flush DNS:
 
-```she
+```sh
 flush-dns
 ```
 
-Install [minikube][minikube-url]:
-
-```sh
-minikube-install
-```
-
 Set Theme to Monokai:
+
 ```sh
 theme monokai # general high quality theme that has been around for many years
 ```
 
 Set Theme to Dark Mode
+
 ```sh
 theme dark-mode # our own custom theme that is nice and bright for dark mode on macOS
 ```
----
+
+### *nix Commands
+
+Install [kind][kind-url]:
+
+```sh
+kind-install
+```
+
 
 ## Copyright and License
 
@@ -226,7 +230,7 @@ theme dark-mode # our own custom theme that is nice and bright for dark mode on 
 [fossa-uri]: https://app.fossa.com/projects/custom%2B12139%2Fgit%40github.com%3AautomotiveMastermind%2Fprompt.git?ref=badge_shield
 [pyenv-url]: https://github.com/pyenv/pyenv
 [direnv-url]: https://github.com/direnv/direnv/wiki/Python
-[minikube-url]: https://minikube.sigs.k8s.io/docs/
+[kind-url]: https://kind.sigs.k8s.io
 [aws-sdk-url]: https://github.com/aws/aws-cli
 [gcloud-sdk-url]: https://cloud.google.com/sdk/install
 [dotnet-sdk-url]: https://github.com/dotnet/installer
