@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.1.0](https://github.com/automotivemastermind/prompt/compare/v7.0.6...v7.1.0) (2020-06-18)
+
+
+### Features
+
+* add support for direnv to second line ([#53](https://github.com/automotivemastermind/prompt/issues/53)) ([8dbaa0e](https://github.com/automotivemastermind/prompt/commit/8dbaa0e))
+
+
+
 ### [7.0.6](https://github.com/automotivemastermind/prompt/compare/v7.0.5...v7.0.6) (2020-05-21)
 
 
