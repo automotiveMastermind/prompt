@@ -31,8 +31,15 @@ __am_prompt_set_prompt() {
     # set the window title
     echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
 
+    if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+        setopt PROMPT_SUBST
+        local DIR_ENV="(${VIRTUAL_ENV##*/})"
+    else
+        local DIR_ENV=""
+    fi
+
     local NEWLINE=$'\n'
-    __posh_git_ps1 "${NEWLINE}%n@%m : %~${NEWLINE}" " $AM_PROMPT_ARROW"
+    __posh_git_ps1 "${NEWLINE}%n@%m : %~${NEWLINE}" "$DIR_ENV $AM_PROMPT_ARROW"
 }
 
 # set up the arrow
