@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# determine if this is a tty
+if [ -t 1 ]; then
+
+    # get the tty
+    export GPG_TTY="$(tty)"
+
+    # get the ssh auth sock
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
+    # relaunch gpg using the expected tty and sock
+    gpgconf --launch gpg-agent
+fi
