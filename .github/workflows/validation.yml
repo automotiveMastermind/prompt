@@ -1,0 +1,67 @@
+name: Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - build/*
+
+jobs:
+  cancel:
+    name: 'Cancel Previous Runs'
+    runs-on: ubuntu-20.04
+    timeout-minutes: 3
+    steps:
+      - uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+  os:
+    name: "Validate: ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    needs: cancel
+    strategy:
+      matrix:
+        os:
+          - macos-11.0
+          - macos-10.15
+          - ubuntu-20.04
+          - ubuntu-18.04
+          - ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Prompt Install (bash)
+        run: ./install.sh bash | tee log.txt && bash -lc 'cat $AM_PROMPT/.sha'
+      - name: Prompt Install (zsh)
+        run: ./install.sh zsh | tee log.txt && zsh -lc 'cat $AM_PROMPT/.sha'
+      - name: Platform Tests
+        run: ./test.sh
+
+  # TODO: add this after figuring out a consistent way to create a non-root user without having to create specialised
+  # dockerfiles for each container type (linuxbrew refuses to install with the root user)
+  # docker:
+  #   name: "Validate: ${{ matrix.container }}"
+  #   runs-on: ubuntu-20.04
+  #   container: ${{ matrix.container }}
+  #   needs: cancel
+  #   strategy:
+  #     matrix:
+  #       container:
+  #         - centos:7
+  #         - centos:8
+  #         - debian:9
+  #         - fedora:31
+  #         - fedora:32
+  #         - fedora:33
+  #         - linuxmintd/mint20-amd64
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Prompt Install (bash)
+  #       run: ./install.sh bash | tee log.txt && bash -lc 'cat $AM_PROMPT/.sha'
+  #     - name: Prompt Install (zsh)
+  #       run: ./install.sh zsh | tee log.txt && zsh -lc 'cat $AM_PROMPT/.sha'
+  #     - name: Platform Tests
+  #       run: ./test.sh

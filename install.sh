@@ -84,6 +84,7 @@ __am_prompt_install() {
     fi
 
     if [ -f "$AM_PROMPT/sh/install/$UNAME_INSTALL" ]; then
+        __am_prompt_success "installing platform prerequisites ($UNAME_INSTALL)"
         . "$AM_PROMPT/sh/install/$UNAME_INSTALL"
     fi
 
@@ -111,8 +112,8 @@ __am_prompt_install() {
 
     local CURL_OPT='-s'
 
-    if [ ! -z "${GH_TOKEN:-}" ]; then
-        local CURL_OPT="$CURL_OPT -H 'Authorization: token $GH_TOKEN'"
+    if [ ! -z "${GITHUB_TOKEN:-}" ]; then
+        local CURL_OPT="$CURL_OPT -H 'Authorization: token $GITHUB_TOKEN'"
     fi
 
     local SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"

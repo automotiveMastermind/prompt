@@ -10,7 +10,7 @@
 !.editorconfig
 
 # semver management
-!.releaserc.yaml
+!.releaserc*
 
 # documentation
 !.docs/
