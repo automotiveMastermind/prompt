@@ -20,8 +20,8 @@ __am_prompt_git_sha() {
 
     local CURL_OPT='-s'
 
-    if [ ! -z "${GH_TOKEN:-}" ]; then
-        CURL_OPT="$CURL_OPT -H 'Authorization: $GH_TOKEN'"
+    if [ ! -z "${GITHUB_TOKEN:-}" ]; then
+        CURL_OPT="$CURL_OPT -H 'Authorization: $GITHUB_TOKEN'"
     fi
 
     local SHA_URI=https://api.github.com/repos/$ORG_NAME/$REPO_NAME/commits/$BRANCH_NAME
