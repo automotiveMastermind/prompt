@@ -1,0 +1,29 @@
+#! /usr/bin/env sh
+
+set -e
+
+__am_prompt_pandoc_install() {
+    brew install pandoc librsvg
+    brew tap homebrew/cask
+    brew cask install basictex
+    eval "$(/usr/libexec/path_helper)"
+
+    echo
+    echo "You will be asked for admin credentials to install tex plugins"
+    echo
+
+    sudo tlmgr update --self
+    sudo tlmgr install texliveonfly
+    sudo tlmgr install xelatex
+    sudo tlmgr install adjustbox
+    sudo tlmgr install tcolorbox
+    sudo tlmgr install collectbox
+    sudo tlmgr install ucs
+    sudo tlmgr install environ
+    sudo tlmgr install trimspaces
+    sudo tlmgr install titling
+    sudo tlmgr install enumitem
+    sudo tlmgr install rsfs
+}
+
+__am_prompt_pandoc_install
