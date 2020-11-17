@@ -1,128 +1,35 @@
-# user files
-*.user
-*.suo
+# hidden files and folders
+.*
 
-# build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-[Tt]arget/
-x64/
-x86/
-[Bb]in/
-[Oo]bj/
-[Aa]rtifacts/
+# vscode
+!.vscode/
 
-# package manager artifacts
-[Pp]ackages/
-[Nn]ode_[Mm]odules/
-[Bb]ower_[Cc]omponents/
-
-# visual studio 2015 cache/options
-[Pp]roject.lock.json
-[Cc]ondo.[Aa]ssembly[Ii]nfo.cs
-
-# ria/silverlight projects
-Generated_Code/
-
-# sql server files
-*.mdf
-*.ndf
-*.ldf
-
-# jetbrains
-_ReSharper*/
-*.[Rr]e[Ss]harper
-*.DotSettings.user
-_TeamCity*
-*.dotCover
-
-# include solution based resharper settings
-!*.[Dd]ot[Ss]ettings
-
-# stylecop
-[Ss]tyle[Cc]op.[Cc]ache
-
-# mstest results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-[Bb]uild.[Ll]og
-
-# business intelligence projects
-*.rdl.data
-*.bim.layout
-*.bim_*.settings
-
-# microsoft fakes
-FakesAssemblies/
-
-# azure build output
-csx/
-*.build.csdef
-
-# windows store app package directory
-AppPackages/
-
-# nuget exe
-nuget.exe
-
-# nuget packages
-*.nupkg
-
-# include msbuild targets in nuget
-!**/packages/**/build/
-
-# include repositories.config for nuget
-!**/packages/repositories.config
-
-# include config file for nuget
-![Nn]u[Gg]et.config
-
-# include self (tfignore)
-!.tfignore
+# configuration
 !.gitignore
 !.gitattributes
+!.editorconfig
 
-# mac files
-.DS_Store
+# semver management
+!.releaserc.yaml
 
-# win files
-[Tt]humbs.db
+# documentation
+!.docs/
+
+# node
+node_modules/
+!.eslintrc.yaml
+!.eslintignore
+package-lock.json
+
+# github
+!.github/
+
+# circleci
+!.circleci/
 
 # log files
+*.logs
 *.log
 
-# tsd
-[Tt]sd/
-_tsd
-tsd
-tsd.cmd
-
-# mocha
-_mocha
-mocha
-mocha.cmd
-
-# bower
-bower
-_bower
-bower.cmd
-
-# gem
-[Gg]emfile.lock
-
-# docs
-vnd/
-
-# hidden folders
-.*/
-
-# condo files
-Condo.AssemblyInfo.cs
-
-# prompt backups
-backup/
-
-# circle-ci
-!**/.circleci
+# windows crap
+Thumbs.db
