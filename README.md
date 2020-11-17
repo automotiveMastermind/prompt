@@ -69,7 +69,7 @@ curl -fsSL https://git.io/am-prompt | sh -s -- --version v7.0.0 bash
 curl -fsSL https://git.io/am-prompt | sh -s -- --version v7.0.0 zsh
 ```
 
-All available versions of prompt are available here: https://github.com/automotiveMastermind/prompt/releases
+All available versions of prompt are available here: <https://github.com/automotiveMastermind/prompt/releases>
 
 > NOTE: zsh is only available as of v7.0.0 -- older versions of prompt only support bash
 
@@ -135,19 +135,19 @@ The second-line emits information about the current branch and status when in a 
 [AWS SDK][aws-sdk-url]
 
 ```sh
-aws-install
+install-aws
 ```
 
 [Google Cloud SDK][gcloud-sdk-url]
 
 ```sh
-gcloud-install
+install-gcloud
 ```
 
 [.Net SDK][dotnet-sdk-url]
 
 ```sh
-dotnet-install
+install-dotnet
 ```
 
 ### Colors
@@ -204,14 +204,25 @@ Set Theme to Dark Mode
 theme dark-mode # our own custom theme that is nice and bright for dark mode on macOS
 ```
 
-### *nix Commands
-
-Install [kind][kind-url]:
+[Pandoc][pandoc-url]
 
 ```sh
-kind-install
+install-pandoc
 ```
 
+### *nix Commands
+
+[Kubernetes in Docker (Kind)][kind-url]
+
+```sh
+install-kind
+```
+
+[Minkube][minikube-url]
+
+```sh
+install-minikube
+```
 
 ## Copyright and License
 
@@ -234,3 +245,5 @@ kind-install
 [aws-sdk-url]: https://github.com/aws/aws-cli
 [gcloud-sdk-url]: https://cloud.google.com/sdk/install
 [dotnet-sdk-url]: https://github.com/dotnet/installer
+[minikube-url]: https://minikube.sigs.k8s.io/docs/start/
+[pandoc-url]: https://pandoc.org
