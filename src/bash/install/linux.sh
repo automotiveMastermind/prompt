@@ -6,7 +6,7 @@ __am_prompt_install_linux() {
     set +e
 
     for pkg in $BREWS; do
-        if brew list -1 | grep -q "^${pkg}\$"; then
+        if brew list --formula -1 | grep -q "^${pkg}\$"; then
             $ECHO "${CLR_SUCCESS}upgrading: $pkg...${CLR_CLEAR}"
             brew upgrade $pkg 2>/dev/null
             brew link --overwrite $pkg 2>/dev/null

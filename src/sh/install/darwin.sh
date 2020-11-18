@@ -5,7 +5,7 @@ __am_prompt_install_darwin() {
 
     if ! type brew 1>/dev/null 2>&1; then
         $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        bash -c "CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) && brew config"
     fi
 
     $ECHO "${CLR_SUCCESS}updating homebrew...${CLR_CLEAR}"
@@ -14,7 +14,7 @@ __am_prompt_install_darwin() {
     set +e
 
     for pkg in $BREWS; do
-        if brew list -1 | grep -q "^${pkg}\$"; then
+        if brew list --formula -1 | grep -q "^${pkg}\$"; then
             $ECHO "${CLR_SUCCESS}upgrading: $pkg...${CLR_CLEAR}"
             brew upgrade $pkg 2>/dev/null
             brew link --overwrite $pkg 2>/dev/null

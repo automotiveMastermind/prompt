@@ -6,11 +6,10 @@
 
 ## Vitals
 
-| Info         | Badges                                    |
-| ------------ | ----------------------------------------- |
-| License      | [![License][license-image]][license-uri]  |
-| License Scan | [![FOSSA Status][fossa-image]][fossa-uri] |
-| Build        | [![Build][build-image]][build-uri]        |
+| Info    | Badges                                   |
+| ------- | ---------------------------------------- |
+| License | [![License][license-image]][license-uri] |
+| Build   | [![Build][build-image]][build-uri]       |
 
 ### Supported Operating Systems
 
@@ -118,9 +117,6 @@ In order to test the installation routine for promptMastermind, we use a set of 
 # build just the mint platform
 ./docker/build.sh mint
 ```
-
-In addition, [circleci][circleci-uri] is used to build all platforms, including macOS as part of our pull request
-validation. Special thanks to [circleci][circleci-uri] for providing the build agents!
 
 ## Features
 
@@ -231,14 +227,11 @@ install-minikube
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license-uri]: LICENSE
 
-[build-image]: https://circleci.com/gh/automotiveMastermind/prompt.svg?style=svg
-[build-uri]: https://circleci.com/gh/automotiveMastermind/prompt
-[circleci-uri]: https://circleci.com
+[build-image]: https://github.com/automotiveMastermind/prompt/workflows/Validation/badge.svg
+[build-uri]: https://github.com/automotiveMastermind/prompt/actions?query=workflow%3AValidation
 
 [preview-image]: https://user-images.githubusercontent.com/1803684/60201230-a8241300-97fc-11e9-8cb6-613cd31d914f.png
 
-[fossa-image]: https://app.fossa.com/api/projects/custom%2B12139%2Fgit%40github.com%3AautomotiveMastermind%2Fprompt.git.svg?type=shield
-[fossa-uri]: https://app.fossa.com/projects/custom%2B12139%2Fgit%40github.com%3AautomotiveMastermind%2Fprompt.git?ref=badge_shield
 [pyenv-url]: https://github.com/pyenv/pyenv
 [direnv-url]: https://github.com/direnv/direnv/wiki/Python
 [kind-url]: https://kind.sigs.k8s.io

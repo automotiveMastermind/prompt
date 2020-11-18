@@ -9,9 +9,9 @@ __am_prompt_update()
     local CLR_WARN=${CLR_WARN:-"\033[1;33m"}        # BRIGHT YELLOW
     local CLR_CLEAR=${CLR_CLEAR:-"\033[0m"}         # DEFAULT COLOR
 
-    local GH_TOKEN=${GH_TOKEN:-}
+    local GITHUB_TOKEN=${GITHUB_TOKEN:-}
     local PROMPT_TOKEN=${PROMPT_TOKEN:-}
-    local PROMPT_TOKEN=${PROMPT_TOKEN:-$GH_TOKEN}
+    local PROMPT_TOKEN=${PROMPT_TOKEN:-$GITHUB_TOKEN}
     local PROMPT_CURL_OPT=${PROMPT_CURL_OPT:-'-s'}
     local PROMPT_COMMIT_REF=${PROMPT_COMMIT_REF:-"master"}
     local PROMPT_SHELL=${PROMPT_SHELL:-"bash"}

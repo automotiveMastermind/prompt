@@ -7,7 +7,7 @@ __am_prompt_aws_install() {
     brew update
 
     for pkg in $BREWS; do
-        if brew list -1 | grep -q "^${pkg}\$"; then
+        if brew list --formula -1 | grep -q "^${pkg}\$"; then
             echo "upgrading: $pkg..."
             brew upgrade $pkg 2>/dev/null
             brew link --overwrite $pkg 2>/dev/null
