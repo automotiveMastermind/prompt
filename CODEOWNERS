@@ -1,7 +1,11 @@
 @automotiveMastermind/Administrators
 
+# this file
 CODEOWNERS @sjk07 @dmccaffery
 
-/.circleci/ @sjk07 @dmccaffery
+# workflows
+/.github/ @sjk07 @dmccaffery
+
+# install scripts
+**/install/ @sjk07 @dmccaffery
 install.sh @sjk07 @dmccaffery
-/uname/ @sjk07 @dmccaffery
