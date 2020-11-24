@@ -10,7 +10,9 @@ __am_prompt_use_shell() {
         exit 1
     fi
 
-    if type brew 1>/dev/null 2>&1; then
+    if [ -f /opt/homebrew/bin/brew ]; then
+        local LOCAL_PREFIX=$(/opt/homebrew/bin/brew --prefix)
+    elif type brew 1>/dev/null 2>&1; then
         local LOCAL_PREFIX=$(brew --prefix)
     elif [ -d $LOCALAPPDATA/git ]; then
         local LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
@@ -39,7 +41,7 @@ __am_prompt_use_shell() {
 
     if [ "$SHELL" != "$PROMPT_SHELL_PATH" ]; then
         echo "${CLR_SUCCESS}setting updated $PROMPT_SHELL to default shell for user...${CLR_CLEAR}"
-        sudo chsh -s $PROMPT_SHELL_PATH $USER
+        sudo chsh -s $PROMPT_SHELL_PATH $(whoami)
 
         # set the default shell for the current session
         export SHELL="$PROMPT_SHELL_PATH"
@@ -48,7 +50,8 @@ __am_prompt_use_shell() {
     echo "${CLR_SUCCESS}"
     echo "##############################################################################"
     echo "##############################################################################"
-    echo "     PLEASE RUN: exec -l \$SHELL # ($SHELL)"
+    echo "     # \$SHELL will be $SHELL"
+    echo "     PLEASE RUN: exec -l \$SHELL"
     echo "##############################################################################"
     echo "##############################################################################"
     echo "${CLR_CLEAR}"

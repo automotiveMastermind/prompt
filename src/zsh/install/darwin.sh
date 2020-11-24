@@ -16,22 +16,19 @@ __am_prompt_install_darwin() {
         fi
     done
 
+    # set permissions on the site-functions paths
+    sudo chmod u=rwx,go=rx "$LOCAL_PREFIX/share/zsh"
+    sudo chown $(whoami) "$LOCAL_PREFIX/share/zsh"
+
+    sudo chmod u=rwx,go=rx "$LOCAL_PREFIX/share/zsh/site-functions"
+    sudo chown $(whoami) "$LOCAL_PREFIX/share/zsh/site-functions"
+
     # test to see if the zsh completion dir is specified
     if [ ! -z "${ZSH_COMPLETION_DIR:-}" ]; then
 
-        # iterate over each completion
-        for completion in $ZSH_COMPLETION_DIR/*; do
-
-            # test for invalid completion
-            if [ ! -e $completion ]; then
-
-                # let the user know we're removing the invalid completion
-                $ECHO "${CLR_WARN}removing: $completion as it no longer exists...${CLR_CLEAR}"
-
-                # remove the completion
-                rm -f $completion
-            fi
-        done
+        # set permissions on the script directory
+        sudo chmod u=rwx,go=rx $ZSH_COMPLETION_DIR
+        sudo chown $(whoami) $ZSH_COMPLETION_DIR
     fi
 }
 

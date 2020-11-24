@@ -70,6 +70,13 @@ fi
 
 export HISTCONTROL=ignoredubs
 
+# detect the apple silicon brew path
+if [ -f /opt/homebrew/bin/brew ]; then
+
+    # force update the path
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+
 if type brew 1>/dev/null 2>&1; then
     export LOCAL_PREFIX=$(brew --prefix)
 elif [ -d $LOCALAPPDATA/git ]; then
@@ -93,7 +100,7 @@ fi
 # test for prompt bin
 if [ -d "$AM_PROMPT/user/bin" ]; then
     # append prompt to path
-    export PATH="$PATH:$AM_PROMPT/user/bin"
+    export PATH="$AM_PROMPT/user/bin:$PATH"
 fi
 
 # evaluate eval scripts

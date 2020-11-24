@@ -35,37 +35,81 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: install-bash
-        run: ./install.sh bash | tee log.txt && bash -lc 'cat $AM_PROMPT/.sha'
+        run: ./hack/install.sh bash
       - name: install-zsh
-        run: ./install.sh zsh | tee log.txt && zsh -lc 'cat $AM_PROMPT/.sha'
+        run: ./hack/install.sh zsh
       - name: run-tests
-        run: ./test.sh
+        run: ./hack/test.sh
 
-  # TODO: add this after figuring out a consistent way to create a non-root user without having to create specialised
-  # dockerfiles for each container type (linuxbrew refuses to install with the root user)
-  # docker:
-  #   name: "end-to-end-${{ matrix.container }}"
-  #   runs-on: ubuntu-20.04
-  #   container: ${{ matrix.container }}
-  #   needs: cancel
-  #   strategy:
-  #     matrix:
-  #       container:
-  #         - centos:7
-  #         - centos:8
-  #         - debian:9
-  #         - debian:10
-  #         - fedora:32
-  #         - fedora:33
-  #         - linuxmintd/mint18-amd64
-  #         - linuxmintd/mint19-amd64
-  #         - linuxmintd/mint20-amd64
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@v2
-  #     - name: install-bash
-  #       run: ./install.sh bash | tee log.txt && bash -lc 'cat $AM_PROMPT/.sha'
-  #     - name: install-zsh
-  #       run: ./install.sh zsh | tee log.txt && zsh -lc 'cat $AM_PROMPT/.sha'
-  #     - name: run-tests
-  #       run: ./test.sh
+  win:
+    name: "end-to-end-${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    needs: cancel
+    strategy:
+      matrix:
+        os:
+          - windows-2019
+    defaults:
+      run:
+        shell: wsl-bash {0}
+    steps:
+      - name: setup-wsl
+        uses: vampire/setup-wsl@v1
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: install-pre
+        run: ./hack/pre.apt.sh
+      - name: install-bash
+        run: gosu build ./hack/install.sh bash
+      - name: install-zsh
+        run: gosu build ./hack/install.sh zsh
+      - name: run-tests
+        run: gosu build ./hack/test.sh
+
+  docker-apt:
+    name: "end-to-end-${{ matrix.container }}"
+    runs-on: ubuntu-20.04
+    container: ${{ matrix.container }}
+    needs: cancel
+    strategy:
+      matrix:
+        container:
+          - debian:9
+          - debian:10
+          - linuxmintd/mint18-amd64
+          - linuxmintd/mint19-amd64
+          - linuxmintd/mint20-amd64
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: install-pre
+        run: ./hack/pre.apt.sh
+      - name: install-bash
+        run: gosu build ./hack/install.sh bash
+      - name: install-zsh
+        run: gosu build ./hack/install.sh zsh
+      - name: run-tests
+        run: gosu build ./hack/test.sh
+
+  docker-yum:
+    name: "end-to-end-${{ matrix.container }}"
+    runs-on: ubuntu-20.04
+    container: ${{ matrix.container }}
+    needs: cancel
+    strategy:
+      matrix:
+        container:
+          - centos:8
+          - fedora:32
+          - fedora:33
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: install-pre
+        run: ./hack/pre.yum.sh
+      - name: install-bash
+        run: gosu build ./hack/install.sh bash
+      - name: install-zsh
+        run: gosu build ./hack/install.sh zsh
+      - name: run-tests
+        run: gosu build ./hack/test.sh
