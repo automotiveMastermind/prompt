@@ -23,7 +23,7 @@ KEYGRIPS="$(gpg --with-keygrip --list-secret-keys $@ | grep Keygrip | awk '{prin
 for keygrip in $KEYGRIPS; do
 
     # remove the keygrip
-    rm "$HOME/.gnupg/private-keys-v1.d/$keygrip.key" 2> /dev/null
+    rm "$HOME/.gnupg/private-keys-v1.d/$keygrip.key" 2>/dev/null || true
 done
 
 # print the card status
