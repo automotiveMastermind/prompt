@@ -30,10 +30,10 @@ __am_prompt_add_var() {
     local VARIABLE="$1"=\"$2\"
     local VAR_PATH="$AM_PROMPT/user/variables.sh"
 
-    echo 'Adding varable: $VARIABLE'
+    echo "add-var: adding varable: $VARIABLE"
     echo >> "$VAR_PATH"
     echo "$VARIABLE" >> "$VAR_PATH"
-    . "$VAR_PATH"
+    source "$VAR_PATH"
 }
 
 __am_prompt_add_var $@

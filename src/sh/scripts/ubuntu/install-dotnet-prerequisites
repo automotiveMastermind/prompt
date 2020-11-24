@@ -1,0 +1,36 @@
+#! /usr/bin/env sh
+
+# source the os release
+. /etc/os-release
+
+# get the major version
+MAJOR_VERSION=${VERSION_ID%.*}
+
+sudo apt-get update
+
+case "${MAJOR_VERSION}" in
+    "20")
+        sudo apt-get install -y --no-install-recommends \
+            ca-certificates \
+            \
+            libc6 \
+            libgcc1 \
+            libgssapi-krb5-2 \
+            libicu66 \
+            libssl1.1 \
+            libstdc++6 \
+            zlib1g
+        ;;
+    "18")
+        sudo apt-get install -y --no-install-recommends \
+            ca-certificates \
+            \
+            libc6 \
+            libgcc1 \
+            libgssapi-krb5-2 \
+            libicu60 \
+            libssl1.1 \
+            libstdc++6 \
+            zlib1g
+        ;;
+esac

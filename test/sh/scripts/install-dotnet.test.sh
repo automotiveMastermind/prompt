@@ -10,4 +10,3 @@ echo 'test channel install'
 
 echo 'test version install'
 ./src/sh/scripts/install-dotnet --version latest
-

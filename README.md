@@ -23,7 +23,7 @@ only validate a few of the most popular.
 | ubuntu | 16.04 (Xenial Xerus), 18.04 (Bionic Beaver), and 20.04 (Focal Fossa) |
 | fedora | 32 and 33                                                            |
 | debian | 9 (Stretch) and 10 (Buster)                                          |
-| centOS | 7 and 8                                                              |
+| centOS | 8                                                                    |
 | mint   | 18 (Sarah), 19 (Tara), and 20 (Ulyana)                               |
 
 > NOTE: not all capabilities are tested. If you discover any bugs or wish to add your favourite distro to the validated

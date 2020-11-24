@@ -9,14 +9,6 @@ elif [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
 fi
 
-if type gulp 1>/dev/null 2>&1; then
-    . <(gulp --completion=bash)
-fi
-
-if type grunt 1>/dev/null 2>&1; then
-    . <(grunt --completion=bash)
-fi
-
 if type kubectl 1>/dev/null 2>&1; then
     . <(kubectl completion bash)
 fi
