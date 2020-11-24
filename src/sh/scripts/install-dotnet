@@ -64,6 +64,12 @@ __am_prompt_dotnet_install() {
         mkdir -p "$DOTNET_INSTALL_DIR"
     fi
 
+    local DOTNET_PREREQUISITES=$(command -v install-dotnet-prerequisites 2>/dev/null)
+
+    if [ ! -z "${DOTNET_PREREQUISITES}" ]; then
+        __am_prompt_safe_exec "${DOTNET_PREREQUISITES}"
+    fi
+
     local DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
 
     local DOTNET_URI='https://dot.net/v1/dotnet-install.sh'

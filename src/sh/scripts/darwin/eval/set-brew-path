@@ -1,0 +1,11 @@
+#! /usr/bin/env sh
+
+# -- alias for homebrew versions
+
+if [ -f /usr/local/bin/brew ]; then
+    alias brew-intel='arch -x86_64 /usr/local/bin/brew'
+fi
+
+if [ -f /opt/homebrew/bin/brew ]; then
+    alias brew-arm='arch -arm64e /opt/homebrew/bin/brew'
+fi

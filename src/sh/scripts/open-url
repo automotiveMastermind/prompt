@@ -1,24 +1,32 @@
 #!/usr/bin/env sh
 
 __am_prompt_open_url() {
-    local url="$1"
+    local url=${1:-}
 
-    if [ -z ${1:-} ]; then
+    if [ -z $url ]; then
         echo 'open-url: url must be supplied'
         return 1
     fi
 
+    set +e
+
     for cmd in open gnome-open kde-open xdg-open sensible-browser; do
-        if type "$cmd" 1>/dev/null 2>&1; then
+        if type $cmd 1>/dev/null 2>&1; then
             echo "open-url: opening $url via $cmd..."
-            "$cmd" "$url"
+            $cmd "$url" 1>/dev/null 2>&1
+
+            exit_code=$?
+
+            if [ $exit_code -ne 0 ]; then
+                echo "open-url: please open a browser to: $url"
+            fi
+
             return 0
         fi
     done
 
     # no open or browser was available (headless)
-    echo "Open a browser: $url"
-    return 0
+    echo "open-url: please open a browser to: $url"
 }
 
 __am_prompt_open_url $@

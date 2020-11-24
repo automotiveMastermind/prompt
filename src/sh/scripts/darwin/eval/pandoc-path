@@ -1,5 +1,0 @@
-#! /usr/bin/env sh
-
-if type /usr/libexec/path_helper 1>/dev/null 2>&1; then
-  eval "$(/usr/libexec/path_helper)"
-fi

@@ -5,7 +5,7 @@ if [ ! -z "${AM_PROMPT_DEBUG:-}" ]; then
 fi
 
 __am_prompt_remove_var_usage() {
-    echo 'remove-var <name> <value>'
+    echo 'remove-var <name>'
     echo '     name  : a name for your variable'
 }
 

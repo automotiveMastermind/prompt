@@ -3,14 +3,6 @@
 # use case sensitive match followed by case-insensitive match
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
-if type gulp 1>/dev/null 2>&1; then
-    . <(gulp --completion=zsh)
-fi
-
-if type grunt 1>/dev/null 2>&1; then
-    . <(grunt --completion=zsh)
-fi
-
 if type kubectl 1>/dev/null 2>&1; then
     . <(kubectl completion zsh)
 fi

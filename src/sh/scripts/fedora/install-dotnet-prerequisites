@@ -1,0 +1,8 @@
+#! /usr/bin/env sh
+
+sudo dnf install -y \
+    ca-certificates \
+    \
+    krb5-libs \
+    libicu \
+    openssl-libs

@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
+# determine if gpgconf is available on the system
+if ! type gpgconf 1>/dev/null 2>&1; then
+    # move on immediately
+    return
+fi
+
 # determine if this is a tty
 if [ -t 1 ]; then
 

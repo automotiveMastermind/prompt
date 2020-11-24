@@ -3,18 +3,20 @@
 set -e
 
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
+CLR_WARN="\033[1;33m"       # BRIGHT YELLOW
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 ECHO='echo'
-
-AM_HOME="$HOME/.am"
-AM_PROMPT="$AM_HOME/prompt"
 
 # when not outputing to a tty, add spacing instead of colors
 if [ ! -t 1 ]; then
     CLR_SUCCESS="\n------------------------------------------------------------------------------------------------------------------------\n"
+    CLR_WARN=$CLR_SUCCESS
     CLR_CLEAR=$CLR_SUCCESS
     ECHO='printf'
 fi
+
+AM_HOME="$HOME/.am"
+AM_PROMPT="$AM_HOME/prompt"
 
 __am_prompt_success() {
     $ECHO "${CLR_SUCCESS}prompt-install: $1${CLR_CLEAR}"
@@ -116,10 +118,9 @@ __am_prompt_install() {
         local CURL_OPT="$CURL_OPT -H 'Authorization: token $GITHUB_TOKEN'"
     fi
 
-    local SHA_URI="https://api.github.com/repos/automotivemastermind/prompt/commits/master"
-    local PROMPT_SHA=$(curl $CURL_OPT $SHA_URI | grep sha | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
+    local PROMPT_SHA=$(cat VERSION)
     local PROMPT_SHA_PATH=$HOME/.am/prompt/.sha
-    local PROMPT_CHANGELOG_URI="https://github.com/automotivemastermind/prompt/blob/$PROMPT_SHA/CHANGELOG.md"
+    local PROMPT_CHANGELOG_URL="https://github.com/automotivemastermind/prompt/blob/$PROMPT_SHA/CHANGELOG.md"
 
     echo $PROMPT_SHA > $PROMPT_SHA_PATH
 
@@ -147,7 +148,7 @@ __am_prompt_install() {
     . $AM_PROMPT/sh/scripts/use-shell $PROMPT_SHELL
 
     # open the changelog url
-    . $AM_PROMPT/sh/scripts/open-url $PROMPT_CHANGELOG_URI 1>/dev/null
+    . $AM_PROMPT/sh/scripts/open-url $PROMPT_CHANGELOG_URL
 }
 
 __am_prompt_install $@

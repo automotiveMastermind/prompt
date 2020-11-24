@@ -6,7 +6,7 @@ __am_prompt_pandoc_install() {
     brew install pandoc librsvg
     brew tap homebrew/cask
     brew cask install basictex
-    eval "$(/usr/libexec/path_helper)"
+    . <(/usr/libexec/path_helper -s)
 
     echo
     echo "You will be asked for admin credentials to install tex plugins"

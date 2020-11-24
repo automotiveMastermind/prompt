@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 if [ -f "$HOME/.linuxbrew/bin/brew" ]; then
     eval $("$HOME/.linuxbrew/bin/brew" shellenv)

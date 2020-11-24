@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
 
+set -e
+
 __am_prompt_install_linux() {
 
-    local BREWS='gcc git'
+    local BREWS='gcc git gpg'
 
     if ! type brew 1>/dev/null 2>&1; then
         $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
@@ -27,8 +29,8 @@ __am_prompt_install_linux() {
         fi
     done
 
-    set -e
-
+    # make sure we have ownership of linuxbrew
+    sudo chown -R $(whoami) /home/linuxbrew/.linuxbrew
 }
 
 __am_prompt_install_nvm() {
