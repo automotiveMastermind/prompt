@@ -6,21 +6,28 @@
 
 ## Vitals
 
-| Info    | Badges                                   |
-| ------- | ---------------------------------------- |
-| License | [![License][license-image]][license-uri] |
-| Build   | [![Build][build-image]][build-uri]       |
+| Info     | Badges                                                      |
+| -------- | ----------------------------------------------------------- |
+| License  | [![License][license-image]][license-url]                    |
+| Build    | [![build][workflow-image]][workflow-url]                    |
+| Releases | ![stable][stable-version-image] ![next][next-version-image] |
 
-### Supported Operating Systems
+### Operating Systems
 
-| Name   | Version           |
-| ------ | ----------------- |
-| macOS  | Sierra or greater |
-| ubuntu | 16.04 or greater  |
-| fedora | 29 or greater     |
-| debian | 9 or greater      |
-| centOS | 7 or greater      |
-| mint   | 19 or greater     |
+While prompt *should* run on macOS High Sierra or greater and all Linux distributions with either apt-get or yum, we
+only validate a few of the most popular.
+
+| Name   | Version                                                              |
+| ------ | -------------------------------------------------------------------- |
+| macOS  | 10.15 (Catalina) and 11.0 (Big Sur)                                  |
+| ubuntu | 16.04 (Xenial Xerus), 18.04 (Bionic Beaver), and 20.04 (Focal Fossa) |
+| fedora | 32 and 33                                                            |
+| debian | 9 (Stretch) and 10 (Buster)                                          |
+| centOS | 7 and 8                                                              |
+| mint   | 18 (Sarah), 19 (Tara), and 20 (Ulyana)                               |
+
+> NOTE: not all capabilities are tested. If you discover any bugs or wish to add your favourite distro to the validated
+> list, please [create an issue][new-issue-url].
 
 ## Know It
 
@@ -42,7 +49,7 @@ including:
 Note: All "extensions" are implemented as scripts added to the path, so it should not interfere with existing
 customization (aside from the prompt).
 
-### Use It
+## Use It
 
 Install promptMastermind in one step (choose one of the following options):
 
@@ -56,16 +63,16 @@ curl -fsSL https://git.io/am-prompt | sh -s -- zsh
 
 > NOTE: if you do not specify a shell, bash will be used by default
 
-#### Specific Versions
+### Specific Versions
 
 Although it is **NOT** recommended, you can install a specific version of prompt using one of the following:
 
 ``` sh
-# install and use bash with prompt v6.0.0
+# install and use bash with prompt v7.0.0
 curl -fsSL https://git.io/am-prompt | sh -s -- --version v7.0.0 bash
 
-# install and use zsh with prompt v7.0.0
-curl -fsSL https://git.io/am-prompt | sh -s -- --version v7.0.0 zsh
+# install and use zsh with prompt v8.0.0
+curl -fsSL https://git.io/am-prompt | sh -s -- --version v8.0.0 zsh
 ```
 
 All available versions of prompt are available here: <https://github.com/automotiveMastermind/prompt/releases>
@@ -222,13 +229,10 @@ install-minikube
 
 ## Copyright and License
 
-&copy; automotiveMastermind and contributors. Distributed under the MIT license. See [LICENSE][license-uri] for details.
+&copy; automotiveMastermind and contributors. Distributed under the MIT license. See [LICENSE][license-url] for details.
 
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
-[license-uri]: LICENSE
-
-[build-image]: https://github.com/automotiveMastermind/prompt/workflows/Validation/badge.svg
-[build-uri]: https://github.com/automotiveMastermind/prompt/actions?query=workflow%3AValidation
+[license-url]: LICENSE
 
 [preview-image]: https://user-images.githubusercontent.com/1803684/60201230-a8241300-97fc-11e9-8cb6-613cd31d914f.png
 
@@ -240,3 +244,11 @@ install-minikube
 [dotnet-sdk-url]: https://github.com/dotnet/installer
 [minikube-url]: https://minikube.sigs.k8s.io/docs/start/
 [pandoc-url]: https://pandoc.org
+
+[workflow-url]: https://github.com/automotivemastermind/prompt/actions?query=workflow%3Aend-to-end
+[workflow-image]: https://img.shields.io/github/workflow/status/automotivemastermind/prompt/end-to-end
+
+[stable-version-image]: https://img.shields.io/github/v/release/automotivemastermind/prompt?label=stable&sort=semver
+[next-version-image]: https://img.shields.io/github/v/tag/automotivemastermind/prompt?color=orange&include_prereleases&label=next&sort=semver
+
+[new-issue-url]: https://github.com/automotivemastermind/prompt/issues/new

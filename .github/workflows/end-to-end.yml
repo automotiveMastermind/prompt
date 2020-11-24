@@ -1,15 +1,17 @@
-name: Validation
+name: end-to-end
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
   push:
     branches:
       - build/*
+      - master
+      - next
+      - +([0-9])?(.{+([0-9]),x}).x
 
 jobs:
   cancel:
-    name: 'Cancel Previous Runs'
+    name: cancel-previous-runs
     runs-on: ubuntu-20.04
     timeout-minutes: 3
     steps:
@@ -18,7 +20,7 @@ jobs:
           access_token: ${{ github.token }}
 
   os:
-    name: "Validate: ${{ matrix.os }}"
+    name: "end-to-end-${{ matrix.os }}"
     runs-on: ${{ matrix.os }}
     needs: cancel
     strategy:
@@ -30,19 +32,19 @@ jobs:
           - ubuntu-18.04
           - ubuntu-16.04
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v2
-      - name: Prompt Install (bash)
+      - name: install-bash
         run: ./install.sh bash | tee log.txt && bash -lc 'cat $AM_PROMPT/.sha'
-      - name: Prompt Install (zsh)
+      - name: install-zsh
         run: ./install.sh zsh | tee log.txt && zsh -lc 'cat $AM_PROMPT/.sha'
-      - name: Platform Tests
+      - name: run-tests
         run: ./test.sh
 
   # TODO: add this after figuring out a consistent way to create a non-root user without having to create specialised
   # dockerfiles for each container type (linuxbrew refuses to install with the root user)
   # docker:
-  #   name: "Validate: ${{ matrix.container }}"
+  #   name: "end-to-end-${{ matrix.container }}"
   #   runs-on: ubuntu-20.04
   #   container: ${{ matrix.container }}
   #   needs: cancel
@@ -52,16 +54,18 @@ jobs:
   #         - centos:7
   #         - centos:8
   #         - debian:9
-  #         - fedora:31
+  #         - debian:10
   #         - fedora:32
   #         - fedora:33
+  #         - linuxmintd/mint18-amd64
+  #         - linuxmintd/mint19-amd64
   #         - linuxmintd/mint20-amd64
   #   steps:
-  #     - name: Checkout
+  #     - name: checkout
   #       uses: actions/checkout@v2
-  #     - name: Prompt Install (bash)
+  #     - name: install-bash
   #       run: ./install.sh bash | tee log.txt && bash -lc 'cat $AM_PROMPT/.sha'
-  #     - name: Prompt Install (zsh)
+  #     - name: install-zsh
   #       run: ./install.sh zsh | tee log.txt && zsh -lc 'cat $AM_PROMPT/.sha'
-  #     - name: Platform Tests
+  #     - name: run-tests
   #       run: ./test.sh
