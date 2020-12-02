@@ -4,7 +4,7 @@ set -e
 
 __am_prompt_install_debian() {
     local SUDO=$(command -v sudo 2>/dev/null || "")
-    local PACKAGES='sudo build-essential curl file git bash'
+    local PACKAGES='sudo build-essential curl file git bash procps'
 
     $ECHO "${CLR_SUCCESS}updating software repositories...${CLR_CLEAR}"
     $SUDO apt-get update
