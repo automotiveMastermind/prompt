@@ -4,7 +4,6 @@ on:
   pull_request:
   push:
     branches:
-      - build/*
       - master
       - next
       - +([0-9])?(.{+([0-9]),x}).x
