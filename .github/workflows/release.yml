@@ -26,7 +26,8 @@ jobs:
             @semantic-release/release-notes-generator \
             @semantic-release/changelog \
             @semantic-release/exec \
-            @semantic-release/github
+            @semantic-release/github \
+            @semantic-release/git
 
       - name: semantic-release-dry-run
         run: npx semantic-release --ci --dry-run
