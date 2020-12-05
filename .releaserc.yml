@@ -1,3 +1,9 @@
+branches:
+  - master
+  - +([0-9])?(.{+([0-9]),x}).x
+  - name: next
+    prerelease: true
+
 plugins:
   - "@semantic-release/commit-analyzer"
   - "@semantic-release/release-notes-generator"
@@ -5,12 +11,7 @@ plugins:
   - path: "@semantic-release/exec"
     prepareCmd: echo ${nextRelease.gitHead} > VERSION
   - path: "@semantic-release/github"
+  - path: "@semantic-release/git"
     assets:
       - CHANGELOG.md
       - VERSION
-
-branches:
-  - master
-  - +([0-9])?(.{+([0-9]),x}).x
-  - name: next
-    prerelease: true
