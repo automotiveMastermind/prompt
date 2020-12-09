@@ -2,6 +2,8 @@
 
 set -e
 
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_WARN="\033[1;33m"       # BRIGHT YELLOW
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
@@ -46,25 +48,25 @@ __am_prompt_install() {
         cp -R $AM_PROMPT/* "$BACKUP_PATH" 1>/dev/null
 
         __am_prompt_success "removing $AM_PROMPT"
-        rm -rf "$AM_PROMPT/bash" 1>/dev/null 2>&1
-        rm -rf "$AM_PROMPT/sh" 1>/dev/null 2>&1
-        rm -rf "$AM_PROMPT/zsh" 1>/dev/null 2>&1
-        rm -rf "$AM_PROMPT/themes" 1>/dev/null 2>&1
+        rm -rf "$AM_PROMPT/bash"    1>/dev/null 2>&1
+        rm -rf "$AM_PROMPT/sh"      1>/dev/null 2>&1
+        rm -rf "$AM_PROMPT/zsh"     1>/dev/null 2>&1
+        rm -rf "$AM_PROMPT/themes"  1>/dev/null 2>&1
 
         # remove legacy paths
         rm -rf "$AM_PROMPT/completions" 1>/dev/null 2>&1
-        rm -rf "$AM_PROMPT/scripts" 1>/dev/null 2>&1
-        rm -f "$AM_PROMPT/bashrc" 1>/dev/null 2>&1
+        rm -rf "$AM_PROMPT/scripts"     1>/dev/null 2>&1
+        rm -f "$AM_PROMPT/bashrc"       1>/dev/null 2>&1
     fi
 
     __am_prompt_success "creating $AM_PROMPT"
     mkdir -p "$AM_PROMPT/user" 1>/dev/null 2>&1
 
     __am_prompt_success "installing promptMastermind to $AM_PROMPT"
-    cp -Rf src/bash "$AM_PROMPT" 1>/dev/null
-    cp -Rf src/sh "$AM_PROMPT" 1>/dev/null
-    cp -Rf src/zsh "$AM_PROMPT" 1>/dev/null
-    cp -Rf src/themes "$AM_PROMPT" 1>/dev/null
+    cp -Rf "$SCRIPT_DIR/src/bash"   "$AM_PROMPT" 1>/dev/null
+    cp -Rf "$SCRIPT_DIR/src/sh"     "$AM_PROMPT" 1>/dev/null
+    cp -Rf "$SCRIPT_DIR/src/zsh"    "$AM_PROMPT" 1>/dev/null
+    cp -Rf "$SCRIPT_DIR/src/themes" "$AM_PROMPT" 1>/dev/null
 
     for USER_ITEM in src/user/*; do
         local USER_ITEM_NAME=$(basename "$USER_ITEM")
@@ -120,7 +122,6 @@ __am_prompt_install() {
 
     local PROMPT_SHA=$(cat VERSION)
     local PROMPT_SHA_PATH=$HOME/.am/prompt/.sha
-    local PROMPT_CHANGELOG_URL="https://github.com/automotivemastermind/prompt/blob/$PROMPT_SHA/CHANGELOG.md"
 
     echo $PROMPT_SHA > $PROMPT_SHA_PATH
 
@@ -145,10 +146,16 @@ __am_prompt_install() {
     local PROMPT_SHELL=$(echo $PROMPT_SHELL | tr '[:upper:]' '[:lower:]')
 
     # use the correct shell
-    . $AM_PROMPT/sh/scripts/use-shell $PROMPT_SHELL
+    . "$AM_PROMPT/sh/scripts/use-shell" $PROMPT_SHELL
 
     # open the changelog url
-    . $AM_PROMPT/sh/scripts/open-url $PROMPT_CHANGELOG_URL
+    . "$AM_PROMPT/sh/scripts/open-url" "https://github.com/automotivemastermind/prompt/blob/$PROMPT_SHA/CHANGELOG.md"
 }
+
+echo
+echo "${CLR_WARN}prompt: establishing sudo (you may be prompted for credentials)...${CLR_CLEAR}"
+sudo echo
+
+trap 'echo; echo; echo "${CLR_WARN}prompt: terminating install...${CLR_CLEAR}"; exit -1;' INT
 
 __am_prompt_install $@
