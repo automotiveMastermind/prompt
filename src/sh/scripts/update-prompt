@@ -69,33 +69,27 @@ __am_prompt_update()
 
         # print latest version already installed
         if [ "${PROMPT_SHA}" = "${PROMPT_CURRENT_SHA}" ]; then
-            echo "${CLR_SUCCESS}prompt: latest version already installed: ${PROMPT_SHA}.${CLR_CLEAR}"
+            echo "${CLR_SUCCESS}prompt: latest version already installed: ${PROMPT_SHA}"
+            echo "  - run update-prompt with the --force flag to reinstall ${CLR_CLEAR}"
             exit 0
         fi
     fi
 
     if [ ! -z "${PROMPT_DRY_RUN:-}" ]; then
-        echo "${CLR_WARN}prompt: a new version of prompt is available: ${PROMPT_SHA}."
+        echo "${CLR_WARN}prompt: a new version of prompt is available: ${PROMPT_SHA}"
         echo "  - run the update-prompt command line tool to upgrade${CLR_CLEAR}"
         return 0
     fi
 
-    remove-backup
-
-    local PROMPT_CHANGELOG_URI="https://github.com/automotivemastermind/prompt/blob/$PROMPT_COMMIT_REF/CHANGELOG.md"
     local PROMPT_INSTALL_URI="https://github.com/automotiveMastermind/prompt/archive/$PROMPT_COMMIT_REF.tar.gz"
-    local PROMPT_INTALL_TEMP=$(mktemp -d)
-    local PROMPT_EXTRACT_TEMP="$PROMPT_INTALL_TEMP/extract"
+    local PROMPT_INSTALL_TEMP=$(mktemp -d)
 
-    local CURRENT_DIR=${PWD}
+    curl -skLo $PROMPT_INSTALL_TEMP/prompt.tgz $PROMPT_INSTALL_URI
+    tar -xzf $PROMPT_INSTALL_TEMP/prompt.tgz --strip-components=1 --directory=$PROMPT_INSTALL_TEMP
 
-    cd $PROMPT_INTALL_TEMP 1>/dev/null
-    curl -skL $PROMPT_INSTALL_URI | tar zx
-    cd prompt-master 1>/dev/null
-    ./install.sh $PROMPT_SHELL
-    cd $CURRENT_DIR
-
-    rm -rf $PROMPT_INTALL_TEMP 1>/dev/null
+    . "$PROMPT_INSTALL_TEMP/install.sh" $PROMPT_SHELL
 }
+
+trap 'echo; echo; echo "${CLR_WARN}prompt: terminating update...${CLR_CLEAR}"; exit -1;' INT
 
 __am_prompt_update $@
