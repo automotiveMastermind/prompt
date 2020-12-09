@@ -25,9 +25,9 @@ __am_prompt_ensure_rosetta() {
     $ECHO "    - /usr/local    : x86_64 emulation via Rosetta 2                          "
     $ECHO
     $ECHO "  The Apple Silicon (arm64e) version will be the default as it will be placed "
-    $ECHO "  on the PATH variable before the native version. This is compatible with more"
-    $ECHO "  formulae at this time. To use the intel (x86_64) version, you can use the   "
-    $ECHO "  \`brew-intel\` alias. For example:                                          "
+    $ECHO "  on the PATH variable before the native version. While this is not compatible"
+    $ECHO "  with most formulae, we expect this to improve over time. To use the         "
+    $ECHO "  intel (x86_64) version, you can use the \`brew-intel\` alias. For example:  "
     $ECHO
     $ECHO "  brew-intel install git                                                      "
     $ECHO
