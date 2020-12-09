@@ -31,7 +31,7 @@ __am_prompt_install() {
     __am_prompt_success "creating backup path: $BACKUP_PATH"
     mkdir -p "$BACKUP_PATH" 1>/dev/null
 
-    for TEMPLATE in template/*; do
+    for TEMPLATE in $SCRIPT_DIR/template/*; do
         local TEMPLATE_NAME=$(basename "$TEMPLATE")
         local TEMPLATE_PATH="$HOME/.${TEMPLATE_NAME}"
 
@@ -68,7 +68,7 @@ __am_prompt_install() {
     cp -Rf "$SCRIPT_DIR/src/zsh"    "$AM_PROMPT" 1>/dev/null
     cp -Rf "$SCRIPT_DIR/src/themes" "$AM_PROMPT" 1>/dev/null
 
-    for USER_ITEM in src/user/*; do
+    for USER_ITEM in $SCRIPT_DIR/src/user/*; do
         local USER_ITEM_NAME=$(basename "$USER_ITEM")
         local USER_ITEM_PATH="$AM_PROMPT/user/$USER_ITEM_NAME"
 
@@ -120,7 +120,7 @@ __am_prompt_install() {
         local CURL_OPT="$CURL_OPT -H 'Authorization: token $GITHUB_TOKEN'"
     fi
 
-    local PROMPT_SHA=$(cat VERSION)
+    local PROMPT_SHA=$(cat "$SCRIPT_DIR/VERSION")
     local PROMPT_SHA_PATH=$HOME/.am/prompt/.sha
 
     echo $PROMPT_SHA > $PROMPT_SHA_PATH
