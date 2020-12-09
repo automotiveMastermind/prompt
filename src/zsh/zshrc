@@ -15,7 +15,8 @@ if [ -t 1 ]; then
 fi
 
 # shell options
-setopt CDABLE_VARS
+setopt cdable_vars
+setopt inc_append_history
 
 # rebuild completion
 rm -rf $HOME/.zcompdump
