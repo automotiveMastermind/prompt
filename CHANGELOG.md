@@ -1,3 +1,17 @@
+# [8.2.0-next.2](https://github.com/automotiveMastermind/prompt/compare/v8.2.0-next.1...v8.2.0-next.2) (2020-12-16)
+
+
+### Bug Fixes
+
+* **build:** use semantic-release token for release ([debaeb5](https://github.com/automotiveMastermind/prompt/commit/debaeb598504f1d1372265f05c0df983d1bf6b39))
+* **install:** use script directory for all relative paths ([ed0db36](https://github.com/automotiveMastermind/prompt/commit/ed0db3652de59bf2064341cc2bd02c57e4390e28))
+* ensure update-prompt can use release channels ([2225a75](https://github.com/automotiveMastermind/prompt/commit/2225a7571d0f29e7d0803ab78303cc494e2b11c5))
+
+
+### Features
+
+* **zsh:** enable history across terminal sessions ([ed5aceb](https://github.com/automotiveMastermind/prompt/commit/ed5aceb7222c7fdc8f53b7eff6dec944991727bd))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
