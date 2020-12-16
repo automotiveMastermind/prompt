@@ -109,22 +109,6 @@ The backup folder is located at: `$HOME/.am/backup/prompt/[date]`.
 
 All profile and rc scripts such as `$HOME/.bash_profile` are also backed up to `$HOME/.am/backup/prompt/[date]/`.
 
-## Build It
-
-In order to test the installation routine for promptMastermind, we use a set of docker images for each of the supported
-*nix platforms. The build script in the `docker/` folder can be used to build all of the images, or specific ones:
-
-```sh
-# build all of the platforms (this will take a while)
-./docker/build.sh
-
-# build the debian and ubuntu platforms
-./docker/build.sh debian ubuntu
-
-# build just the mint platform
-./docker/build.sh mint
-```
-
 ## Features
 
 ### Two-Line Prompt
