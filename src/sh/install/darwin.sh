@@ -114,7 +114,7 @@ __am_prompt_install_darwin() {
     set +e
 
     for pkg in $BREWS; do
-        if ${BREW_CMD} list --formula -1 | grep -q "^${pkg}\$"; then
+        if ${BREW_CMD} list --versions "$pkg" 1>/dev/null; then
             $ECHO "${CLR_SUCCESS}upgrading: $pkg...${CLR_CLEAR}"
             ${BREW_CMD} upgrade $pkg 2>/dev/null
             ${BREW_CMD} link --overwrite $pkg 2>/dev/null

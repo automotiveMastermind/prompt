@@ -2,12 +2,14 @@
 
 set -e
 
-SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+SCRIPT_DIR=${2:-$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)}
 
 CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
 CLR_WARN="\033[1;33m"       # BRIGHT YELLOW
 CLR_CLEAR="\033[0m"         # DEFAULT COLOR
 ECHO='echo'
+
+HOMEBREW_NO_AUTO_UPDATE=1
 
 # when not outputing to a tty, add spacing instead of colors
 if [ ! -t 1 ]; then
