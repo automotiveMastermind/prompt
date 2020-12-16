@@ -1,3 +1,10 @@
+# [8.2.0-next.3](https://github.com/automotiveMastermind/prompt/compare/v8.2.0-next.2...v8.2.0-next.3) (2020-12-16)
+
+
+### Bug Fixes
+
+* replace brew formulae detection ([580c320](https://github.com/automotiveMastermind/prompt/commit/580c320db46706b9e75b3996fd068f2f2cbabeeb))
+
 # [8.2.0-next.2](https://github.com/automotiveMastermind/prompt/compare/v8.2.0-next.1...v8.2.0-next.2) (2020-12-16)
 
 
