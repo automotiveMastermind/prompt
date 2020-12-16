@@ -9,7 +9,7 @@ plugins:
   - "@semantic-release/release-notes-generator"
   - "@semantic-release/changelog"
   - path: "@semantic-release/exec"
-    prepareCmd: echo ${nextRelease.gitHead} > VERSION
+    prepareCmd: echo ${nextRelease.gitTag} > VERSION
   - path: "@semantic-release/github"
   - path: "@semantic-release/git"
     assets:
