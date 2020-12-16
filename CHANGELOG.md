@@ -1,3 +1,21 @@
+# [8.2.0](https://github.com/automotiveMastermind/prompt/compare/v8.1.0...v8.2.0) (2020-12-16)
+
+
+### Bug Fixes
+
+* replace brew formulae detection ([f1142db](https://github.com/automotiveMastermind/prompt/commit/f1142db6a8a5a4337e90f61840aab89951d57542))
+* **build:** use semantic-release token for release ([c0449ef](https://github.com/automotiveMastermind/prompt/commit/c0449ef04d9327fe91817abecda8c77988ef1021))
+* **install:** use script directory for all relative paths ([8f23fb3](https://github.com/automotiveMastermind/prompt/commit/8f23fb31e7a7398ac09fb7bfbe5ae0be247bc198))
+* ensure update-prompt can use release channels ([34633dc](https://github.com/automotiveMastermind/prompt/commit/34633dcfab57986002290a0b9d401cde61b537ae))
+* include procps in debian prerequisites ([405e236](https://github.com/automotiveMastermind/prompt/commit/405e23614114de1309fff8068f248f0ab957f701))
+* **switch-smart-card:** ignore missing keygrips ([09006e7](https://github.com/automotiveMastermind/prompt/commit/09006e72cb68ab7798687571feda09871e5ba043))
+
+
+### Features
+
+* **zsh:** enable history across terminal sessions ([afd4930](https://github.com/automotiveMastermind/prompt/commit/afd4930de42070631fa9566f4ecc83f89b752e0a))
+* add support for apple silicon ([b2685ce](https://github.com/automotiveMastermind/prompt/commit/b2685ce8928a57aa2e2d35a478f0e3fefb925ff0)), closes [#66](https://github.com/automotiveMastermind/prompt/issues/66) [#69](https://github.com/automotiveMastermind/prompt/issues/69)
+
 # [8.2.0-next.3](https://github.com/automotiveMastermind/prompt/compare/v8.2.0-next.2...v8.2.0-next.3) (2020-12-16)
 
 
