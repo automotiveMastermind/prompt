@@ -218,7 +218,7 @@ install-minikube
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]: LICENSE
 
-[preview-image]: https://user-images.githubusercontent.com/1803684/60201230-a8241300-97fc-11e9-8cb6-613cd31d914f.png
+[preview-image]: https://user-images.githubusercontent.com/1803684/102746284-e1880100-4355-11eb-9f72-1e1a07a579a8.png
 
 [pyenv-url]: https://github.com/pyenv/pyenv
 [direnv-url]: https://github.com/direnv/direnv/wiki/Python

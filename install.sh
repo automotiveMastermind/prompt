@@ -102,26 +102,6 @@ __am_prompt_install() {
         mkdir -p "$AM_PROMPT/bash/completions" 1>/dev/null
     fi
 
-    local GIT_PROMPT_NAME=git-prompt.sh
-    local GIT_PROMPT_URI=https://raw.githubusercontent.com/lyze/posh-git-sh/master/$GIT_PROMPT_NAME
-
-    __am_prompt_success 'downloading better git-prompt'
-    local CURL_RESULT=$(curl -sLD- "$GIT_PROMPT_URI" -o "$AM_PROMPT/zsh/completions/_git-prompt" -# | grep "^HTTP/1.1" | head -n 1 | sed "s/HTTP.1.1 \([0-9]*\).*/\1/")
-
-    if [ "$CURL_RESULT" = "200" ]; then
-        __am_prompt_success 'successfully installed git-prompt'
-        chmod +x "$AM_PROMPT/zsh/completions/_git-prompt" 1>/dev/null
-
-        # copy for consumption in bash as well
-        cp "$AM_PROMPT/zsh/completions/_git-prompt" "$AM_PROMPT/bash/completions/git-prompt.sh"
-    fi
-
-    local CURL_OPT='-s'
-
-    if [ ! -z "${GITHUB_TOKEN:-}" ]; then
-        local CURL_OPT="$CURL_OPT -H 'Authorization: token $GITHUB_TOKEN'"
-    fi
-
     local PROMPT_SHA=$(cat "$SCRIPT_DIR/VERSION")
     local PROMPT_SHA_PATH=$HOME/.am/prompt/.sha
 

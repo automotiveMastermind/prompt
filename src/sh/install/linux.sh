@@ -4,7 +4,7 @@ set -e
 
 __am_prompt_install_linux() {
 
-    local BREWS='gcc git gpg'
+    local BREWS='gcc git gpg starship gh'
 
     if ! type brew 1>/dev/null 2>&1; then
         $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
@@ -31,6 +31,30 @@ __am_prompt_install_linux() {
 
     # make sure we have ownership of linuxbrew
     sudo chown -R $(whoami) /home/linuxbrew/.linuxbrew
+
+    $ECHO "${CLR_SUCCESS}upgrading: fira code font...${CLR_CLEAR}"
+
+    # setup the font dir
+    FONT_DIR="$HOME/.local/share/fonts/NerdFonts"
+
+    # create a temp dir for fonts
+    TEMP_DIR=$(mktemp -d)
+
+    # download fonts
+    curl -sLo "$TEMP_DIR/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+
+    # determine if fira code already exists
+    if [ -d "$FONT_DIR" ]; then
+
+        # delete fira code
+        rm -rf "$FONT_DIR" 1>/dev/null 2>&1
+    fi
+
+    # extract fira code
+    unzip "$TEMP_DIR/FiraCode.zip" 'Fira*.otf' -x '*Windows*' -d "$FONT_DIR" 1>/dev/null
+
+    # remove temp
+    rm -rf $TEMP_DIR 1>/dev/null 2>&1
 }
 
 __am_prompt_install_nvm() {

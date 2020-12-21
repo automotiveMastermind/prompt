@@ -1,27 +1,28 @@
 {
-    "search.exclude": {
-        "**/backup": true,
-        "**/node_modules/**": true
-    },
-    "files.exclude": {
-        "**/.git": true,
-        "**/.DS_Store": true,
-        "**/backup": true,
-        "**/node_modules/**": true
-    },
-    "editor.trimAutoWhitespace": true,
-    "editor.formatOnSave": true,
-    "files.trimTrailingWhitespace": true,
-    "cSpell.words": [
-        "dnvm",
-        "gcloud",
-        "keychain",
-        "macos",
-        "minikube",
-        "repos",
-        "symlink",
-        "toolchain",
-        "xcode",
-        "xplat"
-    ]
+  "search.exclude": {
+    "**/backup": true,
+    "**/node_modules/**": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/backup": true,
+    "**/node_modules/**": true
+  },
+  "editor.trimAutoWhitespace": true,
+  "editor.formatOnSave": true,
+  "files.trimTrailingWhitespace": true,
+  "cSpell.words": [
+    "dnvm",
+    "gcloud",
+    "keychain",
+    "macos",
+    "minikube",
+    "repos",
+    "symlink",
+    "toolchain",
+    "xcode",
+    "xplat"
+  ],
+  "evenBetterToml.taploConfig": ".taplo.toml"
 }

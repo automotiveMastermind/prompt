@@ -105,7 +105,7 @@ __am_prompt_install_arm64() {
 }
 
 __am_prompt_install_darwin() {
-    local BREWS='openssl git go nvm python gpg pinentry-mac'
+    local BREWS='openssl git go nvm python gpg pinentry-mac starship gh'
     local BREW_CMD=${1:-"/usr/local/bin/brew"}
 
     $ECHO "${CLR_SUCCESS}updating homebrew...${CLR_CLEAR}"
@@ -138,4 +138,33 @@ __am_prompt_install_darwin() {
     git config --system credential.helper osxkeychain
 }
 
+__am_prompt_install_fonts() {
+
+    # install font
+    $ECHO "${CLR_SUCCESS}upgrading: fira code font...${CLR_CLEAR}"
+
+    # setup the font dir
+    FONT_DIR="$HOME/Library/Fonts/NerdFonts"
+
+    # create a temp dir for fonts
+    TEMP_DIR=$(mktemp -d)
+
+    # download fonts
+    curl -sLo "$TEMP_DIR/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+
+    # determine if fira code already exists
+    if [ -d "$FONT_DIR" ]; then
+
+        # delete fira code
+        rm -rf "$FONT_DIR" 1>/dev/null 2>&1
+    fi
+
+    # extract fira code
+    unzip "$TEMP_DIR/FiraCode.zip" 'Fira*.otf' -x '*Windows*' -d "$FONT_DIR" 1>/dev/null
+
+    # remove temp
+    rm -rf $TEMP_DIR 1>/dev/null 2>&1
+}
+
 __am_prompt_ensure_rosetta
+__am_prompt_install_fonts
