@@ -1,49 +1,24 @@
 #!/usr/bin/env zsh
 
-__am_prompt_emit_prompt_arrow() {
-
-    # set the default color
-    local CLR_PROMPT=$CLR_USER_PROMPT
-
-    # set color for staff user (administrator)
-    if [ ! -z "$(command id -Gn 2>/dev/null | grep -s -o admin)" ]; then
-        CLR_PROMPT=$CLR_STAFF_PROMPT
-    fi
-
-    # set color for root user
-    if [ $(id -u) = 0 ]; then
-        CLR_PROMPT=$CLR_ROOT_PROMPT
-    fi
-
-    # set the color for an ssh session
-    if [ ! -z "${SSH_CONNECTION:-}" ]; then
-        CLR_PROMPT=$CLR_SSH_PROMPT
-
-        # emit the prompt using the correct color
-        export AM_PROMPT_ARROW="${CLR_PROMPT} (ssh) ${AM_PROMPT_MARKER:-==>} ${CLR_CLEAR_PROMPT}"
-    else
-        # emit the prompt using the correct color
-        export AM_PROMPT_ARROW="${CLR_PROMPT} ${AM_PROMPT_MARKER:-==>} ${CLR_CLEAR_PROMPT}"
-    fi
-}
-
-__am_prompt_set_prompt() {
+__am_prompt_set_window_title() {
     # set the window title
-    echo -ne "\033]0;${USER}@${HOSTNAME%%.*} ${PWD}\007"
-
-    if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
-        setopt PROMPT_SUBST
-        local DIR_ENV="(${VIRTUAL_ENV##*/})"
-    else
-        local DIR_ENV=""
-    fi
-
-    local NEWLINE=$'\n'
-    __posh_git_ps1 "${NEWLINE}%n@%m : %~${NEWLINE}" "$DIR_ENV $AM_PROMPT_ARROW"
+    echo -ne "\033]0; $USER@${HOSTNAME%%.*} $(basename $PWD) \007"
 }
 
-# set up the arrow
-__am_prompt_emit_prompt_arrow
+# detect starship
+if command -v starship &> /dev/null; then
+
+    # set the starship configuration path
+    if [ -f "$AM_PROMPT/user/starship.toml" ]; then
+        export STARSHIP_CONFIG="$AM_PROMPT/user/starship.toml"
+    fi
+
+    # use starship
+    eval "$(starship init zsh)"
+
+    # move on immediately
+    return 0
+fi
 
 # set the prompt command
-precmd_functions=(__am_prompt_set_prompt)
+precmd_functions+=(__am_prompt_set_window_title)

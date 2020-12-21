@@ -184,10 +184,10 @@
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
 	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGkCwwVFlUkbnVsbNQNDg8QERIT
-	FFZOU1NpemVYTlNmRmxhZ3NWTlNOYW1lViRjbGFzcyNAKAAAAAAAABAQgAKAA18QEEZp
-	cmFDb2RlLVJlZ3VsYXLSFxgZGlokY2xhc3NuYW1lWCRjbGFzc2VzVk5TRm9udKIZG1hO
-	U09iamVjdAgRGiQpMjdJTFFTWF5nbnd+hY6QkpSnrLfAx8oAAAAAAAABAQAAAAAAAAAc
-	AAAAAAAAAAAAAAAAAAAA0w==
+	FFZOU1NpemVYTlNmRmxhZ3NWTlNOYW1lViRjbGFzcyNAKgAAAAAAABAQgAKAA18QH0Zp
+	cmFDb2RlTmVyZEZvbnRDb21wbGV0ZS1SZXRpbmHSFxgZGlokY2xhc3NuYW1lWCRjbGFz
+	c2VzVk5TRm9udKIZG1hOU09iamVjdAgRGiQpMjdJTFFTWF5nbnd+hY6QkpS2u8bP1tkA
+	AAAAAAABAQAAAAAAAAAcAAAAAAAAAAAAAAAAAAAA4g==
 	</data>
 	<key>FontAntialias</key>
 	<true/>
@@ -204,6 +204,8 @@
 	cqIWGFhOU09iamVjdAgRGiQpMjdJTFFTV11kand+qKqssbzFzdAAAAAAAAABAQAAAAAA
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
+	<key>ShowActiveProcessArgumentsInTitle</key>
+	<true/>
 	<key>ShowActiveProcessInTitle</key>
 	<true/>
 	<key>ShowCommandKeyInTitle</key>
@@ -211,7 +213,9 @@
 	<key>ShowComponentsWhenTabHasCustomTitle</key>
 	<false/>
 	<key>ShowDimensionsInTitle</key>
-	<true/>
+	<false/>
+	<key>ShowRepresentedURLInTitle</key>
+	<false/>
 	<key>ShowRepresentedURLPathInTitle</key>
 	<false/>
 	<key>ShowShellCommandInTitle</key>
