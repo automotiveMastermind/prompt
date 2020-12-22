@@ -1,3 +1,10 @@
+# [8.3.0-next.1](https://github.com/automotiveMastermind/prompt/compare/v8.2.1-next.1...v8.3.0-next.1) (2020-12-22)
+
+
+### Features
+
+* replace git prompt with starship ([453fb20](https://github.com/automotiveMastermind/prompt/commit/453fb20eb250ddb6001aa280c6e1bd1b6e585f86))
+
 ## [8.2.1-next.1](https://github.com/automotiveMastermind/prompt/compare/v8.2.0...v8.2.1-next.1) (2020-12-22)
 
 
