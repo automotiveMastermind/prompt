@@ -87,7 +87,7 @@ __am_prompt_update()
     curl -skLo $PROMPT_INSTALL_TEMP/prompt.tgz $PROMPT_INSTALL_URI
     tar -xzf $PROMPT_INSTALL_TEMP/prompt.tgz --strip-components=1 --directory=$PROMPT_INSTALL_TEMP
 
-    . "$PROMPT_INSTALL_TEMP/install.sh" $PROMPT_SHELL $PROMPT_INSTALL_TEMP
+    "$PROMPT_INSTALL_TEMP/install.sh" $PROMPT_SHELL $PROMPT_INSTALL_TEMP
 }
 
 trap 'echo; echo; echo "${CLR_WARN}prompt: terminating update...${CLR_CLEAR}"; exit -1;' INT
