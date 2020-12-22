@@ -1,3 +1,10 @@
+## [8.2.1-next.1](https://github.com/automotiveMastermind/prompt/compare/v8.2.0...v8.2.1-next.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* **install:** issue with wsl install ([7784337](https://github.com/automotiveMastermind/prompt/commit/778433768e206e69a521e03b78134b396abedda6))
+
 # [8.2.0](https://github.com/automotiveMastermind/prompt/compare/v8.1.0...v8.2.0) (2020-12-16)
 
 
