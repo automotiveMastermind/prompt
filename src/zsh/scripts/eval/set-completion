@@ -15,7 +15,7 @@ if type minikube 1>/dev/null 2>&1; then
     . <(minikube completion zsh)
 fi
 
-if type nvm 1>/dev/null 2>&1; then
+if type npm 1>/dev/null 2>&1; then
     . <(npm completion)
 fi
 
