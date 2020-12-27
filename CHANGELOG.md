@@ -1,3 +1,11 @@
+# [8.3.0-next.2](https://github.com/automotiveMastermind/prompt/compare/v8.3.0-next.1...v8.3.0-next.2) (2020-12-27)
+
+
+### Bug Fixes
+
+* **prompt:** fix git status for stashed ([f6bc7f1](https://github.com/automotiveMastermind/prompt/commit/f6bc7f1827ed2219495b604308ae4e0fe4ebc698))
+* test for npm rather than nvm in completion ([9d7b915](https://github.com/automotiveMastermind/prompt/commit/9d7b915ca9ceff6b982afbf2be9b95ee860adfc8))
+
 # [8.3.0-next.1](https://github.com/automotiveMastermind/prompt/compare/v8.2.1-next.1...v8.3.0-next.1) (2020-12-22)
 
 
