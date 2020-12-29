@@ -17,6 +17,7 @@ fi
 # shell options
 setopt cdable_vars
 setopt inc_append_history
+setopt +o nomatch
 
 # rebuild completion
 rm -rf $HOME/.zcompdump

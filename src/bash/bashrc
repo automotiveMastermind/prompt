@@ -8,6 +8,7 @@ shopt -s checkwinsize     # check window size on script exit
 shopt -s cdable_vars      # enable change directory to a variable value
 shopt -s extglob          # enable extended glob patterns
 shopt -s globstar         # enable glob ** expansion
+shopt -s nullglob         # enable nullglob
 
 # get bash completion dir
 export BASH_COMPLETION_DIR="$LOCAL_PREFIX/etc/bash_completion.d"
