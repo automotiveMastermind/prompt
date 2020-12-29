@@ -4,5 +4,5 @@
 if [ -f "$HOME/.bashrc" ]; then
 
     # load bash
-    source "$HOME/.bashrc"
+    . "$HOME/.bashrc"
 fi

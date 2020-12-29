@@ -90,6 +90,6 @@ __am_prompt_update()
     . "$PROMPT_INSTALL_TEMP/install.sh" $PROMPT_SHELL $PROMPT_INSTALL_TEMP
 }
 
-trap 'echo; echo; echo "${CLR_WARN}prompt: terminating update...${CLR_CLEAR}"; exit -1;' INT
+trap 'echo; echo; echo "${CLR_WARN}prompt: terminating update...${CLR_CLEAR}"; exit 1;' INT
 
 __am_prompt_update $@
