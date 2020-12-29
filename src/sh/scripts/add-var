@@ -33,7 +33,7 @@ __am_prompt_add_var() {
     echo "add-var: adding varable: $VARIABLE"
     echo >> "$VAR_PATH"
     echo "$VARIABLE" >> "$VAR_PATH"
-    source "$VAR_PATH"
+    . "$VAR_PATH"
 }
 
 __am_prompt_add_var $@
