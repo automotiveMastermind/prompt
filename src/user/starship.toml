@@ -1,40 +1,40 @@
 [aws]
 format = 'on [$symbol($region)]($style) '
-symbol = " "
+symbol = ' '
 
 [battery]
-full_symbol        = ""
-charging_symbol    = ""
-discharging_symbol = ""
+full_symbol        = ''
+charging_symbol    = ''
+discharging_symbol = ''
 
 [character]
 error_symbol   = '[->](bold red)'
 success_symbol = '[->](bold green)'
 
-[gcloud]
-format = 'on [$symbol ($region)]($style) '
-symbol = " "
-
 [conda]
-symbol = " "
+symbol = ' '
 
 [dart]
-symbol = " "
+symbol = ' '
 
 [directory]
-read_only = " "
+read_only = ' '
 
 [docker]
-symbol = " "
+symbol = ' '
 
 [elixir]
-symbol = " "
+symbol = ' '
 
 [elm]
-symbol = " "
+symbol = ' '
+
+[gcloud]
+format = 'on [$symbol ($region)]($style) '
+symbol = ' '
 
 [git_branch]
-symbol = " "
+symbol = ' '
 
 [git_status]
 format   = '([\[ $all_status$ahead_behind\]]($style) )'
@@ -47,54 +47,54 @@ renamed  = '([»$count](bold yellow) )'
 deleted  = '([✘$count](bold red) )'
 
 [golang]
-symbol = " "
+symbol = ' '
 
 [haskell]
-symbol = " "
+symbol = ' '
 
 [hg_branch]
-symbol = " "
+symbol = ' '
 
 [java]
-symbol = " "
+symbol = ' '
 
 [julia]
-symbol = " "
+symbol = ' '
 
 [kubernetes]
 disabled = false
 
 [memory_usage]
-symbol = " "
+symbol = ' '
 
 [nim]
-symbol = " "
+symbol = ' '
 
 [nix_shell]
-symbol = " "
+symbol = ' '
 
 [nodejs]
-symbol = " "
+symbol = ' '
 
 [package]
-symbol = " "
+symbol = ' '
 
 [perl]
-symbol = " "
+symbol = ' '
 
 [php]
-symbol = " "
+symbol = ' '
 
 [python]
 python_binary = 'python3'
 style         = 'green bold'
-symbol        = " "
+symbol        = ' '
 
 [ruby]
-symbol = " "
+symbol = ' '
 
 [rust]
-symbol = " "
+symbol = ' '
 
 [swift]
-symbol = "ﯣ "
+symbol = 'ﯣ '

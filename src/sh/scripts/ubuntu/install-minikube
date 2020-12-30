@@ -3,6 +3,9 @@
 # install the hypervisor
 sudo apt-get install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
 
+# install minikube
+brew install minikube
+
 # set the vm-driver
 minikube config set vm-driver kvm2
 
