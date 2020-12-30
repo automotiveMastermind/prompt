@@ -11,7 +11,7 @@ __am_prompt_open_url() {
     set +e
 
     for cmd in open gnome-open kde-open xdg-open sensible-browser; do
-        if type $cmd 1>/dev/null 2>&1; then
+        if command -v $cmd 1>/dev/null 2>&1; then
             echo "open-url: opening $url via $cmd..."
             $cmd "$url" 1>/dev/null 2>&1
 

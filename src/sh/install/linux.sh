@@ -6,7 +6,7 @@ __am_prompt_install_linux() {
 
     local BREWS='gcc git gpg starship gh nvm'
 
-    if ! type brew 1>/dev/null 2>&1; then
+    if ! command -v brew 1>/dev/null 2>&1; then
         $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
         bash -c "CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) || true"
 

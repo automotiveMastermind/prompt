@@ -12,7 +12,7 @@ __am_prompt_use_shell() {
 
     if [ -f /opt/homebrew/bin/brew ]; then
         local LOCAL_PREFIX=$(/opt/homebrew/bin/brew --prefix)
-    elif type brew 1>/dev/null 2>&1; then
+    elif command -v brew 1>/dev/null 2>&1; then
         local LOCAL_PREFIX=$(brew --prefix)
     elif [ -d $LOCALAPPDATA/git ]; then
         local LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
@@ -69,7 +69,7 @@ __am_prompt_use_shell() {
     $ECHO "     NOTE: to take advantage of the symbols used by the shell, please set"
     $ECHO "           the terminal font to 'FiraCode Nerd Font Mono'. If you are using"
     $ECHO "           either macOS terminal or gnome terminal, you can do this"
-    $ECHO "           automatically by loading a `theme`."
+    $ECHO "           automatically by loading a \`theme\`."
     $ECHO
     $ECHO "     \$SHELL will be $SHELL"
     $ECHO "     PLEASE RUN THE FOLLOWING TO START USING THE NEW SHELL:"

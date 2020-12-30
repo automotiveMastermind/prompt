@@ -14,7 +14,7 @@ __am_prompt_gcloud_install() {
     local FILENAME="$TEMP/gcloud-sdk.tar.gz"
     local EXPANDED="$TEMP/google-cloud-sdk"
 
-    if ! type gcloud 1>/dev/null 2>&1; then
+    if ! command -v gcloud 1>/dev/null 2>&1; then
 
         echo
         echo "downloading gcloud-sdk"
