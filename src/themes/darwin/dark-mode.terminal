@@ -184,10 +184,10 @@
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
 	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGkCwwVFlUkbnVsbNQNDg8QERIT
-	FFZOU1NpemVYTlNmRmxhZ3NWTlNOYW1lViRjbGFzcyNAKgAAAAAAABAQgAKAA18QH0Zp
-	cmFDb2RlTmVyZEZvbnRDb21wbGV0ZS1SZXRpbmHSFxgZGlokY2xhc3NuYW1lWCRjbGFz
-	c2VzVk5TRm9udKIZG1hOU09iamVjdAgRGiQpMjdJTFFTWF5nbnd+hY6QkpS2u8bP1tkA
-	AAAAAAABAQAAAAAAAAAcAAAAAAAAAAAAAAAAAAAA4g==
+	FFZOU1NpemVYTlNmRmxhZ3NWTlNOYW1lViRjbGFzcyNAKgAAAAAAABAQgAKAA18QIEZp
+	cmFDb2RlTmVyZEZvbnRDb21wbGV0ZU0tUmV0aW5h0hcYGRpaJGNsYXNzbmFtZVgkY2xh
+	c3Nlc1ZOU0ZvbnSiGRtYTlNPYmplY3QIERokKTI3SUxRU1heZ253foWOkJKUt7zH0Nfa
+	AAAAAAAAAQEAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAOM=
 	</data>
 	<key>FontAntialias</key>
 	<true/>
@@ -206,18 +206,22 @@
 	</data>
 	<key>ShowActiveProcessArgumentsInTitle</key>
 	<true/>
+	<key>ShowActiveProcessInTabTitle</key>
+	<false/>
 	<key>ShowActiveProcessInTitle</key>
-	<true/>
+	<false/>
 	<key>ShowCommandKeyInTitle</key>
 	<false/>
 	<key>ShowComponentsWhenTabHasCustomTitle</key>
 	<false/>
 	<key>ShowDimensionsInTitle</key>
 	<false/>
+	<key>ShowRepresentedURLInTabTitle</key>
+	<false/>
 	<key>ShowRepresentedURLInTitle</key>
 	<false/>
 	<key>ShowRepresentedURLPathInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowShellCommandInTitle</key>
 	<false/>
 	<key>ShowTTYNameInTitle</key>
@@ -250,7 +254,7 @@
 	<key>columnCount</key>
 	<integer>150</integer>
 	<key>name</key>
-	<string>Dark Mode</string>
+	<string>dark-mode</string>
 	<key>noWarnProcesses</key>
 	<array>
 		<dict>

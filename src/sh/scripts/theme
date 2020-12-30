@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+if [ -z "${GNOME_TERMINAL_SERVICE:-}" ]; then
+    echo "${CLR_FAIL}Themes are only supported for gnome terminal.${CLR_CLEAR}"
+    exit 1
+fi
+
+PROMPT_THEME_NAME=${1:-"dark-mode"}
+PROMPT_THEME=$HOME/.am/prompt/themes/linux/$PROMPT_THEME_NAME.theme
+
+if [ ! -f "${PROMPT_THEME:-}" ]; then
+    echo "${CLR_FAIL}The theme $PROMPT_THEME_NAME is not supported.${CLR_CLEAR}"
+    exit 1
+fi
+
+DEFAULT_PROFILE=$(dconf read /org/gnome/terminal/legacy/profiles:/default)
+DEFAULT_PROFILE=${DEFAULT_PROFILE:-$(gsettings get org.gnome.Terminal.ProfilesList default)}
+DEFAULT_PROFILE=${DEFAULT_PROFILE#\'}
+DEFAULT_PROFILE=${DEFAULT_PROFILE%\'}
+DEFAULT_PROFILE=${DEFAULT_PROFILE:-"b1dcc9dd-5262-4d8d-a863-c897e6d979b9"}
+
+# load the theme file
+dconf load "/org/gnome/terminal/legacy/profiles:/:$DEFAULT_PROFILE/" < "$PROMPT_THEME"
+dconf write /org/gnome/terminal/legacy/profiles:/default "'$DEFAULT_PROFILE'"
+gsettings set org.gnome.Terminal.ProfilesList default "'$DEFAULT_PROFILE'"

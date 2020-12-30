@@ -16,7 +16,7 @@ if [ ! -t 1 ]; then
     export CLR_SUCCESS="\n------------------------------------------------------------------------------------------------------------------------\n"
     export CLR_WARN=$CLR_SUCCESS
     export CLR_CLEAR=$CLR_SUCCESS
-    export ECHO='printf'
+    export ECHO='echo'
 fi
 
 export AM_HOME="$HOME/.am"
