@@ -59,7 +59,7 @@ export CLR_WARN=$CLR_BRIGHT_YELLOW      # COLOR FOR WARNING MESSAGES
 export CLR_RESET=$CLR_CLEAR             # ALIAS FOR CLEAR COLOR
 
 # use code as the default editor
-if type code 1>/dev/null 2>&1; then
+if command -v code 1>/dev/null 2>&1; then
     export EDITOR='code --wait'
 fi
 
@@ -70,7 +70,7 @@ if [ -f /opt/homebrew/bin/brew ]; then
     export PATH="/opt/homebrew/bin:$PATH"
 fi
 
-if type brew 1>/dev/null 2>&1; then
+if command -v brew 1>/dev/null 2>&1; then
     export LOCAL_PREFIX=$(brew --prefix)
 elif [ -d $LOCALAPPDATA/git ]; then
     export LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')

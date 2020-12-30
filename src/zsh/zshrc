@@ -9,8 +9,7 @@ setopt inc_append_history
 setopt null_glob
 setopt combining_chars
 
-# rebuild completion
-rm -rf $HOME/.zcompdump
+# load completion
 autoload -U compinit
 compinit
 

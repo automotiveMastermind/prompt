@@ -3,13 +3,13 @@
 __am_prompt_set_gcloud_path() {
 
     # detect gcloud
-    if ! test type gcloud 1>/dev/null 2>&1; then
+    if ! command -v gcloud 1>/dev/null 2>&1; then
 
         # attempt to discover the path
         if [ ! -f "$HOME/.gcloud/bin/gcloud" ]; then
 
             # no gcloud installed
-            return
+            return 0
         fi
 
         # add gcloud to the path

@@ -9,19 +9,19 @@ elif [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
 fi
 
-if type kubectl 1>/dev/null 2>&1; then
+if command -v kubectl 1>/dev/null 2>&1; then
     . <(kubectl completion bash)
 fi
 
-if type helm 1>/dev/null 2>&1; then
+if command -v helm 1>/dev/null 2>&1; then
     . <(helm completion bash)
 fi
 
-if type minikube 1>/dev/null 2>&1; then
+if command -v minikube 1>/dev/null 2>&1; then
     . <(minikube completion bash)
 fi
 
-if type npm 1>/dev/null 2>&1; then
+if command -v npm 1>/dev/null 2>&1; then
     . <(npm completion)
 fi
 
@@ -38,20 +38,6 @@ __am_prompt_dotnet_bash_complete()
   COMPREPLY=( $(compgen -W "$COMPLETIONS" -- "$WORD") )
 }
 
-if type dotnet 1>/dev/null 2>&1; then
+if command -v dotnet 1>/dev/null 2>&1; then
     complete -f -F __am_prompt_dotnet_bash_complete dotnet
 fi
-
-# determine if completions exist
-if [ ! -d "$AM_PROMPT/bash/completions" ]; then
-
-    # move on immediately
-    return
-fi
-
-# iterate over each completion
-for AM_COMPLETION in $AM_PROMPT/bash/completions/*; do
-
-    # source the completion
-    . "$AM_COMPLETION"
-done
