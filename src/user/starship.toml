@@ -3,9 +3,9 @@ format = 'on [$symbol($region)]($style) '
 symbol = ' '
 
 [battery]
-full_symbol        = ''
-charging_symbol    = ''
-discharging_symbol = ''
+full_symbol        = ' '
+charging_symbol    = ' '
+discharging_symbol = ' '
 
 [character]
 error_symbol   = '[->](bold red)'
@@ -30,7 +30,7 @@ symbol = ' '
 symbol = ' '
 
 [gcloud]
-format = 'on [$symbol ($region)]($style) '
+format = 'on [$symbol($region)]($style) '
 symbol = ' '
 
 [git_branch]
