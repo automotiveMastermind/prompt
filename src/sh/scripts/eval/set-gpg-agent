@@ -3,7 +3,7 @@
 # determine if gpgconf is available on the system
 if ! type gpgconf 1>/dev/null 2>&1; then
     # move on immediately
-    return
+    return 0
 fi
 
 # determine if this is a tty
