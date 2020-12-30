@@ -108,6 +108,9 @@ __am_prompt_install_darwin() {
     local BREWS='openssl git go nvm python gpg pinentry-mac starship gh'
     local BREW_CMD=${1:-"/usr/local/bin/brew"}
 
+    # disable brew analytics
+    ${BREW_CMD} analytics off
+
     $ECHO "${CLR_SUCCESS}updating homebrew...${CLR_CLEAR}"
     ${BREW_CMD} update
 
@@ -130,8 +133,6 @@ __am_prompt_install_darwin() {
         $ECHO "${CLR_SUCCESS}setting up nvm...${CLR_CLEAR}"
         export NVM_DIR="${HOME}/.nvm"
         . "$NVM_PATH/nvm.sh"
-        nvm install --lts 2>/dev/null
-        nvm use --lts --delete-prefix --silent 2>/dev/null
     fi
 
     $ECHO "${CLR_SUCCESS}setting git credential helper to use the macOS keychain${CLR_CLEAR}"

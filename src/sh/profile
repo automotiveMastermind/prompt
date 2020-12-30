@@ -58,17 +58,10 @@ export CLR_FAIL=$CLR_BRIGHT_RED         # COLOR FOR ERROR MESSAGES
 export CLR_WARN=$CLR_BRIGHT_YELLOW      # COLOR FOR WARNING MESSAGES
 export CLR_RESET=$CLR_CLEAR             # ALIAS FOR CLEAR COLOR
 
-export CLR_ROOT_PROMPT=$CLR_BRIGHT_RED    # COLOR OF THE PROMPT FOR ROOT
-export CLR_STAFF_PROMPT=$CLR_BRIGHT_GREEN # COLOR OF THE PROMPT FOR STAFF
-export CLR_USER_PROMPT=$CLR_BRIGHT_BLUE   # COLOR OF THE PROMPT FOR USERS
-export CLR_SSH_PROMPT=$CLR_BRIGHT_MAGENTA # COLOR OF THE PROMPT FOR SSH
-
 # use code as the default editor
 if type code 1>/dev/null 2>&1; then
     export EDITOR='code --wait'
 fi
-
-export HISTCONTROL=ignoredubs
 
 # detect the apple silicon brew path
 if [ -f /opt/homebrew/bin/brew ]; then

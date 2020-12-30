@@ -10,6 +10,8 @@ shopt -s extglob          # enable extended glob patterns
 shopt -s globstar         # enable glob ** expansion
 shopt -s nullglob         # enable nullglob
 
+export HISTCONTROL=ignoreboth
+
 # get bash completion dir
 export BASH_COMPLETION_DIR="$LOCAL_PREFIX/etc/bash_completion.d"
 
