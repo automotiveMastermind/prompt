@@ -4,23 +4,23 @@ set -e
 
 SCRIPT_DIR=${2:-$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)}
 
-CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
-CLR_WARN="\033[1;33m"       # BRIGHT YELLOW
-CLR_CLEAR="\033[0m"         # DEFAULT COLOR
-ECHO='echo'
+export CLR_SUCCESS="\033[1;32m"    # BRIGHT GREEN
+export CLR_WARN="\033[1;33m"       # BRIGHT YELLOW
+export CLR_CLEAR="\033[0m"         # DEFAULT COLOR
+export ECHO='echo'
 
-HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 # when not outputing to a tty, add spacing instead of colors
 if [ ! -t 1 ]; then
-    CLR_SUCCESS="\n------------------------------------------------------------------------------------------------------------------------\n"
-    CLR_WARN=$CLR_SUCCESS
-    CLR_CLEAR=$CLR_SUCCESS
-    ECHO='printf'
+    export CLR_SUCCESS="\n------------------------------------------------------------------------------------------------------------------------\n"
+    export CLR_WARN=$CLR_SUCCESS
+    export CLR_CLEAR=$CLR_SUCCESS
+    export ECHO='printf'
 fi
 
-AM_HOME="$HOME/.am"
-AM_PROMPT="$AM_HOME/prompt"
+export AM_HOME="$HOME/.am"
+export AM_PROMPT="$AM_HOME/prompt"
 
 __am_prompt_success() {
     $ECHO "${CLR_SUCCESS}prompt-install: $1${CLR_CLEAR}"
@@ -80,19 +80,29 @@ __am_prompt_install() {
         fi
     done
 
-    local UNAME=$(uname | tr '[:upper:]' '[:lower:]')
-    local UNAME_INSTALL="$UNAME.sh"
-
     if [ -f /etc/os-release ]; then
         . /etc/os-release
-
-        local UNAME_INSTALL="$ID.sh"
+        local UNAMES="$ID $ID_LIKE"
+    else
+        local UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
     fi
 
-    if [ -f "$AM_PROMPT/sh/install/$UNAME_INSTALL" ]; then
-        __am_prompt_success "installing platform prerequisites ($UNAME_INSTALL)"
-        . "$AM_PROMPT/sh/install/$UNAME_INSTALL"
-    fi
+    local UNAME=
+    until [ "$UNAME" = "$UNAMES" ]; do
+        local UNAME=${UNAMES%%' '*}
+        local UNAMES=${UNAMES#*' '}
+
+        local UNAME_PATH="$AM_PROMPT/sh/install/$UNAME.sh"
+
+        if [ ! -f "$UNAME_PATH" ]; then
+            continue
+        fi
+
+        __am_prompt_success "installing platform prerequisites ($UNAME)"
+        . "$UNAME_PATH"
+
+        break
+    done
 
     if [ ! -d "$AM_PROMPT/zsh/completions" ]; then
         mkdir -p "$AM_PROMPT/zsh/completions" 1>/dev/null
@@ -128,16 +138,16 @@ __am_prompt_install() {
     local PROMPT_SHELL=$(echo $PROMPT_SHELL | tr '[:upper:]' '[:lower:]')
 
     # use the correct shell
-    . "$AM_PROMPT/sh/scripts/use-shell" $PROMPT_SHELL
+    "$AM_PROMPT/sh/scripts/use-shell" $PROMPT_SHELL
 
     # open the changelog url
-    . "$AM_PROMPT/sh/scripts/open-url" "https://github.com/automotivemastermind/prompt/blob/$PROMPT_SHA/CHANGELOG.md"
+    "$AM_PROMPT/sh/scripts/open-url" "https://github.com/automotivemastermind/prompt/blob/$PROMPT_SHA/CHANGELOG.md"
 }
 
-echo
-echo "${CLR_WARN}prompt: establishing sudo (you may be prompted for credentials)...${CLR_CLEAR}"
+$ECHO
+$ECHO "${CLR_WARN}prompt: establishing sudo (you may be prompted for credentials)...${CLR_CLEAR}"
 sudo echo
 
-trap 'echo; echo; echo "${CLR_WARN}prompt: terminating install...${CLR_CLEAR}"; exit -1;' INT
+trap '$ECHO; $ECHO; $ECHO "${CLR_WARN}prompt: terminating install...${CLR_CLEAR}"; exit 1;' INT
 
 __am_prompt_install $@

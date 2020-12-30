@@ -2,27 +2,35 @@
 
 __am_prompt_source_os() {
 
-    local UNAME=$(uname | tr '[:upper:]' '[:lower:]')
-	local UNAME_PATH="$HOME/.am/prompt/bash/scripts/$UNAME"
-
     if [ -f /etc/os-release ]; then
         . /etc/os-release
+        local UNAMES="$ID $ID_LIKE"
+    else
+        local UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
+    fi
 
-        local UNAME="$ID"
+    local UNAME=
+    until [ "$UNAME" = "$UNAMES" ]; do
+        local UNAME=${UNAMES%%' '*}
+        local UNAMES=${UNAMES#*' '}
+
         local UNAME_PATH="$HOME/.am/prompt/bash/scripts/$UNAME"
-    fi
 
-	if [ -d "$UNAME_PATH" ]; then
+        if [ ! -d "$UNAME_PATH" ]; then
+            continue
+        fi
+
+        export AM_PROMPT_OS=$UNAME
         export PATH="$UNAME_PATH:$PATH"
-	fi
 
-    if [ -d "$UNAME_PATH/eval" ]; then
-		for EVAL_SCRIPT in $UNAME_PATH/eval/*; do
-			. "$EVAL_SCRIPT"
-		done
-    fi
+        if [ -d "$UNAME_PATH/eval" ]; then
+            for EVAL_SCRIPT in $UNAME_PATH/eval/*; do
+                . "$EVAL_SCRIPT"
+            done
+        fi
 
-    export AM_PROMPT_OS=$UNAME
+        break
+    done
 }
 
 __am_prompt_source_os
