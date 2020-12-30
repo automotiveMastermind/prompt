@@ -4,18 +4,20 @@ set -e
 
 SCRIPT_DIR=$(mktemp -d)
 
-cat <<- 'EOT' > $SCRIPT_DIR.e2e.sh
+cat <<- 'EOT' > $SCRIPT_DIR/e2e.sh
 #! /usr/bin/env sh
 set -e
 ./hack/pre.apt.sh
-./hack/install.sh bash
-./hack/install.sh zsh
-./hack/test.sh
+gosu build ./hack/install.sh bash
+gosu build ./hack/install.sh zsh
+gosu build ./hack/test.sh
 EOT
 
 chmod +x $SCRIPT_DIR/e2e.sh
 
 docker run \
-    --volume $PWD:/home/build
-    --volume $SCRIPT_DIR:/build \
-    debian --tty 'sh -c /build/e2e.sh'
+    --volume "$PWD":'/repo' \
+    --volume "$SCRIPT_DIR":'/scripts' \
+    --workdir /repo \
+    --tty \
+    debian '/scripts/e2e.sh'
