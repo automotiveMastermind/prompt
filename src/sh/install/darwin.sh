@@ -19,8 +19,9 @@ __am_prompt_ensure_rosetta() {
     $ECHO
     $ECHO "  DETECTED APPLE SILICON                                                      "
     $ECHO
-    $ECHO "  Apple Silicon is not yet officially supported by homebrew. We will install  "
-    $ECHO "  homebrew in the following locations:                                        "
+    $ECHO "  Apple Silicon is NOW officially supported by homebrew but some formulae do  "
+    $ECHO "  not yet have bottles available, so we will continue to install both apple   "
+    $ECHO "  silicon and intel homebrew in the following locations:                      "
     $ECHO "    - /opt/homebrew : arm64e native (DEFAULT)                                 "
     $ECHO "    - /usr/local    : x86_64 emulation via Rosetta 2                          "
     $ECHO
@@ -31,26 +32,8 @@ __am_prompt_ensure_rosetta() {
     $ECHO
     $ECHO "  brew-intel install git                                                      "
     $ECHO
-    $ECHO "  NOTE: Installation will take significantly longer as most formulae will be  "
-    $ECHO "        built from source. NOT ALL FORMULA ARE GAURANTEED TO WORK. INCLUDING  "
-    $ECHO "        THOSE WE ATTEMPT TO INSTALL BY DEFAULT WITHIN PROMPT! We do this to   "
-    $ECHO "        enable these formulae via install as soon as they start working.      "
-    $ECHO
     $ECHO "##############################################################################"
     $ECHO ${CLR_CLEAR}
-
-    # install rosetta 2
-    softwareupdate --install-rosetta --agree-to-license 2>/dev/null
-
-    # create the homebrew directory
-    if [ ! -d "/opt/homebrew" ]; then
-
-        # create the homebrew path
-        sudo mkdir -p /opt/homebrew
-
-        # chown the path
-        sudo chown /opt/homebrew $(whoami):staff
-    fi
 
      # install homebrew for apple silicon
     __am_prompt_install_arm64
@@ -66,7 +49,10 @@ __am_prompt_install_intel() {
     $ECHO "##############################################################################"
     $ECHO ${CLR_CLEAR}
 
-    if ! type "${BREW_CMD}" 1>/dev/null 2>&1; then
+    HOMEBREW_PREFIX="/usr/local"
+    BREW_CMD="$HOMEBREW_PREFIX/bin/brew"
+
+    if ! command -v $BREW_CMD 1>/dev/null 2>&1; then
         $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
         /bin/bash -c "CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) && /usr/local/bin/brew config"
     fi
@@ -81,7 +67,13 @@ __am_prompt_install_rosetta() {
     $ECHO "##############################################################################"
     $ECHO ${CLR_CLEAR}
 
-    if ! type "${BREW_CMD}" 1>/dev/null 2>&1; then
+    # install rosetta 2
+    softwareupdate --install-rosetta --agree-to-license 2>/dev/null
+
+    HOMEBREW_PREFIX="/usr/local"
+    BREW_CMD="$HOMEBREW_PREFIX/bin/brew"
+
+    if ! command -v $BREW_CMD 1>/dev/null 2>&1; then
         $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
         arch -x86_64 /bin/bash -c "HOMEBREW_PREFIX=/usr/local CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) && /usr/local/bin/brew config"
     fi
@@ -96,9 +88,12 @@ __am_prompt_install_arm64() {
     $ECHO "##############################################################################"
     $ECHO ${CLR_CLEAR}
 
-    if ! type "${BREW_CMD}" 1>/dev/null 2>&1; then
+    HOMEBREW_PREFIX="/opt/homebrew"
+    BREW_CMD="$HOMEBREW_PREFIX/bin/brew"
+
+    if ! command -v $BREW_CMD 1>/dev/null 2>&1; then
         $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
-        arch -x86_64 /bin/bash -c "HOMEBREW_PREFIX=/opt/homebrew CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) && /opt/homebrew/bin/brew config"
+        /bin/bash -c "HOMEBREW_PREFIX=$HOMEBREW_PREFIX CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) && $BREW_CMD config"
     fi
 
     __am_prompt_install_darwin "arch -arm64e /opt/homebrew/bin/brew"
@@ -109,25 +104,25 @@ __am_prompt_install_darwin() {
     local BREW_CMD=${1:-"/usr/local/bin/brew"}
 
     # disable brew analytics
-    ${BREW_CMD} analytics off
+    $BREW_CMD analytics off
 
     $ECHO "${CLR_SUCCESS}updating homebrew...${CLR_CLEAR}"
-    ${BREW_CMD} update
+    $BREW_CMD update
 
     set +e
 
     for pkg in $BREWS; do
-        if ${BREW_CMD} list --versions "$pkg" 1>/dev/null; then
+        if $BREW_CMD list --versions "$pkg" 1>/dev/null; then
             $ECHO "${CLR_SUCCESS}upgrading: $pkg...${CLR_CLEAR}"
-            ${BREW_CMD} upgrade $pkg 2>/dev/null
-            ${BREW_CMD} link --overwrite $pkg 2>/dev/null
+            $BREW_CMD upgrade $pkg 2>/dev/null
+            $BREW_CMD link --overwrite $pkg 2>/dev/null
         else
             $ECHO "${CLR_SUCCESS}installing: $pkg...${CLR_CLEAR}"
-            ${BREW_CMD} install $pkg
+            $BREW_CMD install $pkg
         fi
     done
 
-    local NVM_PATH=$(${BREW_CMD} --prefix nvm)
+    local NVM_PATH=$($BREW_CMD --prefix nvm)
 
     if [ -f "$NVM_PATH/nvm.sh" ]; then
         $ECHO "${CLR_SUCCESS}setting up nvm...${CLR_CLEAR}"
