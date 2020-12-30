@@ -71,7 +71,7 @@ __am_prompt_update()
         if [ "${PROMPT_SHA}" = "${PROMPT_CURRENT_SHA}" ]; then
             echo "${CLR_SUCCESS}prompt: latest version already installed: ${PROMPT_SHA}"
             echo "  - run update-prompt with the --force flag to reinstall ${CLR_CLEAR}"
-            exit 0
+            return 0
         fi
     fi
 
