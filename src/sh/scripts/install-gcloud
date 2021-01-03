@@ -36,7 +36,7 @@ __am_prompt_gcloud_install() {
 	fi
 
 	print-success "installing and updating gcloud components..."
-	gcloud components install kubectl docker-credential-gcr gsutil core --quiet 2>&1
+	gcloud components install kubectl gsutil core --quiet 2>&1
 	gcloud components update --quiet 2>&1
 }
 
