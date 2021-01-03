@@ -6,5 +6,12 @@ indent_size = 4
 char_set = utf-8
 insert_final_newline = true
 
+[{src,template}/**]
+indent_style = tab
+
+[*.sh]
+indent_style = tab
+
 [*.{json,yml,yaml}]
 indent_size = 2
+indent_style = space
