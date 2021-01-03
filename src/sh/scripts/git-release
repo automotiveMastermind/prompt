@@ -13,7 +13,7 @@ __am_prompt_git_release() {
 	RELEASE=$(curl -s "$@" "$RELEASE_URI" | grep tag_name | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
 
 	if [ -n "${RELEASE:-}" ]; then
-		printf "%s" "$RELEASE"
+		printf "%s\n" "$RELEASE"
 		return 0
 	fi
 
