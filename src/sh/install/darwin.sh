@@ -14,7 +14,7 @@ __am_prompt_ensure_rosetta() {
 		return $?
 	fi
 
-	printf "\n%s" "$CLR_WARN"
+	printf "\n%s${CLR_WARN}" ""
 	cat <<-EOT
 		##############################################################################
 
@@ -36,7 +36,7 @@ __am_prompt_ensure_rosetta() {
 
 		##############################################################################
 	EOT
-	printf "%s" "$FORMAT_CLEAR"
+	printf "\n%s${FORMAT_CLEAR}" ""
 
 	 # install homebrew for apple silicon
 	__am_prompt_install_arm64
