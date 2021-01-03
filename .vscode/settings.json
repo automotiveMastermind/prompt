@@ -24,5 +24,11 @@
     "xcode",
     "xplat"
   ],
-  "evenBetterToml.taploConfig": ".taplo.toml"
+  "evenBetterToml.taploConfig": ".taplo.toml",
+  "shellcheck.enableQuickFix": true,
+  "shellcheck.exclude": [
+    "1071",
+    "1090",
+    "1091"
+  ]
 }

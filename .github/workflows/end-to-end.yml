@@ -18,10 +18,22 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
+  lint:
+    name: lint
+    runs-on: ubuntu-20.04
+    container: koalaman/shellcheck-alpine:stable
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: run-lint
+        run: ./hack/lint.sh
+
   os:
     name: "end-to-end-${{ matrix.os }}"
     runs-on: ${{ matrix.os }}
-    needs: cancel
+    needs:
+      - cancel
+      - lint
     strategy:
       matrix:
         os:
@@ -35,15 +47,19 @@ jobs:
         uses: actions/checkout@v2
       - name: install-bash
         run: ./hack/install.sh bash
+      - name: run-tests-bash
+        run: ./hack/test.sh bash
       - name: install-zsh
         run: ./hack/install.sh zsh
-      - name: run-tests
-        run: ./hack/test.sh
+      - name: run-tests-zsh
+        run: ./hack/test.sh zsh
 
   win:
     name: "end-to-end-${{ matrix.os }}"
     runs-on: ${{ matrix.os }}
-    needs: cancel
+    needs:
+      - cancel
+      - lint
     strategy:
       matrix:
         os:
@@ -60,16 +76,20 @@ jobs:
         run: ./hack/pre.apt.sh
       - name: install-bash
         run: gosu build ./hack/install.sh bash
+      - name: run-tests-bash
+        run: gosu build ./hack/test.sh bash
       - name: install-zsh
         run: gosu build ./hack/install.sh zsh
-      - name: run-tests
-        run: gosu build ./hack/test.sh
+      - name: run-tests-zsh
+        run: gosu build ./hack/test.sh zsh
 
-  docker-apt:
+  container-apt:
     name: "end-to-end-${{ matrix.container }}"
     runs-on: ubuntu-20.04
     container: ${{ matrix.container }}
-    needs: cancel
+    needs:
+      - cancel
+      - lint
     strategy:
       matrix:
         container:
@@ -85,16 +105,20 @@ jobs:
         run: ./hack/pre.apt.sh
       - name: install-bash
         run: gosu build ./hack/install.sh bash
+      - name: run-tests-bash
+        run: gosu build ./hack/test.sh bash
       - name: install-zsh
         run: gosu build ./hack/install.sh zsh
-      - name: run-tests
-        run: gosu build ./hack/test.sh
+      - name: run-tests-zsh
+        run: gosu build ./hack/test.sh zsh
 
-  docker-yum:
+  container-yum:
     name: "end-to-end-${{ matrix.container }}"
     runs-on: ubuntu-20.04
     container: ${{ matrix.container }}
-    needs: cancel
+    needs:
+      - cancel
+      - lint
     strategy:
       matrix:
         container:
@@ -108,7 +132,9 @@ jobs:
         run: ./hack/pre.yum.sh
       - name: install-bash
         run: gosu build ./hack/install.sh bash
+      - name: run-tests-bash
+        run: gosu build ./hack/test.sh bash
       - name: install-zsh
         run: gosu build ./hack/install.sh zsh
-      - name: run-tests
-        run: gosu build ./hack/test.sh
+      - name: run-tests-zsh
+        run: gosu build ./hack/test.sh zsh
