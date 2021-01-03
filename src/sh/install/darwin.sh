@@ -160,6 +160,9 @@ __am_prompt_install_fonts() {
 		rm -rf "$FONT_DIR" 1>/dev/null 2>&1
 	fi
 
+	# ensure the fira code directory
+	mkdir -p "$FONT_DIR" 1>/dev/null 2>&1
+
 	# extract fira code
 	unzip "$TEMP_DIR/FiraCode.zip" 'Fira*.otf' -x '*Windows*' -d "$FONT_DIR" 1>/dev/null
 
