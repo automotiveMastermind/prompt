@@ -1,16 +1,16 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 __am_prompt_remove_backup() {
-    local BACKUP=$1
+	BACKUP=$1
 
-    if [ -z "${BACKUP:-}" ]; then
-        BACKUP='prompt'
-    fi
+	if [ -z "${BACKUP:-}" ]; then
+		BACKUP='prompt'
+	fi
 
-    local REMOVE_PATH="$AM_HOME/backup/$BACKUP"
+	REMOVE_PATH="$AM_HOME/backup/$BACKUP"
 
-    echo "removing path: $REMOVE_PATH..."
-    rm -rf "$AM_HOME/backup/$BACKUP" 2>/dev/null
+	print-warn "removing path: $REMOVE_PATH..."
+	rm -rf "$AM_HOME/backup/$BACKUP" 2>/dev/null
 }
 
-__am_prompt_remove_backup $@
+__am_prompt_remove_backup "$@"

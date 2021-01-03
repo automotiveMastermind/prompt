@@ -1,26 +1,24 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 __am_prompt_aws_install() {
-    local BREWS='awscli aws-sam-cli'
+	BREWS='awscli aws-sam-cli'
 
-    brew tap aws/tap
-    brew update
+	brew tap aws/tap
+	brew update
 
-    for pkg in $BREWS; do
-        if brew list --versions "$pkg" 1>/dev/null; then
-            echo "upgrading: $pkg..."
-            brew upgrade $pkg 2>/dev/null
-            brew link --overwrite $pkg 2>/dev/null
-        else
-            echo "installing: $pkg..."
-            brew install $pkg
-        fi
-    done
+	for pkg in $BREWS; do
+		if brew list --versions "$pkg" 1>/dev/null; then
+			print-success "upgrading: $pkg..."
+			brew upgrade "$pkg" 2>/dev/null
+			brew link --overwrite "$pkg" 2>/dev/null
+		else
+			print-success "installing: $pkg..."
+			brew install "$pkg"
+		fi
+	done
 
-    echo
-    echo "configuring aws..."
-    echo
-    aws configure
+	print-warn "configuring aws..."
+	aws configure
 }
 
 __am_prompt_aws_install

@@ -1,19 +1,19 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 if [ -d "/usr/local/share/dotnet" ]; then
-    export DOTNET_ROOT="/usr/local/share/dotnet"
-    export PATH="$DOTNET_ROOT:$PATH"
+	export DOTNET_ROOT="/usr/local/share/dotnet"
+	export PATH="$DOTNET_ROOT:$PATH"
 fi
 
 if [ -d "/usr/local/share/dotnet/tools" ]; then
-    export PATH="/usr/local/share/dotnet/tools:$PATH"
+	export PATH="/usr/local/share/dotnet/tools:$PATH"
 fi
 
 if [ -d "$HOME/.dotnet" ]; then
-    export DOTNET_ROOT="$HOME/.dotnet"
-    export PATH="$DOTNET_ROOT:$PATH"
+	export DOTNET_ROOT="$HOME/.dotnet"
+	export PATH="$DOTNET_ROOT:$PATH"
 fi
 
 if [ -d "$HOME/.dotnet/tools" ]; then
-    export PATH="$HOME/.dotnet/tools:$PATH"
+	export PATH="$HOME/.dotnet/tools:$PATH"
 fi

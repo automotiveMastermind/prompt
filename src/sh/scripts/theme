@@ -1,16 +1,16 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 if [ -z "${GNOME_TERMINAL_SERVICE:-}" ]; then
-    echo "${CLR_FAIL}Themes are only supported for gnome terminal.${CLR_CLEAR}"
-    exit 1
+	print-fail "themes are only supported for gnome terminal"
+	exit 1
 fi
 
 PROMPT_THEME_NAME=${1:-"dark-mode"}
 PROMPT_THEME=$HOME/.am/prompt/themes/linux/$PROMPT_THEME_NAME.theme
 
 if [ ! -f "${PROMPT_THEME:-}" ]; then
-    echo "${CLR_FAIL}The theme $PROMPT_THEME_NAME is not supported.${CLR_CLEAR}"
-    exit 1
+	print-fail "the theme $PROMPT_THEME_NAME is not supported"
+	exit 1
 fi
 
 DEFAULT_PROFILE=$(dconf read /org/gnome/terminal/legacy/profiles:/default)

@@ -2,11 +2,11 @@
 
 set -eu
 
-echo 'test default install'
+printf "%s\n" "test default install"
 ./src/sh/scripts/install-dotnet
 
-echo 'test channel install'
+printf "%s\n" "test channel install"
 ./src/sh/scripts/install-dotnet --channel lts
 
-echo 'test version install'
+printf "%s\n" "test version install"
 ./src/sh/scripts/install-dotnet --version latest

@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
 # determine if bash exists
-if [ -f "$HOME/.bashrc" ]; then
+if [ -f "$HOME"/.bashrc ]; then
 
-    # load bash
-    . "$HOME/.bashrc"
+	# load bash
+	. "$HOME"/.bashrc
 fi

@@ -1,20 +1,18 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 __am_prompt_install_darwin() {
-    local BREWS='bash bash-completion'
+	BREWS='bash bash-completion'
 
-    set +e
-
-    for pkg in $BREWS; do
-        if brew list --versions "$pkg" 1>/dev/null; then
-            $ECHO "${CLR_SUCCESS}upgrading: $pkg...${CLR_CLEAR}"
-            brew upgrade $pkg 2>/dev/null
-            brew link --overwrite $pkg 2>/dev/null
-        else
-            $ECHO "${CLR_SUCCESS}installing: $pkg...${CLR_CLEAR}"
-            brew install $pkg
-        fi
-    done
+	for pkg in $BREWS; do
+		if brew list --versions "$pkg" 1>/dev/null; then
+			print-success "macOS: upgrading $pkg..."
+			brew upgrade "$pkg" 2>/dev/null || true
+			brew link --overwrite "$pkg" 2>/dev/null || true
+		else
+			print-success "macOS: installing $pkg..."
+			brew install "$pkg" || true
+		fi
+	done
 }
 
 __am_prompt_install_darwin

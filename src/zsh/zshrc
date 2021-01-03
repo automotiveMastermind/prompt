@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#! /usr/bin/env zsh
 
 # set prompt shell
 export PROMPT_SHELL="zsh"
@@ -9,32 +9,32 @@ setopt inc_append_history
 setopt null_glob
 setopt combining_chars
 
-# load completion
-autoload -U compinit
-compinit
-
 # get zsh completion dir
 export ZSH_COMPLETION_DIR="$AM_PROMPT/user/zsh/completions"
 
 # determine if the completion dir does not exist
 if [ ! -d "${ZSH_COMPLETION_DIR}" ]; then
 
-    # create the completion dir
-    mkdir -p "$ZSH_COMPLETION_DIR" 1>/dev/null 2>&1
+	# create the completion dir
+	mkdir -p "$ZSH_COMPLETION_DIR" 1>/dev/null 2>&1
 fi
 
 # add completion dir to fpath
-fpath=($ZSH_COMPLETION_DIR $fpath)
+fpath=("$ZSH_COMPLETION_DIR" "${fpath[@]}")
+
+# load completion
+autoload -U compinit
+compinit
 
 # add scripts to path
 export PATH="$AM_PROMPT/zsh/scripts:$PATH"
 
 # evaluate eval scripts
-for EVAL_SCRIPT in $AM_PROMPT/zsh/scripts/eval/*; do
-    . "$EVAL_SCRIPT"
+for EVAL_SCRIPT in "$AM_PROMPT"/zsh/scripts/eval/*; do
+	. "$EVAL_SCRIPT"
 done
 
 # test for user zshrc
-if [ -f $AM_PROMPT/user/zshrc ]; then
-    . "$AM_PROMPT/user/zshrc"
+if [ -f "$AM_PROMPT"/user/zshrc ]; then
+	. "$AM_PROMPT"/user/zshrc
 fi

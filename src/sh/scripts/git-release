@@ -1,25 +1,23 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 __am_prompt_git_release() {
 
-    local ORG_NAME=${1:-'automotivemastermind'}
-    local REPO_NAME=${2:-'prompt'}
+	ORG_NAME=${1:-'automotivemastermind'}
+	REPO_NAME=${2:-'prompt'}
 
-    local CURL_OPT='-s'
+	if [ -n "${GITHUB_TOKEN:-}" ]; then
+		set -- -H "Authorization: $GITHUB_TOKEN"
+	fi
 
-    if [ ! -z "${GITHUB_TOKEN:-}" ]; then
-        CURL_OPT="$CURL_OPT -H 'Authorization: $GITHUB_TOKEN'"
-    fi
+	RELEASE_URI=https://api.github.com/repos/$ORG_NAME/$REPO_NAME/releases/latest
+	RELEASE=$(curl -s "$@" "$RELEASE_URI" | grep tag_name | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
 
-    local RELEASE_URI=https://api.github.com/repos/$ORG_NAME/$REPO_NAME/releases/latest
-    local RELEASE=$(curl $CURL_OPT $RELEASE_URI | grep tag_name | head -n 1 | sed 's#.*\:.*"\(.*\).*",#\1#')
+	if [ -n "${RELEASE:-}" ]; then
+		printf "%s" "$RELEASE"
+		return 0
+	fi
 
-    if [ ! -z "${RELEASE:-}" ]; then
-        echo $RELEASE
-        return 0
-    fi
-
-    return 1
+	return 1
 }
 
-__am_prompt_git_release $@
+__am_prompt_git_release "$@"

@@ -1,16 +1,16 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 PROMPT_THEME_NAME=${1:-"dark-mode"}
 PROMPT_THEME=$HOME/.am/prompt/themes/darwin/$PROMPT_THEME_NAME.terminal
 
 if [ ! -f "$PROMPT_THEME" ]; then
-    echo "${CLR_FAIL}The theme $PROMPT_THEME_NAME is not supported.${CLR_CLEAR}"
-    exit 1
+	prompt-fail "The theme $PROMPT_THEME_NAME is not supported."
+	exit 1
 fi
 
 # open the theme
 open "$PROMPT_THEME"
 
 # set the theme as the default
-defaults write com.apple.Terminal "Default Window Settings" $PROMPT_THEME_NAME
-defaults write com.apple.Terminal "Startup Window Settings" $PROMPT_THEME_NAME
+defaults write com.apple.Terminal "Default Window Settings" "$PROMPT_THEME_NAME"
+defaults write com.apple.Terminal "Startup Window Settings" "$PROMPT_THEME_NAME"

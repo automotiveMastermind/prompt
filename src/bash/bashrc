@@ -1,14 +1,14 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
 # set prompt shell
 export PROMPT_SHELL="bash"
 
 # shell options
-shopt -s checkwinsize     # check window size on script exit
-shopt -s cdable_vars      # enable change directory to a variable value
-shopt -s extglob          # enable extended glob patterns
-shopt -s globstar         # enable glob ** expansion
-shopt -s nullglob         # enable nullglob
+shopt -s checkwinsize	# check window size on script exit
+shopt -s cdable_vars	# enable change directory to a variable value
+shopt -s extglob		# enable extended glob patterns
+shopt -s globstar		# enable glob ** expansion
+shopt -s nullglob		# enable nullglob
 
 export HISTCONTROL=ignoreboth
 
@@ -17,20 +17,20 @@ export BASH_COMPLETION_DIR="$LOCAL_PREFIX/etc/bash_completion.d"
 
 # system binds for bash completion (for interactive terminals)
 if [ -t 1 ]; then
-    bind "set completion-ignore-case on" 2>/dev/null     # ignore strict case sensitivity
-    bind "set bell-style none" 2>/dev/null               # turn off audible alerts
-    bind "set show-all-if-ambiguous on" 2>/dev/null      # show completion with double tap
+	bind "set completion-ignore-case on" 2>/dev/null	# ignore strict case sensitivity
+	bind "set bell-style none" 2>/dev/null				# turn off audible alerts
+	bind "set show-all-if-ambiguous on" 2>/dev/null		# show completion with double tap
 fi
 
 # add scripts to path
 export PATH="$AM_PROMPT/bash/scripts:$PATH"
 
 # evaluate eval scripts
-for EVAL_SCRIPT in $AM_PROMPT/bash/scripts/eval/*; do
-    . "$EVAL_SCRIPT"
+for EVAL_SCRIPT in "$AM_PROMPT"/bash/scripts/eval/*; do
+	. "$EVAL_SCRIPT"
 done
 
 # test for user bashrc
-if [ -f $AM_PROMPT/user/bashrc ]; then
-    . "$AM_PROMPT/user/bashrc"
+if [ -f "$AM_PROMPT"/user/bashrc ]; then
+	. "$AM_PROMPT/user/bashrc"
 fi

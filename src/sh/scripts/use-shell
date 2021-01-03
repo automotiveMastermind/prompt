@@ -2,82 +2,86 @@
 
 __am_prompt_use_shell() {
 
-    local PROMPT_SHELL=$1
-    ECHO=${ECHO:-"echo"}
+	PROMPT_SHELL=${PROMPT_SHELL:-1}
 
-    if [ -z "${PROMPT_SHELL:-}" ]; then
-        $ECHO "${CLR_FAIL}You must specify a shell to use, either bash or zsh.${CLR_CLEAR}"
-        return 1
-    fi
+	if [ -z "${PROMPT_SHELL:-}" ]; then
+		print-fail "prompt: uou must specify a shell to use, either bash or zsh"
+		return 1
+	fi
 
-    if [ -f /opt/homebrew/bin/brew ]; then
-        local LOCAL_PREFIX=$(/opt/homebrew/bin/brew --prefix)
-    elif command -v brew 1>/dev/null 2>&1; then
-        local LOCAL_PREFIX=$(brew --prefix)
-    elif [ -d $LOCALAPPDATA/git ]; then
-        local LOCAL_PREFIX=$(echo "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
-    else
-        local LOCAL_PREFIX=/usr/local
-    fi
+	if [ -f /opt/homebrew/bin/brew ]; then
+		LOCAL_PREFIX=$(/opt/homebrew/bin/brew --prefix)
+	elif command -v brew 1>/dev/null 2>&1; then
+		LOCAL_PREFIX=$(brew --prefix)
+	elif [ -d "$LOCALAPPDATA/git" ]; then
+		LOCAL_PREFIX=$(printf "%s" "/$LOCALAPPDATA/git" | sed -e 's/\\/\//g' -e 's/://')
+	else
+		LOCAL_PREFIX=/usr/local
+	fi
 
-    local PROMPT_SHELL_PATH="$LOCAL_PREFIX/bin/$PROMPT_SHELL"
-    local INSTALL_PATH="$AM_PROMPT/$PROMPT_SHELL/install"
+	PROMPT_SHELL_PATH="$LOCAL_PREFIX/bin/$PROMPT_SHELL"
+	INSTALL_PATH="$AM_PROMPT/$PROMPT_SHELL/install"
 
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        local UNAMES="$ID $ID_LIKE"
-    else
-        local UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
-    fi
+	if [ -f /etc/os-release ]; then
+		. /etc/os-release
+		UNAMES="$ID ${ID_LIKE:-unknown} linux"
+	else
+		UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
+	fi
 
-    local UNAME=
-    until [ "$UNAME" = "$UNAMES" ]; do
-        local UNAME=${UNAMES%%' '*}
-        local UNAMES=${UNAMES#*' '}
+	UNAME=
+	until [ "$UNAME" = "$UNAMES" ]; do
+		UNAME=${UNAMES%%' '*}
+		UNAMES=${UNAMES#*' '}
 
-        local UNAME_PATH="$INSTALL_PATH/$UNAME.sh"
+		UNAME_PATH="$INSTALL_PATH/$UNAME.sh"
 
-        if [ ! -f "$UNAME_PATH" ]; then
-            continue
-        fi
-    done
+		if [ ! -f "$UNAME_PATH" ]; then
+			continue
+		fi
+	done
 
-    if [ ! -f "$UNAME_PATH" ]; then
-      $ECHO "${CLR_WARN}prompt: shell cannot be installed on this platform."
-      $ECHO "Please open an issue to request support for this distribution.${CLR_CLR}"
-      return 1
-    fi
+	if [ ! -f "$UNAME_PATH" ]; then
+	  print-fail "prompt: shell cannot be installed on this platform."
+	  print-warn "Please open an issue to request support for this distribution."
+	  return 1
+	fi
 
-    . "$UNAME_PATH"
+	. "$UNAME_PATH"
 
-    if ! grep "$PROMPT_SHELL_PATH" /etc/shells 1>/dev/null 2>&1; then
-        $ECHO "${CLR_SUCCESS}adding updated $PROMPT_SHELL to shells...${CLR_CLEAR}"
-        sudo sh -c "echo $PROMPT_SHELL_PATH >> /etc/shells"
-    fi
+	if ! grep "$PROMPT_SHELL_PATH" /etc/shells 1>/dev/null 2>&1; then
+		print-success "prompt: adding updated $PROMPT_SHELL to shells..."
+		sudo sh -c "printf \"%s\n\" $PROMPT_SHELL_PATH >> /etc/shells"
+	fi
 
-    if [ "$SHELL" != "$PROMPT_SHELL_PATH" ]; then
-        $ECHO "${CLR_SUCCESS}setting updated $PROMPT_SHELL to default shell for user...${CLR_CLEAR}"
-        sudo chsh -s $PROMPT_SHELL_PATH $(whoami)
+	if [ "$SHELL" != "$PROMPT_SHELL_PATH" ]; then
+		print-success "setting updated $PROMPT_SHELL to default shell for user..."
+		sudo chsh -s "$PROMPT_SHELL_PATH" "$(whoami)"
 
-        # set the default shell for the current session
-        export SHELL="$PROMPT_SHELL_PATH"
-    fi
+		# set the default shell for the current session
+		export SHELL="$PROMPT_SHELL_PATH"
+	fi
 
-    $ECHO "${CLR_SUCCESS}"
-    $ECHO "##############################################################################"
-    $ECHO "##############################################################################"
-    $ECHO "     NOTE: to take advantage of the symbols used by the shell, please set"
-    $ECHO "           the terminal font to 'FiraCode Nerd Font Mono'. If you are using"
-    $ECHO "           either macOS terminal or gnome terminal, you can do this"
-    $ECHO "           automatically by loading a \`theme\`."
-    $ECHO
-    $ECHO "     \$SHELL will be $SHELL"
-    $ECHO "     PLEASE RUN THE FOLLOWING TO START USING THE NEW SHELL:"
-    $ECHO
-    $ECHO "     exec \$SHELL -l"
-    $ECHO "##############################################################################"
-    $ECHO "##############################################################################"
-    $ECHO "${CLR_CLEAR}"
+	printf "\n\n%s" "${CLR_SUCCESS}"
+	cat <<-EOT
+		##############################################################################
+		##############################################################################
+
+		  NOTE: to take advantage of the symbols used by the shell, please set the
+		        the terminal font to \`FiraCode Nerd Font Mono\`. If you are using
+		        either macOS terminal or gnome terminal, you can do this automatically
+		        by loading a \`theme\`.
+
+		  \$SHELL will be $SHELL
+
+		  PLEASE RUN THE FOLLOWING TO START USING THE NEW SHELL:
+
+		  exec \$SHELL -l
+
+		##############################################################################
+		##############################################################################
+	EOT
+	printf "%s\n\n" "${FORMAT_CLEAR}"
 }
 
-__am_prompt_use_shell $@
+__am_prompt_use_shell "$@"

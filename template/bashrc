@@ -1,18 +1,17 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
-if [ ! -z "${AM_PROMPT_BASH:-}" ]; then
-    return
+if [ -n "${AM_PROMPT_BASH:-}" ]; then
+	return
 fi
 
-echo
-echo "prompt: using bash shell"
+printf "\n%s\n" "prompt: using bash shell"
 
-if [ -f $HOME/.am/prompt/sh/profile ]; then
-    . $HOME/.am/prompt/sh/profile
+if [ -f "$HOME"/.am/prompt/sh/profile ]; then
+	. "$HOME"/.am/prompt/sh/profile
 fi
 
-if [ -f $HOME/.am/prompt/bash/bashrc ]; then
-    . $HOME/.am/prompt/bash/bashrc
+if [ -f "$HOME"/.am/prompt/bash/bashrc ]; then
+	. "$HOME"/.am/prompt/bash/bashrc
 fi
 
 AM_PROMPT_BASH=1

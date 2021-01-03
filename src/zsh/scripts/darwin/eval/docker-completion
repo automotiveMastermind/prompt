@@ -1,25 +1,32 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 if [ -d /Applications/Docker.app/Contents/Resources/etc ]; then
-    local DOCKER_PATH=/Applications/Docker.app/Contents/Resources/etc
+	DOCKER_PATH=/Applications/Docker.app/Contents/Resources/etc
 elif [ -d "$HOME/Applications/Docker.app/Contents/Resources/etc" ]; then
-    local DOCKER_PATH="$HOME/Applications/Docker.app/Contents/Resources/etc"
+	DOCKER_PATH="$HOME/Applications/Docker.app/Contents/Resources/etc"
 fi
 
-if [ ! -z "${DOCKER_PATH:-}" ]; then
+if [ -n "${DOCKER_PATH:-}" ]; then
 
-    # enable short option stacking for docker
-    zstyle ':completion:*:*:docker:*' option-stacking yes
-    zstyle ':completion:*:*:docker-*:*' option-stacking yes
+	# enable short option stacking for docker
+	zstyle ':completion:*:*:docker:*' option-stacking yes
+	zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
-    # iterate over each completion
-    for completion in $DOCKER_PATH/*.zsh-completion; do
+	# iterate over each completion
+	for completion in "$DOCKER_PATH"/*.zsh-completion; do
 
-        ZSH_COMPLETION=${completion##*/}
-        ZSH_COMPLETION=${ZSH_COMPLETION%.*}
-        ZSH_COMPLETION="$ZSH_COMPLETION_DIR/_$ZSH_COMPLETION"
+		ZSH_COMPLETION=${completion##*/}
+		ZSH_COMPLETION=${ZSH_COMPLETION%.*}
+		ZSH_COMPLETION="$ZSH_COMPLETION_DIR/_$ZSH_COMPLETION"
 
-        ln -s $completion $ZSH_COMPLETION 2>/dev/null 1>&1
-        . $ZSH_COMPLETION
-    done
+		if [ -f "$ZSH_COMPLETION" ]; then
+			continue
+		fi
+
+		# remove any cached zsh completion
+		rm -f "$HOME"/.zcompdump* 1>/dev/null 2>&1 || true
+
+		ln -s "$completion" "$ZSH_COMPLETION" 2>/dev/null 1>&1
+		. "$ZSH_COMPLETION"
+	done
 fi

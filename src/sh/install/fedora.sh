@@ -1,14 +1,15 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 set -e
 
 __am_prompt_install_fedora() {
-    local PACKAGES='libxcrypt-compat'
+	PACKAGES='libxcrypt-compat'
 
-    $ECHO "${CLR_SUCCESS}installing $PACKAGES...${CLR_CLEAR}"
-    sudo dnf install -y ${PACKAGES}
+	print-success "installing $PACKAGES..."
+	# shellcheck disable=SC2086
+	sudo dnf install -y $PACKAGES
 
-    . "$AM_PROMPT/sh/install/centos.sh"
+	. "$AM_PROMPT"/sh/install/centos.sh
 }
 
 __am_prompt_install_fedora
