@@ -14,7 +14,7 @@ __am_prompt_ensure_rosetta() {
 		return $?
 	fi
 
-	printf "%s" "$CLR_WARN"
+	printf "\n%s" "$CLR_WARN"
 	cat <<-EOT
 		##############################################################################
 
@@ -36,7 +36,7 @@ __am_prompt_ensure_rosetta() {
 
 		##############################################################################
 	EOT
-	printf "%s\n" "$FORMAT_CLEAR"
+	printf "%s" "$FORMAT_CLEAR"
 
 	 # install homebrew for apple silicon
 	__am_prompt_install_arm64
@@ -65,7 +65,7 @@ __am_prompt_install_intel() {
 __am_prompt_install_rosetta() {
 	printf "\n${CLR_SUCCESS}%s\n%s\n%s${FORMAT_CLEAR}\n\n" \
 		"##############################################################################" \
-		"INSTALLING VIA HOMEBREW FOR ROSETTA 2 (x86_64)"
+		"INSTALLING VIA HOMEBREW FOR ROSETTA 2 (x86_64)" \
 		"##############################################################################"
 
 	# install rosetta 2
@@ -85,7 +85,7 @@ __am_prompt_install_rosetta() {
 __am_prompt_install_arm64() {
 	printf "\n${CLR_SUCCESS}%s\n%s\n%s${FORMAT_CLEAR}\n\n" \
 		"##############################################################################" \
-		"INSTALLING VIA HOMEBREW FOR APPLE SILICON (arm64e)"
+		"INSTALLING VIA HOMEBREW FOR APPLE SILICON (arm64e)" \
 		"##############################################################################"
 
 	HOMEBREW_PREFIX="/opt/homebrew"
