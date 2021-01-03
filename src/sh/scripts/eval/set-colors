@@ -56,11 +56,6 @@ else
 	export FORMAT_CLEAR=$CLR_SUCCESS
 fi
 
-__am_prompt_print_notice()
-{
-	printf "${1}%s${FORMAT_CLEAR}\n" "$@"
-}
-
 __am_prompt_print_success()
 {
 	printf "${CLR_SUCCESS}%s${FORMAT_CLEAR}\n" "$@"
@@ -76,7 +71,6 @@ __am_prompt_print_fail()
 	printf "${CLR_FAIL}%s${FORMAT_CLEAR}\n" "$@"
 }
 
-alias print-notice='__am_prompt_print_notice'
 alias print-success='__am_prompt_print_success'
 alias print-warn='__am_prompt_print_warn'
 alias print-fail='__am_prompt_print_fail'

@@ -1,0 +1,3 @@
+#! /usr/bin/env sh
+
+printf "${CLR_SUCCESS}%s${FORMAT_CLEAR}\n" "$@"
