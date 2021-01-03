@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
 if [ -f "$HOME/.linuxbrew/bin/brew" ]; then
-    eval $("$HOME/.linuxbrew/bin/brew" shellenv)
+	eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
 fi
 
 if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi

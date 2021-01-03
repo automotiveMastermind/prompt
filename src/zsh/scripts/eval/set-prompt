@@ -1,23 +1,23 @@
-#!/usr/bin/env zsh
+#! /usr/bin/env zsh
 
 __am_prompt_set_window_title() {
-    # set the window title
-    echo -ne "\033]0; $USER@${HOSTNAME%%.*} $(basename $PWD) \007"
+	# set the window title
+	printf "\033]0; %s \007" "$USER@${HOSTNAME%%.*} -:- ${PWD##*/}"
 }
 
 # detect starship
-if command -v starship &> /dev/null; then
+if command -v starship 1>/dev/null 2>&1; then
 
-    # set the starship configuration path
-    if [ -f "$AM_PROMPT/user/starship.toml" ]; then
-        export STARSHIP_CONFIG="$AM_PROMPT/user/starship.toml"
-    fi
+	# set the starship configuration path
+	if [ -f "$AM_PROMPT/user/starship.toml" ]; then
+		export STARSHIP_CONFIG="$AM_PROMPT/user/starship.toml"
+	fi
 
-    # use starship
-    eval "$(starship init zsh)"
+	# use starship
+	eval "$(starship init zsh)"
 
-    # move on immediately
-    return 0
+	# move on immediately
+	return 0
 fi
 
 # set the prompt command

@@ -1,31 +1,31 @@
-#!/usr/bin/env zsh
+#! /usr/bin/env zsh
 
 # use case sensitive match followed by case-insensitive match
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 if command -v kubectl 1>/dev/null 2>&1; then
-    . <(kubectl completion zsh)
+	. <(kubectl completion zsh)
 fi
 
 if command -v helm 1>/dev/null 2>&1; then
-    . <(helm completion zsh)
+	. <(helm completion zsh)
 fi
 
 if command -v minikube 1>/dev/null 2>&1; then
-    . <(minikube completion zsh)
+	. <(minikube completion zsh)
 fi
 
 if command -v npm 1>/dev/null 2>&1; then
-    . <(npm completion)
+	. <(npm completion)
 fi
 
 __am_prompt_dotnet_zsh_complete()
 {
-  local COMPLETIONS=("$(dotnet complete "$WORDS")")
+  COMPLETIONS=("$(dotnet complete "$WORDS")")
 
   reply=( "${(ps:\n:)COMPLETIONS}" )
 }
 
 if command -v dotnet 1>/dev/null 2>&1; then
-    compctl -K __am_prompt_dotnet_zsh_complete dotnet
+	compctl -K __am_prompt_dotnet_zsh_complete dotnet
 fi

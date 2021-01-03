@@ -1,66 +1,75 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 set -e
 
 __am_prompt_install_linux() {
 
-    local BREWS='gcc git gpg starship gh nvm'
+	BREWS='gcc git gpg starship gh nvm'
 
-    if ! command -v brew 1>/dev/null 2>&1; then
-        $ECHO "${CLR_SUCCESS}installing homebrew...${CLR_CLEAR}"
-        bash -c "CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) || true"
+	if ! command -v brew 1>/dev/null 2>&1; then
+		print-success "installing homebrew..."
+		bash -c "CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) || true"
 
-        . "$AM_PROMPT/sh/scripts/eval/set-brew-path"
+		. "$AM_PROMPT/sh/scripts/eval/set-brew-path"
 
-        # disable brew analytics
-        brew analytics off
-    fi
+		# disable brew analytics
+		brew analytics off
+	fi
 
-    $ECHO "${CLR_SUCCESS}updating homebrew...${CLR_CLEAR}"
-    brew update
+	print-success "updating homebrew..."
+	brew update
 
-    set +e
+	for pkg in $BREWS; do
+		if brew list --versions "$pkg" 1>/dev/null; then
+			print-success "linux: upgrading $pkg..."
+			brew upgrade "$pkg" 2>/dev/null || true
+			brew link --overwrite "$pkg" 2>/dev/null || true
+		else
+			print-success "linux: installing $pkg..."
+			brew install "$pkg" || true
+		fi
+	done
 
-    for pkg in $BREWS; do
-        if brew list --versions "$pkg" 1>/dev/null; then
-            $ECHO "${CLR_SUCCESS}upgrading: $pkg...${CLR_CLEAR}"
-            brew upgrade $pkg 2>/dev/null
-            brew link --overwrite $pkg 2>/dev/null
-        else
-            $ECHO "${CLR_SUCCESS}installing: $pkg...${CLR_CLEAR}"
-            brew install $pkg
-        fi
-    done
+	# make sure we have ownership of linuxbrew
+	sudo chown -R "$(whoami)" /home/linuxbrew/.linuxbrew
 
-    # make sure we have ownership of linuxbrew
-    sudo chown -R $(whoami) /home/linuxbrew/.linuxbrew
+	GPG_CONFIG_DIR="$(gpgconf --list-dirs homedir)"
 
-    $ECHO "${CLR_SUCCESS}upgrading: fira code font...${CLR_CLEAR}"
+	# test for gpg config
+	if [ ! -d "$GPG_CONFIG_DIR" ]; then
 
-    # setup the font dir
-    FONT_DIR="$HOME/.local/share/fonts/NerdFonts"
+		# create the gpg config directory
+		mkdir -p "$GPG_CONFIG_DIR"
 
-    # create a temp dir for fonts
-    TEMP_DIR=$(mktemp -d)
+		# set the permissions
+		chmod u=rwx,go= "$GPG_CONFIG_DIR"
 
-    # download fonts
-    curl -sLo "$TEMP_DIR/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+		# apply initial defaults
+		gpgconf --apply-defaults 2>/dev/null || true
+	fi
 
-    # determine if fira code already exists
-    if [ -d "$FONT_DIR" ]; then
+	print-success "upgrading: fira code font..."
+	FONT_DIR="$HOME/.local/share/fonts/NerdFonts"
+	TEMP_DIR=$(mktemp -d)
 
-        # delete fira code
-        rm -rf "$FONT_DIR" 1>/dev/null 2>&1
-    fi
+	# download fonts
+	curl -sLo "$TEMP_DIR/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
 
-    # make sure the font dir exists
-    mkdir -p $FONT_DIR 1>/dev/null
+	# determine if fira code already exists
+	if [ -d "$FONT_DIR" ]; then
 
-    # extract fira code
-    unzip "$TEMP_DIR/FiraCode.zip" 'Fira*.otf' -x '*Windows*' -d "$FONT_DIR" 1>/dev/null
+		# delete fira code
+		rm -rf "$FONT_DIR" 1>/dev/null 2>&1
+	fi
 
-    # remove temp
-    rm -rf $TEMP_DIR 1>/dev/null 2>&1
+	# make sure the font dir exists
+	mkdir -p "$FONT_DIR" 1>/dev/null
+
+	# extract fira code
+	unzip "$TEMP_DIR/FiraCode.zip" 'Fira*.otf' -x '*Windows*' -d "$FONT_DIR" 1>/dev/null
+
+	# remove temp
+	rm -rf "$TEMP_DIR" 1>/dev/null 2>&1
 }
 
 __am_prompt_install_linux

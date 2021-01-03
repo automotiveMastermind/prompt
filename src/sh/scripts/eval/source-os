@@ -1,36 +1,36 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 __am_prompt_source_os() {
 
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        local UNAMES="$ID $ID_LIKE"
-    else
-        local UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
-    fi
+	if [ -f /etc/os-release ]; then
+		. /etc/os-release
+		UNAMES="$ID ${ID_LIKE:-unknown} linux"
+	else
+		UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
+	fi
 
-    local UNAME=
-    until [ "$UNAME" = "$UNAMES" ]; do
-        local UNAME=${UNAMES%%' '*}
-        local UNAMES=${UNAMES#*' '}
+	UNAME=
+	until [ "$UNAME" = "$UNAMES" ]; do
+		UNAME=${UNAMES%%' '*}
+		UNAMES=${UNAMES#*' '}
 
-        local UNAME_PATH="$HOME/.am/prompt/sh/scripts/$UNAME"
+		UNAME_PATH="$HOME/.am/prompt/sh/scripts/$UNAME"
 
-        if [ ! -d "$UNAME_PATH" ]; then
-            continue
-        fi
+		if [ ! -d "$UNAME_PATH" ]; then
+			continue
+		fi
 
-        export AM_PROMPT_OS=$UNAME
-        export PATH="$UNAME_PATH:$PATH"
+		export AM_PROMPT_OS=$UNAME
+		export PATH="$UNAME_PATH:$PATH"
 
-        if [ -d "$UNAME_PATH/eval" ]; then
-            for EVAL_SCRIPT in $UNAME_PATH/eval/*; do
-                . "$EVAL_SCRIPT"
-            done
-        fi
+		if [ -d "$UNAME_PATH/eval" ]; then
+			for EVAL_SCRIPT in "$UNAME_PATH"/eval/*; do
+				. "$EVAL_SCRIPT"
+			done
+		fi
 
-        break
-    done
+		break
+	done
 }
 
 __am_prompt_source_os

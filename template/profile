@@ -1,8 +1,7 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
-echo
-echo "prompt: using default shell"
+printf "\n%s\n" "prompt: using default shell"
 
-if [ -f $HOME/.am/prompt/sh/profile ]; then
-    . $HOME/.am/prompt/sh/profile
+if [ -f "$HOME"/.am/prompt/sh/profile ]; then
+	. "$HOME"/.am/prompt/sh/profile
 fi

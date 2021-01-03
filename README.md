@@ -143,7 +143,7 @@ Global colors defined by promotMastermind:
 
 | Name               | Color                   |
 | ------------------ | ----------------------- |
-| CLR_CLEAR          | DEFAULT COLOR           |
+| FORMAT_CLEAR       | CLEAR ALL FORMATTING    |
 | CLR_BLACK          | ANSI BLACK (GRAY)       |
 | CLR_RED            | ANSI RED                |
 | CLR_GREEN          | ANSI GREEN              |
@@ -205,12 +205,6 @@ install-pandoc
 install-kind
 ```
 
-[Minkube][minikube-url]
-
-```sh
-install-minikube
-```
-
 ## Copyright and License
 
 &copy; automotiveMastermind and contributors. Distributed under the MIT license. See [LICENSE][license-url] for details.
@@ -226,7 +220,6 @@ install-minikube
 [aws-sdk-url]: https://github.com/aws/aws-cli
 [gcloud-sdk-url]: https://cloud.google.com/sdk/install
 [dotnet-sdk-url]: https://github.com/dotnet/installer
-[minikube-url]: https://minikube.sigs.k8s.io/docs/start/
 [pandoc-url]: https://pandoc.org
 
 [workflow-url]: https://github.com/automotivemastermind/prompt/actions?query=workflow%3Aend-to-end

@@ -1,19 +1,19 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 __am_kind_prompt_install() {
 
-    # get the kind command
-    KIND=$(command -v kind 2>/dev/null)
+	# get the kind command
+	KIND=$(command -v kind 2>/dev/null)
 
-    # determine if kind is already available
-    if ! test -z "${KIND:-}"; then
+	# determine if kind is already available
+	if ! test -z "${KIND:-}"; then
 
-        # move on immediately
-        return 0
-    fi
+		# move on immediately
+		return 0
+	fi
 
-    # install kind with homebrew now that its available there
-    brew install kind
+	# install kind with homebrew now that its available there
+	brew install kind
 }
 
 __am_kind_prompt_install

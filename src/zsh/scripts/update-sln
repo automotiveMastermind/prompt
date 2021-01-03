@@ -1,0 +1,39 @@
+#! /usr/bin/env zsh
+
+__contains() { for item in "${@:2}"; do [[ "$item" == "$1" ]] && return 0; done; return 1; }
+
+mpafil -t SOLUTIONS <<< "$@"
+
+if [ ${#SOLUTIONS[@]} -eq 0 ]; then
+	SOLUTIONS=(*.sln)
+fi
+
+for solution in "${SOLUTIONS[@]}"; do
+	if [ ! -f "$solution" ]; then
+		print-fail "error: $solution does not exist; skipping..."
+		continue
+	fi
+
+	solution="./$solution"
+
+	basepath="${solution%/*}"
+	name="${solution##*/}"
+
+	printf "%s" "checking solution: $name"
+
+	pushd "$basepath" || exit
+
+	mapfile -t EXISTING <<< "$(dotnet sln "$name" list)"
+	EXISTING=("${EXISTING[@]:2}")
+	mapfile -t DISCOVERED < <(find -- * -name '*.csproj' ! -path '*/bin/*' ! -path '*/obj/*' ! -path '*/shared/*')
+
+	for existing in "${EXISTING[@]}"; do
+		__contains "$existing" "${DISCOVERED[@]}" || dotnet sln "$name" remove "$existing"
+	done
+
+	for discovered in "${DISCOVERED[@]}"; do
+		__contains "$discovered" "${EXISTING[@]}" || dotnet sln "$name" add "$discovered"
+	done
+
+	popd || exit
+done

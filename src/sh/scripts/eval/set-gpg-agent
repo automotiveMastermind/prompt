@@ -1,20 +1,21 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 # determine if gpgconf is available on the system
 if ! command -v gpgconf 1>/dev/null 2>&1; then
-    # move on immediately
-    return 0
+	# move on immediately
+	return 0
 fi
 
 # determine if this is a tty
 if [ -t 1 ]; then
 
-    # get the tty
-    export GPG_TTY="$(tty)"
+	# get the tty
+	GPG_TTY="$(tty)"
+	SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 
-    # get the ssh auth sock
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+	export GPG_TTY
+	export SSH_AUTH_SOCK
 
-    # relaunch gpg using the expected tty and sock
-    gpgconf --launch gpg-agent
+	# launch gpg-agent using the expected tty and sock
+	gpgconf --launch gpg-agent
 fi

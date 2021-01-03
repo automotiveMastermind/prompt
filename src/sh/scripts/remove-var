@@ -1,40 +1,37 @@
-#!/usr/bin/env sh
-
-if [ ! -z "${AM_PROMPT_DEBUG:-}" ]; then
-    echo 'remove-var'
-fi
+#! /usr/bin/env sh
 
 __am_prompt_remove_var_usage() {
-    echo 'remove-var <name>'
-    echo '     name  : a name for your variable'
+	printf "%s\n\t%s\n" \
+		"remove-var <name>" \
+			"name : a name for your variable"
 }
 
 __am_prompt_remove_var() {
-    local VARIABLE=$1
-    local REMOVE=
-    local USER_PATH="$AM_PROMPT/user"
-    local VAR_PATH="$USER_PATH/variables"
+	VARIABLE=$1
+	REMOVE=
+	USER_PATH="$AM_PROMPT/user"
+	VAR_PATH="$USER_PATH/variables"
 
-    if [ -z "${VARIABLE:-}" ]; then
-        __am_prompt_remove_var_usage
-        return 1
-    fi
+	if [ -z "${VARIABLE:-}" ]; then
+		__am_prompt_remove_var_usage
+		return 1
+	fi
 
-    REMOVE=$(grep -s -m 1 ^$VARIABLE $VAR_PATH)
-    unset $VARIABLE 1>/dev/null 2>&1
+	REMOVE=$(grep -s -m 1 ^"$VARIABLE" "$VAR_PATH")
+	unset "$VARIABLE" 1>/dev/null 2>&1
 
-    if [ -z ${REMOVE:-} ]; then
-        echo 'remove-var: no variable was declared for the specified name'
+	if [ -z "${REMOVE:-}" ]; then
+		printf "%s\n" "remove-var: no variable was declared for the specified name"
 
-        return 1
-    fi
+		return 1
+	fi
 
-    echo "remove-var: removing variable $REMOVE"
+	printf "%s\n" "remove-var: removing variable $REMOVE"
 
-    grep -s -v ^$VARIABLE "$VAR_PATH" >> "$USER_PATH/variables1"
-    mv -f "$USER_PATH/variables1" "$USER_PATH/variables"
+	grep -s -v ^"$VARIABLE" "$VAR_PATH" >> "$USER_PATH/variables1"
+	mv -f "$USER_PATH/variables1" "$USER_PATH/variables"
 
-    . "$USER_PATH/variables"
+	. "$USER_PATH/variables"
 }
 
-__am_prompt_remove_var $@
+__am_prompt_remove_var "$@"

@@ -1,32 +1,32 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
+
+if ! command -v print-warn 1>/dev/null 2>&1; then
+	. "$HOME"/.am/prompt/sh/scripts/eval/set-colors
+fi
 
 __am_prompt_open_url() {
-    local url=${1:-}
+	url=${1:-}
 
-    if [ -z $url ]; then
-        echo 'open-url: url must be supplied'
-        return 1
-    fi
+	if [ -z "$url" ]; then
+		print-fail "open-url: url must be supplied"
+		return 1
+	fi
 
-    set +e
+	for cmd in open gnome-open kde-open xdg-open sensible-browser; do
+		if command -v $cmd 1>/dev/null 2>&1; then
+			print-success "open-url: opening $url via $cmd..."
+			$cmd "$url" 1>/dev/null 2>&1
 
-    for cmd in open gnome-open kde-open xdg-open sensible-browser; do
-        if command -v $cmd 1>/dev/null 2>&1; then
-            echo "open-url: opening $url via $cmd..."
-            $cmd "$url" 1>/dev/null 2>&1
+			if ! $cmd "$url" 1>/dev/null 2>&1; then
+				print-warn "open-url: please open a browser to: $url"
+			fi
 
-            exit_code=$?
+			return 0
+		fi
+	done
 
-            if [ $exit_code -ne 0 ]; then
-                echo "open-url: please open a browser to: $url"
-            fi
-
-            return 0
-        fi
-    done
-
-    # no open or browser was available (headless)
-    echo "open-url: please open a browser to: $url"
+	# no open or browser was available (headless)
+	print-warn "open-url: please open a browser to: $url"
 }
 
-__am_prompt_open_url $@
+__am_prompt_open_url "$@"

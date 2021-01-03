@@ -1,19 +1,7 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
-echo
-
-for color in $(env | awk '/^CLR_BRIGHT/' | cut -d= -f1 | sort); do
-    echo "${!color}\$$color${CLR_CLEAR}"
-done
-
-echo
-
-for color in $(env | awk '/^CLR_/' | awk '!/^CLR_BRIGHT/' | awk '!/_PROMPT/' | cut -d= -f1 | sort); do
-    echo "${!color}\$$color${CLR_CLEAR}"
-done
-
-echo
-
-for color in $(env | awk '/^CLR/' | awk '/_PROMPT/' | cut -d= -f1 | sort); do
-    echo "${!color}\$$color${CLR_CLEAR}"
+for color in $(env | grep "^CLR" | sort); do
+	name=${color#*=}
+	value=${color%=*}
+	printf "%s%s${FORMAT_CLEAR}\n" "$name" "$value"
 done

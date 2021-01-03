@@ -1,18 +1,17 @@
-#!/usr/bin/env zsh
+#! /usr/bin/env zsh
 
 if [ ! -z "${AM_PROMPT_ZSH:-}" ]; then
-    return
+	return
 fi
 
-echo
-echo "prompt: using zsh shell"
+printf "\n%s\n" "prompt: using zsh shell"
 
-if [ -f $HOME/.am/prompt/sh/profile ]; then
-    . $HOME/.am/prompt/sh/profile
+if [ -f "$HOME"/.am/prompt/sh/profile ]; then
+	. "$HOME"/.am/prompt/sh/profile
 fi
 
-if [ -f $HOME/.am/prompt/zsh/zshrc ]; then
-    . $HOME/.am/prompt/zsh/zshrc
+if [ -f "$HOME"/.am/prompt/zsh/zshrc ]; then
+	. "$HOME"/.am/prompt/zsh/zshrc
 fi
 
 AM_PROMPT_ZSH=1

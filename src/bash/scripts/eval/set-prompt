@@ -1,24 +1,25 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
 __am_prompt_set_window_title() {
-    # set the window title
-    echo -ne "\033]0; $USER@${HOSTNAME%%.*} $(basename $PWD) \007"
+	# set the window title
+	printf "\033]0; %s \007" "$USER@${HOSTNAME%%.*} -:- ${PWD##*/}"
 }
 
 # detect startship
 if command -v starship &> /dev/null; then
 
-    # set the starship configuration path
-    if [ -f "$AM_PROMPT/user/starship.toml" ]; then
-        export STARSHIP_CONFIG="$AM_PROMPT/user/starship.toml"
-    fi
+	# set the starship configuration path
+	if [ -f "$AM_PROMPT/user/starship.toml" ]; then
+		export STARSHIP_CONFIG="$AM_PROMPT/user/starship.toml"
+	fi
 
-    # use starship instead of prompt command
-    eval "$(starship init bash)"
+	# use starship instead of prompt command
+	eval "$(starship init bash)"
 
-    # set the window title
-    starship_precmd_user_func="__am_prompt_set_window_title"
+	# set the window title
+	# shellcheck disable=SC2034
+	starship_precmd_user_func="__am_prompt_set_window_title"
 
-    # move on immediately
-    return 0
+	# move on immediately
+	return 0
 fi

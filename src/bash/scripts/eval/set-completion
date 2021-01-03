@@ -1,43 +1,44 @@
-#!/usr/bin/env bash
+#! /usr/bin/env bash
 
 # setup completion
 if [ -f "$LOCAL_PREFIX/etc/bash_completion" ]; then
-    . "$LOCAL_PREFIX/etc/bash_completion"
+	. "$LOCAL_PREFIX/etc/bash_completion"
 elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+	. /etc/bash_completion
 elif [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
+	. /usr/share/bash-completion/bash_completion
 fi
 
 if command -v kubectl 1>/dev/null 2>&1; then
-    . <(kubectl completion bash)
+	. <(kubectl completion bash)
 fi
 
 if command -v helm 1>/dev/null 2>&1; then
-    . <(helm completion bash)
+	. <(helm completion bash)
 fi
 
 if command -v minikube 1>/dev/null 2>&1; then
-    . <(minikube completion bash)
+	. <(minikube completion bash)
 fi
 
 if command -v npm 1>/dev/null 2>&1; then
-    . <(npm completion)
+	. <(npm completion)
 fi
 
 __am_prompt_dotnet_bash_complete()
 {
-  local WORD=${COMP_WORDS[COMP_CWORD]}
+	WORD=${COMP_WORDS[COMP_CWORD]}
 
-  local COMPLETIONS="$(dotnet complete --position "${COMP_POINT}" "${COMP_LINE}" 2>/dev/null)"
+	COMPLETIONS="$(dotnet complete --position "${COMP_POINT}" "${COMP_LINE}" 2>/dev/null)"
 
-  if [ $? -ne 0 ]; then
-    COMPLETIONS=""
-  fi
+	# shellcheck disable=SC2181
+	if [ $? -ne 0 ]; then
+		COMPLETIONS=""
+	fi
 
-  COMPREPLY=( $(compgen -W "$COMPLETIONS" -- "$WORD") )
+	mapfile -t COMPREPLY < <(compgen -W "$COMPLETIONS" -- "$WORD")
 }
 
 if command -v dotnet 1>/dev/null 2>&1; then
-    complete -f -F __am_prompt_dotnet_bash_complete dotnet
+	complete -f -F __am_prompt_dotnet_bash_complete dotnet
 fi

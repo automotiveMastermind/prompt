@@ -1,46 +1,43 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
 __am_prompt_gcloud_install() {
-    local GCLOUD_PATH="$HOME/.gcloud"
-    local PLATFORM='linux'
+	GCLOUD_PATH="$HOME/.gcloud"
+	PLATFORM='linux'
 
-    if [ "$(uname)" = "Darwin" ]; then
-        PLATFORM='darwin'
-    fi
+	if [ "$(uname)" = "Darwin" ]; then
+		PLATFORM='darwin'
+	fi
 
-    local URL=https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-161.0.0-$PLATFORM-x86_64.tar.gz
+	URL=https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-161.0.0-$PLATFORM-x86_64.tar.gz
 
-    local TEMP=$(mktemp -d)
-    local FILENAME="$TEMP/gcloud-sdk.tar.gz"
-    local EXPANDED="$TEMP/google-cloud-sdk"
+	TEMP=$(mktemp -d)
+	FILENAME="$TEMP/gcloud-sdk.tar.gz"
+	EXPANDED="$TEMP/google-cloud-sdk"
 
-    if ! command -v gcloud 1>/dev/null 2>&1; then
+	if ! command -v gcloud 1>/dev/null 2>&1; then
 
-        echo
-        echo "downloading gcloud-sdk"
-        curl -L $URL -o "$FILENAME" --silent 2>&1
+		print-success "downloading gcloud-sdk..."
+		curl -L $URL -o "$FILENAME" --silent 2>&1
 
-        tar -xf "$FILENAME" -C "$TEMP" 1>/dev/null 2>&1
+		tar -xf "$FILENAME" -C "$TEMP" 1>/dev/null 2>&1
 
-        rm -rf "$GCLOUD_PATH" 1>/dev/null 2>&1
-        mv "$EXPANDED" "$GCLOUD_PATH" 1>/dev/null 2>&1
-        rm -rf "$TEMP" 1>/dev/null 2>&1
+		rm -rf "$GCLOUD_PATH" 1>/dev/null 2>&1
+		mv "$EXPANDED" "$GCLOUD_PATH" 1>/dev/null 2>&1
+		rm -rf "$TEMP" 1>/dev/null 2>&1
 
-        echo
-        echo "installing gcloud-sdk"
-        ~/.gcloud/install.sh --command-completion false --usage-reporting false --quiet --path-update false 2>&1
+		print-success "installing gcloud-sdk..."
+		"$HOME"/.gcloud/install.sh --command-completion false --usage-reporting false --quiet --path-update false 2>&1
 
-        local GCLOUD_PATH_INC="$HOME/.gcloud/path.bash.inc"
+		GCLOUD_PATH_INC="$HOME"/.gcloud/path.bash.inc
 
-        if [ -f "$GCLOUD_PATH_INC" ]; then
-            . "$GCLOUD_PATH_INC"
-        fi
-    fi
+		if [ -f "$GCLOUD_PATH_INC" ]; then
+			. "$GCLOUD_PATH_INC"
+		fi
+	fi
 
-    echo
-    echo "installing and updating gcloud components"
-    gcloud components install kubectl docker-credential-gcr gsutil core --quiet 2>&1
-    gcloud components update --quiet 2>&1
+	print-success "installing and updating gcloud components..."
+	gcloud components install kubectl docker-credential-gcr gsutil core --quiet 2>&1
+	gcloud components update --quiet 2>&1
 }
 
 __am_prompt_gcloud_install
