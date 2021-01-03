@@ -45,6 +45,7 @@ modified = '([!$count](bold yellow) )'
 staged   = '([+$count](bold green) )'
 renamed  = '([»$count](bold yellow) )'
 deleted  = '([✘$count](bold red) )'
+diverged = '([⇡$ahead_count⇣$behind_count](bold yellow) )'
 
 [golang]
 symbol = ' '
