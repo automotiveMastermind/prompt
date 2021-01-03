@@ -1,3 +1,3 @@
-#!/usr/bin/env sh
+#! /usr/bin/env sh
 
-. "$AM_PROMPT/sh/install/debian.sh"
+. "$AM_PROMPT"/sh/install/debian.sh
