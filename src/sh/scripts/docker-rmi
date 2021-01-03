@@ -1,3 +1,4 @@
 #! /usr/bin/env sh
 
-docker rmi "$(docker images --filter dangling=true -q 2>/dev/null)" 2>/dev/null
+# shellcheck disable=SC2046
+docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
