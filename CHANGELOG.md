@@ -1,3 +1,31 @@
+# [8.3.0-next.3](https://github.com/automotiveMastermind/prompt/compare/v8.3.0-next.2...v8.3.0-next.3) (2021-01-05)
+
+
+### Bug Fixes
+
+* **starship:** fix diverged formatting ([9d7cab8](https://github.com/automotiveMastermind/prompt/commit/9d7cab8f5b0eadcf218075c7b04556937e2c59e5))
+* formatting around heredocs ([636868a](https://github.com/automotiveMastermind/prompt/commit/636868a547bf70d79c21955a380850b0589e601a))
+* **darwin:** ensure the fira code directory in install ([7783750](https://github.com/automotiveMastermind/prompt/commit/77837509a9bbcb42f228de216e5da9129ccadc70))
+* **darwin:** fix notice block formatting for apple silicon ([bd8d2e0](https://github.com/automotiveMastermind/prompt/commit/bd8d2e0aa946896ed12c014683bb837678a72a99))
+* handle null globs correctly ([19c07ee](https://github.com/automotiveMastermind/prompt/commit/19c07ee3ea79f0a45fb23b9fb102b3405c483bcf))
+* remove bookmark support ([a94c32c](https://github.com/automotiveMastermind/prompt/commit/a94c32c053aa2cd2e21b4fe071ad787f42b90673))
+* **install:** remove  unnecessary platform proxy scripts ([1be3f9f](https://github.com/automotiveMastermind/prompt/commit/1be3f9fcd0c0e17adc7d6de3a96f882ab0002c1f))
+* **sh:** remove show-virtualenv (replaced by starship) ([60514f0](https://github.com/automotiveMastermind/prompt/commit/60514f003662e0ae8e5aa86639469a501ed8a46c))
+* **starship:** normalise symbols for battery indicators ([8bd5ffd](https://github.com/automotiveMastermind/prompt/commit/8bd5ffd46f3868fdaae8b128f513ef039a9231a7))
+* use posix-compliant source (dot) and exit codes ([cf33dde](https://github.com/automotiveMastermind/prompt/commit/cf33dde725f7ea17353182d59be69bc424913541))
+* **template:** do not assume dash is the default shell in sh profile ([aea2e75](https://github.com/automotiveMastermind/prompt/commit/aea2e756f5365bc5546555c611d693c46983fe57))
+
+
+### Features
+
+* add support for derived platforms (like popos) ([1ef63d7](https://github.com/automotiveMastermind/prompt/commit/1ef63d7ad8c7200aa6d07b86ac5f4d321e18c186))
+* add support for themes in gnome terminal ([872f31c](https://github.com/automotiveMastermind/prompt/commit/872f31cabbc0669b9fb882c00b4c26bfec7c750b))
+
+
+### Performance Improvements
+
+* improve pstartup time, especially for zsh ([7c09e63](https://github.com/automotiveMastermind/prompt/commit/7c09e633224121dba20e47354ea663a623e79e17))
+
 # [8.3.0-next.2](https://github.com/automotiveMastermind/prompt/compare/v8.3.0-next.1...v8.3.0-next.2) (2020-12-27)
 
 
