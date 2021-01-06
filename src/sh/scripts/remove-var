@@ -17,8 +17,7 @@ __am_prompt_remove_var() {
 		return 1
 	fi
 
-	REMOVE=$(grep -s -m 1 ^"$VARIABLE" "$VAR_PATH")
-	unset "$VARIABLE" 1>/dev/null 2>&1
+	REMOVE=$(grep -s -m 1 ^"export $VARIABLE=" "$VAR_PATH")
 
 	if [ -z "${REMOVE:-}" ]; then
 		printf "%s\n" "remove-var: no variable was declared for the specified name"
@@ -28,10 +27,13 @@ __am_prompt_remove_var() {
 
 	printf "%s\n" "remove-var: removing variable $REMOVE"
 
-	grep -s -v ^"$VARIABLE" "$VAR_PATH" >> "$USER_PATH/variables1"
+	unset "$VARIABLE" 1>/dev/null 2>&1
+	grep -s -v ^"export $VARIABLE=" "$VAR_PATH" >> "$USER_PATH/variables1"
 	mv -f "$USER_PATH/variables1" "$USER_PATH/variables"
 
-	. "$USER_PATH/variables"
+	print-success "remove-var: successfully removed value for $VARIABLE" \
+		"start a new shell or unset the variable using:" \
+		"unset $VARIABLE"
 }
 
 __am_prompt_remove_var "$@"
