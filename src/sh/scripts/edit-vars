@@ -7,7 +7,7 @@ __am_prompt_edit_vars() {
 		printf "%s\n\n" "#! /usr/bin/env sh" > "$VAR_PATH"
 	fi
 
-	"${EDITOR:-vi}" "$VAR_PATH"
+	${EDITOR:-vi} "$VAR_PATH"
 }
 
 __am_prompt_edit_vars

@@ -1,39 +1,46 @@
 #! /usr/bin/env sh
 
 __am_prompt_add_var_usage() {
-	printf "%s\n" "[add-var|set-var] <name> <value>"
-	printf "\t%s\n" \
-		"name  : a name for your variable" \
-		"value : a value for your variable"
+	print-warn "[add-var|set-var] <name> <value>" \
+		"	name  : a name for your variable" \
+		"	value : a value for your variable"
 }
 
 __am_prompt_add_var() {
-	# make sure that a bookmark was specified.
-	if [ -z "${1:-}" ]; then
-		printf "%s\n" "add-var: missing <name>"
+
+	# capture the name
+	name=${1:-}
+	shift
+
+	# capture the remainder as a value
+	value=${*:-}
+
+	if [ -z "$name" ]; then
+		print-warn "add-var: missing <name>"
 		__am_prompt_add_var_usage
 		return
 	fi
 
-	if [ "${1:-}" = "--help" ]; then
+	if [ "$name" = "--help" ]; then
 		__am_prompt_add_var_usage
 		return
 	fi
 
-	if [ -z "${2:-}" ]; then
-		printf "%s\n" "add-var: missing <value>"
+	if [ -z "$value" ]; then
+		print-warn "add-var: missing <value>"
 		__am_prompt_add_var_usage
 		return
 	fi
 
-	# make sure we remove any existing variable before defining another one
-	remove-var "$1" silent
-	VARIABLE="$1"=\"$2\"
-	VAR_PATH="$AM_PROMPT/user/variables.sh"
+	# remove the var if it currently exists
+	remove-var "$name" --silent
+	VAR_PATH="$AM_PROMPT/user/variables"
+	key="$name=\"$value\""
 
-	printf "%s\n" "add-var: adding varable: $VARIABLE"
-	printf "\n%s\n" "$VARIABLE" >> "$VAR_PATH"
-	. "$VAR_PATH"
+	printf "export %s\n" "$key" >> "$VAR_PATH"
+	print-success "add-var: successfully added value for $key" \
+		"start a new shell or reload the variables using:" \
+		". \"$VAR_PATH\""
 }
 
 __am_prompt_add_var "$@"
