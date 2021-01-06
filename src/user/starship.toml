@@ -63,6 +63,7 @@ symbol = ' '
 symbol = ' '
 
 [kubernetes]
+symbol   = 'ﴱ '
 disabled = false
 
 [memory_usage]
