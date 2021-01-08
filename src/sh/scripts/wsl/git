@@ -1,0 +1,23 @@
+#! /usr/bin/env sh
+
+GIT_WINDOWS='/mnt/c/Program Files/Git/cmd/git.exe'
+GIT_LINUX="$HOMEBREW_PREFIX"/git
+
+# determine if git windows does not exist
+if [ ! -f "$GIT_WINDOWS" ]; then
+
+	# use linux git and replace the process
+	exec "$GIT_LINUX" "$@"
+fi
+
+# get the current working directory
+case "$(pwd -P)" in
+  /mnt/?/*)
+	# directory is a windows location so use windows git
+  	exec "$GIT_WINDOWS" "$@" | sed "s#\([A-E]\):#/mnt/\L\1#"
+	;;
+  *)
+	# directory is a linux location so use linux git
+  	exec "$GIT_LINUX" "$@"
+	;;
+esac

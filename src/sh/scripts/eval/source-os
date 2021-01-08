@@ -9,6 +9,11 @@ __am_prompt_source_os() {
 		UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
 	fi
 
+	# detect wsl
+	if [ -n "${WSL_DISTRO_NAME:-}" ]; then
+		UNAMES="wsl $UNAMES"
+	fi
+
 	UNAME=
 	until [ "$UNAME" = "$UNAMES" ]; do
 		UNAME=${UNAMES%%' '*}
