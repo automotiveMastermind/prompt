@@ -5,7 +5,7 @@ __am_prompt_use_shell() {
 	PROMPT_SHELL=${PROMPT_SHELL:-1}
 
 	if [ -z "${PROMPT_SHELL:-}" ]; then
-		print-fail "prompt: uou must specify a shell to use, either bash or zsh"
+		print-fail "prompt: you must specify a shell to use, either bash or zsh"
 		return 1
 	fi
 
@@ -27,6 +27,11 @@ __am_prompt_use_shell() {
 		UNAMES="$ID ${ID_LIKE:-unknown} linux"
 	else
 		UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
+	fi
+
+	# detect wsl
+	if [ -n "${WSL_DISTRO_NAME:-}" ]; then
+		UNAMES="wsl $UNAMES"
 	fi
 
 	UNAME=

@@ -65,11 +65,17 @@ __am_prompt_install() {
 		fi
 	done
 
+	# detect platform
 	if [ -f /etc/os-release ]; then
 		. /etc/os-release
 		UNAMES="$ID ${ID_LIKE:-unknown} linux"
 	else
 		UNAMES=$(uname | tr '[:upper:]' '[:lower:]')
+	fi
+
+	# detect wsl
+	if [ -n "${WSL_DISTRO_NAME:-}" ]; then
+		UNAMES="wsl $UNAMES"
 	fi
 
 	UNAME=
