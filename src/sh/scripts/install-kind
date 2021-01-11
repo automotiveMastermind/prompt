@@ -2,11 +2,8 @@
 
 __am_kind_prompt_install() {
 
-	# get the kind command
-	KIND=$(command -v kind 2>/dev/null)
-
 	# determine if kind is already available
-	if ! test -z "${KIND:-}"; then
+	if command -v kind 1>/dev/null 2>&1; then
 
 		# move on immediately
 		return 0
