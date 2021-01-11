@@ -6,15 +6,15 @@ if ! command -v gpgconf 1>/dev/null 2>&1; then
 	return 0
 fi
 
-# determine if this is a tty
-if [ -t 1 ]; then
+SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+export SSH_AUTH_SOCK
+
+# determine if this is not an ssh session
+if [ -z "${SSH_CLIENT:-}" ]; then
 
 	# get the tty
 	GPG_TTY="$(tty)"
-	SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-
 	export GPG_TTY
-	export SSH_AUTH_SOCK
 
 	# launch gpg-agent using the expected tty and sock
 	gpgconf --launch gpg-agent
