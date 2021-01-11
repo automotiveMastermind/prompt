@@ -64,10 +64,8 @@ __am_prompt_dotnet_install() {
 		mkdir -p "$DOTNET_INSTALL_DIR"
 	fi
 
-	DOTNET_PREREQUISITES=$(command -v install-dotnet-prerequisites 2>/dev/null)
-
-	if [ -n "${DOTNET_PREREQUISITES}" ]; then
-		__am_prompt_safe_exec "${DOTNET_PREREQUISITES}"
+	if command -v install-dotnet-prerequisites 1>/dev/null 2>&1; then
+		__am_prompt_safe_exec install-dotnet-prerequisites
 	fi
 
 	DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
