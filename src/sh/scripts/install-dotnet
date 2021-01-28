@@ -1,17 +1,6 @@
 #! /usr/bin/env sh
 
-__am_prompt_safe_exec() {
-	CMD=$1
-	shift
-
-	$CMD "$@" 2>&1
-
-	EXIT_CODE=$?
-
-	if [ $EXIT_CODE -ne 0 ]; then
-		return $EXIT_CODE
-	fi
-}
+set -e
 
 __am_prompt_dotnet_install() {
 
@@ -49,7 +38,7 @@ __am_prompt_dotnet_install() {
 	done
 
 	if [ -z "${DOTNET_INSTALL_DIR:-}" ]; then
-		export DOTNET_INSTALL_DIR="$HOME/.dotnet"
+		export DOTNET_INSTALL_DIR="$AM_PROMPT_USER/dotnet"
 	fi
 
 	if [ -z "${DOTNET_CHANNELS:-}" ]; then
@@ -65,7 +54,7 @@ __am_prompt_dotnet_install() {
 	fi
 
 	if command -v install-dotnet-prerequisites 1>/dev/null 2>&1; then
-		__am_prompt_safe_exec install-dotnet-prerequisites
+		install-dotnet-prerequisites
 	fi
 
 	DOTNET_INSTALL_SH="$DOTNET_INSTALL_DIR/dotnet-install.sh"
@@ -73,29 +62,24 @@ __am_prompt_dotnet_install() {
 	DOTNET_URI='https://dot.net/v1/dotnet-install.sh'
 
 	curl -fSsL $DOTNET_URI -o "$DOTNET_INSTALL_SH" 1>/dev/null 2>&1
-	__am_prompt_safe_exec chmod +x "$DOTNET_INSTALL_SH"
+	chmod +x "$DOTNET_INSTALL_SH"
 
 	for DOTNET_VERSION in $DOTNET_VERSIONS; do
-		__am_prompt_safe_exec "$DOTNET_INSTALL_SH" --version "$DOTNET_VERSION"
+		"$DOTNET_INSTALL_SH" --version "$DOTNET_VERSION"
 	done
 
 	for DOTNET_CHANNEL in $DOTNET_CHANNELS; do
-		__am_prompt_safe_exec "$DOTNET_INSTALL_SH" --channel $DOTNET_CHANNEL
+		"$DOTNET_INSTALL_SH" --channel $DOTNET_CHANNEL
 	done
 
 	mkdir -p /usr/local/share 1>/dev/null 2>&1
 	ln -s "$DOTNET_INSTALL_DIR" "/usr/local/share" 1>/dev/null 2>&1
 
-	if [ -f "/usr/local/share/dotnet/dotnet" ]; then
-		export PATH="/usr/local/share/dotnet:$PATH"
-	fi
-
-	if [ -f "$HOME/.dotnet/dotnet" ]; then
-		export PATH="$HOME/.dotnet:$PATH"
-	fi
-
 	print-warn 'building dotnet cache... (this may take a few minutes)'
-	dotnet help
+	"$DOTNET_INSTALL_DIR"/dotnet  help
+
+	# print a warning about restarting
+	print-warn '' 'start a new shell to enable tab completion...'
 }
 
 __am_prompt_dotnet_install "$@"

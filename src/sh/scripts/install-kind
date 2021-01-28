@@ -2,15 +2,53 @@
 
 __am_kind_prompt_install() {
 
+	version="latest"
+
+	while :; do
+		case $1 in
+			-v|--version)
+				version="v${2#v*}"
+				shift
+				;;
+			-f|--force)
+				if [ -f "$AM_PROMPT_BIN"/kind ]; then
+					rm -f "$AM_PROMPT_BIN"/kind 1>/dev/null
+				fi
+				;;
+			--debug)
+				set -x
+				;;
+			?*)
+				print-fail "install-kind: invalid argument: $1"
+				exit 1
+				;;
+			*)
+				break
+				;;
+		esac
+		shift
+	done
+
 	# determine if kind is already available
 	if command -v kind 1>/dev/null 2>&1; then
 
 		# move on immediately
-		return 0
+		return
 	fi
 
-	# install kind with homebrew now that its available there
-	brew install kind
+	platform=$(uname | tr "[:upper:]" "[:lower:]")
+	arch=$(uname -m)
+
+	# download kind to ~/.am/prompt/bin
+	curl -Lo "$AM_PROMPT_BIN"/kind https://kind.sigs.k8s.io/dl/"$version"/kind-"$platform"-"$arch"
+	chmod +x "$AM_PROMPT_BIN"/kind
+
+	# setup tab completion
+	kind completion bash > "$AM_PROMPT_USER"/bash/completions/kind.inc
+	kind completion zsh > "$AM_PROMPT_USER"/zsh/completions/_kind
+
+	# print a warning about restarting
+	print-warn '' 'start a new shell to enable tab completion...'
 }
 
-__am_kind_prompt_install
+__am_kind_prompt_install "$@"

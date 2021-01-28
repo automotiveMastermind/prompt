@@ -1,7 +1,9 @@
 #! /usr/bin/env sh
 
+set -e
+
 __am_prompt_edit_vars() {
-	VAR_PATH="$AM_PROMPT/user/variables"
+	VAR_PATH="$AM_PROMPT"/user/variables
 
 	if [ ! -f "$VAR_PATH" ]; then
 		printf "%s\n\n" "#! /usr/bin/env sh" > "$VAR_PATH"

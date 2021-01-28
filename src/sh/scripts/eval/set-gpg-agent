@@ -2,8 +2,9 @@
 
 # determine if gpgconf is available on the system
 if ! command -v gpgconf 1>/dev/null 2>&1; then
+
 	# move on immediately
-	return 0
+	return
 fi
 
 SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"

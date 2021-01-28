@@ -1,5 +1,6 @@
 #! /usr/bin/env sh
 
+sudo dnf update -y
 sudo dnf install -y \
 	ca-certificates \
 	\

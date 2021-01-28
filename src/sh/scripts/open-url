@@ -21,7 +21,7 @@ __am_prompt_open_url() {
 				print-warn "open-url: please open a browser to: $url"
 			fi
 
-			return 0
+			return
 		fi
 	done
 

@@ -14,18 +14,13 @@ __am_prompt_source_os() {
 		UNAMES="wsl $UNAMES"
 	fi
 
-	UNAME=
-	until [ "$UNAME" = "$UNAMES" ]; do
-		UNAME=${UNAMES%%' '*}
-		UNAMES=${UNAMES#*' '}
-
-		UNAME_PATH="$HOME/.am/prompt/zsh/scripts/$UNAME"
+	for current in $UNAMES; do
+		UNAME_PATH="$AM_PROMPT/zsh/scripts/$current"
 
 		if [ ! -d "$UNAME_PATH" ]; then
 			continue
 		fi
 
-		export AM_PROMPT_OS=$UNAME
 		export PATH="$UNAME_PATH:$PATH"
 
 		if [ -d "$UNAME_PATH/eval" ]; then
@@ -33,8 +28,6 @@ __am_prompt_source_os() {
 				. "$EVAL_SCRIPT"
 			done
 		fi
-
-		break
 	done
 }
 

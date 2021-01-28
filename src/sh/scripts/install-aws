@@ -1,24 +1,30 @@
 #! /usr/bin/env sh
 
 __am_prompt_aws_install() {
-	BREWS='awscli aws-sam-cli'
 
-	brew tap aws/tap
-	brew update
+	if command -v aws 1>/dev/null 2>&1; then
+		return
+	fi
 
-	for pkg in $BREWS; do
-		if brew list --versions "$pkg" 1>/dev/null; then
-			print-success "upgrading: $pkg..."
-			brew upgrade "$pkg" 2>/dev/null
-			brew link --overwrite "$pkg" 2>/dev/null
-		else
-			print-success "installing: $pkg..."
-			brew install "$pkg"
-		fi
-	done
+	temp=$(mktemp -d)
+	platform=$(uname | tr "[:upper:]" "[:lower:]")
+	arch=$(uname -m)
 
-	print-warn "configuring aws..."
-	aws configure
+	print-success "downloading aws-sdk..."
+	curl -Lso "$temp"/aws.zip https://awscli.amazonaws.com/awscli-exe-"$platform"-"$arch".zip
+
+	# extract the contents
+	(cd "$temp" && unzip aws.zip)
+
+	# run the installer
+	print-success "installing aws-sdk..."
+	"$temp"/aws/install --install-dir "$AM_PROMPT_USER"/aws --bin-dir "$AM_PROMPT_USER"/bin
+
+	# remove the temp path
+	rm -rf "$temp"
+
+	# print a warning about restarting
+	print-warn '' 'start a new shell to enable tab completion...'
 }
 
 __am_prompt_aws_install

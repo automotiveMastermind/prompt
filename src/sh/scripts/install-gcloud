@@ -1,43 +1,78 @@
 #! /usr/bin/env sh
 
 __am_prompt_gcloud_install() {
-	GCLOUD_PATH="$HOME/.gcloud"
-	PLATFORM='linux'
 
-	if [ "$(uname)" = "Darwin" ]; then
-		PLATFORM='darwin'
+	version="323.0.0"
+
+	while :; do
+		case $1 in
+			-v|--version)
+				version=$2
+				shift
+				;;
+			-f|--force)
+				if [ -d "$HOME"/.gcloud ]; then
+					rm -rf "$HOME"/.gcloud 1>/dev/null
+				fi
+
+				if [ -d "$AM_PROMPT_USER"/gcloud ]; then
+					rm -rf "$HOME"/gcloud 1>/ev/null
+				fi
+				;;
+			--debug)
+				set -x
+				;;
+			?*)
+				print-fail "install-gcloud: invalid argument: $1"
+				;;
+			*)
+				break
+				;;
+		esac
+		shift
+	done
+
+	if command -v gcloud 1>/dev/null 2>&1; then
+		return
 	fi
 
-	URL=https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-161.0.0-$PLATFORM-x86_64.tar.gz
+	temp=$(mktemp -d)
+	platform=$(uname | tr "[:upper:]" "[:lower:]")
+	arch=$(uname -m)
 
-	TEMP=$(mktemp -d)
-	FILENAME="$TEMP/gcloud-sdk.tar.gz"
-	EXPANDED="$TEMP/google-cloud-sdk"
+	print-success "downloading gcloud-sdk..."
+	curl -Lso "$temp"/gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-"$version"-"$platform"-"$arch".tar.gz
 
-	if ! command -v gcloud 1>/dev/null 2>&1; then
+	# extract the executable
+	tar -xfC "$temp" --strip-components=1 --directory "$AM_PROMPT_USER"/gcloud gcloud.tar.gz 1>/dev/null
 
-		print-success "downloading gcloud-sdk..."
-		curl -L $URL -o "$FILENAME" --silent 2>&1
+	# remove the temp directory
+	rm -rf "$temp"
 
-		tar -xf "$FILENAME" -C "$TEMP" 1>/dev/null 2>&1
+	# run the installer
+	print-success "installing gcloud-sdk..."
+	"$AM_PROMPT_USER"/bin/gcloud/install.sh \
+		--command-completion false \
+		--usage-reporting false \
+		--quiet \
+		--path-update false \
+		--additional-components kubectl gsutil core 2>&1
 
-		rm -rf "$GCLOUD_PATH" 1>/dev/null 2>&1
-		mv "$EXPANDED" "$GCLOUD_PATH" 1>/dev/null 2>&1
-		rm -rf "$TEMP" 1>/dev/null 2>&1
-
-		print-success "installing gcloud-sdk..."
-		"$HOME"/.gcloud/install.sh --command-completion false --usage-reporting false --quiet --path-update false 2>&1
-
-		GCLOUD_PATH_INC="$HOME"/.gcloud/path.bash.inc
-
-		if [ -f "$GCLOUD_PATH_INC" ]; then
-			. "$GCLOUD_PATH_INC"
-		fi
+	# setup completion
+	if [ -f "$AM_PROMPT_USER"/gcloud/completion.bash.inc ]; then
+		ln -fs \
+			"$AM_PROMPT_USER"/gcloud/completion.bash.inc \
+			"$AM_PROMPT_USER"/bash/completions/gcloud.inc
 	fi
 
-	print-success "installing and updating gcloud components..."
-	gcloud components install kubectl gsutil core --quiet 2>&1
-	gcloud components update --quiet 2>&1
+	if [ -f "$AM_PROMPT_USER"/gcloud/completion.zsh.inc ]; then
+		ln -fs \
+			"$AM_PROMPT_USER"/gcloud/completion.zsh.inc \
+			"$AM_PROMPT_USER"/zsh/completions/_gcloud
+	fi
+
+	# print a warning about restarting
+	print-warn '' 'start a new shell to enable tab completion...'
 }
 
-__am_prompt_gcloud_install
+__am_prompt_gcloud_install "$@"

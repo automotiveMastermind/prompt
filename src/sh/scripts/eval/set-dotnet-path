@@ -9,11 +9,11 @@ if [ -d "/usr/local/share/dotnet/tools" ]; then
 	export PATH="/usr/local/share/dotnet/tools:$PATH"
 fi
 
-if [ -d "$HOME/.dotnet" ]; then
-	export DOTNET_ROOT="$HOME/.dotnet"
+if [ -d "$AM_PROMPT_USER/dotnet" ]; then
+	export DOTNET_ROOT="$AM_PROMPT_USER/dotnet"
 	export PATH="$DOTNET_ROOT:$PATH"
 fi
 
-if [ -d "$HOME/.dotnet/tools" ]; then
-	export PATH="$HOME/.dotnet/tools:$PATH"
+if [ -d "$AM_PROMPT_USER/dotnet/tools" ]; then
+	export PATH="$AM_PROMPT_USER/dotnet/tools:$PATH"
 fi

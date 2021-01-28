@@ -2,7 +2,7 @@
 
 __am_prompt_install_centos() {
 	YUM=$(command -v dnf 2>/dev/null || command -v yum 2>/dev/null)
-	PACKAGES='sudo curl git bash gnupg'
+	PACKAGES='zsh'
 
 	print-success "centos: installing $PACKAGES..."
 	# shellcheck disable=SC2086

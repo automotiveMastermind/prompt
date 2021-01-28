@@ -35,21 +35,22 @@ fi
 export LOCAL_PREFIX
 
 # add am home
-export AM_HOME="$HOME/.am"
-export AM_PROMPT="$AM_HOME/prompt"
+export AM_HOME="$HOME"/.am
+export AM_PROMPT="$AM_HOME"/prompt
+export AM_PROMPT_USER="$AM_PROMPT"/user
 
 # add scripts to path
 export PATH="$AM_PROMPT/sh/scripts:$PATH"
 
 # test for user variables
-if [ -f "$AM_PROMPT"/user/variables ]; then
-	. "$AM_PROMPT"/user/variables
+if [ -f "$AM_PROMPT_USER"/variables ]; then
+	. "$AM_PROMPT_USER"/variables
 fi
 
 # test for prompt bin
-if [ -d "$AM_PROMPT"/user/bin ]; then
+if [ -d "$AM_PROMPT_USER"/bin ]; then
 	# append prompt to path
-	export PATH="$AM_PROMPT/user/bin:$PATH"
+	export PATH="$AM_PROMPT_USER/bin:$PATH"
 fi
 
 # evaluate eval scripts

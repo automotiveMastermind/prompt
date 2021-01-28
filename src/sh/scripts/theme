@@ -1,5 +1,7 @@
 #! /usr/bin/env sh
 
+set -e
+
 if [ -z "${GNOME_TERMINAL_SERVICE:-}" ]; then
 	print-fail "themes are only supported for gnome terminal"
 	exit 1

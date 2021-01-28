@@ -1,5 +1,7 @@
 #! /usr/bin/env sh
 
+set -e
+
 __am_prompt_remove_backup() {
 	BACKUP=$1
 

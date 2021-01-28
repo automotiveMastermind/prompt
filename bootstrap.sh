@@ -111,7 +111,7 @@ __am_prompt_update()
 			print-warn \
 				"prompt: latest version already installed: ${PROMPT_SHA}" \
 				"  - run update-prompt with the --force flag to reinstall ${CLR_CLEAR}"
-			return 0
+			return
 		fi
 	fi
 
@@ -119,7 +119,7 @@ __am_prompt_update()
 		print-warn" \
 			prompt: a new version of prompt is available: ${PROMPT_SHA}" \
 			"  - run the update-prompt command line tool to upgrade${CLR_CLEAR}"
-		return 0
+		return
 	fi
 
 	PROMPT_INSTALL_URI="https://github.com/automotiveMastermind/prompt/archive/$PROMPT_COMMIT_REF.tar.gz"

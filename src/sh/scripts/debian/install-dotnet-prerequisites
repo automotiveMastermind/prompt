@@ -6,7 +6,7 @@
 # get the major version
 MAJOR_VERSION=${VERSION_ID%.*}
 
-sudo apt-get update
+sudo apt-get update -y
 
 case "${MAJOR_VERSION}" in
 	"9")
