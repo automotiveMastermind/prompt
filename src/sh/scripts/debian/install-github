@@ -1,0 +1,14 @@
+#! /usr/bin/env sh
+
+__am_prompt_install_github() {
+	if command -v gh 1>/dev/null 2>&1; then
+		return
+	fi
+
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+	sudo apt-add-repository https://cli.github.com/packages
+	sudo apt update
+	sudo apt install gh
+}
+
+__am_prompt_install_github

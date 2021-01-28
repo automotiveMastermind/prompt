@@ -1,7 +1,7 @@
 #! /usr/bin/env sh
 
-if [ "${AM_PROMPT_UPDATE}" = "1" ]; then
+if [ "${AM_PROMPT_UPDATE:-}" = "1" ]; then
 	update-prompt --dry-run
-elif [ "${AM_PROMPT_UPDATE}" = "true" ]; then
+elif [ "${AM_PROMPT_UPDATE:-}" = "true" ]; then
 	update-prompt --dry-run
 fi

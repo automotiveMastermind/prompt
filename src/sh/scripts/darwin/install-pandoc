@@ -2,7 +2,7 @@
 
 set -e
 
-__am_prompt_pandoc_install() {
+__am_prompt_install_pandoc() {
 	brew install pandoc librsvg
 	brew tap homebrew/cask
 	brew cask install basictex
@@ -24,4 +24,4 @@ __am_prompt_pandoc_install() {
 	sudo tlmgr install rsfs
 }
 
-__am_prompt_pandoc_install
+__am_prompt_install_pandoc

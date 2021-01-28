@@ -1,0 +1,12 @@
+#! /usr/bin/env sh
+
+__am_prompt_install_github() {
+	if command -v gh 1>/dev/null 2>&1; then
+		return
+	fi
+
+	sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+	sudo dnf install gh
+}
+
+__am_prompt_install_github

@@ -4,35 +4,6 @@ set -e
 
 __am_prompt_install_linux() {
 
-	BREWS='gcc git gpg starship gh nvm'
-
-	if ! command -v brew 1>/dev/null 2>&1; then
-		print-success "installing homebrew..."
-		bash -c "CI=true $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh) || true"
-
-		. "$AM_PROMPT/sh/scripts/eval/set-brew-path"
-
-		# disable brew analytics
-		brew analytics off
-	fi
-
-	print-success "updating homebrew..."
-	brew update
-
-	for pkg in $BREWS; do
-		if brew list --versions "$pkg" 1>/dev/null; then
-			print-success "linux: upgrading $pkg..."
-			brew upgrade "$pkg" 2>/dev/null || true
-			brew link --overwrite "$pkg" 2>/dev/null || true
-		else
-			print-success "linux: installing $pkg..."
-			brew install "$pkg" || true
-		fi
-	done
-
-	# make sure we have ownership of linuxbrew
-	sudo chown -R "$(whoami)" /home/linuxbrew/.linuxbrew
-
 	GPG_CONFIG_DIR="$(gpgconf --list-dirs homedir)"
 
 	# test for gpg config
@@ -48,7 +19,10 @@ __am_prompt_install_linux() {
 		gpgconf --apply-defaults 2>/dev/null || true
 	fi
 
-	print-success "upgrading: fira code font..."
+	print-success "linux: installing starship..."
+	curl -fsSL https://starship.rs/install.sh | bash -s -- --force
+
+	print-success "linux: upgrading fira code font..."
 	FONT_DIR="$HOME/.local/share/fonts/NerdFonts"
 	TEMP_DIR=$(mktemp -d)
 

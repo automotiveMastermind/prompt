@@ -1,0 +1,15 @@
+#! /usr/bin/env sh
+
+__am_prompt_install_github() {
+
+	# determine if github is already available
+	if command -v github 1>/dev/null 2>&1; then
+
+		# move on immediately
+		return
+	fi
+
+	brew install github
+}
+
+__am_prompt_install_github

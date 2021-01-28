@@ -1,5 +1,7 @@
 #! /usr/bin/env sh
 
+set -e
+
 __am_prompt_remove_var_usage() {
 	printf "%s\n\t%s\n" \
 		"remove-var <name>" \

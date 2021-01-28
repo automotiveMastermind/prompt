@@ -2,13 +2,12 @@
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
-
-  return 0
+  return
 fi
 
 PYTHON=$(command -v python3 2>/dev/null || command -v python 2>/dev/null)
 
-if ! test -z "${PYTHON:-}"; then
+if [ -n "$PYTHON" ]; then
 	USER_BASE_PATH=$($PYTHON -m site --user-base)
-	export PATH=$PATH:$USER_BASE_PATH/bin
+	export PATH="$USER_BASE_PATH/bin:$PATH"
 fi

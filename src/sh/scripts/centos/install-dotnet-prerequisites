@@ -1,5 +1,8 @@
 #! /usr/bin/env sh
 
+set -e
+
+sudo yum update -y
 sudo yum install -y \
 	ca-certificates \
 	\

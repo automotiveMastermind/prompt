@@ -2,6 +2,9 @@
 
 set -e
 
+# install prerequisites
+./hack/prerequisites.sh
+
 # install and test bash
 ./hack/install.sh bash
 ./hack/test.sh bash

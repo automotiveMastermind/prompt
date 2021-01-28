@@ -15,4 +15,4 @@ docker run \
 	--name "$CONTAINER_NAME" \
 	--rm \
 	--tty \
-	"$IMAGE" './hack/lint.sh'
+	"$IMAGE" './hack/check.sh'

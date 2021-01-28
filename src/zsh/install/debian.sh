@@ -4,7 +4,7 @@ set -e
 
 __am_prompt_install_debian() {
 	SUDO=$(command -v sudo 2>/dev/null || "")
-	PACKAGES="sudo curl git bash gnupg"
+	PACKAGES="zsh"
 
 	print-success "debian: updating software repositories..."
 	$SUDO apt-get update -y

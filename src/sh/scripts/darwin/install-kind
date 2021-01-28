@@ -1,0 +1,15 @@
+#! /usr/bin/env sh
+
+__am_prompt_install_kind() {
+
+	# determine if kind is already available
+	if command -v kind 1>/dev/null 2>&1; then
+
+		# move on immediately
+		return
+	fi
+
+	brew install kind
+}
+
+__am_prompt_install_kind

@@ -4,7 +4,7 @@ __am_prompt_git_token() {
 	GITHUB_TOKEN=${1:-}
 
 	if [ -z "${GITHUB_TOKEN:-}" ]; then
-		print-fail "usage: git-token [token]"
+		print-fail "usage: github-token [token]"
 		return 1
 	else
 		add-var GITHUB_TOKEN "$GITHUB_TOKEN"

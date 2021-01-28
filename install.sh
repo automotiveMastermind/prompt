@@ -47,7 +47,7 @@ __am_prompt_install() {
 	fi
 
 	print-success "creating $AM_PROMPT"
-	mkdir -p "$AM_PROMPT/user" 1>/dev/null 2>&1
+	mkdir -p "$AM_PROMPT/user/bin" 1>/dev/null 2>&1
 
 	print-success "installing promptMastermind to $AM_PROMPT"
 	cp -Rf "$SCRIPT_DIR/src/bash"   "$AM_PROMPT" 1>/dev/null
@@ -61,7 +61,7 @@ __am_prompt_install() {
 
 		if [ ! -f "$USER_ITEM_PATH" ]; then
 			print-success "initializing user profile: $USER_ITEM_NAME at $USER_ITEM_PATH"
-			cp "$USER_ITEM" "$USER_ITEM_PATH"
+			cp -r "$USER_ITEM" "$USER_ITEM_PATH"
 		fi
 	done
 
@@ -78,11 +78,7 @@ __am_prompt_install() {
 		UNAMES="wsl $UNAMES"
 	fi
 
-	UNAME=
-	until [ "$UNAME" = "$UNAMES" ]; do
-		UNAME=${UNAMES%%' '*}
-		UNAMES=${UNAMES#*' '}
-
+	for UNAME in $UNAMES; do
 		UNAME_PATH="$AM_PROMPT/sh/install/$UNAME.sh"
 
 		if [ ! -f "$UNAME_PATH" ]; then
@@ -91,8 +87,6 @@ __am_prompt_install() {
 
 		print-success "installing platform prerequisites ($UNAME)"
 		. "$UNAME_PATH"
-
-		break
 	done
 
 	if [ ! -d "$AM_PROMPT/zsh/completions" ]; then

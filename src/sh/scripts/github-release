@@ -2,8 +2,8 @@
 
 __am_prompt_git_release() {
 
-	ORG_NAME=${1:-'automotivemastermind'}
-	REPO_NAME=${2:-'prompt'}
+	ORG_NAME=${1:-automotivemastermind}
+	REPO_NAME=${2:-prompt}
 
 	if [ -n "${GITHUB_TOKEN:-}" ]; then
 		set -- -H "Authorization: $GITHUB_TOKEN"
@@ -14,7 +14,7 @@ __am_prompt_git_release() {
 
 	if [ -n "${RELEASE:-}" ]; then
 		printf "%s\n" "$RELEASE"
-		return 0
+		return
 	fi
 
 	return 1

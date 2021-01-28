@@ -9,7 +9,7 @@ __am_prompt_set_gcloud_path() {
 		if [ ! -f "$HOME/.gcloud/bin/gcloud" ]; then
 
 			# no gcloud installed
-			return 0
+			return
 		fi
 
 		# add gcloud to the path

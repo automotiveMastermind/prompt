@@ -1,5 +1,7 @@
 #! /usr/bin/env sh
 
+set -e
+
 __am_prompt_use_shell() {
 
 	PROMPT_SHELL=${PROMPT_SHELL:-1}
@@ -34,25 +36,26 @@ __am_prompt_use_shell() {
 		UNAMES="wsl $UNAMES"
 	fi
 
-	UNAME=
-	until [ "$UNAME" = "$UNAMES" ]; do
-		UNAME=${UNAMES%%' '*}
-		UNAMES=${UNAMES#*' '}
+	FOUND=
 
+	for UNAME in $UNAMES; do
 		UNAME_PATH="$INSTALL_PATH/$UNAME.sh"
 
 		if [ ! -f "$UNAME_PATH" ]; then
 			continue
 		fi
+
+		FOUND=1
+
+		print-success "installing platform prerequisites ($UNAME)"
+		. "$UNAME_PATH"
 	done
 
-	if [ ! -f "$UNAME_PATH" ]; then
+	if [ -z "${FOUND:-}" ]; then
 	  print-fail "prompt: shell cannot be installed on this platform."
 	  print-warn "Please open an issue to request support for this distribution."
 	  return 1
 	fi
-
-	. "$UNAME_PATH"
 
 	if ! grep "$PROMPT_SHELL_PATH" /etc/shells 1>/dev/null 2>&1; then
 		print-success "prompt: adding updated $PROMPT_SHELL to shells..."

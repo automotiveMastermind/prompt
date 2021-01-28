@@ -1,6 +1,6 @@
 #! /usr/bin/env zsh
 
-__contains() { for item in "${@:2}"; do [[ "$item" == "$1" ]] && return 0; done; return 1; }
+__contains() { for item in "${@:2}"; do [[ "$item" == "$1" ]] && return; done; return 1; }
 
 mpafil -t SOLUTIONS <<< "$@"
 

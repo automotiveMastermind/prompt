@@ -27,7 +27,7 @@ __am_prompt_git_sha() {
 
 	if [ -n "${SHA:-}" ]; then
 		printf "%s\n" "$SHA"
-		return 0
+		return
 	fi
 
 	return 1
