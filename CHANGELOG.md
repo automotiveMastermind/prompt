@@ -1,3 +1,20 @@
+# [8.3.0-next.4](https://github.com/automotiveMastermind/prompt/compare/v8.3.0-next.3...v8.3.0-next.4) (2021-02-04)
+
+
+### Bug Fixes
+
+* add icon for kubernetes to starship ([416912f](https://github.com/automotiveMastermind/prompt/commit/416912f65c80083850e8f5bd37a6b748751808d7))
+* do not set gpg_tty in ssh sessions ([ddd07b6](https://github.com/automotiveMastermind/prompt/commit/ddd07b6b3a508df0859dee54dcf0c52fc469c542))
+* **docker:** fix/cleanup docker-* commands ([280ba4b](https://github.com/automotiveMastermind/prompt/commit/280ba4b64d82bf9d935d6bc53f60d75d7c0bafca))
+* **git-release:** fix formatting ([506775e](https://github.com/automotiveMastermind/prompt/commit/506775e4f620a56a7982fac00e881c91fd83d7a0))
+* **install-gcloud:** remove credential-gcr ([eb1c460](https://github.com/automotiveMastermind/prompt/commit/eb1c460b2e11c3afb4807bf3ffc09c5712ef164c))
+* **print:** ensure print-* is available to other scripts ([1aa8ad0](https://github.com/automotiveMastermind/prompt/commit/1aa8ad0f53dc6a7f46c64d8f77785bba0e4657b5))
+
+
+### Features
+
+* proxy git commands to windows on wsl ([7a54310](https://github.com/automotiveMastermind/prompt/commit/7a543105467ef5ff3bbd83dabdcf5d9c6f4d7edb))
+
 # [8.3.0-next.3](https://github.com/automotiveMastermind/prompt/compare/v8.3.0-next.2...v8.3.0-next.3) (2021-01-05)
 
 
