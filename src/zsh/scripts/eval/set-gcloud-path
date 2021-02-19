@@ -6,14 +6,14 @@ __am_prompt_set_gcloud_path() {
 	if ! command -v gcloud 1>/dev/null 2>&1; then
 
 		# attempt to discover the path
-		if [ ! -f "$HOME/.gcloud/bin/gcloud" ]; then
+		if [ ! -f "$AM_PROMPT_USER/bin/gcloud/bin/gcloud" ]; then
 
 			# no gcloud installed
 			return
 		fi
 
 		# add gcloud to the path
-		export PATH="$HOME/.gcloud/bin":$PATH
+		export PATH="$AM_PROMPT_USER/bin/gcloud/bin/":$PATH
 	fi
 
 	GCLOUD_CMD=$(command -v gcloud)

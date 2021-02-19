@@ -15,7 +15,7 @@ __am_prompt_gcloud_install() {
 					rm -rf "$HOME"/.gcloud 1>/dev/null
 				fi
 
-				if [ -d "$AM_PROMPT_USER"/gcloud ]; then
+				if [ -d "$AM_PROMPT_USER"/bin/gcloud ]; then
 					rm -rf "$HOME"/gcloud 1>/ev/null
 				fi
 				;;
@@ -36,15 +36,20 @@ __am_prompt_gcloud_install() {
 		return
 	fi
 
-	temp=$(mktemp -d)
+	temp="$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')"
 	platform=$(uname | tr "[:upper:]" "[:lower:]")
 	arch=$(uname -m)
 
 	print-success "downloading gcloud-sdk..."
 	curl -Lso "$temp"/gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-"$version"-"$platform"-"$arch".tar.gz
 
+	# tar will fail if the directory doesn't exist
+	if [ ! -d "$AM_PROMPT_USER"/bin/gcloud ]; then
+		mkdir "$AM_PROMPT_USER"/bin/gcloud
+	fi
+
 	# extract the executable
-	tar -xfC "$temp" --strip-components=1 --directory "$AM_PROMPT_USER"/gcloud gcloud.tar.gz 1>/dev/null
+	tar -xf "$temp"/gcloud.tar.gz --strip-components=1 --directory="$AM_PROMPT_USER"/bin/gcloud  1>/dev/null
 
 	# remove the temp directory
 	rm -rf "$temp"
