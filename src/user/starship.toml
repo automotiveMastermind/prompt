@@ -20,7 +20,7 @@ symbol = ' '
 [directory]
 read_only = ' '
 
-[docker]
+[docker_context]
 symbol = ' '
 
 [elixir]
@@ -49,9 +49,6 @@ diverged = '([⇡$ahead_count⇣$behind_count](bold yellow) )'
 
 [golang]
 symbol = ' '
-
-[haskell]
-symbol = ' '
 
 [hg_branch]
 symbol = ' '
